@@ -10,7 +10,7 @@ env:
   - PACKAGES=false
 
 install:
-  - cd climas-ng
+  - cd webapp
   - pip install setuptools --upgrade
   - pip install coveralls
   - python setup.py install
