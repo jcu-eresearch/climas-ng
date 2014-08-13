@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+	<meta charset="utf-8" />
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+	<title>
+		CliMAS Next Generation
+	</title>
+	<meta content="width=device-width" name="viewport" />
+	<link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
+	<link href="${request.static_path('climasng:static/css/normalize.min.css')}" rel="stylesheet" />
+	<link href="${request.static_path('climasng:static/css/h5bp.css')}" rel="stylesheet" />
+	<link href="${request.static_path('climasng:static/css/main.css')}" rel="stylesheet" />
+
+	<link href='http://fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
+	<script>
+		window.climasSettings = {
+			assetUrlPrefix: "${request.static_path('climasng:static/assets/')}",
+			vizUrlPrefix: "//118.138.243.53:10600/api/raster/1/default?data_url="
+		}
+	</script>
+
+	<script src="${request.static_path('climasng:static/lib/modernizr.2.7.1.js')}"></script>
+
+	<!-- <link href="${request.static_path('climasng:static/css/map.css')}" rel="stylesheet" /> -->
+	<link rel="stylesheet/less" type="text/css" href="${request.static_path('climasng:static/css/map.less')}" />
+	<script src="${request.static_path('climasng:static/lib/less-1.6.1.min.js')}"></script>
+
+	<script src="${request.static_path('climasng:static/lib/jquery-1.10.2.min.js')}"></script>
+	<script src="${request.static_path('climasng:static/lib/jquery-ui-1.10.4.custom.min.js')}"></script>
+	<link href="${request.static_path('climasng:static/lib/jqueryui-css/ui-lightness/jquery-ui-1.10.4.custom.min.css')}" rel="stylesheet" />
+</head>
+<body>
+	<header class="page clearfix">
+		<h1>CliMAS</h1>
+		<a href="http://tropicaldatahub.org/">
+			<img class="logo" src="${request.static_path('climasng:static/images/tdhlogo.png')}" />
+		</a>
+		<p>Climate change and biodiversity in Australia</p>
+		<nav>
+			<ul class="main menu clearfix">
+				<li class="menuitem">
+					<a href="${request.route_url('map')}">View Maps</a>
+				</li>
+				<!--
+				<li class="menuitem"><a href="${request.route_url('form')}">
+					Generate Reports
+				</a></li>
+				-->
+				<li class="menuitem">
+					<a href="${request.route_url('doc', doc_name='about')}">
+						About CliMAS
+					</a>
+				</li>
+				<li class="menuitem">
+					<a href="${request.route_url('doc', doc_name='credits')}">
+						Credits
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div id="content"><div id="notreport">
+		<div class="maincontent">
+			${ structure: page_content }
+		</div>
+		<div class="footer-wrapper">
+			<div class="footer">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
+					<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" />
+				</a>
+				This work is licensed under a
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
+					Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
+				</a>.
+			</div>
+		</div>
+	</div></div>
+	<script>
+		$('header').disableSelection();
+	</script>
+</body>
+</html>
+
+
+
+
+

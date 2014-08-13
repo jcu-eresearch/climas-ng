@@ -1,0 +1,106 @@
+body {
+  line-height: 1.5;
+}
+@media print {
+  @page {
+    size: 210mm 297mm;
+    margin: 12mm;
+  }
+}
+/* ----------------------------------------------------- */
+/* the report itself */
+#report {
+  max-width: 210mm;
+  width: 210mm;
+  font-family: "Book Antiqua", Georgia, serif;
+  font-size: 12pt;
+  background: transparent;
+  padding: 20mm;
+  margin: 0 auto;
+}
+@media screen {
+  #report {
+    background: #fff;
+  }
+}
+#report .frontpagecredits {
+  xpage-break-after: always;
+  font-style: italic;
+  margin: 3em 25mm;
+}
+#report p,
+#report h3 {
+  orphans: 2;
+  widows: 2;
+}
+#report img {
+  margin: 0 auto;
+  width: 99%;
+}
+#report h1 {
+  text-align: center;
+}
+#report h1 span {
+  white-space: nowrap;
+}
+#report h2 {
+  margin: 1.5em 0 0.5em 0;
+  padding: 1.5em 0 0.5em 0;
+  page-break-before: always;
+  font-size: 24pt;
+  font-family: "Segoe UI", Segoe, Tahoma, Geneva, Verdana, sans-serif;
+}
+@media print {
+  #report h2 {
+    margin: 0 0 0.5em 0;
+    padding: 0 0 0.5em 0;
+    page-break-before: always;
+  }
+}
+#report h3 {
+  margin: 1.5em 0 0.5em 0;
+  padding: 1.5em 0 0.5em 0;
+  page-break-after: avoid;
+  font-size: 14pt;
+  font-family: "Segoe UI", Segoe, Tahoma, Geneva, Verdana, sans-serif;
+}
+#report table {
+  width: 99%;
+  margin: 10mm auto;
+  border-top: 1mm solid #ccc;
+  border-bottom: 1mm solid #ccc;
+  border-collapse: separate;
+  border-spacing: 4mm 0;
+}
+#report td,
+#report th {
+  text-align: center;
+  padding: 2mm;
+  margin: 2mm;
+}
+#report th {
+  border-bottom: 0.5mm solid #ccc;
+}
+#report .totals td,
+#report .totals th {
+  font-weight: bold;
+  border-top: 0.5mm solid #ccc;
+  border-bottom: none;
+}
+#report .gained {
+  color: #060;
+}
+#report .lost {
+  color: #600;
+}
+#report table.specieslist {
+  border-spacing: 0;
+}
+#report table.specieslist td {
+  margin: 1px 0;
+  padding: 2pt 0 2pt 0.5em;
+  text-indent: -0.5em;
+  font-size: 8pt;
+  line-height: 0.9;
+  text-align: left;
+}

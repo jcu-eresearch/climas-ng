@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+	<meta charset="utf-8" />
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+	<title>
+		CliMAS Reports, Next Generation
+	</title>
+	<meta content="width=device-width" name="viewport" />
+	<link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
+	<link href="${request.static_path('climasng:static/css/normalize.min.css')}" rel="stylesheet" />
+	<link href="${request.static_path('climasng:static/css/h5bp.css')}" rel="stylesheet" />
+	<link href="${request.static_path('climasng:static/css/main.css')}" rel="stylesheet" />
+	<script src="${request.static_path('climasng:static/js/lib/modernizr.2.7.1.js')}"></script>
+</head>
+<body>
+	<div id="content"><div id="notreport">
+		<div class="header clearfix">
+			<a href="http://tropicaldatahub.org/">
+				<img class="logo" src="${request.static_path('climasng:static/images/tdhlogo.png')}" />
+			</a>
+			<h1>
+				CliMAS Reports <i style="font-size: 66%; opacity: 0.5; letter-spacing: 0.25em; padding-left: 1em; position: relative; bottom: 0.1em">NEXT GENERATION</i>
+			</h1>
+			<h2>
+				Reports on climate change and biodiversity
+			</h2>
+		</div>
+		<div class="navbarwrapper clearfix">
+			<div class="navbarwrapper clearfix">
+				<ul class="nav clearfix">
+					<!-- <li><a href="http://tdh-tools-2.hpc.jcu.edu.au/climas/">
+						&laquo; CliMAS tools
+					</a></li> -->
+					<li><a class="current" href="${request.route_url('form')}">
+						generate reports
+					</a></li>
+					<li><a href="${request.route_url('doc', doc_name='about')}">
+						about Reports
+					</a></li>
+					<li><a href="${request.route_url('doc', doc_name='using')}">
+						using Reports
+					</a></li>
+					<li><a href="${request.route_url('doc', doc_name='credits')}">
+						credits
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="maincontent">
+
+
+
+            <div id="notreport">
+                <p class="toolintro">
+                    Get a regional report on projected changes in temperature, rainfall, and species composition for a selected year.<br>
+                    Species included are land-based Australian birds, mammals, reptiles and amphibians.
+                </p>
+                <form id="kickoffform" class="clearfix" name="kickoffform" action="${request.route_url('report')}" method="post">
+                    <div class="onefield regiontypeselection formsection">
+                        <h3>Select a region</h3>
+                        <div class="regiontypeselector">
+                            <label><input type="radio" class="rtype" name="regiontyperadio" value="IBRA">IBRA bioregions</label>
+                            <select class="regionselect" name="chosen_IBRA" id="chosen_IBRA" style="visibility: visible;">
+                                <option disabled="disabled" selected="selected" value="invalid">choose a region...</option>
+                                <option value="77">Arnhem Coast</option>
+                                <option value="78">Arnhem Plateau</option>
+                                <option value="79">Australian Alps</option>
+                                <option value="80">Avon Wheatbelt</option>
+                                <option value="81">Brigalow Belt North</option>
+                                <option value="82">Brigalow Belt South</option>
+                                <option value="83">Ben Lomond</option>
+                                <option value="84">Broken Hill Complex</option>
+                                <option value="85">Burt Plain</option>
+                                <option value="86">Carnarvon</option>
+                                <option value="87">Central Arnhem</option>
+                                <option value="88">Central Kimberley</option>
+                                <option value="89">Central Ranges</option>
+                                <option value="90">Channel Country</option>
+                                <option value="91">Central Mackay Coast</option>
+                                <option value="92">Coolgardie</option>
+                                <option value="93">Cobar Peneplain</option>
+                                <option value="94">Coral Sea</option>
+                                <option value="95">Cape York Peninsula</option>
+                                <option value="96">Daly Basin</option>
+                                <option value="97">Darwin Coastal</option>
+                                <option value="98">Dampierland</option>
+                                <option value="99">Desert Uplands</option>
+                                <option value="100">Davenport Murchison Ranges</option>
+                                <option value="101">Darling Riverine Plains</option>
+                                <option value="102">Einasleigh Uplands</option>
+                                <option value="103">Esperance Plains</option>
+                                <option value="104">Eyre Yorke Block</option>
+                                <option value="105">Finke</option>
+                                <option value="106">Flinders Lofty Block</option>
+                                <option value="107">Furneaux</option>
+                                <option value="108">Gascoyne</option>
+                                <option value="109">Gawler</option>
+                                <option value="110">Geraldton Sandplains</option>
+                                <option value="111">Gulf Fall and Uplands</option>
+                                <option value="112">Gibson Desert</option>
+                                <option value="113">Great Sandy Desert</option>
+                                <option value="114">Gulf Coastal</option>
+                                <option value="115">Gulf Plains</option>
+                                <option value="116">Great Victoria Desert</option>
+                                <option value="117">Hampton</option>
+                                <option value="118">Indian Tropical Islands</option>
+                                <option value="119">Jarrah Forest</option>
+                                <option value="120">Kanmantoo</option>
+                                <option value="121">King</option>
+                                <option value="122">Little Sandy Desert</option>
+                                <option value="123">MacDonnell Ranges</option>
+                                <option value="124">Mallee</option>
+                                <option value="125">Murray Darling Depression</option>
+                                <option value="126">Mitchell Grass Downs</option>
+                                <option value="127">Mount Isa Inlier</option>
+                                <option value="128">Mulga Lands</option>
+                                <option value="129">Murchison</option>
+                                <option value="130">Nandewar</option>
+                                <option value="131">Naracoorte Coastal Plain</option>
+                                <option value="132">New England Tablelands</option>
+                                <option value="133">NSW North Coast</option>
+                                <option value="134">Northern Kimberley</option>
+                                <option value="135">NSW South Western Slopes</option>
+                                <option value="136">Nullarbor</option>
+                                <option value="137">Ord Victoria Plain</option>
+                                <option value="138">Pine Creek</option>
+                                <option value="139">Pilbara</option>
+                                <option value="140">Pacific Subtropical Islands</option>
+                                <option value="141">Riverina</option>
+                                <option value="142">Subantarctic Islands</option>
+                                <option value="143">South East Coastal Plain</option>
+                                <option value="144">South East Corner</option>
+                                <option value="145">South Eastern Highlands</option>
+                                <option value="146">South Eastern Queensland</option>
+                                <option value="147">Simpson Strzelecki Dunefields</option>
+                                <option value="148">Stony Plains</option>
+                                <option value="149">Sturt Plateau</option>
+                                <option value="150">Southern Volcanic Plain</option>
+                                <option value="151">Swan Coastal Plain</option>
+                                <option value="152">Sydney Basin</option>
+                                <option value="153">Tanami</option>
+                                <option value="154">Tasmanian Central Highlands</option>
+                                <option value="155">Tiwi Cobourg</option>
+                                <option value="156">Tasmanian Northern Midlands</option>
+                                <option value="157">Tasmanian Northern Slopes</option>
+                                <option value="158">Tasmanian South East</option>
+                                <option value="159">Tasmanian Southern Ranges</option>
+                                <option value="160">Tasmanian West</option>
+                                <option value="161">Victoria Bonaparte</option>
+                                <option value="162">Victorian Midlands</option>
+                                <option value="163">Warren</option>
+                                <option value="164">Wet Tropics</option>
+                                <option value="165">Yalgoo</option>
+                            </select>
+                        </div>
+                        <div class="regiontypeselector">
+                            <label><input type="radio" class="rtype" name="regiontyperadio" value="NRM">Natural Resource Management (NRM) regions</label>
+                            <select class="regionselect" name="chosen_NRM" id="chosen_NRM" style="visibility: hidden;">
+                                <option disabled="disabled" selected="selected" value="invalid">choose a region...</option>
+                                <option value="12">ACT</option>
+                                <option value="13">Adelaide and Mount Lofty Ranges</option>
+                                <option value="14">Alinytjara Wilurara</option>
+                                <option value="15">Ashmore and Cartier Islands</option>
+                                <option value="16">Avon</option>
+                                <option value="17">Border Rivers Maranoa-Balonne</option>
+                                <option value="18">Border Rivers-Gwydir</option>
+                                <option value="19">Burdekin</option>
+                                <option value="20">Burnett Mary</option>
+                                <option value="21">Cape York</option>
+                                <option value="22">Central West</option>
+                                <option value="23">Christmas Island</option>
+                                <option value="24">Cocos Keeling Islands</option>
+                                <option value="25">Condamine</option>
+                                <option value="26">Cooperative Management Area</option>
+                                <option value="27">Corangamite</option>
+                                <option value="28">Desert Channels</option>
+                                <option value="29">East Gippsland</option>
+                                <option value="30">Eyre Peninsula</option>
+                                <option value="31">Fitzroy</option>
+                                <option value="32">Glenelg Hopkins</option>
+                                <option value="33">Goulburn Broken</option>
+                                <option value="34">Hawkesbury-Nepean</option>
+                                <option value="35">Heard and McDonald Islands</option>
+                                <option value="36">Hunter-Central Rivers</option>
+                                <option value="37">Kangaroo Island</option>
+                                <option value="38">Lachlan</option>
+                                <option value="39">Lower Murray Darling</option>
+                                <option value="40">Mackay Whitsunday</option>
+                                <option value="41">Mallee</option>
+                                <option value="42">Murray</option>
+                                <option value="43">Murrumbidgee</option>
+                                <option value="44">Namoi</option>
+                                <option value="45">Norfolk Island</option>
+                                <option value="46">North</option>
+                                <option value="47">North Central</option>
+                                <option value="48">North East</option>
+                                <option value="49">North West</option>
+                                <option value="50">Northern Agricultural</option>
+                                <option value="51">Northern Gulf</option>
+                                <option value="52">Northern Rivers</option>
+                                <option value="53">Northern Rivers - Lord Howe Island</option>
+                                <option value="54">Northern Territory</option>
+                                <option value="55">Northern and Yorke</option>
+                                <option value="56">Perth</option>
+                                <option value="57">Port Phillip and Western Port</option>
+                                <option value="58">Rangelands</option>
+                                <option value="59">South</option>
+                                <option value="60">South - Macquarie Islands</option>
+                                <option value="61">South Australian Arid Lands</option>
+                                <option value="62">South Australian Murray Darling Basin</option>
+                                <option value="63">South Coast</option>
+                                <option value="64">South East</option>
+                                <option value="65">South East Queensland</option>
+                                <option value="66">South West</option>
+                                <option value="67">South West Queensland</option>
+                                <option value="68">Southern Gulf</option>
+                                <option value="69">Southern Rivers</option>
+                                <option value="70">Sydney Metro</option>
+                                <option value="71">Torres Strait</option>
+                                <option value="72">West Gippsland</option>
+                                <option value="73">Western</option>
+                                <option value="74">Wet Tropics</option>
+                                <option value="75">Wimmera</option>
+                            </select>
+                        </div>
+                        <div class="regiontypeselector">
+                            <label><input type="radio" class="rtype" name="regiontyperadio" value="State">states of Australia</label>
+                            <select class="regionselect" name="chosen_State" id="chosen_State" style="visibility: hidden;">
+                                <option disabled="disabled" selected="selected" value="invalid">choose a region...</option>
+                                <option value="2">New South Wales</option>
+                                <option value="3">Victoria</option>
+                                <option value="4">Queensland</option>
+                                <option value="5">South Australia</option>
+                                <option value="6">Western Australia</option>
+                                <option value="7">Tasmania</option>
+                                <option value="8">Northern Territory</option>
+                                <option value="9">Australian Capital Territory</option>
+                                <option value="10">Other Territories</option>
+                            </select>
+                        </div><a id="regiondownloadlink" href="" style="visibility: hidden;" name="regiondownloadlink">download region data</a>
+                    </div>
+                    <div class="onefield yearselection formsection">
+                        <h3>Select a year</h3>
+                        <label><input type="radio" class="year" name="yearradio" value="2015"> 2015</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2025"> 2025</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2035"> 2035</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2045"> 2045</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2055"> 2055</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2065"> 2065</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2075"> 2075</label>
+                        <label><input type="radio" class="year" name="yearradio" value="2085"> 2085</label>
+                    </div>
+                    <div class="onefield formatselection formsection">
+                        <h3>Select an output format</h3>
+                        <label><input type="radio" class="format" name="formatradio" value="html"> Download a HTML document</label>
+                        <label><input type="radio" class="format" name="formatradio" value="preview"> Preview in this browser window</label>
+
+                        <!-- <button class="generate" disabled="disabled">generate report</button> -->
+                        <button class="generate">generate report</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+		</div>
+		<div class="footer-wrapper">
+			<div class="footer">
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
+                    <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" />
+                </a>
+                This work is licensed under a
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
+                    Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
+                </a>.
+			</div>
+		</div>
+	</div></div>
+</body>
+</html>
+
+
+
+
+

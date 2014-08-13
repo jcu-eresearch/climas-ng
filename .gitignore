@@ -52,3 +52,16 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# ignore the annoying crap python virtualenv leaves lying around
+webapp/lib
+webapp/include
+webapp/climasng/include
+webapp/.Python
+webapp/bin
+
+# ignore vagrant's working dir
+.vagrant
+
+# we have to ignore lib dirs because they get scattered about
+# everywhere, but DON'T ignore the static lib dir
+!webapp/climasng/static/lib

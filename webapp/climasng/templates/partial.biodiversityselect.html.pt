@@ -1,0 +1,890 @@
+
+<form class="formblocks">
+    <fieldset class="formblock taxon">
+
+        <div class="onefield">
+            <h3>Select a class</h3>
+            <label><input type="radio" class="clazz_selection all" name="clazztype" value="all" checked="checked">all vertebrates</label>
+            <label><input type="radio" class="clazz_selection amphibians" name="clazztype" value="amphibians">amphibians</label>
+            <label><input type="radio" class="clazz_selection birds" name="clazztype" value="birds">birds</label>
+            <label><input type="radio" class="clazz_selection mammals" name="clazztype" value="mammals">mammals</label>
+            <label><input type="radio" class="clazz_selection reptiles" name="clazztype" value="reptiles">reptiles</label>
+        </div>
+
+        <div class="onefield taxa_selector amphibians" style="display: none;">
+                        <h3>…and a taxon</h3>
+
+                        <label><input type="radio" class="taxa all" name="amphibians_taxatype" value="all" checked="checked">all amphibians</label>
+                        <label><input type="radio" class="taxa family" name="amphibians_taxatype" value="family">an amphibian family</label>
+                        <select class="taxa_dd family" name="chosen_family_amphibians">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a family...</option>
+                            <option value="BUFONIDAE">Bufonidae</option>
+                            <option value="HYLIDAE">Hylidae</option>
+                            <option value="MICROHYLIDAE">Microhylidae</option>
+                            <option value="MYOBATRACHIDAE">Myobatrachidae</option>
+                            <option value="RANIDAE">Ranidae</option>
+                        </select>
+
+                        <label><input type="radio" class="taxa genus" name="amphibians_taxatype" value="genus">an amphibian genus</label>
+                        <select class="taxa_dd genus" name="chosen_genus_amphibians">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a genus...</option>
+                            <option value="Rhinella">Rhinella</option>
+                            <option value="Cyclorana">Cyclorana</option>
+                            <option value="Litoria">Litoria</option>
+                            <option value="Nyctimystes">Nyctimystes</option>
+                            <option value="Austrochaperina">Austrochaperina</option>
+                            <option value="Adelotus">Adelotus</option>
+                            <option value="Assa">Assa</option>
+                            <option value="Crinia">Crinia</option>
+                            <option value="Geocrinia">Geocrinia</option>
+                            <option value="Heleioporus">Heleioporus</option>
+                            <option value="Lechriodus">Lechriodus</option>
+                            <option value="Limnodynastes">Limnodynastes</option>
+                            <option value="Mixophyes">Mixophyes</option>
+                            <option value="Neobatrachus">Neobatrachus</option>
+                            <option value="Notaden">Notaden</option>
+                            <option value="Philoria">Philoria</option>
+                            <option value="Pseudophryne">Pseudophryne</option>
+                            <option value="Taudactylus">Taudactylus</option>
+                            <option value="Uperoleia">Uperoleia</option>
+                            <option value="Rana">Rana</option>
+                        </select>
+
+                    </div>
+                                        <div class="onefield taxa_selector birds" style="display: none;">
+                        <h3>…and a taxon</h3>
+
+                        <label><input type="radio" class="taxa all" name="birds_taxatype" value="all" checked="checked">all birds</label>
+                        <label><input type="radio" class="taxa family" name="birds_taxatype" value="family">a bird family</label>
+                        <select class="taxa_dd family" name="chosen_family_birds">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a family...</option>
+                            <option value="ACANTHIZIDAE">Acanthizidae</option>
+<option value="ACCIPITRIDAE">Accipitridae</option>
+<option value="ACROCEPHALIDAE">Acrocephalidae</option>
+<option value="AEGOTHELIDAE">Aegothelidae</option>
+<option value="ALAUDIDAE">Alaudidae</option>
+<option value="ALCEDINIDAE">Alcedinidae</option>
+<option value="ANATIDAE">Anatidae</option>
+<option value="ANHINGIDAE">Anhingidae</option>
+<option value="ANSERANATIDAE">Anseranatidae</option>
+<option value="APODIDAE">Apodidae</option>
+<option value="ARDEIDAE">Ardeidae</option>
+<option value="ARTAMIDAE">Artamidae</option>
+<option value="ATRICHORNITHIDAE">Atrichornithidae</option>
+<option value="BURHINIDAE">Burhinidae</option>
+<option value="CACATUIDAE">Cacatuidae</option>
+<option value="CAMPEPHAGIDAE">Campephagidae</option>
+<option value="CAPRIMULGIDAE">Caprimulgidae</option>
+<option value="CASUARIIDAE">Casuariidae</option>
+<option value="CENTROPODIDAE">Centropodidae</option>
+<option value="CHARADRIIDAE">Charadriidae</option>
+<option value="CICONIIDAE">Ciconiidae</option>
+<option value="CISTICOLIDAE">Cisticolidae</option>
+<option value="CLIMACTERIDAE">Climacteridae</option>
+<option value="COLUMBIDAE">Columbidae</option>
+<option value="CORACIIDAE">Coraciidae</option>
+<option value="CORCORACIDAE">Corcoracidae</option>
+<option value="CORVIDAE">Corvidae</option>
+<option value="CUCULIDAE">Cuculidae</option>
+<option value="DASYORNITHIDAE">Dasyornithidae</option>
+<option value="DICRURIDAE">Dicruridae</option>
+<option value="DIOMEDEIDAE">Diomedeidae</option>
+<option value="ESTRILDIDAE">Estrildidae</option>
+<option value="FALCONIDAE">Falconidae</option>
+<option value="FREGATIDAE">Fregatidae</option>
+<option value="FRINGILLIDAE">Fringillidae</option>
+<option value="GLAREOLIDAE">Glareolidae</option>
+<option value="GRUIDAE">Gruidae</option>
+<option value="HAEMATOPODIDAE">Haematopodidae</option>
+<option value="HIRUNDINIDAE">Hirundinidae</option>
+<option value="HYDROBATIDAE">Hydrobatidae</option>
+<option value="JACANIDAE">Jacanidae</option>
+<option value="LARIDAE">Laridae</option>
+<option value="MALURIDAE">Maluridae</option>
+<option value="MEGALURIDAE">Megaluridae</option>
+<option value="MEGAPODIIDAE">Megapodiidae</option>
+<option value="MELIPHAGIDAE">Meliphagidae</option>
+<option value="MENURIDAE">Menuridae</option>
+<option value="MEROPIDAE">Meropidae</option>
+<option value="MONARCHIDAE">Monarchidae</option>
+<option value="MOTACILLIDAE">Motacillidae</option>
+<option value="NECTARINIIDAE">Nectariniidae</option>
+<option value="NEOSITTIDAE">Neosittidae</option>
+<option value="NUMIDIDAE">Numididae</option>
+<option value="OCEANITIDAE">Oceanitidae</option>
+<option value="ORIOLIDAE">Oriolidae</option>
+<option value="ORTHONYCHIDAE">Orthonychidae</option>
+<option value="OTIDIDAE">Otididae</option>
+<option value="PACHYCEPHALIDAE">Pachycephalidae</option>
+<option value="PARADISAEIDAE">Paradisaeidae</option>
+<option value="PARDALOTIDAE">Pardalotidae</option>
+<option value="PASSERIDAE">Passeridae</option>
+<option value="PEDIONOMIDAE">Pedionomidae</option>
+<option value="PELECANIDAE">Pelecanidae</option>
+<option value="PETROICIDAE">Petroicidae</option>
+<option value="PHAETHONTIDAE">Phaethontidae</option>
+<option value="PHALACROCORACIDAE">Phalacrocoracidae</option>
+<option value="PHASIANIDAE">Phasianidae</option>
+<option value="PITTIDAE">Pittidae</option>
+<option value="PODARGIDAE">Podargidae</option>
+<option value="PODICIPEDIDAE">Podicipedidae</option>
+<option value="POMATOSTOMIDAE">Pomatostomidae</option>
+<option value="PROCELLARIIDAE">Procellariidae</option>
+<option value="PSITTACIDAE">Psittacidae</option>
+<option value="PSOPHODIDAE">Psophodidae</option>
+<option value="PTILONORHYNCHIDAE">Ptilonorhynchidae</option>
+<option value="PYCNONOTIDAE">Pycnonotidae</option>
+<option value="RALLIDAE">Rallidae</option>
+<option value="RECURVIROSTRIDAE">Recurvirostridae</option>
+<option value="RHIPIDURIDAE">Rhipiduridae</option>
+<option value="ROSTRATULIDAE">Rostratulidae</option>
+<option value="SCOLOPACIDAE">Scolopacidae</option>
+<option value="SPHENISCIDAE">Spheniscidae</option>
+<option value="STERCORCARIIDAE">Stercorcariidae</option>
+<option value="STRIGIDAE">Strigidae</option>
+<option value="STURNIDAE">Sturnidae</option>
+<option value="SULIDAE">Sulidae</option>
+<option value="THRESKIORNITHIDAE">Threskiornithidae</option>
+<option value="TIMALIIDAE">Timaliidae</option>
+<option value="TURDIDAE">Turdidae</option>
+<option value="TURNICIDAE">Turnicidae</option>
+<option value="TYTONIDAE">Tytonidae</option>
+                        </select>
+
+                        <label><input type="radio" class="taxa genus" name="birds_taxatype" value="genus">a bird genus</label>
+                        <select class="taxa_dd genus" name="chosen_genus_birds">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a genus...</option>
+                            <option value="Acanthiza">Acanthiza</option>
+<option value="Acanthornis">Acanthornis</option>
+<option value="Aphelocephala">Aphelocephala</option>
+<option value="Calamanthus">Calamanthus</option>
+<option value="Chthonicola">Chthonicola</option>
+<option value="Gerygone">Gerygone</option>
+<option value="Hylacola">Hylacola</option>
+<option value="Oreoscopus">Oreoscopus</option>
+<option value="Origma">Origma</option>
+<option value="Pyrrholaemus">Pyrrholaemus</option>
+<option value="Sericornis">Sericornis</option>
+<option value="Smicrornis">Smicrornis</option>
+<option value="Accipiter">Accipiter</option>
+<option value="Aquila">Aquila</option>
+<option value="Aviceda">Aviceda</option>
+<option value="Circus">Circus</option>
+<option value="Elanus">Elanus</option>
+<option value="Erythrotriorchis">Erythrotriorchis</option>
+<option value="Haliaeetus">Haliaeetus</option>
+<option value="Haliastur">Haliastur</option>
+<option value="Hamirostra">Hamirostra</option>
+<option value="Hieraaetus">Hieraaetus</option>
+<option value="Lophoictinia">Lophoictinia</option>
+<option value="Milvus">Milvus</option>
+<option value="Pandion">Pandion</option>
+<option value="Acrocephalus">Acrocephalus</option>
+<option value="Aegotheles">Aegotheles</option>
+<option value="Alauda">Alauda</option>
+<option value="Mirafra">Mirafra</option>
+<option value="Alcedo">Alcedo</option>
+<option value="Ceyx">Ceyx</option>
+<option value="Dacelo">Dacelo</option>
+<option value="Syma">Syma</option>
+<option value="Tanysiptera">Tanysiptera</option>
+<option value="Todiramphus">Todiramphus</option>
+<option value="Anas">Anas</option>
+<option value="Anser">Anser</option>
+<option value="Aythya">Aythya</option>
+<option value="Biziura">Biziura</option>
+<option value="Cairina">Cairina</option>
+<option value="Cereopsis">Cereopsis</option>
+<option value="Chenonetta">Chenonetta</option>
+<option value="Cygnus">Cygnus</option>
+<option value="Dendrocygna">Dendrocygna</option>
+<option value="Malacorhynchus">Malacorhynchus</option>
+<option value="Nettapus">Nettapus</option>
+<option value="Oxyura">Oxyura</option>
+<option value="Stictonetta">Stictonetta</option>
+<option value="Tadorna">Tadorna</option>
+<option value="Anhinga">Anhinga</option>
+<option value="Anseranas">Anseranas</option>
+<option value="Aerodramus">Aerodramus</option>
+<option value="Apus">Apus</option>
+<option value="Hirundapus">Hirundapus</option>
+<option value="Ardea">Ardea</option>
+<option value="Botaurus">Botaurus</option>
+<option value="Butorides">Butorides</option>
+<option value="Egretta">Egretta</option>
+<option value="Ixobrychus">Ixobrychus</option>
+<option value="Nycticorax">Nycticorax</option>
+<option value="Artamus">Artamus</option>
+<option value="Cracticus">Cracticus</option>
+<option value="Strepera">Strepera</option>
+<option value="Atrichornis">Atrichornis</option>
+<option value="Burhinus">Burhinus</option>
+<option value="Esacus">Esacus</option>
+<option value="Cacatua">Cacatua</option>
+<option value="Callocephalon">Callocephalon</option>
+<option value="Calyptorhynchus">Calyptorhynchus</option>
+<option value="Eolophus">Eolophus</option>
+<option value="Lophochroa">Lophochroa</option>
+<option value="Nymphicus">Nymphicus</option>
+<option value="Probosciger">Probosciger</option>
+<option value="Coracina">Coracina</option>
+<option value="Lalage">Lalage</option>
+<option value="Caprimulgus">Caprimulgus</option>
+<option value="Eurostopodus">Eurostopodus</option>
+<option value="Casuarius">Casuarius</option>
+<option value="Dromaius">Dromaius</option>
+<option value="Centropus">Centropus</option>
+<option value="Charadrius">Charadrius</option>
+<option value="Elseyornis">Elseyornis</option>
+<option value="Erythrogonys">Erythrogonys</option>
+<option value="Peltohyas">Peltohyas</option>
+<option value="Pluvialis">Pluvialis</option>
+<option value="Thinornis">Thinornis</option>
+<option value="Vanellus">Vanellus</option>
+<option value="Ephippiorhynchus">Ephippiorhynchus</option>
+<option value="Cisticola">Cisticola</option>
+<option value="Climacteris">Climacteris</option>
+<option value="Cormobates">Cormobates</option>
+<option value="Chalcophaps">Chalcophaps</option>
+<option value="Columba">Columba</option>
+<option value="Ducula">Ducula</option>
+<option value="Geopelia">Geopelia</option>
+<option value="Geophaps">Geophaps</option>
+<option value="Leucosarcia">Leucosarcia</option>
+<option value="Lopholaimus">Lopholaimus</option>
+<option value="Macropygia">Macropygia</option>
+<option value="Ocyphaps">Ocyphaps</option>
+<option value="Petrophassa">Petrophassa</option>
+<option value="Phaps">Phaps</option>
+<option value="Ptilinopus">Ptilinopus</option>
+<option value="Streptopelia">Streptopelia</option>
+<option value="Eurystomus">Eurystomus</option>
+<option value="Corcorax">Corcorax</option>
+<option value="Struthidea">Struthidea</option>
+<option value="Corvus">Corvus</option>
+<option value="Cacomantis">Cacomantis</option>
+<option value="Chalcites">Chalcites</option>
+<option value="Chrysococcyx">Chrysococcyx</option>
+<option value="Cuculus">Cuculus</option>
+<option value="Eudynamys">Eudynamys</option>
+<option value="Scythrops">Scythrops</option>
+<option value="Dasyornis">Dasyornis</option>
+<option value="Pycnoptilus">Pycnoptilus</option>
+<option value="Dicrurus">Dicrurus</option>
+<option value="Diomedea">Diomedea</option>
+<option value="Phoebetria">Phoebetria</option>
+<option value="Thalassarche">Thalassarche</option>
+<option value="Emblema">Emblema</option>
+<option value="Erythrura">Erythrura</option>
+<option value="Heteromunia">Heteromunia</option>
+<option value="Lonchura">Lonchura</option>
+<option value="Neochmia">Neochmia</option>
+<option value="Poephila">Poephila</option>
+<option value="Stagonopleura">Stagonopleura</option>
+<option value="Taeniopygia">Taeniopygia</option>
+<option value="Falco">Falco</option>
+<option value="Fregata">Fregata</option>
+<option value="Carduelis">Carduelis</option>
+<option value="Chloris">Chloris</option>
+<option value="Glareola">Glareola</option>
+<option value="Stiltia">Stiltia</option>
+<option value="Grus">Grus</option>
+<option value="Haematopus">Haematopus</option>
+<option value="Cheramoeca">Cheramoeca</option>
+<option value="Hirundo">Hirundo</option>
+<option value="Petrochelidon">Petrochelidon</option>
+<option value="Hydrobates">Hydrobates</option>
+<option value="Irediparra">Irediparra</option>
+<option value="Anous">Anous</option>
+<option value="Chlidonias">Chlidonias</option>
+<option value="Chroicocephalus">Chroicocephalus</option>
+<option value="Gelochelidon">Gelochelidon</option>
+<option value="Gygis">Gygis</option>
+<option value="Hydroprogne">Hydroprogne</option>
+<option value="Larus">Larus</option>
+<option value="Leucophaeus">Leucophaeus</option>
+<option value="Onychoprion">Onychoprion</option>
+<option value="Procelsterna">Procelsterna</option>
+<option value="Sterna">Sterna</option>
+<option value="Sternula">Sternula</option>
+<option value="Thalasseus">Thalasseus</option>
+<option value="Amytornis">Amytornis</option>
+<option value="Malurus">Malurus</option>
+<option value="Stipiturus">Stipiturus</option>
+<option value="Cincloramphus">Cincloramphus</option>
+<option value="Eremiornis">Eremiornis</option>
+<option value="Megalurus">Megalurus</option>
+<option value="Alectura">Alectura</option>
+<option value="Leipoa">Leipoa</option>
+<option value="Megapodius">Megapodius</option>
+<option value="Acanthagenys">Acanthagenys</option>
+<option value="Acanthorhynchus">Acanthorhynchus</option>
+<option value="Anthochaera">Anthochaera</option>
+<option value="Ashbyia">Ashbyia</option>
+<option value="Certhionyx">Certhionyx</option>
+<option value="Cissomela">Cissomela</option>
+<option value="Conopophila">Conopophila</option>
+<option value="Entomyzon">Entomyzon</option>
+<option value="Epthianura">Epthianura</option>
+<option value="Gliciphila">Gliciphila</option>
+<option value="Grantiella">Grantiella</option>
+<option value="Lichenostomus">Lichenostomus</option>
+<option value="Lichmera">Lichmera</option>
+<option value="Manorina">Manorina</option>
+<option value="Meliphaga">Meliphaga</option>
+<option value="Melithreptus">Melithreptus</option>
+<option value="Myzomela">Myzomela</option>
+<option value="Philemon">Philemon</option>
+<option value="Phylidonyris">Phylidonyris</option>
+<option value="Plectorhyncha">Plectorhyncha</option>
+<option value="Purnella">Purnella</option>
+<option value="Ramsayornis">Ramsayornis</option>
+<option value="Sugomel">Sugomel</option>
+<option value="Trichodere">Trichodere</option>
+<option value="Xanthotis">Xanthotis</option>
+<option value="Menura">Menura</option>
+<option value="Merops">Merops</option>
+<option value="Arses">Arses</option>
+<option value="Carterornis">Carterornis</option>
+<option value="Grallina">Grallina</option>
+<option value="Machaerirhynchus">Machaerirhynchus</option>
+<option value="Monarcha">Monarcha</option>
+<option value="Myiagra">Myiagra</option>
+<option value="Symposiachrus">Symposiachrus</option>
+<option value="Anthus">Anthus</option>
+<option value="Motacilla">Motacilla</option>
+<option value="Dicaeum">Dicaeum</option>
+<option value="Nectarinia">Nectarinia</option>
+<option value="Daphoenositta">Daphoenositta</option>
+<option value="Numida">Numida</option>
+<option value="Fregetta">Fregetta</option>
+<option value="Garrodia">Garrodia</option>
+<option value="Oceanites">Oceanites</option>
+<option value="Pelagodroma">Pelagodroma</option>
+<option value="Oriolus">Oriolus</option>
+<option value="Sphecotheres">Sphecotheres</option>
+<option value="Orthonyx">Orthonyx</option>
+<option value="Ardeotis">Ardeotis</option>
+<option value="Colluricincla">Colluricincla</option>
+<option value="Falcunculus">Falcunculus</option>
+<option value="Oreoica">Oreoica</option>
+<option value="Pachycephala">Pachycephala</option>
+<option value="Phonygammus">Phonygammus</option>
+<option value="Ptiloris">Ptiloris</option>
+<option value="Pardalotus">Pardalotus</option>
+<option value="Passer">Passer</option>
+<option value="Pedionomus">Pedionomus</option>
+<option value="Pelecanus">Pelecanus</option>
+<option value="Drymodes">Drymodes</option>
+<option value="Eopsaltria">Eopsaltria</option>
+<option value="Heteromyias">Heteromyias</option>
+<option value="Melanodryas">Melanodryas</option>
+<option value="Microeca">Microeca</option>
+<option value="Peneoenanthe">Peneoenanthe</option>
+<option value="Petroica">Petroica</option>
+<option value="Poecilodryas">Poecilodryas</option>
+<option value="Tregellasia">Tregellasia</option>
+<option value="Phaethon">Phaethon</option>
+<option value="Microcarbo">Microcarbo</option>
+<option value="Phalacrocorax">Phalacrocorax</option>
+<option value="Coturnix">Coturnix</option>
+<option value="Excalfactoria">Excalfactoria</option>
+<option value="Gallus">Gallus</option>
+<option value="Meleagris">Meleagris</option>
+<option value="Pavo">Pavo</option>
+<option value="Phasianus">Phasianus</option>
+<option value="Pitta">Pitta</option>
+<option value="Podargus">Podargus</option>
+<option value="Podiceps">Podiceps</option>
+<option value="Poliocephalus">Poliocephalus</option>
+<option value="Tachybaptus">Tachybaptus</option>
+<option value="Pomatostomus">Pomatostomus</option>
+<option value="Ardenna">Ardenna</option>
+<option value="Bulweria">Bulweria</option>
+<option value="Calonectris">Calonectris</option>
+<option value="Daption">Daption</option>
+<option value="Fulmarus">Fulmarus</option>
+<option value="Halobaena">Halobaena</option>
+<option value="Lugensa">Lugensa</option>
+<option value="Macronectes">Macronectes</option>
+<option value="Pachyptila">Pachyptila</option>
+<option value="Pelecanoides">Pelecanoides</option>
+<option value="Procellaria">Procellaria</option>
+<option value="Pseudobulweria">Pseudobulweria</option>
+<option value="Pterodroma">Pterodroma</option>
+<option value="Puffinus">Puffinus</option>
+<option value="Thalassoica">Thalassoica</option>
+<option value="Alisterus">Alisterus</option>
+<option value="Aprosmictus">Aprosmictus</option>
+<option value="Barnardius">Barnardius</option>
+<option value="Cyclopsitta">Cyclopsitta</option>
+<option value="Eclectus">Eclectus</option>
+<option value="Geoffroyus">Geoffroyus</option>
+<option value="Glossopsitta">Glossopsitta</option>
+<option value="Lathamus">Lathamus</option>
+<option value="Melopsittacus">Melopsittacus</option>
+<option value="Neophema">Neophema</option>
+<option value="Neopsephotus">Neopsephotus</option>
+<option value="Northiella">Northiella</option>
+<option value="Pezoporus">Pezoporus</option>
+<option value="Platycercus">Platycercus</option>
+<option value="Polytelis">Polytelis</option>
+<option value="Psephotus">Psephotus</option>
+<option value="Psitteuteles">Psitteuteles</option>
+<option value="Purpureicephalus">Purpureicephalus</option>
+<option value="Trichoglossus">Trichoglossus</option>
+<option value="Cinclosoma">Cinclosoma</option>
+<option value="Psophodes">Psophodes</option>
+<option value="Ailuroedus">Ailuroedus</option>
+<option value="Amblyornis">Amblyornis</option>
+<option value="Ptilonorhynchus">Ptilonorhynchus</option>
+<option value="Scenopoeetes">Scenopoeetes</option>
+<option value="Sericulus">Sericulus</option>
+<option value="Pycnonotus">Pycnonotus</option>
+<option value="Amaurornis">Amaurornis</option>
+<option value="Eulabeornis">Eulabeornis</option>
+<option value="Fulica">Fulica</option>
+<option value="Gallinula">Gallinula</option>
+<option value="Gallirallus">Gallirallus</option>
+<option value="Lewinia">Lewinia</option>
+<option value="Porphyrio">Porphyrio</option>
+<option value="Porzana">Porzana</option>
+<option value="Rallina">Rallina</option>
+<option value="Tribonyx">Tribonyx</option>
+<option value="Cladorhynchus">Cladorhynchus</option>
+<option value="Himantopus">Himantopus</option>
+<option value="Recurvirostra">Recurvirostra</option>
+<option value="Rhipidura">Rhipidura</option>
+<option value="Rostratula">Rostratula</option>
+<option value="Actitis">Actitis</option>
+<option value="Arenaria">Arenaria</option>
+<option value="Calidris">Calidris</option>
+<option value="Gallinago">Gallinago</option>
+<option value="Limicola">Limicola</option>
+<option value="Limnodromus">Limnodromus</option>
+<option value="Limosa">Limosa</option>
+<option value="Numenius">Numenius</option>
+<option value="Phalaropus">Phalaropus</option>
+<option value="Philomachus">Philomachus</option>
+<option value="Tringa">Tringa</option>
+<option value="Tryngites">Tryngites</option>
+<option value="Xenus">Xenus</option>
+<option value="Aptenodytes">Aptenodytes</option>
+<option value="Eudyptes">Eudyptes</option>
+<option value="Eudyptula">Eudyptula</option>
+<option value="Stercorarius">Stercorarius</option>
+<option value="Ninox">Ninox</option>
+<option value="Acridotheres">Acridotheres</option>
+<option value="Aplornis">Aplornis</option>
+<option value="Sturnus">Sturnus</option>
+<option value="Morus">Morus</option>
+<option value="Sula">Sula</option>
+<option value="Platalea">Platalea</option>
+<option value="Plegadis">Plegadis</option>
+<option value="Threskiornis">Threskiornis</option>
+<option value="Zosterops">Zosterops</option>
+<option value="Turdus">Turdus</option>
+<option value="Zoothera">Zoothera</option>
+<option value="Turnix">Turnix</option>
+<option value="Tyto">Tyto</option>
+                        </select>
+
+                    </div>
+                                        <div class="onefield taxa_selector mammals" style="display: none;">
+                        <h3>…and a taxon</h3>
+
+                        <label><input type="radio" class="taxa all" name="mammals_taxatype" value="all" checked="checked">all mammals</label>
+                        <label><input type="radio" class="taxa family" name="mammals_taxatype" value="family">a mammal family</label>
+                        <select class="taxa_dd family" name="chosen_family_mammals">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a family...</option>
+                            <option value="ACROBATIDAE">Acrobatidae</option>
+<option value="BOVIDAE">Bovidae</option>
+<option value="BURRAMYIDAE">Burramyidae</option>
+<option value="CANIDAE">Canidae</option>
+<option value="DASYURIDAE">Dasyuridae</option>
+<option value="EMBALLONURIDAE">Emballonuridae</option>
+<option value="HIPPOSIDERIDAE">Hipposideridae</option>
+<option value="HYPSOPRYMNODONTIDAE">Hypsoprymnodontidae</option>
+<option value="MACROPODIDAE">Macropodidae</option>
+<option value="MEGADERMATIDAE">Megadermatidae</option>
+<option value="MINIOPTERIDAE">Miniopteridae</option>
+<option value="MOLOSSIDAE">Molossidae</option>
+<option value="MURIDAE">Muridae</option>
+<option value="NOTORYCTIDAE">Notoryctidae</option>
+<option value="ORNITHORHYNCHIDAE">Ornithorhynchidae</option>
+<option value="PERAMELIDAE">Peramelidae</option>
+<option value="PETAURIDAE">Petauridae</option>
+<option value="PHALANGERIDAE">Phalangeridae</option>
+<option value="PHASCOLARCTIDAE">Phascolarctidae</option>
+<option value="POTOROIDAE">Potoroidae</option>
+<option value="PSEUDOCHEIRIDAE">Pseudocheiridae</option>
+<option value="PTEROPODIDAE">Pteropodidae</option>
+<option value="RHINOLOPHIDAE">Rhinolophidae</option>
+<option value="TACHYGLOSSIDAE">Tachyglossidae</option>
+<option value="THYLACOMYIDAE">Thylacomyidae</option>
+<option value="VESPERTILIONIDAE">Vespertilionidae</option>
+<option value="VOMBATIDAE">Vombatidae</option>
+                        </select>
+
+                        <label><input type="radio" class="taxa genus" name="mammals_taxatype" value="genus">a mammal genus</label>
+                        <select class="taxa_dd genus" name="chosen_genus_mammals">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a genus...</option>
+                            <option value="Acrobates">Acrobates</option>
+<option value="Bos">Bos</option>
+<option value="Burramys">Burramys</option>
+<option value="Cercartetus">Cercartetus</option>
+<option value="Canis">Canis</option>
+<option value="Vulpes">Vulpes</option>
+<option value="Antechinomys">Antechinomys</option>
+<option value="Antechinus">Antechinus</option>
+<option value="Dasycercus">Dasycercus</option>
+<option value="Dasyuroides">Dasyuroides</option>
+<option value="Dasyurus">Dasyurus</option>
+<option value="Ningaui">Ningaui</option>
+<option value="Phascogale">Phascogale</option>
+<option value="Planigale">Planigale</option>
+<option value="Pseudantechinus">Pseudantechinus</option>
+<option value="Sarcophilus">Sarcophilus</option>
+<option value="Sminthopsis">Sminthopsis</option>
+<option value="Saccolaimus">Saccolaimus</option>
+<option value="Taphozous">Taphozous</option>
+<option value="Hipposideros">Hipposideros</option>
+<option value="Rhinonicteris">Rhinonicteris</option>
+<option value="Hypsiprymnodon">Hypsiprymnodon</option>
+<option value="Dendrolagus">Dendrolagus</option>
+<option value="Lagorchestes">Lagorchestes</option>
+<option value="Macropus">Macropus</option>
+<option value="Onychogalea">Onychogalea</option>
+<option value="Petrogale">Petrogale</option>
+<option value="Setonix">Setonix</option>
+<option value="Thylogale">Thylogale</option>
+<option value="Wallabia">Wallabia</option>
+<option value="Macroderma">Macroderma</option>
+<option value="Miniopterus">Miniopterus</option>
+<option value="Chaerephon">Chaerephon</option>
+<option value="Mormopterus">Mormopterus</option>
+<option value="Tadarida">Tadarida</option>
+<option value="Conilurus">Conilurus</option>
+<option value="Hydromys">Hydromys</option>
+<option value="Leggadina">Leggadina</option>
+<option value="Mastacomys">Mastacomys</option>
+<option value="Melomys">Melomys</option>
+<option value="Mesembriomys">Mesembriomys</option>
+<option value="Mus">Mus</option>
+<option value="Notomys">Notomys</option>
+<option value="Pseudomys">Pseudomys</option>
+<option value="Rattus">Rattus</option>
+<option value="Uromys">Uromys</option>
+<option value="Xeromys">Xeromys</option>
+<option value="Zyzomys">Zyzomys</option>
+<option value="Notoryctes">Notoryctes</option>
+<option value="Ornithorhynchus">Ornithorhynchus</option>
+<option value="Isoodon">Isoodon</option>
+<option value="Perameles">Perameles</option>
+<option value="Dactylopsila">Dactylopsila</option>
+<option value="Gymnobelideus">Gymnobelideus</option>
+<option value="Petaurus">Petaurus</option>
+<option value="Trichosurus">Trichosurus</option>
+<option value="Phascolarctos">Phascolarctos</option>
+<option value="Aepyprymnus">Aepyprymnus</option>
+<option value="Bettongia">Bettongia</option>
+<option value="Potorous">Potorous</option>
+<option value="Hemibelideus">Hemibelideus</option>
+<option value="Petauroides">Petauroides</option>
+<option value="Petropseudes">Petropseudes</option>
+<option value="Pseudocheirus">Pseudocheirus</option>
+<option value="Pseudochirops">Pseudochirops</option>
+<option value="Macroglossus">Macroglossus</option>
+<option value="Nyctimene">Nyctimene</option>
+<option value="Pteropus">Pteropus</option>
+<option value="Syconycteris">Syconycteris</option>
+<option value="Rhinolophus">Rhinolophus</option>
+<option value="Tachyglossus">Tachyglossus</option>
+<option value="Macrotis">Macrotis</option>
+<option value="Chalinolobus">Chalinolobus</option>
+<option value="Eptesicus">Eptesicus</option>
+<option value="Falsistrellus">Falsistrellus</option>
+<option value="Kerivoula">Kerivoula</option>
+<option value="Myotis">Myotis</option>
+<option value="Nyctophilus">Nyctophilus</option>
+<option value="Pipistrellus">Pipistrellus</option>
+<option value="Scoteanax">Scoteanax</option>
+<option value="Scotorepens">Scotorepens</option>
+<option value="Vespadelus">Vespadelus</option>
+<option value="Lasiorhinus">Lasiorhinus</option>
+<option value="Vombatus">Vombatus</option>
+                        </select>
+
+                    </div>
+                                        <div class="onefield taxa_selector reptiles" style="display: none;">
+                        <h3>…and a taxon</h3>
+
+                        <label><input type="radio" class="taxa all" name="reptiles_taxatype" value="all" checked="checked">all reptiles</label>
+                        <label><input type="radio" class="taxa family" name="reptiles_taxatype" value="family">a reptile family</label>
+                        <select class="taxa_dd family" name="chosen_family_reptiles">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a family...</option>
+                            <option value="ACROCHORDIDAE">Acrochordidae</option>
+<option value="AGAMIDAE">Agamidae</option>
+<option value="BOIDAE">Boidae</option>
+<option value="COLUBRIDAE">Colubridae</option>
+<option value="ELAPIDAE">Elapidae</option>
+<option value="GEKKONIDAE">Gekkonidae</option>
+<option value="PYGOPODIDAE">Pygopodidae</option>
+<option value="SCINCIDAE">Scincidae</option>
+<option value="TYPHLOPIDAE">Typhlopidae</option>
+<option value="VARANIDAE">Varanidae</option>
+                        </select>
+
+                        <label><input type="radio" class="taxa genus" name="reptiles_taxatype" value="genus">a reptile genus</label>
+                        <select class="taxa_dd genus" name="chosen_genus_reptiles">
+                            <option disabled="disabled" selected="selected" value="invalid">choose a genus...</option>
+                            <option value="Acrochordus">Acrochordus</option>
+<option value="Amphibolurus">Amphibolurus</option>
+<option value="Chelosania">Chelosania</option>
+<option value="Chlamydosaurus">Chlamydosaurus</option>
+<option value="Ctenophorus">Ctenophorus</option>
+<option value="Diporiphora">Diporiphora</option>
+<option value="Hypsilurus">Hypsilurus</option>
+<option value="Lophognathus">Lophognathus</option>
+<option value="Moloch">Moloch</option>
+<option value="Physignathus">Physignathus</option>
+<option value="Pogona">Pogona</option>
+<option value="Rankinia">Rankinia</option>
+<option value="Tympanocryptis">Tympanocryptis</option>
+<option value="Antaresia">Antaresia</option>
+<option value="Aspidites">Aspidites</option>
+<option value="Liasis">Liasis</option>
+<option value="Morelia">Morelia</option>
+<option value="Boiga">Boiga</option>
+<option value="Dendrelaphis">Dendrelaphis</option>
+<option value="Stegonotus">Stegonotus</option>
+<option value="Tropidonophis">Tropidonophis</option>
+<option value="Acanthophis">Acanthophis</option>
+<option value="Austrelaps">Austrelaps</option>
+<option value="Brachyurophis">Brachyurophis</option>
+<option value="Cacophis">Cacophis</option>
+<option value="Cryptophis">Cryptophis</option>
+<option value="Demansia">Demansia</option>
+<option value="Denisonia">Denisonia</option>
+<option value="Drysdalia">Drysdalia</option>
+<option value="Echiopsis">Echiopsis</option>
+<option value="Furina">Furina</option>
+<option value="Hemiaspis">Hemiaspis</option>
+<option value="Hoplocephalus">Hoplocephalus</option>
+<option value="Neelaps">Neelaps</option>
+<option value="Notechis">Notechis</option>
+<option value="Oxyuranus">Oxyuranus</option>
+<option value="Parasuta">Parasuta</option>
+<option value="Pseudechis">Pseudechis</option>
+<option value="Pseudonaja">Pseudonaja</option>
+<option value="Rhinoplocephalus">Rhinoplocephalus</option>
+<option value="Simoselaps">Simoselaps</option>
+<option value="Suta">Suta</option>
+<option value="Tropidechis">Tropidechis</option>
+<option value="Vermicella">Vermicella</option>
+<option value="Christinus">Christinus</option>
+<option value="Crenadactylus">Crenadactylus</option>
+<option value="Diplodactylus">Diplodactylus</option>
+<option value="Gehyra">Gehyra</option>
+<option value="Hemidactylus">Hemidactylus</option>
+<option value="Heteronotia">Heteronotia</option>
+<option value="Lucasium">Lucasium</option>
+<option value="Nephrurus">Nephrurus</option>
+<option value="Oedura">Oedura</option>
+<option value="Phyllurus">Phyllurus</option>
+<option value="Pseudothecadactylus">Pseudothecadactylus</option>
+<option value="Rhynchoedura">Rhynchoedura</option>
+<option value="Saltuarius">Saltuarius</option>
+<option value="Strophurus">Strophurus</option>
+<option value="Aprasia">Aprasia</option>
+<option value="Delma">Delma</option>
+<option value="Lialis">Lialis</option>
+<option value="Ophidiocephalus">Ophidiocephalus</option>
+<option value="Pygopus">Pygopus</option>
+<option value="Acritoscincus">Acritoscincus</option>
+<option value="Anepischetosia">Anepischetosia</option>
+<option value="Anomalopus">Anomalopus</option>
+<option value="Bellatorias">Bellatorias</option>
+<option value="Calyptotis">Calyptotis</option>
+<option value="Carlia">Carlia</option>
+<option value="Coeranoscincus">Coeranoscincus</option>
+<option value="Cryptoblepharus">Cryptoblepharus</option>
+<option value="Ctenotus">Ctenotus</option>
+<option value="Egernia">Egernia</option>
+<option value="Eremiascincus">Eremiascincus</option>
+<option value="Eulamprus">Eulamprus</option>
+<option value="Glaphyromorphus">Glaphyromorphus</option>
+<option value="Gnypetoscincus">Gnypetoscincus</option>
+<option value="Harrisoniascincus">Harrisoniascincus</option>
+<option value="Hemiergis">Hemiergis</option>
+<option value="Lampropholis">Lampropholis</option>
+<option value="Lerista">Lerista</option>
+<option value="Liopholis">Liopholis</option>
+<option value="Lissolepis">Lissolepis</option>
+<option value="Lygisaurus">Lygisaurus</option>
+<option value="Menetia">Menetia</option>
+<option value="Morethia">Morethia</option>
+<option value="Nannoscincus">Nannoscincus</option>
+<option value="Niveoscincus">Niveoscincus</option>
+<option value="Notoscincus">Notoscincus</option>
+<option value="Ophioscincus">Ophioscincus</option>
+<option value="Proablepharus">Proablepharus</option>
+<option value="Pseudemoia">Pseudemoia</option>
+<option value="Saiphos">Saiphos</option>
+<option value="Saproscincus">Saproscincus</option>
+<option value="Tiliqua">Tiliqua</option>
+<option value="Ramphotyphlops">Ramphotyphlops</option>
+<option value="Varanus">Varanus</option>
+                        </select>
+
+                    </div>
+
+
+
+    </fieldset>
+
+    <fieldset class="formblock timepoint">
+        <h3 for="timepoint">Select a year</h3>
+        <label><input type="radio" name="timepoint" value="baseline" checked="checked">baseline</label>
+        <label><input type="radio" name="timepoint" value="2025">2025</label>
+        <label><input type="radio" name="timepoint" value="2035">2035</label>
+        <label><input type="radio" name="timepoint" value="2045">2045</label>
+        <label><input type="radio" name="timepoint" value="2055">2055</label>
+        <label><input type="radio" name="timepoint" value="2065">2065</label>
+        <label><input type="radio" name="timepoint" value="2075">2075</label>
+        <label><input type="radio" name="timepoint" value="2085">2085</label>
+    </fieldset>
+
+    <fieldset class="formblock scenario">
+        <h3>Select a scenario</h3>
+        <label><input type="radio" name="scenario" value="RCP3PD">RCP 3PD</label>
+        <label><input type="radio" name="scenario" value="RCP45">RCP 4.5</label>
+        <label><input type="radio" name="scenario" value="RCP6">RCP 6</label>
+        <label><input type="radio" name="scenario" value="RCP85" checked="checked">RCP 8.5</label>
+    </fieldset>
+
+    <fieldset class="wide">
+        <button id="showbiodiversitymap" type="button" class="bigbutton switchpage" data-targetpage="biodiversityshowingpage">show the map</button>
+    </fieldset>
+</form>
+
+
+<script>
+//<![CDATA[
+    // Generated by CoffeeScript 1.4.0
+(function() {
+
+  $(function() {
+    var $clazzRadios, $generate, $taxaSelectors;
+    String.prototype.capped = function() {
+      return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();
+    };
+    $clazzRadios = $('.clazz_selection');
+    $taxaSelectors = $('.taxa_selector');
+    $taxaSelectors.hide();
+    $clazzRadios.each(function(index, clazzRadio) {
+      var $familyDD, $genusDD, $taxaDDs, $taxaRadios, $taxaSelector;
+      $taxaSelector = $taxaSelectors.filter('.' + clazzRadio.value);
+      $(clazzRadio).change(function(event) {
+        var selectedClazz;
+        $taxaSelectors.hide();
+        selectedClazz = $clazzRadios.filter(':checked').prop('value');
+        if (selectedClazz !== 'all') {
+          return $taxaSelectors.filter('.' + selectedClazz).show('blind');
+        }
+      });
+      if (clazzRadio.value !== 'all') {
+        $taxaRadios = $taxaSelector.find('.taxa');
+        $taxaDDs = $taxaSelector.find('.taxa_dd');
+        $familyDD = $taxaSelector.find('.taxa_dd.family');
+        $genusDD = $taxaSelector.find('.taxa_dd.genus');
+        return $taxaRadios.change(function(event) {
+          $taxaDDs.css('visibility', 'hidden');
+          switch (event.target.value) {
+            case 'family':
+              return $familyDD.css('visibility', 'visible');
+            case 'genus':
+              return $genusDD.css('visibility', 'visible');
+          }
+        });
+      }
+    });
+    $('.timepoint').change(function(event) {
+      if ($('.timepoint:checked').prop('value') === 'current') {
+        $('input:radio[name="scenario"]').attr('disabled', true);
+        return $('.scenario').addClass('disabled');
+      } else {
+        $('input:radio[name="scenario"]').attr('disabled', false);
+        return $('.scenario').removeClass('disabled');
+      }
+    });
+    $('.timepoint').first().change();
+    $generate = $('#showbiodiversitymap');
+    $('input').add('select').change(function(event) {
+      var clazz, formIncomplete, groupName, taxaLevel;
+      formIncomplete = false;
+      clazz = $('input:radio[name="clazztype"]:checked').val();
+      if ((clazz != null) && clazz !== 'all') {
+        taxaLevel = $("input:radio[name='" + clazz + "_taxatype']:checked").val();
+        if (taxaLevel !== 'all') {
+          groupName = $("select[name='chosen_" + taxaLevel + "_" + clazz + "']").val();
+          if (groupName === 'invalid') {
+            formIncomplete = true;
+          }
+        }
+      }
+      return $('.generate').attr('disabled', formIncomplete);
+    });
+    return $generate.click(function(e) {
+        var clazz, groupLevel, groupName, output, path, prefix, scenario, taxaLevel, year;
+        year = $('input:radio[name="timepoint"]:checked').val();
+        scenario = $('input:radio[name="scenario"]:checked').val();
+        output = $('input:radio[name="output"]:checked').val();
+        clazz = $('input:radio[name="clazztype"]:checked').val();
+        groupLevel = 'clazz';
+        groupName = clazz;
+        if ((clazz != null) && clazz !== 'all') {
+          taxaLevel = $("input:radio[name='" + clazz + "_taxatype']:checked").val();
+          if (taxaLevel === 'all') {
+
+          } else {
+            groupLevel = taxaLevel;
+            groupName = $("select[name='chosen_" + taxaLevel + "_" + clazz + "']").val();
+          }
+        }
+
+        console.log({year: year, scenario: scenario, clazz: clazz, groupLevel: groupLevel, groupName: groupName});
+
+        var modelPoint = scenario + '_' + year;
+        if ( year === 'baseline') { modelPoint = '1990'; }
+
+        var mapUrl = 'http://130.102.155.33:8080/';
+
+        if (groupLevel === 'clazz' && clazz === 'all') {
+            mapUrl += "SDM/vertebrate_richness/" + modelPoint + "_vertebrates.tif";
+        } else {
+            if (groupLevel !== 'clazz') {
+                groupName = groupName.toLowerCase().capped();
+            }
+            mapUrl += "SDM/" + clazz + "/richness/" + modelPoint + "_" + groupName + ".tif";
+        }
+
+        console.log(mapUrl);
+
+        mapUrl = window.climasSettings.vizUrlPrefix + encodeURIComponent(mapUrl);
+
+        $('#biodiversityshowingpage .taxonname').html(groupName.toLowerCase().capped());
+        $('#map').animate({ opacity: 0 }, 'fast', function() {
+            // find the map and apply it
+            $('#mapframe').attr('src', mapUrl);
+            // the iframe's ready event will eventually fire, and that's when we fade the map back in.
+        });
+
+    });
+  });
+
+}).call(this);
+
+//]]>
+</script>
+

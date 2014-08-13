@@ -1,0 +1,117 @@
+
+/**
+ * CSS required for jQuery plugin menusandpanels.js
+ * author: Daniel Baird <daniel@danielbaird.com>
+ * version: 0.1.2014-02-05
+ */
+
+/* ========================================= mspp menus & submenus */
+
+/*
+.mspp-main-menu * {
+    background: rgba(0,0,0, 0.1);
+}
+*/
+
+.mspp-main-menu ul { /* ----------------------- main and sub menus */
+    margin: 0;
+    padding: 0;
+    float: left;
+    line-height: 3em;
+}
+
+.mspp-main-menu li { /* ------------------ main and sub menu items */
+    margin: 0;
+    padding: 0;
+    display: block;
+    float: left;
+    overflow: hidden;
+    -webkit-transition: width 1s;
+    transition: width 1s;
+}
+.mspp-main-menu li.current {
+    /* background: rgba(0,100,0, 0.33); */
+}
+
+.mspp-main-menu li a { /* ---------------------- text inside items */
+    padding: 0 1em;
+    float: left;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+.mspp-main-menu li a:hover {
+    /* background: rgba(0,100,255, 0.2); */
+}
+
+.mspp-main-menu { /* ----------------------------------- main menu */
+    height: 3em;
+    padding: 0;
+    margin: 1em 5% 0;
+    overflow: hidden;
+}
+
+.mspp-main-menu > li { /* ------------------------- main menu item */
+    position: relative;
+    height: 3em;
+}
+
+.mspp-main-menu > li > a { /* --------------------- main menu text */
+    height: 100%;
+    line-height: 3em;
+}
+
+.mspp-main-menu ul { /* --------------------------------- sub menu */
+    height: 2em;
+    line-height: 2em;
+    margin: -2em 1em 0 0.5em;
+    position: relative;
+    top: 100%;
+}
+
+.mspp-main-menu li.current ul { /* -------------- current sub menu */
+    display: block;
+    white-space: nowrap;
+}
+
+.mspp-main-menu ul li a { /* ------------------- submenu item text */
+    line-height: 2em;
+    height: 2em;
+    float: left;
+}
+
+/* =========================================== mspp panels & pages */
+
+/*
+.mspp-panel * {
+    background: rgba(0,0,0, 0.1);
+}
+*/
+
+.mspp-panel { /* ------------------------------------------ panels */
+    /* background: rgba(0,0,0, 0.1); */
+    position: relative;
+    width: 90%;
+    margin: 0 5% 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.mspp-panel .mspp-page { /* -------------------------------- pages */
+    box-sizing: border-box;
+    padding: 1em 5%;
+}
+
+.mspp-panel .mspp-page.current {
+    /* background: rgba(0,100,0, 0.33); */
+}
+
+/* ================================================ mspp utilities */
+
+/* ------------------------------------------------------ clearfix */
+.mspp-clearfix:before, .mspp-clearfix:after {
+    content: " ";
+    display: table;
+}
+.mspp-clearfix:after { clear: both; }
+.mspp-clearfix { *zoom: 1; }

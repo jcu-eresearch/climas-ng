@@ -1,0 +1,509 @@
+
+// css for the climas header.
+
+@background: #2d4048;
+@headerbackground: #242732;
+@bodybackground: lighten(#efe6c5, 2%);
+
+// go get Lato for much prettiness
+@import (less) url(http://fonts.googleapis.com/css?family=Lato:300,400,900,400italic);
+
+body {
+    padding: 0;
+    font-family: Lato, "Arial Unicode MS", sans-serif;
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased; /* light-text-on-dark is too bold on Macs */
+    line-height: 1.4;
+    color: #000;
+    background: #eee;
+    -moz-osx-font-smoothing: grayscale; /* light-text-on-dark is too bold on Macs */
+}
+
+@media screen { body {
+        background: @background;
+        color: #222;
+}   }
+
+a {
+    color: #016;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+}
+
+@sidepad: 4%;
+// innersidepad is the size of sidepad, if you've been narrowed by the sidepad.
+@innersidepad: (100% * @sidepad / (100% - @sidepad - @sidepad) );
+
+/* disclaimer overlay - - - - - - - - - - - - - - */
+
+.disclaimer {
+    opacity: 0.66;
+    border-radius: 1em;
+    border: dotted black 2px;
+    transform: rotate(3deg);
+    position: absolute;
+    right: (3 * @sidepad);
+    top: -35em;
+    z-index: 10000;
+    box-sizing: border-box;
+    width: 19em;
+    height: 40em;
+    padding-top: 5em;
+    background: yellow;
+    transition: all 0.11s;
+
+    &:hover {
+        opacity: 1;
+    }
+    &.show {
+        opacity: 1;
+        top: -5em;
+        right: (3.5 * @sidepad);
+        transition: all 0.33s;
+    }
+    p {
+        margin: 0;
+        padding: 0.75em 2em;
+    }
+    h1 {
+        margin: 0;
+        padding: 0.5em 1em;
+        font-size: inherit;
+        letter-spacing: 0.1em;
+        display: block;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+/* header - - - - - - - - - - - - - - - - - - - - */
+
+@headerheight: 120px;
+header.page {
+    opacity: 0.99;
+    position: relative;
+    z-index: 10;
+    height: @headerheight;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    color: white;
+    background: #242732;
+
+    h1 {
+        float: left;
+        padding: 0 0 0 @sidepad;
+        margin: 0;
+        font-size: (@headerheight / 5);
+        letter-spacing: 0.1em;
+        font-weight: 300;
+        line-height: (@headerheight - @navheight);
+        text-align: left;
+        text-shadow: 2px 2px 5px #000;
+    }
+    p { // p in the header is a subheading
+        color: lighten(@bodybackground, 8%);
+        float: left;
+        padding: 0 0 0 (@sidepad);
+        margin: 0;
+        font-size: inherit;
+        font-weight: 400;
+        line-height: (@headerheight - @navheight);
+        text-shadow: 1px 1px 3px #000;
+    }
+
+    @logopad: 8px;
+    img.logo {
+        float: right;
+        height: (@headerheight - @navheight - @logopad - @logopad);
+        margin: @logopad @sidepad 0;
+        opacity: 0.25;
+        transition: 0.5s ease-in-out;
+
+        @logoheight: min(55px, (@headerheight - @navheight - @logopad - @logopad));
+
+        height: @logoheight;
+        margin: (-0.5 * @logoheight) @sidepad 0;
+        position: absolute;
+        top: (0.5 * (@headerheight - @navheight));
+        right: 0;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+}
+
+/* navbar - - - - - - - - - - - - - - - - - - - - */
+
+/*
+    normal background: #242732 / 36,39,50 / @headerbackground
+    darker: #1e212a / 30,33,42
+    lighter: #2e3240 / 46,50,64
+*/
+
+// navbar is defined in mspp.css to be 3ems tall
+@navheight: 45px;
+// @subnavheight: 30px;
+nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: @headerbackground;
+    background: linear-gradient(to bottom, rgb(46,50,64) 0, rgb(30,33,42) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e3240', endColorstr='#1e212a');
+}
+
+// general nav menu..
+nav ul {
+    // height: @navheight;
+    position: relative;
+    left: -1px;
+    float: left;
+    padding: 0;
+    margin: 0;
+    > li {
+        display: block;
+        float: left;
+        height: 100%;
+        > a {
+            display: block;
+            float: left;
+            height: 100%;
+            padding: 0 2em;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: opacity 0.1s ease-in-out;
+
+            &:hover {
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+// main menu..
+nav .main.menu {
+    // height: @navheight;
+    padding: 0;
+    margin: 0 @sidepad 0;
+    // border-left:  1px solid rgba(46,50,64, 0.75);
+    // border-right: 1px solid rgba(30,33,42, 0.75);
+
+    > li {
+        display: block;
+        float: left;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-right: 1px solid rgba(30,33,42, 1);
+        border-left: 1px solid rgba(46,50,64, 1);
+
+        &.current {
+            background: linear-gradient(top, rgba(30,33,42, 1) 0, rgba(46,50,64, 1) 100%);
+            border-right: 1px solid rgba(46,50,64, 1);
+            border-left: 1px solid rgba(30,33,42, 1);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e212a', endColorstr='#2e3240');
+
+            a {
+                opacity: 1;
+            }
+        }
+
+        > a {
+//            line-height: @navheight;
+            color: @bodybackground;
+            text-shadow: 0 1px 0 rgba(46,50,64, 1), 0 -1px 0 rgba(30,33,42, 1);
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            transition: opacity 0.1s ease-in-out;
+
+            &:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+        }
+    }
+}
+
+/*
+    normal: efe6c5 / 239,230,197
+    lighter: fff5d1 / 255,245,209 (or just #fff)
+    darker: cfc6a9 / 207,198,169
+
+    shaded thing: 216,201,167
+*/
+
+nav ul li ul {
+    // height: @subnavheight;
+    // line-height: @subnavheight;
+    // margin: (@navheight - @subnavheight) (@navheight - @subnavheight) 0 0;
+    font-size: 90%;
+    color: #016;
+
+    > li {
+        background: #cfc6a9;
+        background: linear-gradient(top, rgba(239,230,197, 1) 0, rgba(207,198,169, 1) 100%);
+        border: 1px solid rgba(255,255,255, 0.1);
+        border-right: 1px solid rgba(0,0,0, 0.1);
+        border-bottom: none;
+        border-radius: 3px 3px 0 0;
+
+        &.current, &:hover {
+            background: @bodybackground;
+        }
+    }
+}
+
+/* main content - - - - - - - - - - - - - - - - */
+
+.maincontent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    margin: 0 @sidepad;
+    padding: 3em @sidepad;
+    background: @bodybackground;
+    line-height: 1.6;
+
+    .textcolumn {
+        // limits the width of text to readable size.
+        max-width: 40em;
+        margin: 0 auto;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 900;
+    }
+
+    .credits {
+        padding: 1.5em 0 2em;
+        // spread back over the normal page padding so we're edge-to-edge
+        margin: @sidepad (-1 * @innersidepad) 0;
+
+        text-align: center;
+        background: white;
+        -webkit-box-shadow: inset 0 0.5em 0.5em -0.25em rgba(0,0,0, 0.25), inset 0 -0.5em 0.5em -0.25em rgba(0,0,0, 0.25);
+        -moz-box-shadow:    inset 0 0.5em 0.5em -0.25em rgba(0,0,0, 0.25), inset 0 -0.5em 0.5em -0.25em rgba(0,0,0, 0.25);
+        box-shadow:         inset 0 0.5em 0.5em -0.25em rgba(0,0,0, 0.25), inset 0 -0.5em 0.5em -0.25em rgba(0,0,0, 0.25);
+
+        a {
+            display: inline-block;
+            margin: 1em 2em;
+            vertical-align: middle;
+        }
+
+        img { border: none; }
+    }
+}
+
+/* footer - - - - - - - - - - - - - - - - - - - */
+
+@footerheight: 30px;
+footer.page {
+    position: absolute;
+    bottom: 0;
+    width: 92%;
+    height: @footerheight;
+    padding: 0 4%;
+    margin: 0;
+    font-size: 80%;
+    line-height: @footerheight;
+    color: rgba(255,255,255, 1);
+    text-align: center;
+    background: rgba(36,39,50, 1);
+
+    p {
+        padding: 0;
+        margin: 0;
+        opacity: 0.5;
+        -moz-transition: opacity 0.33s ease-in-out;
+        -webkit-transition: opacity 0.33s ease-in-out;
+        transition: opacity 0.33s ease-in-out;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    img { vertical-align: middle; }
+    a { color: rgba(170,187,255, 1); }
+}
+
+/* panel - - - - - - - - - - - - - - - - - - - - */
+/* these are also styled by the mspp css */
+div.mspp-panel {
+    z-index: 2;
+    position: absolute;
+    top: (@headerheight);
+    box-shadow: 0 6px 12px -6px rgba(0,0,0, 0.5);
+    width: (100% - @sidepad - @sidepad);
+    left: @sidepad;
+    text-align: center;
+    box-sizing: border-box;
+    background: @bodybackground;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    border-radius: 0 0 2px 2px;
+    overflow: hidden;
+
+    &.hidden {
+        // display: none;
+    }
+}
+
+/* panel pages - - - - - - - - - - - - - - - - - */
+
+div.mspp-panel > .mspp-page {
+    box-sizing: border-box;
+    padding: 2em @sidepad 1.5em;
+    margin: 0 auto;
+    text-align: left;
+
+    &.current {
+        display: inline-block;
+    }
+
+    /* specific pages - - - - - - - - - - - - - */
+    &.short {
+        // short pages get less top/bottom padding
+        padding: 0.5em @sidepad 0.75em;
+        p {
+            margin: 0.25em 0;
+        }
+    }
+
+    /* specific pages - - - - - - - - - - - - - */
+    &.speciesselect {
+        #speciesname {
+            box-sizing: border-box;
+            padding: 0.5em 1em;
+            margin: 0;
+            font-size: 125%;
+        }
+    }
+
+    /* forms on pages - - - - - - - - - - - - - */
+
+    input, select, option, button {
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    button {
+        margin: 0 1em;
+        padding: 0.5em 1em;
+    }
+
+    fieldset {
+        margin: 1em;
+        padding: 1em 0;
+    }
+
+    .disabled {
+        opacity: 0.5;
+    }
+
+    form.formblocks {
+        text-align: center;
+
+        fieldset.formblock {
+            display: inline-block;
+            *display: inline; /* ie fix */
+            padding: 0 0.5em 1em;
+            text-align: left;
+            vertical-align: top;
+            background: -webkit-radial-gradient(bottom right, ellipse farthest-side, rgba(0,0,0, 0.025), rgba(0,0,0, 0.0));
+            background: radial-gradient(ellipse farthest-side at bottom right, rgba(0,0,0, 0.025), rgba(0,0,0, 0.0));
+            border: 6px solid rgba(0,0,0,0.1);
+            border-width: 3px 0;
+            border-radius: 12px;
+            zoom: 1; /* ie fix */
+
+            h3 {
+                padding: 1em 0 0.75em;
+                margin: 0;
+                font-size: inherit;
+                font-weight: 900;
+                opacity: 0.8;
+            }
+
+            label {
+                display: block;
+            }
+
+            input[type="radio"] {
+                margin-right: 0.3em;
+            }
+        }
+
+        fieldset.wide {
+            box-sizing: border-box;
+            display: block;
+            input { width: 100%; }
+        }
+
+    }
+
+    .taxa_selector {
+        position: relative;
+        padding-bottom: 3em;
+    }
+
+    .formblock.taxon {
+        min-width: 11.5em; /* random estimate */
+    }
+
+    .taxa_dd {
+        position: absolute;
+        right: 0.5em;
+        bottom: 0.5em;
+        left: 1.25em;
+        padding: 0.25em 0;
+        clear: both; /* this is for IE6 :( */
+        visibility: hidden;
+        zoom: 1;     /* another dagger in my heart from IE */
+    }
+
+    /* logos area - - - - - - - - - - - - - - - */
+    .credits {
+        padding: 1.5em 0.5em 2em;
+        // spread back over the normal page padding so we're edge-to-edge
+        margin: 0 -(100% * @sidepad / (100% - @sidepad - @sidepad));
+        text-align: center;
+        background: white;
+        -webkit-box-shadow: inset 0 0.5em 0.5em -0.25em rgba(0,0,0, 0.25), inset 0 -0.5em 0.5em -0.25em rgba(0,0,0, 0.25);
+        -moz-box-shadow:    inset 0 0.5em 0.5em -0.25em rgba(0,0,0, 0.25), inset 0 -0.5em 0.5em -0.25em rgba(0,0,0, 0.25);
+        box-shadow:         inset 0 0.5em 0.5em -0.25em rgba(0,0,0, 0.25), inset 0 -0.5em 0.5em -0.25em rgba(0,0,0, 0.25);
+
+        a {
+            display: inline-block;
+            margin: 1em 2em;
+            vertical-align: middle;
+        }
+
+        img { border: none; }
+    }
+}
+
+
+
+
+
+
+
+
+

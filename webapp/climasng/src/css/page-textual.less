@@ -1,0 +1,42 @@
+
+// This is the master css for the map page.
+//
+// running 'gulp css' will compile this less file and it's @imports into a single minified css file.
+
+// include other css-es used on the map page
+@import (less) "components/normalize.css";
+@import (less) "components/h5bp.css";
+
+// our jq plugin css for the menubar and panels
+@import (less) "components/menusandpanels.css";
+
+@import (less) "components/common.less";       // common styles
+
+// nice and spacious
+// @headerheight: 200px;
+
+/* body  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body { height: 100% }
+
+/*  content - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+.contentwrap {
+    position: absolute;
+    top: @headerheight;
+    // box-shadow: 0 6px 12px -6px rgba(0,0,0, 0.5);
+    right: 0;
+    bottom: @footerheight;
+    left: 0;
+    z-index: 1;
+    min-height: 100px;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+

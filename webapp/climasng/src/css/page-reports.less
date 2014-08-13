@@ -1,0 +1,340 @@
+
+// This is the master css for the map page.
+//
+// running 'gulp css' will compile this less file and it's @imports into a single minified css file.
+
+// include other css-es used on the map page
+@import (less) "components/normalize.css";
+@import (less) "components/h5bp.css";
+
+// our jq plugin css for the menubar and panels
+@import (less) "components/menusandpanels.css";
+
+@import (less) "components/common.less";       // common styles
+
+// @headerheight: 160px;
+
+/* body  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body { height: 100% }
+
+/*  content - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
+
+.contentwrap {
+    position: absolute;
+    top: @headerheight;
+    // box-shadow: 0 6px 12px -6px rgba(0,0,0, 0.5);
+    right: 0;
+    bottom: @footerheight;
+    left: 0;
+    z-index: 1;
+    min-height: 100px;
+    padding: 0;
+}
+
+#reportform {
+    // --------------------------------------------------------------
+    @reviewblockwidth: 22em;
+    @formbordercolor: darken(@bodybackground, 10%);
+    @sectiondividercolor: darken(@bodybackground, 30%);
+    @sectiondividercolor: #666;
+    // --------------------------------------------------------------
+
+    max-width: 65em;
+    margin: 0 auto;
+
+    .reviewblock {
+        box-sizing: border-box;
+        padding: 1em 1em 0.25em;
+        margin-top: 3em;
+        position: fixed;
+        right: (2 * @sidepad);
+        top: @headerheight;
+        width: @reviewblockwidth;
+
+        background: rgba(0,0,0, 0.05);
+        // background: fadeout(lighten(@bodybackground, 5%), 10%);
+
+        h1 {
+            font-size: inherit;
+            margin: 0 0 0.5em;
+            padding: 0;
+            border-bottom: 1px solid @sectiondividercolor;
+        }
+
+        p.coverage {
+            margin: 0.2em 0;
+            padding: 0.2em 0;
+        }
+
+        ul.contents {
+            padding: 0 0 1em 0;
+            margin: 0;
+            li {
+                line-height: 1.3;
+                text-indent: -3em;
+                padding: 0.2em 0 0.2em 3em;
+                margin: 0;
+                list-style: disc inside;
+            }
+            border-bottom: 1px solid @sectiondividercolor;
+        }
+
+        @buttoncolor: saturate(@bodybackground, 50%);
+        button {
+            display: block;
+            font-weight: 900;
+            width: auto;
+            margin: 1em auto;
+            padding: 0.33em 2em;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0, 0.15);
+
+            background: @buttoncolor;
+            @topedgemax: lighten(@buttoncolor, 12%);
+            @topedge: lighten(@buttoncolor, 8%);
+            @bottomedge: darken(@buttoncolor, 8%);
+            @bottomedgemax: darken(@buttoncolor, 12%);
+            background: linear-gradient(to bottom, @topedge, @bottomedge);
+            filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{topedge}', endColorstr='@{bottomedge}')";
+
+            &:hover {
+                background: lighten(@buttoncolor, 5%);
+                background: linear-gradient(to bottom, @topedgemax, @bottomedgemax);
+                filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{topedgemax}', endColorstr='@{bottomedgemax}')";
+            }
+        }
+
+    }
+    .reviewblock:empty { display: none; }
+    // --------------------------------------------------------------
+    .formblock {
+        padding-right: (@reviewblockwidth + 3em);
+        min-width: 30em;
+
+        // ----------------------------------------------------------
+        h1 {
+            background-image: linear-gradient(to left, rgba(255,255,255, 0.33), rgba(255,255,255, 0) 80%);
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            font-size: 120%;
+            letter-spacing: 0.5em;
+            font-weight: 400;
+            text-align: left;
+            line-height: 0.8;
+            text-transform: uppercase;
+            margin: 1em 0;
+            padding: 1em 0;
+
+            &:first-of-type { margin-top: 0; }
+        }
+        // ----------------------------------------------------------
+        .select {
+            margin-bottom: 3em;
+        }
+        .select.yearselect {
+            column-width: 12em;
+        }
+        // ----------------------------------------------------------
+        .regiontypeselector {
+            margin: -1.33em 0;
+            padding: 0.5em 0;
+            position: relative;
+            border-radius: 2px;
+            &:first-of-type { margin-top: 0 }
+
+            .name {
+                display: block;
+                // font-weight: 900;
+                padding: 0.25em;
+                cursor: pointer;
+                border-radius: 2px;
+
+                &:hover {
+                    background: lighten(@bodybackground, 5%);
+                }
+
+                input {
+                    margin: 0 0.5em 0 0;
+                }
+            }
+
+            .regionselectorwrapper {
+                position: absolute;
+                right: 0.5em;
+                top: 50%;
+                margin-top: -1em;
+                height: 2em;
+                line-height: 2em;
+                width: 66%;
+                border: 1px solid darken(@bodybackground, 5%);
+                border-radius: 2px;
+                overflow: hidden;
+                background-color: fadeout(lighten(@bodybackground, 5%), 33%);
+
+                &:after {
+                    color: #999;
+                    font-weight: 400;
+                    font-size: 150%;
+                    content: '\25be';
+                    position: absolute;
+                    right: 0.33em;
+                    z-index: 1;
+                }
+
+                .regionselector {
+                    z-index: 2;
+                    position: absolute;
+                    height: 100%;
+                    line-height: 2em;
+                    right: -11%;
+                    width: 110%;
+                    font-weight: 400;
+                    cursor: pointer;
+
+                    border: none;
+                    box-shadow: none;
+                    background-color: transparent;
+                    background-image: none;
+                    -webkit-appearance: none;
+                       -moz-appearance: none;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+            // only show the dropdown if the region type is selected
+            .regionselectorwrapper { display: none; }
+            &.typeselected .regionselectorwrapper { display: block; }
+
+            &.typeselected.regionselected {
+                background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 66%);
+            }
+        }
+
+        // ----------------------------------------------------------
+
+        .yearrow {
+            border-radius: 2px;
+            padding: 0.33em 0;
+            margin: -0.33em 0;
+            &:first-of-type { margin-top: 0; }
+
+            .name {
+                display: block;
+                // font-weight: 900;
+                padding: 0 0.5em;
+                cursor: pointer;
+                border-radius: 2px;
+
+                &:hover {
+                    background: lighten(@bodybackground, 5%);
+                }
+
+                input {
+                    margin: 0 0.5em 0 0;
+                }
+            }
+
+            &.yearselected {
+                background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 66%);
+            }
+        }
+
+        // ----------------------------------------------------------
+
+        .sectionselector {
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 66%);
+
+            .name {
+                background: @bodybackground;
+                float: left;
+                font-weight: 900;
+                padding: 0.5em 0.5em 0.25em;
+                margin: 0 0.33em 0 -4.5em;
+                cursor: pointer;
+                border-radius: 2px;
+
+                &:after {
+                    content: ': ';
+                }
+
+                &:hover {
+                    background: lighten(@bodybackground, 5%);
+                }
+
+                input {
+                    margin: 0 0.5em 0 0;
+                }
+            }
+
+            .description {
+                padding: 0.5em 0.5em 0.66em 0;
+                margin: 0 0 0 3em;
+            }
+
+            .subsections {
+                margin-left: 2em;
+                padding: 0 0 1em 1em;
+                overflow: hidden;
+                transition: all 1s;
+
+                .subsectionintro {
+                    margin: 0 0 0.5em;
+                    font-style: italic;
+                }
+            }
+
+            &.hassubsections {
+                background-image: none;
+                border-left: 1px solid @formbordercolor;
+                > .name {
+                    border-bottom: 1px solid @formbordercolor;
+                }
+                &:after {
+                    // this makes a little horizontal tail at the bottom
+                    display: block;
+                    content: ' ';
+                    height: 1px;
+                    width: 1em;
+                    border-bottom: 1px solid @formbordercolor;
+                }
+            }
+        }
+
+        .sectionselector .sectionselector {
+            // all nested sections have a little spacing at the
+            // botom to help the left-border line clearly include
+            // the contents.
+            // margin-bottom: 1em;
+        }
+
+        // vertical padding gets smaller for more-nested sections
+        .sectionselector { margin: 2em 0 2em 4em; }
+        .subsections .sectionselector { margin: 1em 0 1em 4em; }
+        .subsections .subsections .sectionselector { margin: 0.5em 0 0.5em 4em; }
+
+        .sectionselector.unselected {
+            background-image: linear-gradient(to left, rgba(200,0,0, 0.1), rgba(255,255,255, 0) 66%);
+
+            .description { opacity: 0.66; transition: all 0.25s; }
+            &:hover .description { opacity: 1; }
+
+            &.hassubsections { border-left: 1px solid rgba(255,255,255, 0.0001); }
+            > .subsections, > .subsectionintro, &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+

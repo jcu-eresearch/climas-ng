@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+	<meta charset="utf-8" />
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+	<title>
+		CliMAS Next Generation
+	</title>
+	<meta content="width=device-width" name="viewport" />
+	<link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
+	<link href="${request.static_path('climasng:static/css/normalize.min.css')}" rel="stylesheet" />
+    <script src="${request.static_path('climasng:static/lib/jquery-1.11.0.js')}"></script>
+    <script src="${request.static_path('climasng:static/lib/jquery-ui-1.10.4.custom.min.js')}"></script>
+
+	<script src="${request.static_path('climasng:static/js/menusandpanels.js')}"></script>
+    <link href="${request.static_path('climasng:static/css/menusandpanels.css')}" rel="stylesheet" />
+
+	<style>
+
+        /* add some colours for the demo */
+        .mspp-main-menu * {
+            background: rgba(0,0,0, 0.1);
+        }
+        .mspp-main-menu li.current {
+            background: rgba(0,100,0, 0.33);
+        }
+        .mspp-main-menu li a:hover {
+            background: rgba(0,100,255, 0.2);
+        }
+        .mspp-panel * {
+            background: rgba(0,0,0, 0.1);
+        }
+        .mspp-panel {
+            background: rgba(0,0,0, 0.1);
+        }
+        .mspp-panel .mspp-page.current {
+            background: rgba(0,100,0, 0.33);
+        }
+	</style>
+
+</head>
+
+<body class="map">
+
+
+<ul id="menu">
+    <li class="current">
+        <a>Main First Item</a>
+        <ul>
+            <li class="current">
+                <a data-targetpanel="panel1a">sub item 1 (panel 1-1)</a>
+            </li>
+            <li><a data-targetpanel="panel1b">sub item 2</a></li>
+        </ul>
+    </li>
+
+    <li><a href="#">main item 2</a></li>
+
+    <li>
+        <a>main item 3</a>
+        <ul>
+            <li>
+                <a data-targetpanel="panel2">sub2 item 1 (panel 2-1)</a>
+            </li>
+            <li class="current"><a>sub item 2</a></li>
+        </ul>
+
+    </li>
+</ul>
+
+<div id="panel1a" class="mspp-panel">
+    <div id="page1a-1" class="mspp-page current">
+        <p>This is the first page of panel 1a.</p>
+        <p>This is the first page of panel 1a.</p>
+        <button type="button" data-targetpage="page1a-2">show page 2</button>
+    </div>
+    <div id="page1a-2" class="mspp-page">
+        <p>This is the other page of panel 1a. #######################</p>
+        <p>This is the other page of panel 1a.</p>
+        <p>This is the other page of panel 1a.</p>
+        <p>This is the other page of panel 1a.</p>
+        <p>This is the other page of panel 1a.</p>
+        <p>This is the other page of panel 1a.</p>
+        <p>This is the other page of panel 1a.</p>
+        <p>This is the other page of panel 1a.</p>
+        <a data-targetpage="page1a-1">see the first page again</a>
+        <p>
+            <button type="button" onclick="$(this).parent().height( $(this).parent().height() + 100 );">grow</button>
+            <button type="button" onclick="$(this).parent().height( $(this).parent().height() - 100 );">shrink</button>
+        </p>
+    </div>
+</div>
+<div id="panel1b" class="mspp-panel">
+    <div id="page1b-1" class="mspp-page current">
+        This is the first page of panel 1b.
+        <button type="button" data-targetpage="page1b-2">show page 2</button>
+    </div>
+    <div id="page1b-2" class="mspp-page">
+        This is the other page.
+        <a data-targetpage="page1b-1">see the first page again</a>
+    </div>
+</div>
+
+<div id="panel2" class="mspp-panel">
+    <div id="page2-1" class="mspp-page current">
+        <p>This is the first page of panel 2.</p>
+        <p>This is the first page of panel 2.</p>
+        <p>This is the first page of panel 2.</p>
+        <p>This is the first page of panel 2.</p>
+        <button type="button" data-targetpage="page2-2">show page 2</button>
+    </div>
+    <div id="page2-2" class="mspp-page">
+        This is the other page.
+        <a data-targetpage="page2-1">see the first page again</a>
+    </div>
+</div>
+
+<script>
+	$('#menu').mspp({animationFactor: 0.5});
+</script>
+
+</body>
+</html>
+
+
+
+
+

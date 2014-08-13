@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+    <title>
+        CliMAS Reports, Next Generation
+    </title>
+</head>
+<body>
+    <div tal:repeat="flavour ('mammals', 'birds', 'reptiles', 'amphibians')">
+        <h3>${ flavour.title() }</h3>
+        <table class='specieslist'>
+            <thead>
+                <tr>
+                    <th colspan='9'>
+                        ${ flavour.title() } with climate suitability in ${ region.long_name }, ${ year }
+                    </th>
+                </tr><tr>
+                    <th rowspan='2'>Current</th>
+                    <th colspan='2'>Emission scenario</th>
+                    <th rowspan='2'>Species</th>
+
+                    <td rowspan='2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                    <th rowspan='2'>Current</th>
+                    <th colspan='2'>Emission scenario</th>
+                    <th rowspan='2'>Species</th>
+                </tr><tr>
+                    <th>Low</th><th>High</th>
+                    <th>Low</th><th>High</th>
+                </tr>
+            </thead><tbody>
+                <div tal:repeat="spp presences" tal:omit-tag="">
+
+                    <div tal:condition="repeat.spp.even" tal:omit-tag="" tal:content="structure '<tr>'" />
+
+                        <?python low = getattr(spp.PresenceList, 'presence' + year + 'low') ?>
+                        <?python high = getattr(spp.PresenceList, 'presence' + year + 'high') ?>
+                        <?python occurs = (spp.PresenceList.occurrences > 0) ?>
+                        <?python current = 'observed' if occurs else 'suitable' if (low=='lost' or low=='kept') else '&mdash;' ?>
+                        <?python panic = occurs and (low=='lost' or low=='' or high=='lost' or high=='') ?>
+                        <?python lowfuture = 'suitable' if (low=='kept' or low=='gain') else '<b>unsuitable</b>' if occurs else '&mdash;' ?>
+                        <?python highfuture = 'suitable' if (high=='kept' or high=='gain') else '<b>unsuitable</b>' if occurs else '&mdash;' ?>
+
+                        <td style="text-align: center" class="${ current }" tal:content="structure current" />
+                        <td style="text-align: center" class="${ lowfuture }" tal:content="structure lowfuture" />
+                        <td style="text-align: center" class="${ highfuture }" tal:content="structure highfuture" />
+                        <td><b tal:omit-tag="not panic"  tal:content="structure spp.Species.scientific_name" /></td>
+
+                    <td tal:omit-tag="repeat.spp.odd" />
+                    <div tal:condition="repeat.spp.odd" tal:omit-tag="" tal:content="structure '</tr>'" />
+
+                </div>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+

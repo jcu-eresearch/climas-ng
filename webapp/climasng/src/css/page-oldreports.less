@@ -1,0 +1,160 @@
+
+// This is the master css for the old report page.
+//
+// running 'gulp css' will compile this less file and it's @imports into a single minified css file.
+
+// include other css-es used on this page
+@import (less) "components/normalize.css";
+@import (less) "components/h5bp.css";
+
+// our jq plugin css for the menubar and panels
+@import (less) "components/menusandpanels.css";
+
+@import (less) "components/common.less";  // common styles
+@import (less) "report.css";              // for inline report
+
+// nice and spacious
+// @headerheight: 200px;
+
+/* body  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body { height: 100% }
+
+.content {
+    position: absolute;
+    top: @headerheight;
+    box-shadow: 0 6px 12px -6px rgba(0,0,0, 0.5);
+    right: @sidepad;
+    bottom: @footerheight;
+    left: @sidepad;
+    z-index: 1;
+    padding: 0;
+    overflow-x: scroll;
+}
+
+
+/* little intro bit  - - - - - - - - - - - - - - - - - - - - - - - */
+.toolintro {
+    text-align: center;
+    font-size: 85%;
+    color: rgba(0,0,0, 0.75);
+    padding: 2em 10% 0.5em;
+    margin: -0.25em auto 2em;
+    border-bottom: 1px solid rgba(216,201,167, 0.66);
+
+    background: -moz-radial-gradient(bottom center, ellipse cover, rgba(216,201,167, 0.80) 10%, rgba(216,201,167, 0) 70%); /* FF3.6+ */
+    background: -webkit-gradient(radial, bottom center, 0px, center center, 70%, color-stop(0%,rgba(216,201,167, 0.80)), color-stop(70%,rgba(216,201,167, 0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(bottom center, ellipse cover, rgba(216,201,167, 0.80) 10%,rgba(216,201,167, 0) 70%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(bottom center, ellipse cover, rgba(216,201,167, 0.80) 10%,rgba(216,201,167, 0) 70%); /* Opera 12+ */
+    background: -ms-radial-gradient(bottom center, ellipse cover, rgba(216,201,167, 0.80) 10%,rgba(216,201,167, 0) 70%); /* IE10+ */
+    background: radial-gradient(ellipse at bottom center, rgba(216,201,167, 0.80) 10%,rgba(216,201,167, 0) 70%); /* W3C */
+
+    padding-top: 2.2em;
+}
+
+/* form  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+#kickoffform {
+    text-align: center;
+    background: #efe6c5;
+    padding: 3em 4%; /* 8% text border = 4% margin, 4% padding */
+    margin: 0 4% 0;  /* 8% text border = 4% margin, 4% padding */
+    padding: 3em 0;
+    margin: 0;
+
+    padding-top: 0;
+}
+
+#kickoffform .onefield {
+    padding: 1em 0;
+}
+
+#kickoffform .formsection {
+    text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    margin: 1em;
+
+    border: 6px solid rgba(0,0,0,0.15);
+    border-width: 6px 0;
+    border-radius: 12px;
+}
+
+#kickoffform .formsection h3 {
+    font-size: inherit;
+    font-weight: bold;
+    opacity: 0.8;
+    margin: 0;
+    padding: 0 0 0.5em;
+}
+
+#kickoffform .regiontypeselection {
+    position: relative;
+    padding-bottom: 5em;
+}
+
+#kickoffform .regionselect {
+    position: absolute;
+    bottom: 2.25em;
+    left: 1.25em;
+    right: 0.5em;
+    padding: 0.25em 0;
+
+    visibility: hidden;
+
+    clear: both; /* this is for IE6 :( */
+    zoom: 1;     /* another dagger in my heart from IE */
+}
+
+#kickoffform #regiondownloadlink {
+    /* you're right, no need for two ids in the selector,
+    they're there to show where the dl link is. */
+    font-size: 90%;
+    text-align: right;
+    position: absolute;
+    bottom: 0.75em;
+    right: 0.55555555em; /* 0.5em at 90% font size */
+    opacity: 0.75;
+
+    visibility: hidden;
+
+    clear: both; /* for IE6 */
+    zoom: 1;     /* for IE6 */
+}
+
+#regiondownloadlink:hover { opacity: 1; }
+
+#kickoffform input[type="radio"] {
+    margin-right: 0.3em;
+}
+
+#kickoffform .regiontypeselector {
+    display: block;
+}
+
+#kickoffform .yearselection label {
+    display: block;
+    text-align: center;
+}
+
+#kickoffform .formatselection label {
+    display: block;
+}
+
+#kickoffform .generate {
+    display: block;
+    width: 80%;
+    margin: 1em auto 0.75em;
+    padding: 0.25em 0;
+}
+
+#kickoffform [disabled] {
+    opacity: 0.5;
+}
+
+p.linkselsewhere {
+    text-align: right;
+    font-size: 90%;
+    margin-top: 1em;
+    padding-top: 2em;
+    border-top: 2px groove rgba(255,255,255, 0.45);
+}
+

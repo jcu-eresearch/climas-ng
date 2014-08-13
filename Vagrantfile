@@ -9,10 +9,16 @@ echo ' *************************************************************'
 echo ' ******************************  installing OS-level stuff... '
 echo ' *************************************************************'
 
+
 yum install -y yum-plugin-priorities
 wget -nv http://sherkin.justhub.org/el6/RPMS/x86_64/justhub-release-2.0-4.0.el6.x86_64.rpm
-rpm -Uvh justhub-release-*.rpm
+wget -nv http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+wget -nv http://elgis.argeo.org/repos/6/elgis-release-6-6_0.noarch.rpm
+rpm -Uvh justhub-release-*.rpm epel-release-6*.rpm elgis-release-*.rpm
 yum repolist
+yum install -y supervisor
+/sbin/chkconfig supervisord on
+service supervisord start
 
 echo ''
 echo ' *************************************************************'
@@ -40,12 +46,12 @@ wget -nv https://bootstrap.pypa.io/get-pip.py
 /usr/local/bin/pip2.7 install virtualenv
 
 
-# echo ''
-# echo ' *************************************************************'
-# echo ' ********************************  installing pandoc & tex... '
-# echo ' *************************************************************'
+echo ''
+echo ' *************************************************************'
+echo ' ********************************  installing pandoc & tex... '
+echo ' *************************************************************'
 
-__=' ***** commenting out the haskell stuff..
+__=" @@@@@@@@@@@@ disabling stuff.. @@@@@@@@@@@@@
 # haskell
 yum install -y haskell
 # pandoc
@@ -53,7 +59,92 @@ cabal update
 cabal install pandoc
 # laTeX
 yum install -y texlive
-****** end of haskell disabler ***** '
+
+@@@@@@@@@@@@ end of disabler   @@@@@@@@@@@@@@ "
+
+echo ''
+echo ' *************************************************************'
+echo ' *********************************  installing viz prereqs... '
+echo ' *************************************************************'
+
+yum install -y libpng libpng-devel freetype gd gd-devel
+yum install -y zlib giflib-devel gcc
+
+#### yum install -y proj
+#### compile proj, yum install doesn't work for some reason?
+wget -nv http://download.osgeo.org/proj/proj-4.8.0.tar.gz
+tar -zxvf proj-4.8.0.tar.gz
+pushd proj-4.8.0
+./configure
+make
+make check
+make install
+popd
+
+### add proj path to everyone's environment
+# echo ""                                       >> /etc/bashrc
+# echo 'export PROJ_LIB=/usr/local/share/proj/' >> /etc/bashrc
+## DOESN'T WORK mapserver still doesn't know where proj is.
+## See later for additonal attempts to fix this.
+
+yum install -y libcurl agg agg-devel readline-devel zlib-devel
+yum install -y libxml2-devel geos-devel gcc-c++ curl-devel
+yum install -y libtiff libgeotiff libjpeg geos libxml2
+
+wget -nv http://proj.badc.rl.ac.uk/cedaservices/raw-attachment/ticket/670/armadillo-3.800.2-1.el6.x86_64.rpm
+yum localinstall -y armadillo-3*.rpm
+yum install -y gdal gdal-devel
+
+# scipy needs this..
+yum install -y atlas atlas-devel blas blas-devel lapack lapack-devel
+
+echo ''
+echo ' *************************************************************'
+echo ' *****************************************  installing viz... '
+echo ' *************************************************************'
+
+# install bccvl visualiser
+mkdir /var/bccvlviz
+chown vagrant:vagrant /var/bccvlviz
+sudo -u vagrant git clone https://github.com/jcu-eresearch/BCCVL_Visualiser.git /var/bccvlviz
+pushd /var/bccvlviz/BCCVL_Visualiser
+sudo -u vagrant /usr/local/bin/virtualenv-2.7 .
+sudo -u vagrant ./bin/pip install setuptools --upgrade
+sudo -u vagrant ./bin/pip install numpy --upgrade
+sudo -u vagrant ./bin/python ./bootstrap.py
+sudo -u vagrant ./bin/buildout
+popd
+
+# add visualiser to supervisord.conf
+
+echo "[program:bccvlviz]"            >> /etc/supervisord.conf
+echo "command=/var/bccvlviz/BCCVL_Visualiser/bin/pserve /var/bccvlviz/BCCVL_Visualiser/development.ini" >> /etc/supervisord.conf
+echo "priority=999"                  >> /etc/supervisord.conf
+echo "autostart=true"                >> /etc/supervisord.conf
+echo "autorestart=true"              >> /etc/supervisord.conf
+echo "startsecs=10"                  >> /etc/supervisord.conf
+echo "startretries=3"                >> /etc/supervisord.conf
+echo "exitcodes=0,2"                 >> /etc/supervisord.conf
+echo "stopsignal=QUIT"               >> /etc/supervisord.conf
+echo "stopwaitsecs=10"               >> /etc/supervisord.conf
+echo "user=vagrant"                  >> /etc/supervisord.conf
+echo "log_stdout=true"               >> /etc/supervisord.conf
+echo "log_stderr=true"               >> /etc/supervisord.conf
+echo "logfile=/var/log/bccvlviz.log" >> /etc/supervisord.conf
+echo "logfile_maxbytes=1MB"          >> /etc/supervisord.conf
+echo "logfile_backups=10"            >> /etc/supervisord.conf
+
+## mapserver needs to know where to find proj.  This sets the
+## env var that mapserver checks to get the proj path.
+# echo 'environment = PROJ_LIB="/usr/local/share/proj/"' >> /etc/supervisord.conf
+# echo ""                              >> /etc/supervisord.conf
+## STILL DOESN'T WORK mapserver still can't find it.  See below
+
+## Okay so edit the frickin mapfile to add a config line
+## specifying where the frickin proj projections are.
+cp /var/bccvlviz/BCCVL_Visualiser/map_files/default_raster.map /var/bccvlviz/BCCVL_Visualiser/map_files/default_raster.map.backup
+sed -n 'H;${x;s/^\\n//;s/MAP\\s*\\n/&\\n    CONFIG "PROJ_LIB" "\\/usr\\/local\\/share\\/proj\\/"\\n\\n/;p;}' /var/bccvlviz/BCCVL_Visualiser/map_files/default_raster.map.backup > /var/bccvlviz/BCCVL_Visualiser/map_files/default_raster.map
+service supervisord restart
 
 echo ''
 echo ' *************************************************************'
@@ -66,14 +157,33 @@ echo ' *************************************************************'
 # project's ./webapp/ dir to /var/climaswebapp/ on the VM, and uses
 # that as the path for the production ini file.
 
-# do project setup as non-superuser
-su vagrant
-pushd /var/climaswebapp/
-/usr/local/bin/virtualenv-2.7 .
-./bin/pip install setuptools --upgrade
-./bin/python setup.py install
+# install CliMAS
+pushd /var/climaswebapp
+sudo -u vagrant /usr/local/bin/virtualenv-2.7 .
+sudo -u vagrant ./bin/pip install setuptools --upgrade
+sudo -u vagrant ./bin/python ./setup.py develop
 popd
-exit
+
+# add climas to supervisord.conf
+
+echo "[program:climas]"              >> /etc/supervisord.conf
+echo "command=/var/climaswebapp/bin/pserve /var/climaswebapp/virtual.ini" >> /etc/supervisord.conf
+echo "priority=999"                  >> /etc/supervisord.conf
+echo "autostart=true"                >> /etc/supervisord.conf
+echo "autorestart=true"              >> /etc/supervisord.conf
+echo "startsecs=10"                  >> /etc/supervisord.conf
+echo "startretries=3"                >> /etc/supervisord.conf
+echo "exitcodes=0,2"                 >> /etc/supervisord.conf
+echo "stopsignal=QUIT"               >> /etc/supervisord.conf
+echo "stopwaitsecs=10"               >> /etc/supervisord.conf
+echo "user=vagrant"                  >> /etc/supervisord.conf
+echo "log_stdout=true"               >> /etc/supervisord.conf
+echo "log_stderr=true"               >> /etc/supervisord.conf
+echo "logfile=/var/log/climas.log"   >> /etc/supervisord.conf
+echo "logfile_maxbytes=1MB"          >> /etc/supervisord.conf
+echo "logfile_backups=10"            >> /etc/supervisord.conf
+echo ""                              >> /etc/supervisord.conf
+service supervisord restart
 
 echo ''
 echo ' *************************************************************'
@@ -88,49 +198,26 @@ SCRIPT_TERMINATOR
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
-
-  # Every Vagrant virtual environment requires a box to build off of.
+  # Vagrant configuration happens here.
   config.vm.box     = "centos-65-x64-vbox4.3.6"
-  # config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
   config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box"
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
+  # Disable automatic box update checking?  Not recommended.
   # config.vm.box_check_update = false
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  # Port forwarding
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 10600, host: 10600
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
-
-  # If true, then any SSH connections made will enable agent forwarding.
-  # Default value: false
+  # Agent forwarding on SSH?
   # config.ssh.forward_agent = true
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
+  # Share additional folders
   config.vm.synced_folder "./webapp", "/var/climaswebapp"
+  config.vm.synced_folder "../climasng-data", "/var/climaswebapp-testdata"
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
+  # Provider-specific config
   # Example for VirtualBox:
-  #
   # config.vm.provider "virtualbox" do |vb|
   #   # Don't boot with headless mode
   #   vb.gui = true
@@ -139,11 +226,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   vb.customize ["modifyvm", :id, "--memory", "1024"]
   # end
   #
-  # View the documentation for the provider you're using for more
-  # information on available options.
 
-  # provision the VM via these shell commands, provided inline (as a var)
+  # provision the VM via a shell script, provided inline (as a variable, set above)
   config.vm.provision :shell, :inline => $provisioning_script
 
-  # (commented out examples for other provisioners removed..)
 end

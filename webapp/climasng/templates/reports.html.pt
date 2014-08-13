@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <title>
+        CliMAS Next Generation
+    </title>
+    <meta content="width=device-width" name="viewport" />
+
+    <link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
+    <link href='http://fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
+    <link href="${request.static_path('climasng:static/lib/leaflet.css')}" rel="stylesheet" />
+    <link href="${request.static_path('climasng:static/lib/jqueryui-css/ui-lightness/jquery-ui-1.10.4.custom.min.css')}" rel="stylesheet" />
+    <script src="${request.static_path('climasng:static/lib/html5shiv.js')}"></script>
+
+    <!-- this page's css -->
+    <link href="${request.static_path('climasng:static/css/page-reports.css')}" rel="stylesheet" />
+</head>
+
+<body>
+    <div metal:use-macro="load: partial.header.html.pt"></div><!-- ::partial:: -->
+
+    <div id="contentwrap" class="contentwrap">
+        <div class="maincontent">
+            <!-- dynamic form goes here -->
+        </div>
+    </div>
+
+    <div metal:use-macro="load: partial.footer.html.pt"></div><!-- ::partial:: -->
+
+    <!-- JS goes down here, where civilised people put it -->
+    <script src="${request.static_path('climasng:static/lib/jquery-1.11.0.js')}"></script>
+    <script src="${request.static_path('climasng:static/lib/jquery-ui-1.10.4.custom.min.js')}"></script>
+    <script src="${request.static_path('climasng:static/lib/lodash.compat.js')}"></script>
+    <script src="${request.static_path('climasng:static/lib/backbone.js')}"></script>
+    <script src="${request.static_path('climasng:static/lib/leaflet-src.js')}"></script>
+    <script src="${request.static_path('climasng:static/js/page-reports.js')}"></script>
+</body>
+</html>

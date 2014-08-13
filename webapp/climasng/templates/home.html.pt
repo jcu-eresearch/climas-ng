@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+
+<div metal:use-macro="load: partial.textual.dochead.html.pt"></div><!-- ::partial:: -->
+
+<body>
+    <div metal:use-macro="load: partial.header.html.pt"></div><!-- ::partial:: -->
+
+    <div id="contentwrap" class="contentwrap">
+        <div class="maincontent">
+            <div class="textcolumn">
+                <div metal:use-macro="load: ../pagecontent/about.html"></div><!-- ::partial:: -->
+            </div>
+        </div>
+    </div>
+
+    <div metal:use-macro="load: partial.footer.html.pt"></div><!-- ::partial:: -->
+
+    <!-- JS goes down here, where civilised people put it -->
+    <script src="${request.static_path('climasng:static/lib/jquery-1.11.0.js')}"></script>
+</body>
+</html>

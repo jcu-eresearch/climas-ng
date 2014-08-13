@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+	<meta charset="utf-8" />
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+	<title>
+		CliMAS Next Generation
+	</title>
+	<meta content="width=device-width" name="viewport" />
+	<script>
+		window.climasSettings = {
+			assetUrlPrefix: "${request.static_path('climasng:static/assets/')}",
+			vizUrlPrefix: "//118.138.243.53:10600/api/raster/1/default?data_url="
+		}
+	</script>
+
+	<link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
+
+	<link href='http://fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
+
+
+	<!-- jUI css (for autocomplete dropdown) -->
+	<link href="${request.static_path('climasng:static/lib/jqueryui-css/smoothness/jquery-ui-1.10.4.custom.min.css')}" rel="stylesheet" />
+
+	<!-- this page's css -->
+	<link href="${request.static_path('climasng:static/css/page-oldmap.css')}" rel="stylesheet" />
+
+	<!-- script shoudl be at the bottom but the awful biodiv code uses jquery -->
+	<script src="${request.static_path('climasng:static/lib/jquery-1.11.0.js')}"></script>
+</head>
+
+<body class="map">
+
+    <div metal:use-macro="load: partial.header.html.pt"></div><!-- ::partial:: -->
+
+	<header class="page clearfix">
+		<h1>CliMAS</h1>
+		<a href="http://tropicaldatahub.org/">
+			<img class="logo" src="${request.static_path('climasng:static/images/tdhlogo.png')}" />
+		</a>
+		<p>Climate change and biodiversity in Australia</p>
+		<nav>
+			<ul class="main menu clearfix">
+				<li class="current">
+					<a>View Maps</a>
+					<ul>
+						<li class="current"><a data-targetpanel="speciespanel">Species Suitability</a></li>
+						<li><a data-targetpanel="biodiversitypanel">Biodiversity</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="${request.route_path('oldreport')}">Create Reports</a>
+				</li>
+				<li>
+					<a>About CliMAS</a>
+					<ul>
+						<li class="current"><a data-targetpanel="aboutpanel">About this project</a></li>
+						<li><a data-targetpanel="creditspanel">Credits</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<div id="speciespanel" class="mspp-panel current species">
+		<div id="speciesselectpage" class="mspp-page current speciesselect">
+			<div metal:use-macro="load: partial.speciesselect.html.pt"></div><!-- ::partial:: -->
+		</div>
+
+		<div id="speciesshowingpage" class="mspp-page short speciesshowing">
+			<p>
+				Showing suitability distribution for <strong class="speciesname">your selected species</strong>.
+				<button type="button" id="speciesselectbtn" class="switchpage" data-targetpage="speciesselectpage">view a different distribution</button>
+			</p>
+		</div>
+	</div>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<div id="biodiversitypanel" class="mspp-panel biodiversity">
+		<div id="biodiversityselectpage" class="mspp-page biodiversityselect current">
+			<div metal:use-macro="load: partial.biodiversityselect.html.pt"></div><!-- ::partial:: -->
+		</div>
+
+		<div id="biodiversityshowingpage" class="mspp-page biodiversityshowing short">
+			<p>
+				Showing species richness for <strong class="taxonname">your selected taxon</strong>.
+				<button type="button" id="biodivselectbutton" class="switchpage" data-targetpage="biodiversityselectpage">view a different richness map</button>
+			</p>
+		</div>
+	</div>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<div id="aboutpanel" class="mspp-panel about"><div id="docaboutpage" class="mspp-page docabout current">
+		<div metal:use-macro="load: ../pagecontent/about.html"></div><!-- ::partial:: -->
+	</div></div>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<div id="creditspanel" class="mspp-panel credits"><div id="doccreditspage" class="mspp-page doccredits current">
+		<div metal:use-macro="load: ../pagecontent/credits.html"></div><!-- ::partial:: -->
+	</div></div>
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+	<div id="map" class="map">
+		<iframe class="mapframe" id="mapframe"></iframe>
+	</div>
+
+	<footer class="page clearfix">
+		<p>
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
+				<img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" />
+			</a>
+			This work is licensed under a
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
+				Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
+			</a>.
+		</p>
+	</footer>
+
+	<!-- JS goes down here, where civilised people put it -->
+	<script src="${request.static_path('climasng:static/lib/modernizr.2.7.1.js')}"></script>
+	<script src="${request.static_path('climasng:static/lib/jquery-ui-1.10.4.custom.min.js')}"></script>
+
+	<script src="${request.static_path('climasng:static/js/page-map.js')}"></script>
+
+</body>
+</html>

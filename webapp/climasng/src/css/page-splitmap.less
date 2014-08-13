@@ -1,0 +1,318 @@
+
+// This is the master css for the map page.
+//
+// running 'gulp css' will compile this less file and it's @imports into a single minified css file.
+
+// include other css-es used on the map page
+@import (less) "components/normalize.css";
+@import (less) "components/h5bp.css";
+
+// our jq plugin css for the menubar and panels
+@import (less) "components/menusandpanels.css";
+
+@import (less) "components/common.less";       // common styles
+
+// override the sidepad
+// @sidepad: 2%;
+
+/* body  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+body {
+    height: 100%;
+    min-width: 600px;
+}
+
+/* map content - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.contentwrap {
+    position: absolute;
+    top: @headerheight;
+    // box-shadow: 0 6px 12px -6px rgba(0,0,0, 0.5);
+    right: 0;
+    bottom: @footerheight;
+    left: 0;
+    z-index: 1;
+    min-height: 100px;
+    padding: 0;
+    // background: @background;
+}
+
+@tagheight: 4em;
+@tagcontentpad: (@tagheight / 8);
+.splitmap {
+
+    @sideformwidth: 15em;
+
+    @right_z: 10000;
+    @left_z: (@right_z + 1);
+    @splitter_z: (@left_z + 1);
+
+    @splitlinedragwidth: 1px;
+    @splitlinestillwidth: 6px;
+    @splitthumbwidth: 3em;
+
+    height: 100%;
+    width: 100%;
+
+    .tag {
+        // the tag is the strip at the top that says what
+        // map is showing.
+        position: absolute;
+        top: 0;
+        width: 100%;
+        left: 0;
+        background: #efe6c5;
+        height: @tagheight;
+        overflow: hidden;
+        &.left { text-align: left;   z-index: @left_z }
+        &.right { text-align: right; z-index: @right_z }
+
+        > div {
+            // a div inside the tag is a wrapper
+            position: absolute;
+            top: @tagcontentpad;
+            left: @sidepad; // from common.less
+            height: (@tagheight - @tagcontentpad - @tagcontentpad);
+            right: @sidepad;
+            transition: 0.25s;
+            > span {
+                // a span in a wrapper never has linebreaks
+                white-space: no-wrap;
+            }
+            button {
+                font-size: inherit;
+                vertical-align: middle;
+                box-sizing: border-box;
+                height: (@tagheight / 2);
+                line-height: (@tagheight / 2);
+                padding: 0 1em;
+                margin: 0 0 0 0.5em;
+            }
+            @inputfontzoom: 1.25;
+            input {
+                // inputs in a tag are the species search box
+                text-align: inherit;
+                vertical-align: middle;
+                box-sizing: border-box;
+                font-size: (100% * @inputfontzoom);
+                height: 100%;
+                padding: 0 0.5em;
+                width: (30 - @sidepad);
+                margin: 0;
+            }
+        }
+        > div.edit {
+            line-height: (@tagheight - @tagcontentpad - @tagcontentpad);
+        }
+        > div.show {
+            line-height: 1.5em;
+            button {
+                font-size: 80%;
+                opacity: 0.9;
+                display: inline;
+                padding: 0;
+                margin: 0 0.5em 0 0;
+                background: none;
+                border: none;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &.showforms .tag {
+        > div.edit { top: @tagcontentpad; }
+        > div.show { top: @tagheight; }
+    }
+    .tag {
+        > div.edit { top: (-1 * @tagheight); }
+        > div.show { top: @tagcontentpad; }
+    }
+
+    @loaderimageheight: 24px;
+    @loaderpadding: 10px;
+    @loaderheight: (@loaderimageheight + @loaderpadding + @loaderpadding);
+    .loader {
+        z-index: @right_z;
+        opacity: 0;
+        box-sizing: border-box;
+        position: absolute;
+        background: @headerbackground;
+        top: 50%;
+        margin-top: 0;
+        height: 0;
+        width: 0;
+        transition: all 0.2s;
+        overflow: hidden;
+        img {
+            height: (@loaderimageheight / @loaderheight * 100%);
+            margin: (@loaderpadding / @loaderheight * 100%);
+        }
+    }
+    .loader.left {
+        left:  0;
+        border-top-right-radius: 50% 50%;
+        border-bottom-right-radius: 50% 50%;
+        img { float: right; }
+    }
+    &.showforms .loader.left { left: @sideformwidth; }
+    .loader.right {
+        right: 0;
+        border-top-left-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+        img { float: left; }
+    }
+    &.split.showforms .loader.right { right: @sideformwidth; }
+    &.leftloading  .loader.left  { opacity: 0.5; width: @loaderheight; height: @loaderheight; margin-top: (-1 * @loaderheight / 2); }
+    &.rightloading .loader.right { opacity: 0.5; width: @loaderheight; height: @loaderheight; margin-top: (-1 * @loaderheight / 2); }
+
+    .side.form {
+        position: absolute;
+        box-sizing: border-box;
+        background: #efe6c5;
+        top: @tagheight;
+        bottom: 0;
+        width: @sideformwidth;
+        padding: 0.5em 1em 0;
+        text-align: center;
+        &.right {
+            right: 0;
+            box-shadow: inset 3em 0 0.5em -3em rgba(0,0,0, 0.25);
+        }
+        &.left {
+            left: 0;
+            box-shadow: inset -3em 0 0.5em -3em rgba(0,0,0, 0.25);
+        }
+
+        select, button, label {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: inherit;
+            font-family: inherit;
+        }
+        button {
+            padding: 0.25em 0;
+        }
+        label {
+            input[type="radio"] {
+                margin: 0 0.33em;
+            }
+            text-align: left;
+            span {
+                text-transform: lowercase;
+                font-variant: small-caps;
+            }
+        }
+        fieldset {
+            margin-top: 2em;
+        }
+        legend {
+            // background-image: linear-gradient(to left, rgba(255,255,255, 0.5), rgba(255,255,255, 0) 80%);
+            // border-top-right-radius: 2px;
+            // border-bottom-right-radius: 2px;
+
+            background-image: radial-gradient(ellipse 49% 99% at center bottom, rgba(255,255,255, 0.5), rgba(255,255,255, 0.25) 66%, rgba(255,255,255, 0) 100%);
+            border-bottom: 1px solid rgba(255,255,255, 0.66);
+            width: 100%;
+            letter-spacing: 0.33em;
+            // font-weight: 400;
+            text-align: center;
+            line-height: 0.89;
+            text-transform: uppercase;
+            padding: 1em 0.1em 0;
+            margin: 0 0 0.5em;
+            font-size: 66%;
+        }
+        p {
+            margin: 0 0 1em;
+        }
+    }
+    .side.form .btn-copy-rtl {
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.33s;
+    }
+    &.split .side.form .btn-copy-rtl {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    #mapwrapper {
+        position: absolute;
+        top: @tagheight;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-width: 10em;
+        transition: all 0.33s;
+        #map {
+            width: 100%;
+            height: 100%;
+
+            .leaflet-map-pane, .leaflet-tile-pane, .leaflet-layer {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    &.showforms #mapwrapper {
+        left: @sideformwidth;
+    }
+    &.split.showforms #mapwrapper {
+        right: @sideformwidth;
+    }
+
+
+
+    .splitthumb, .splitline {
+        position: absolute;
+        left: 66%;
+        z-index: -1; // stay hidden unless splitting
+    }
+    &.split .splitthumb { z-index: @splitter_z; }
+    &.split .splitline { z-index: @splitter_z; }
+
+    @splitcolor: rgb(0,0,0);
+    .splitline {
+        background: @splitcolor; // for old IE
+        background: fadeout(@splitcolor, 33%);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: @splitlinestillwidth;
+        margin-left: (-0.5 * @splitlinestillwidth);
+        overflow: hidden;
+        transition: width 0.33s, margin 0.33s;
+    }
+    .splitline.dragging {
+        width: @splitlinedragwidth;
+        margin-left: (-0.5 * @splitlinedragwidth);
+    }
+
+    .splitthumb {
+        text-align: center;
+        overflow: hidden;
+        background: @splitcolor;
+        top: 50%;
+        width: @splitthumbwidth;
+        height: @splitthumbwidth;
+        border-radius: 50%;
+        cursor: ew-resize; // IE doesn't recognise col-resize
+        cursor: col-resize;
+        span {
+            @thumbtextsize: 1.66;
+            font-size: (@thumbtextsize * 100%);
+            line-height: (@splitthumbwidth / @thumbtextsize);
+            color: white;
+            white-space: nowrap;
+        }
+    }
+
+}
+
+
+
+
+
+
+
+

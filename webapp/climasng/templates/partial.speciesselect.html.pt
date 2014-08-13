@@ -1,0 +1,42 @@
+
+<form class="formblocks">
+    <fieldset class="wide">
+        <input id="speciesname" name="speciesname" placeholder="&hellip; type a species name &hellip;" />
+    </fieldset>
+
+    <fieldset class="formblock spptimepoint">
+        <h3>Select a year</h3>
+        <label><input type="radio" name="spptimepoint" value="baseline" checked="checked">baseline</label>
+        <label><input type="radio" name="spptimepoint" value="2025">2025</label>
+        <label><input type="radio" name="spptimepoint" value="2035">2035</label>
+        <label><input type="radio" name="spptimepoint" value="2045">2045</label>
+        <label><input type="radio" name="spptimepoint" value="2055">2055</label>
+        <label><input type="radio" name="spptimepoint" value="2065">2065</label>
+        <label><input type="radio" name="spptimepoint" value="2075">2075</label>
+        <label><input type="radio" name="spptimepoint" value="2085">2085</label>
+    </fieldset>
+
+    <fieldset class="formblock sppscenario">
+        <h3>Select a scenario</h3>
+        <label><input type="radio" name="sppscenario" value="RCP3PD">RCP 3PD</label>
+        <label><input type="radio" name="sppscenario" value="RCP45">RCP 4.5</label>
+        <label><input type="radio" name="sppscenario" value="RCP6">RCP 6</label>
+        <label><input type="radio" name="sppscenario" value="RCP85" checked="checked">RCP 8.5</label>
+    </fieldset>
+
+    <fieldset class="formblock sppgcm">
+        <h3>Select a climate model</h3>
+        <label><input type="radio" name="sppgcm" value="all" checked="checked">median across models</label>
+        <!--
+        <label><input type="radio" name="sppgcm" value="10th">10th percentile across models</label>
+        <label><input type="radio" name="sppgcm" value="90th">90th percentile across models</label>
+        -->
+        <label><input type="radio" name="sppgcm" value="cccma-cgcm31">CCCMA CGCM 3.1</label>
+        <label><input type="radio" name="sppgcm" value="csiro-mk30">CSIRO Mark 3.0</label>
+        <label><input type="radio" name="sppgcm" value="ukmo-hadgem1">UK Met Office HadGEM v1</label>
+    </fieldset>
+
+    <fieldset class="wide">
+        <button id="sppshowmap" type="button" class="bigbutton switchpage" data-targetpage="speciesshowingpage">show the map</button>
+    </fieldset>
+</form>
