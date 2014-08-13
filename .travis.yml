@@ -1,0 +1,24 @@
+language: python
+
+virtualenv:
+  system_site_packages: false
+
+python:
+  - "2.7"
+
+env:
+  - PACKAGES=false
+
+install:
+  - cd climas-ng
+  - pip install setuptools --upgrade
+  - pip install coveralls
+  - python setup.py install
+
+script:
+  # actually run the tests
+  - python setup.py test
+  # check coverage too
+  - coverage run --source=climasng setup.py test
+after_success:
+  - coveralls
