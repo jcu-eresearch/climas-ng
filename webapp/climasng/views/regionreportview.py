@@ -26,7 +26,13 @@ class RegionReportView(object):
             'format': 'pdf'
         }
 
-        da = DocAssembler(doc_data)
+        da = DocAssembler(
+            doc_data,
+            settings={
+                'region_url_pattern': 'http://localhost:8080/regiondata/${region_type}/${region_id}'
+            },
+        )
+
 
         return { 'report_content': da.result() }
 

@@ -220,6 +220,18 @@ class ProseMaker(object):
                         val = plural_part
                     continue
 
+                if trans_name == 'change':
+                    up   = trans_args[0] if len(trans_args) > 0 else 'increase'
+                    down = trans_args[1] if len(trans_args) > 1 else 'decrease'
+                    none = trans_args[2] if len(trans_args) > 2 else 'change'
+                    if val > 0:
+                        val = up
+                    elif val < 0:
+                        val = down
+                    else:
+                        val = none
+                    continue
+
                 raise Exception('transformation "%s" is not implemented.' % trans_name)
 
                 # loop repeats for each transform

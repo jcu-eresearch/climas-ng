@@ -16,9 +16,9 @@ install:
   - python setup.py install
 
 script:
-  # actually run the tests
-  - python setup.py test
-  # check coverage too
+  # run the tests
+  # - python setup.py test
+  # check coverage
   - coverage run --source=climasng setup.py test
 after_success:
   - coveralls

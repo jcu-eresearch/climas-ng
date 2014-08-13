@@ -13,7 +13,7 @@ class DocAssembler(object):
     def __init__(self, doc_data, settings={}):
         self._defaults = {
             # pattern can use region_id and region_type to make a url
-            'region_url_pattern': Template('http://localhost:6543/regiondata/${region_type}/${region_id}'),
+            'region_url_pattern': 'http://localhost:6543/regiondata/${region_type}/${region_id}',
             'section_path': './climasng/reportcontent/sections'
         }
         # merge in the user settings
@@ -41,7 +41,7 @@ class DocAssembler(object):
             'region_id': region_id
         }
 
-        region_data_url = self._settings['region_url_pattern'].substitute(self._region)
+        region_data_url = Template(self._settings['region_url_pattern']).substitute(self._region)
 
         json_string = urllib2.urlopen(region_data_url).read()
         data = json.loads(

@@ -17,6 +17,7 @@ class TestProseMakerReplacements(ProseMakerTestCase):
             "one":            1,
             "onePone":        1.1,
             "onePsix":        1.6,
+            "zero":           0,
             "negone":        -1,
             "negonePone":    -1.1,
             "negonePsix":    -1.6,
@@ -115,6 +116,18 @@ class TestProseMakerReplacements(ProseMakerTestCase):
 
         self.assertParses('{{one, plural radii radius}}', 'radius')
         self.assertParses('{{two, plural radii radius}}', 'radii')
+
+    # ------------------------------------------------------- test --
+    def test_pm_transform_quotedargs(self):
+        self.assertParses('{{one, plural "knights errant" "knight errant"}}', 'knight errant')
+        self.assertParses("{{two, plural 'knights errant' 'knight errant'}}", 'knights errant')
+        self.assertParses("{{two, plural \"knights errant\" 'knight errant'}}", 'knights errant')
+
+    # ------------------------------------------------------- test --
+    def test_pm_transform_change(self):
+        self.assertParses('{{one, change}}', 'increase')
+        self.assertParses('{{zero, change}}', 'change')
+        self.assertParses('{{negone, change}}', 'decrease')
 
 # ===================================================================
 
