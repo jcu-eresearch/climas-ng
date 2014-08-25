@@ -129,6 +129,18 @@ class TestProseMakerReplacements(ProseMakerTestCase):
         self.assertParses('{{zero, change}}', 'change')
         self.assertParses('{{negone, change}}', 'decrease')
 
+        self.assertParses('{{one, change up}}', 'up')
+        self.assertParses('{{one, change up down}}', 'up')
+        self.assertParses('{{one, change up down stable}}', 'up')
+
+        self.assertParses('{{zero, change up}}', 'change')
+        self.assertParses('{{zero, change up down}}', 'change')
+        self.assertParses('{{zero, change up down stable}}', 'stable')
+
+        self.assertParses('{{negone, change up}}', 'decrease')
+        self.assertParses('{{negone, change up down}}', 'down')
+        self.assertParses('{{negone, change up down stable}}', 'down')
+
 # ===================================================================
 
 

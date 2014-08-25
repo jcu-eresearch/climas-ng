@@ -1,0 +1,6 @@
+{
+    "id": "biodiversity",
+    "name": "Biodiversity Review",
+    "description": "a description of the region's current and projected biodiversity.",
+   "presence": "optional"
+}

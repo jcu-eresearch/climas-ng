@@ -1,0 +1,6 @@
+{
+    "id": "freshwaterfish",
+    "name": "Freshwater fish",
+    "description": "current and projected biodiversity over freshwater fish species.",
+    "presence": "optional"
+}

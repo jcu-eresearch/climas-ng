@@ -1,0 +1,6 @@
+{
+    "id": "mammals",
+    "name": "Mammals",
+    "description": "current and projected biodiversity over mammal species.",
+    "presence": "optional"
+}

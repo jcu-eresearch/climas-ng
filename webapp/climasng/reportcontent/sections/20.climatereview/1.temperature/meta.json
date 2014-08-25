@@ -1,0 +1,6 @@
+{
+    "id": "temperature",
+    "name": "Temperature",
+    "description": "current and projected temperature.",
+    "presence": "optional"
+}

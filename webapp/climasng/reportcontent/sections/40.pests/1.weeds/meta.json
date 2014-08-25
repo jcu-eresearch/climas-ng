@@ -1,0 +1,7 @@
+{
+    "id": "weeds",
+    "name": "Weeds",
+    "description": "summary of projections for selected pest plants.",
+    "presence": "required"
+}
+

@@ -1,0 +1,6 @@
+{
+    "id": "allamphibians",
+    "name": "All",
+    "description": "current and projected biodiversity over all amphibian species.",
+    "presence": "optional"
+}

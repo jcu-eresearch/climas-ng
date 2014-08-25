@@ -5,6 +5,7 @@ from pyramid.view import view_config
 
 from climasng.parsing.docparser import DocParser
 from climasng.docassembly.docassembler import DocAssembler
+from climasng.docassembly.sectiondata import SectionData
 
 # -------------------------------------------------------------------
 # -------------------------------------------------------------------
@@ -22,12 +23,15 @@ class RegionReportView(object):
             'year': params['year'],
             'regiontype': params['regiontype'],
             'regionid': params['region'],
-            'sections': params['sections'].split(' '),
+            'selected_sections': params['sections'].split(' '),
             'format': 'pdf'
         }
 
+        root_section = SectionData('/var/climaswebapp/climasng/reportcontent/sections')
+
         da = DocAssembler(
             doc_data,
+            root_section,
             settings={
                 'region_url_pattern': 'http://localhost:8080/regiondata/${region_type}/${region_id}'
             },

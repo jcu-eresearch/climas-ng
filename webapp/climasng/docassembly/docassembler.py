@@ -10,20 +10,20 @@ from climasng.parsing.prosemaker import ProseMaker
 
 class DocAssembler(object):
 
-    def __init__(self, doc_data, settings={}):
+    def __init__(self, doc_data, section_data, settings={}):
         self._defaults = {
             # pattern can use region_id and region_type to make a url
             'region_url_pattern': 'http://localhost:6543/regiondata/${region_type}/${region_id}',
-            'section_path': './climasng/reportcontent/sections'
         }
         # merge in the user settings
         self._settings = dict(self._defaults.items() + settings.items())
 
         self._doc_data = doc_data
+        self._sect_data = section_data
 
         self._region_type = doc_data['regiontype']
         self._region_id = doc_data['regionid']
-        self._sections = doc_data['sections']
+        self._selected_sections = doc_data['selected_sections']
         self._format = doc_data['format']
         self._year = doc_data['year']
 
@@ -53,28 +53,36 @@ class DocAssembler(object):
 
         self._region.update(data) # merge, json wins
 
+        self.addSectionsToData() # add indicators showing included sections
+
         # raise Exception(region_data_url)
         # raise Exception(self._region)
+        # raise Exception(self._sections)
 
         return self._region
 
 
     def getSource(self):
         sources = []
-        for section in self._sections:
-            sources.append(self.getSectionSource(section))
+        for sect in self._sect_data:
+            if sect.id in self._selected_sections:
+                sources.append(self.getSectionSource(sect))
         self._source = "\n\n".join(sources)
         return self._source
 
 
-    def getSectionSource(self, section):
-        section_path = os.path.join(
-            self._settings['section_path'],
-            os.sep.join(section.split('.')),
-            'source.md'
-        )
+    def addSectionsToData(self):
+        for sect in self._sect_data:
+            if sect.id in self._selected_sections:
+                self._region['section_' + sect.id.replace('.', '_')] = Decimal(1)
+            else:
+                self._region['section_' + sect.id.replace('.', '_')] = Decimal(0)
+
+            print('added: section_' + sect.id.replace('.', '_'))
+
+    def getSectionSource(self, sect):
         try:
-            with file(section_path) as sourcefile:
+            with file(sect.contentpath) as sourcefile:
                 return sourcefile.read()
         except IOError as e:
             return ''

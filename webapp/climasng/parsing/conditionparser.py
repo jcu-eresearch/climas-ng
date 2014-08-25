@@ -29,7 +29,10 @@ class ConditionVisitor(NodeVisitor):
 
     # throwaway node handler ----------------------------------------
     def generic_visit(self, node, children):
-        return node.text.strip()
+        if len(children) == 1:
+            return children[0]
+        else:
+            return node.text.strip()
 
     # proper node handlers ------------------------------------------
 
@@ -175,6 +178,30 @@ class ConditionVisitor(NodeVisitor):
     def visit_simple_comparator(self, node, (cmp)):
         return cmp[0]
 
+
+    def visit_expression(self, node, (left, ws1, operator, ws2, right)):
+
+        if not isinstance(left, Decimal):
+            left = Decimal(repr(left))
+
+        if not isinstance(right, Decimal):
+            right = Decimal(repr(right))
+
+        if operator ==  '+':
+            return (left + right)
+
+        if operator ==  '-':
+            return (left - right)
+
+        if operator ==  '*':
+            return (left * right)
+
+        if operator ==  '/':
+            return (left / right)
+
+        raise Exception('operator "' + operator + '" is not implemented')
+
+
 # ===================================================================
 class ConditionParser(object):
 
@@ -238,10 +265,19 @@ class ConditionParser(object):
             never = ~"never"i
             always = ~"always"i
 
-            value = numeric / varname
+            value = expression / numeric / varname
 
             numeric = ~"[+-]?\d+(\.\d+)?"
             varname = ~"[a-z_][a-z0-9_]*"i
+
+            expression = term rws operator rws term
+            term = numeric / varname
+
+            operator = plus / minus / times / divide
+            plus = "+"
+            minus = "-"
+            times = "*"
+            divide = "/"
 
             range = percentage / numeric
 

@@ -1,0 +1,7 @@
+{
+    "id": "climatereview",
+    "name": "Climate Review",
+    "description": "a description of the region's current and projected climate.",
+    "presence": "optional"
+}
+

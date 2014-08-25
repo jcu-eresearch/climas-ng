@@ -1,0 +1,6 @@
+{
+    "id": "birds",
+    "name": "Birds",
+    "description": "current and projected biodiversity over bird species.",
+    "presence": "optional"
+}
