@@ -7,7 +7,6 @@ from decimal import Decimal
 
 from climasng.parsing.prosemaker import ProseMaker
 
-
 class DocAssembler(object):
 
     def __init__(self, doc_data, section_data, settings={}):
@@ -20,9 +19,9 @@ class DocAssembler(object):
 
         self._doc_data = doc_data
         self._sect_data = section_data
-
         self._region_type = doc_data['regiontype']
         self._region_id = doc_data['regionid']
+        self._region_url_template = Template(self._settings['region_url_pattern'])
         self._selected_sections = doc_data['selected_sections']
         self._format = doc_data['format']
         self._year = doc_data['year']
@@ -40,10 +39,10 @@ class DocAssembler(object):
             'region_type': region_type,
             'region_id': region_id
         }
+        # resolve the region url template with region info
+        self._region['region_url'] = self._region_url_template.substitute(self._region)
 
-        region_data_url = Template(self._settings['region_url_pattern']).substitute(self._region)
-
-        json_string = urllib2.urlopen(region_data_url).read()
+        json_string = urllib2.urlopen(self._region['region_url']).read()
         data = json.loads(
                     json_string,
                     parse_float=Decimal,

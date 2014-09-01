@@ -52,11 +52,11 @@ Almost all models agree on a decrease in rainfall, by between {{ hi_{{rpt_year}}
 [[always]]
 ----
 
-![Figure 3: Average Projected rainfall]({{rg_url}}/absolute.climate.rainfall.png)
+! Figure 3: Average Projected rainfall ({{region_url}}/absolute_climate_rainfall.png)
 
 Figure 4 shows the median projected change in annual average rainfall across {{ rg_name }}, in low and high emission scenarios.
 
-![Figure 4: Projected rainfall Change]({{rg_url}}/delta.rainfall.png)
+! Figure 4: Projected rainfall Change ({{region_url}}/delta_rainfall.png)
 [[rpt_year < 2085]]Note that this figure shows projections for 2085.[[always]]
 
 

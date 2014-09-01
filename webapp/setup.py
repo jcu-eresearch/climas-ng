@@ -17,7 +17,8 @@ install_reqs = [
     'waitress',
     'parsimonious',
     'coverage',
-    'simplejson'
+    'simplejson',
+    'pypandoc'
 ]
 
 setup_reqs = [
