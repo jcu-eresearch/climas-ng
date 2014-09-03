@@ -5,17 +5,10 @@ Currently, the mean annual rainfall for {{ rg_name }} is {{baseline_p_mean, roun
 
 Future rainfall projections are much more variable.  By {{rpt_year}}, rainfall is projected to be in the range {{ hi_{{rpt_year}}_p_mean_10th, round}} &ndash; {{ hi_{{rpt_year}}_p_mean_90th, round}} mL.
 
-xxxxxx
-
-baseline_p_mean {{baseline_p_mean}}
-
-hi_2065_p_mean_10th {{hi_2065_p_mean_10th}}
-
-hi_2065_p_mean_50th {{hi_2065_p_mean_50th}}
-
-hi_2065_p_mean_90th {{hi_2065_p_mean_90th}}
-
-xxxxxx
+- baseline_p_mean {{baseline_p_mean}}
+- hi_2065_p_mean_10th {{hi_2065_p_mean_10th}}
+- hi_2065_p_mean_50th {{hi_2065_p_mean_50th}}
+- hi_2065_p_mean_90th {{hi_2065_p_mean_90th}}
 
 Figure 3 tracks change in rainfall in {{ rg_name }} between 2015 and 2085.
 
@@ -48,15 +41,14 @@ Most models predict a decrease in rainfall, by as much as {{ hi_{{rpt_year}}_p_m
 AND hi_{{rpt_year}}_p_mean_10th < baseline_p_mean ]]
 Almost all models agree on a decrease in rainfall, by between {{ hi_{{rpt_year}}_p_mean_90th - baseline_p_mean, absolute, round }} mL and {{ hi_{{rpt_year}}_p_mean_10th - baseline_p_mean, absolute, round }} mL.
 
-
 [[always]]
-----
 
-! Figure 3: Average Projected rainfall ({{region_url}}/absolute_climate_rainfall.png)
+![Figure 3: Average Projected rainfall]({{region_data_path}}/absolute_climate_rainfall.png)
 
 Figure 4 shows the median projected change in annual average rainfall across {{ rg_name }}, in low and high emission scenarios.
 
-! Figure 4: Projected rainfall Change ({{region_url}}/delta_rainfall.png)
+![Figure 4: Projected rainfall Change]({{region_data_path}}/delta_rainfall.png)
+
 [[rpt_year < 2085]]Note that this figure shows projections for 2085.[[always]]
 
 
