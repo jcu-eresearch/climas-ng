@@ -59,20 +59,17 @@ yum install -y haskell
 cabal update
 cabal install pandoc --global
 
-__=" @@@@@@@@@@@@ disabling stuff.. @@@@@@@@@@@@@
+__=" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  disabling stuff..  @@@
 ### can't get tex to actually compile pandoc's latex output.
 ### laTeX
 # yum install -y texlive texlive-latex texlive-xetex
-@@@@@@@@@@@@ end of disabler   @@@@@@@@@@@@@@ "
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  ..end of disabler  @@@"
 
 wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar -zxvf install-tl-unx.tar.gz
 pushd install-tl-unx*
-
-
+install-tl --profile=/var/climaswebapp/texlive-install.profile
 popd
-
 
 echo ''
 echo ' *************************************************************'
