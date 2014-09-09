@@ -22,6 +22,7 @@ class DocAssembler(object):
         self._region_type = doc_data['regiontype']
         self._region_id = doc_data['regionid']
         self._region_url_template = Template(self._settings['region_url_pattern'])
+        self._region_data_path_template = Template(self._settings['region_data_path_pattern'])
         self._selected_sections = doc_data['selected_sections']
         self._format = doc_data['format']
         self._year = doc_data['year']
@@ -41,6 +42,7 @@ class DocAssembler(object):
         }
         # resolve the region url template with region info
         self._region['region_url'] = self._region_url_template.substitute(self._region)
+        self._region['region_data_path'] = self._region_data_path_template.substitute(self._region)
 
         json_string = urllib2.urlopen(self._region['region_url']).read()
         data = json.loads(
@@ -77,7 +79,6 @@ class DocAssembler(object):
             else:
                 self._region['section_' + sect.id.replace('.', '_')] = Decimal(0)
 
-            print('added: section_' + sect.id.replace('.', '_'))
 
     def getSectionSource(self, sect):
         try:

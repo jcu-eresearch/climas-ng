@@ -20,6 +20,7 @@ class RegionDataView(object):
             os.path.join(
                 data_path,
                 self.request.matchdict['regiontype'],
+                self.request.matchdict['regionid'],
                 self.request.matchdict['regionid'] + '.json'
             ),
             request=self.request

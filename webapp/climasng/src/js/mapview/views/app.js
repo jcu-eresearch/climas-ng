@@ -39,18 +39,22 @@
     events: {
       'click .btn-change': 'toggleForms',
       'click .btn-compare': 'toggleSplitter',
-      'click .btn-copy-ltr': 'copyMapLeftToRight',
-      'click .btn-copy-rtl': 'copyMapRightToLeft',
+      'click .btn-copy.ltr': 'copyMapLeftToRight',
+      'click .btn-copy.rtl': 'copyMapRightToLeft',
       'leftmapupdate': 'leftSideUpdate',
       'rightmapupdate': 'rightSideUpdate',
       'change select.left': 'leftSideUpdate',
-      'change select.right': 'rightSideUpdate'
+      'change select.right': 'rightSideUpdate',
+      'change input.left': 'leftSideUpdate',
+      'change input.right': 'rightSideUpdate'
     },
     tick: function() {
       if (false) {
-        debug(this.map.getPixelOrigin());
+        debug(this.leftInfo.scenario);
+      } else {
+        debug('tick');
       }
-      return setTimeout(this.tick, 2000);
+      return setTimeout(this.tick, 1000);
     },
     initialize: function() {
       debug('AppView.initialize');
@@ -105,7 +109,11 @@
       }
       this.$('#rightmapspp').val(this.leftInfo.speciesName);
       this.$('#rightmapyear').val(this.leftInfo.year);
-      this.$('#rightmapscenario').val(this.leftInfo.scenario);
+      this.$('input[name=rightmapscenario]').each((function(_this) {
+        return function(index, item) {
+          return $(item).prop('checked', $(item).val() === _this.leftInfo.scenario);
+        };
+      })(this));
       this.$('#rightmapgcm').val(this.leftInfo.gcm);
       return this.rightSideUpdate();
     },
@@ -116,7 +124,11 @@
       }
       this.$('#leftmapspp').val(this.rightInfo.speciesName);
       this.$('#leftmapyear').val(this.rightInfo.year);
-      this.$('#leftmapscenario').val(this.rightInfo.scenario);
+      this.$('input[name=leftmapscenario]').each((function(_this) {
+        return function(index, item) {
+          return $(item).prop('checked', $(item).val() === _this.rightInfo.scenario);
+        };
+      })(this));
       this.$('#leftmapgcm').val(this.rightInfo.gcm);
       return this.leftSideUpdate();
     },
@@ -125,24 +137,24 @@
       debug('AppView.leftSideUpdate');
       sppName = this.$('#leftmapspp').val();
       if (__indexOf.call(this.speciesSciNameList, sppName) >= 0) {
-        this.$('.btn-copy-rtl').prop('disabled', false);
+        this.$('.btn-copy.rtl').prop('disabled', false);
       } else {
-        this.$('.btn-copy-rtl').prop('disabled', true);
+        this.$('.btn-copy.rtl').prop('disabled', true);
         return false;
       }
       newLeftInfo = {
         speciesName: sppName,
         year: this.$('#leftmapyear').val(),
-        scenario: this.$('#leftmapscenario').val(),
+        scenario: this.$('input[name=leftmapscenario]:checked').val(),
         gcm: this.$('#leftmapgcm').val()
       };
       if (this.leftInfo && _.isEqual(newLeftInfo, this.leftInfo)) {
         return false;
       }
+      this.leftInfo = newLeftInfo;
       if (this.leftInfo && newLeftInfo.speciesName === this.leftInfo.speciesName && newLeftInfo.year === this.leftInfo.year && newLeftInfo.year === 'baseline') {
         return false;
       }
-      this.leftInfo = newLeftInfo;
       this.addMapLayer('left');
       return this.addMapTag('left');
     },
@@ -151,15 +163,15 @@
       debug('AppView.rightSideUpdate');
       sppName = this.$('#rightmapspp').val();
       if (__indexOf.call(this.speciesSciNameList, sppName) >= 0) {
-        this.$('.btn-copy-ltr').prop('disabled', false);
+        this.$('.btn-copy.ltr').prop('disabled', false);
       } else {
-        this.$('.btn-copy-ltr').prop('disabled', true);
+        this.$('.btn-copy.ltr').prop('disabled', true);
         return false;
       }
       newRightInfo = {
         speciesName: sppName,
         year: this.$('#rightmapyear').val(),
-        scenario: this.$('#rightmapscenario').val(),
+        scenario: this.$('input[name=rightmapscenario]:checked').val(),
         gcm: this.$('#rightmapgcm').val()
       };
       if (this.rightInfo && _.isEqual(newRightInfo, this.rightInfo)) {
@@ -427,8 +439,8 @@
       layout: _.template("<div class=\"splitline\">&nbsp;</div>\n<div class=\"splitthumb\"><span>&#x276e; &#x276f;</span></div>\n<div class=\"left tag\"><%= leftTag %></div>\n<div class=\"right tag\"><%= rightTag %></div>\n<div class=\"left side form\"><%= leftForm %></div>\n<div class=\"right side form\"><%= rightForm %></div>\n<div class=\"left loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div class=\"right loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div id=\"mapwrapper\"><div id=\"map\"></div></div>"),
       leftTag: _.template("<div class=\"show\">\n    <span class=\"leftlayername\">plain map</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <input id=\"leftmapspp\" name=\"leftmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n    <!--\n    <button class=\"btn-change\">hide settings</button>\n    <button class=\"btn-compare\">compare +/-</button>\n    -->\n</div>"),
       rightTag: _.template("<div class=\"show\">\n    <span class=\"rightlayername\">(no distribution)</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <input id=\"rightmapspp\" name=\"rightmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
-      leftForm: _.template("<fieldset>\n    <button class=\"btn-copy-rtl\">copy right map &laquo;</button>\n</fieldset>\n<fieldset>\n    <legend>time point</legend>\n    <select class=\"left\" id=\"leftmapyear\">\n        <option value=\"baseline\">current</option>\n        <option>2015</option>\n        <option>2025</option>\n        <option>2035</option>\n        <option>2045</option>\n        <option>2055</option>\n        <option>2065</option>\n        <option>2075</option>\n        <option>2085</option>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>emission scenario</legend>\n    <label><span>RCP 4.5</span> <input name=\"leftmapscenario\" type=\"radio\" value=\"RCP45\"> lower emissions</label>\n    <label><span>RCP 8.5</span> <input name=\"leftmapscenario\" type=\"radio\" value=\"RCP85\" checked=\"checked\"> business as usual</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapgcm\">\n        <option value=\"10th\">10th percentile</option>\n        <option value=\"all\" selected=\"selected\">50th percentile</option>\n        <option value=\"90th\">90th percentile</option>\n    </select>\n</fieldset><fieldset>\n    <legend></legend>\n    <button class=\"btn-change\">hide settings</button>\n</fieldset><fieldset>\n    <button class=\"btn-compare\">compare +/-</button>\n</fieldset>"),
-      rightForm: _.template("<fieldset>\n<button class=\"btn-copy-ltr\">&raquo; copy left map</button>\n</fieldset><fieldset>\n<select class=\"right\" id=\"rightmapyear\">\n    <option value=\"baseline\">baseline</option>\n    <option>2015</option>\n    <option>2025</option>\n    <option>2035</option>\n    <option>2045</option>\n    <option>2055</option>\n    <option>2065</option>\n    <option>2075</option>\n    <option>2085</option>\n</select>\n</fieldset><fieldset>\n<select class=\"right\" id=\"rightmapscenario\">\n    <option value=\"RCP3PD\">RCP 3PD</option>\n    <option value=\"RCP45\">RCP 4.5</option>\n    <option value=\"RCP6\">RCP 6</option>\n    <option value=\"RCP85\" selected=\"selected\">RCP 8.5</option>\n</select>\n</fieldset><fieldset>\n<select class=\"right\" id=\"rightmapgcm\">\n    <option value=\"10th\">10th percentile</option>\n    <option value=\"all\" selected=\"selected\">50th percentile</option>\n    <option value=\"90th\">90th percentile</option>\n</select>\n</fieldset><fieldset>\n<legend></legend>\n<button class=\"btn-change\">hide settings</button>\n</fieldset><fieldset>\n<button class=\"btn-compare\">compare +/-</button>\n</fieldset>")
+      leftForm: _.template("<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">show right map</button>\n    <button type=\"button\" class=\"btn-copy rtl\">copy right map &laquo;</button>\n</fieldset>\n<fieldset>\n    <legend>time point</legend>\n    <select class=\"left\" id=\"leftmapyear\">\n        <option value=\"baseline\">current</option>\n        <option>2015</option>\n        <option>2025</option>\n        <option>2035</option>\n        <option>2045</option>\n        <option>2055</option>\n        <option>2065</option>\n        <option>2075</option>\n        <option>2085</option>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>emission scenario</legend>\n    <label><span>RCP 4.5</span> <input name=\"leftmapscenario\" class=\"left\" type=\"radio\" value=\"RCP45\"> lower emissions</label>\n    <label><span>RCP 8.5</span> <input name=\"leftmapscenario\" class=\"left\" type=\"radio\" value=\"RCP85\"> business as usual</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapgcm\">\n        <option value=\"10th\">10th percentile</option>\n        <option value=\"all\" selected=\"selected\">50th percentile</option>\n        <option value=\"90th\">90th percentile</option>\n    </select>\n</fieldset>"),
+      rightForm: _.template("<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide right map</button>\n    <button type=\"button\" class=\"btn-copy ltr\">&raquo; copy left map</button>\n</fieldset>\n<fieldset>\n    <legend>time point</legend>\n    <select class=\"left\" id=\"rightmapyear\">\n        <option value=\"baseline\">current</option>\n        <option>2015</option>\n        <option>2025</option>\n        <option>2035</option>\n        <option>2045</option>\n        <option>2055</option>\n        <option>2065</option>\n        <option>2075</option>\n        <option>2085</option>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>emission scenario</legend>\n    <label><span>RCP 4.5</span> <input name=\"rightmapscenario\" class=\"right\" type=\"radio\" value=\"RCP45\"> lower emissions</label>\n    <label><span>RCP 8.5</span> <input name=\"rightmapscenario\" class=\"right\" type=\"radio\" value=\"RCP85\" checked=\"checked\"> business as usual</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"right\" id=\"rightmapgcm\">\n        <option value=\"10th\">10th percentile</option>\n        <option value=\"all\" selected=\"selected\">50th percentile</option>\n        <option value=\"90th\">90th percentile</option>\n    </select>\n</fieldset>")
     }
   });
 

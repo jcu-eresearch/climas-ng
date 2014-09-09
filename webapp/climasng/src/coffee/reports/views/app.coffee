@@ -47,7 +47,7 @@ AppView = Backbone.View.extend {
     id: 'reportform'
     # ---------------------------------------------------------------
     # some settings
-    speciesDataUrl: "#{location.protocol}//#{location.host}/speciesdata"
+    dataUrl: "#{location.protocol}//#{location.host}/data"
     rasterApiUrl: "#{location.protocol}//localhost:10600/api/raster/1/wms_data_url"
     # ---------------------------------------------------------------
     # tracking the splitter bar
@@ -72,6 +72,7 @@ AppView = Backbone.View.extend {
         @fetchRegions()
         @fetchYears()
 
+        @updateSummary()
         # @tick()
     # ---------------------------------------------------------------
     render: ()->
@@ -113,8 +114,10 @@ AppView = Backbone.View.extend {
     fetchReportSections: ()->
         debug 'AppView.fetchReportSections'
 
+        fetch = $.ajax @dataUrl + '/reportsections'
+
         # later this will be an ajax call, for now make a deferred object
-        fetch = $.Deferred()
+        # fetch = $.Deferred()
 
         fetch.done (data)=>
             @possibleSections = data.sections
@@ -122,174 +125,174 @@ AppView = Backbone.View.extend {
             sectionselect.empty().removeClass 'loading'
             @buildReportSectionList @possibleSections, sectionselect
 
-        # pretend it took a while to get the data..
-        setTimeout ()->
-            fetch.resolve({
-                sections: [
-                    {
-                        id: 'intro'
-                        name: 'Introduction'
-                        description: 'title, credits, and introductory paragraphs.'
-                        presence: 'required'
-                        sections: []
-                    },{
-                        id: 'climatereview'
-                        name: 'Climate Review'
-                        description: 'a description of the region\'s current and projected climate.'
-                        presence: 'optional'
-                        sections: [
-                            {
-                                id: 'temperature'
-                                name: 'Temperature'
-                                description: 'current and projected temperature.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'rainfall'
-                                name: 'Rainfall'
-                                description: 'current and projected precipitation.'
-                                presence: 'optional'
-                                sections: []
-                            }
-                        ]
-                    },{
-                        id: 'biodiversity'
-                        name: 'Biodiversity Review'
-                        description: 'a description of the region\'s current and projected biodiversity.'
-                        presence: 'optional'
-                        sections: [
-                            {
-                                id: 'overall'
-                                name: 'Overall'
-                                description: 'current and projected biodiversity over all modelled species.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'mammals'
-                                name: 'Mammals'
-                                description: 'current and projected biodiversity over mammal species.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'amphibians'
-                                name: 'Amphibians'
-                                description: 'current and projected biodiversity over amphibian species.'
-                                presence: 'optional'
-                                sections: [{
-                                        id: 'allamphibians'
-                                        name: 'All'
-                                        description: 'current and projected biodiversity over all amphibian species.'
-                                        presence: 'optional'
-                                        sections: []
-                                    },{
-                                        id: 'streamfrogs'
-                                        name: 'Stream frogs'
-                                        description: 'current and projected biodiversity over stream frogs.'
-                                        presence: 'optional'
-                                        sections: []
-                                    }
-                                ]
-                            },{
-                                id: 'reptiles'
-                                name: 'Reptiles'
-                                description: 'current and projected biodiversity over reptile species.'
-                                presence: 'optional'
-                                sections: [{
-                                        id: 'allreptiles'
-                                        name: 'All'
-                                        description: 'current and projected biodiversity over all reptile species.'
-                                        presence: 'optional'
-                                        sections: []
-                                    },{
-                                        id: 'turtles'
-                                        name: 'Turtles'
-                                        description: 'current and projected biodiversity over turtles.'
-                                        presence: 'optional'
-                                        sections: []
-                                    }
-                                ]
-                            },{
-                                id: 'birds'
-                                name: 'Birds'
-                                description: 'current and projected biodiversity over bird species.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'freshwaterfish'
-                                name: 'Freshwater fish'
-                                description: 'current and projected biodiversity over freshwater fish species.'
-                                presence: 'optional'
-                                sections: []
-                            }
-                        ]
-                    },{
-                        id: 'pests'
-                        name: 'Pest Species'
-                        description: 'climate suitability and distribution of pest species.'
-                        presence: 'optional'
-                        sections: [
-                            {
-                                id: 'pestplants'
-                                name: 'Pest Plants'
-                                description: 'summary of projections for selected pest plants.'
-                                presence: 'optional'
-                                sections: []
-                            }
-                        ]
-                    },{
-                        id: 'appendixes'
-                        name: 'Appendices'
-                        description: 'tables and other appendices.'
-                        presence: 'required'
-                        sections: [
-                            {
-                                id: 'observedmammallist'
-                                name: 'Mammals Present'
-                                description: 'list of mammals currently or projected to be present in region.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'observedamphibianslist'
-                                name: 'Amphibians Present'
-                                description: 'list of amphibians currently or projected to be present in region.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'observedstreamfrogslist'
-                                name: 'Steam Frogs Present'
-                                description: 'list of stream frogs currently or projected to be present in region.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'observedreptileslist'
-                                name: 'Reptiles Present'
-                                description: 'list of reptiles currently or projected to be present in region.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'observedturtleslist'
-                                name: 'Turtles Present'
-                                description: 'list of turtles currently or projected to be present in region.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'observedbirdslist'
-                                name: 'Birds Present'
-                                description: 'list of birds currently or projected to be present in region.'
-                                presence: 'optional'
-                                sections: []
-                            },{
-                                id: 'science'
-                                name: 'Science'
-                                description: 'description of the climate and species distribution modelling used to generate the data in the report.'
-                                presence: 'required'
-                                sections: []
-                            }
-                        ]
-                    }
-                ]
-            })
-        , 500 + (500 * Math.random())
+        # # pretend it took a while to get the data..
+        # setTimeout ()->
+        #     fetch.resolve({
+        #         sections: [
+        #             {
+        #                 id: 'intro'
+        #                 name: 'Introduction'
+        #                 description: 'title, credits, and introductory paragraphs.'
+        #                 presence: 'required'
+        #                 sections: []
+        #             },{
+        #                 id: 'climatereview'
+        #                 name: 'Climate Review'
+        #                 description: 'a description of the region\'s current and projected climate.'
+        #                 presence: 'optional'
+        #                 sections: [
+        #                     {
+        #                         id: 'temperature'
+        #                         name: 'Temperature'
+        #                         description: 'current and projected temperature.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'rainfall'
+        #                         name: 'Rainfall'
+        #                         description: 'current and projected precipitation.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     }
+        #                 ]
+        #             },{
+        #                 id: 'biodiversity'
+        #                 name: 'Biodiversity Review'
+        #                 description: 'a description of the region\'s current and projected biodiversity.'
+        #                 presence: 'optional'
+        #                 sections: [
+        #                     {
+        #                         id: 'overall'
+        #                         name: 'Overall'
+        #                         description: 'current and projected biodiversity over all modelled species.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'mammals'
+        #                         name: 'Mammals'
+        #                         description: 'current and projected biodiversity over mammal species.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'amphibians'
+        #                         name: 'Amphibians'
+        #                         description: 'current and projected biodiversity over amphibian species.'
+        #                         presence: 'optional'
+        #                         sections: [{
+        #                                 id: 'allamphibians'
+        #                                 name: 'All'
+        #                                 description: 'current and projected biodiversity over all amphibian species.'
+        #                                 presence: 'optional'
+        #                                 sections: []
+        #                             },{
+        #                                 id: 'streamfrogs'
+        #                                 name: 'Stream frogs'
+        #                                 description: 'current and projected biodiversity over stream frogs.'
+        #                                 presence: 'optional'
+        #                                 sections: []
+        #                             }
+        #                         ]
+        #                     },{
+        #                         id: 'reptiles'
+        #                         name: 'Reptiles'
+        #                         description: 'current and projected biodiversity over reptile species.'
+        #                         presence: 'optional'
+        #                         sections: [{
+        #                                 id: 'allreptiles'
+        #                                 name: 'All'
+        #                                 description: 'current and projected biodiversity over all reptile species.'
+        #                                 presence: 'optional'
+        #                                 sections: []
+        #                             },{
+        #                                 id: 'turtles'
+        #                                 name: 'Turtles'
+        #                                 description: 'current and projected biodiversity over turtles.'
+        #                                 presence: 'optional'
+        #                                 sections: []
+        #                             }
+        #                         ]
+        #                     },{
+        #                         id: 'birds'
+        #                         name: 'Birds'
+        #                         description: 'current and projected biodiversity over bird species.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'freshwaterfish'
+        #                         name: 'Freshwater fish'
+        #                         description: 'current and projected biodiversity over freshwater fish species.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     }
+        #                 ]
+        #             },{
+        #                 id: 'pests'
+        #                 name: 'Pest Species'
+        #                 description: 'climate suitability and distribution of pest species.'
+        #                 presence: 'optional'
+        #                 sections: [
+        #                     {
+        #                         id: 'pestplants'
+        #                         name: 'Pest Plants'
+        #                         description: 'summary of projections for selected pest plants.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     }
+        #                 ]
+        #             },{
+        #                 id: 'appendixes'
+        #                 name: 'Appendices'
+        #                 description: 'tables and other appendices.'
+        #                 presence: 'required'
+        #                 sections: [
+        #                     {
+        #                         id: 'observedmammallist'
+        #                         name: 'Mammals Present'
+        #                         description: 'list of mammals currently or projected to be present in region.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'observedamphibianslist'
+        #                         name: 'Amphibians Present'
+        #                         description: 'list of amphibians currently or projected to be present in region.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'observedstreamfrogslist'
+        #                         name: 'Steam Frogs Present'
+        #                         description: 'list of stream frogs currently or projected to be present in region.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'observedreptileslist'
+        #                         name: 'Reptiles Present'
+        #                         description: 'list of reptiles currently or projected to be present in region.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'observedturtleslist'
+        #                         name: 'Turtles Present'
+        #                         description: 'list of turtles currently or projected to be present in region.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'observedbirdslist'
+        #                         name: 'Birds Present'
+        #                         description: 'list of birds currently or projected to be present in region.'
+        #                         presence: 'optional'
+        #                         sections: []
+        #                     },{
+        #                         id: 'science'
+        #                         name: 'Science'
+        #                         description: 'description of the climate and species distribution modelling used to generate the data in the report.'
+        #                         presence: 'required'
+        #                         sections: []
+        #                     }
+        #                 ]
+        #             }
+        #         ]
+        #     })
+        # , 500 + (500 * Math.random())
 
         # now return a promise in case we need to wait for this
         return fetch.promise()
@@ -308,6 +311,8 @@ AppView = Backbone.View.extend {
                 subsections = $ AppView.templates.subsections()
                 @buildReportSectionList item.sections, subsections
                 $(selectorRow).addClass('hassubsections').append(subsections)
+
+        @updateSummary()
     # ---------------------------------------------------------------
     updateSectionSelection: (event)->
         debug 'AppView.updateSectionSelection'
@@ -319,7 +324,7 @@ AppView = Backbone.View.extend {
 
         $.each sectionList, (index, item)=>
             # find the selection checkbox..
-            selector = @$ "#section-#{ item.id }"
+            selector = @$ "#section-#{ item.id.replace /\./g, '\\.' }"
             selectionControl = selector.find 'input'
 
             # set the right class on the selector
@@ -410,14 +415,14 @@ AppView = Backbone.View.extend {
                             { id: 'NRM_Wet_Tropics', name: 'Wet Tropics' },
                             { id: 'NRM_Wimmera', name: 'Wimmera' }
                         ]
-                    },{
-                        id: 'ibra'
-                        name: 'IBRA bioregion'
-                        regions: []
-                    },{
-                        id: 'park'
-                        name: 'Parks, reserves'
-                        regions: []
+                    # },{
+                    #     id: 'ibra'
+                    #     name: 'IBRA bioregion'
+                    #     regions: []
+                    # },{
+                    #     id: 'park'
+                    #     name: 'Parks, reserves'
+                    #     regions: []
                     },{
                         id: 'state'
                         name: 'State, territory'
@@ -456,6 +461,8 @@ AppView = Backbone.View.extend {
 
             regionTypeRow = $ AppView.templates.regionTypeSelector(regionType)
             regionselect.append regionTypeRow
+
+        @updateSummary()
     # ---------------------------------------------------------------
     updateRegionSelection: (event)->
         debug 'AppView.updateRegionSelection'
@@ -471,7 +478,7 @@ AppView = Backbone.View.extend {
                 selector.addClass 'typeselected'
                 @selectedRegionType = regionType.id
                 @selectedRegion = $(selector.find('select')).val()
-                if @selectedRegion == null
+                if @selectedRegion == ''
                     selector.removeClass 'regionselected'
                 else
                     selector.addClass 'regionselected'
@@ -522,6 +529,8 @@ AppView = Backbone.View.extend {
         $.each @years, (index, year)=>
             # make a selector for this year
             yearselect.append AppView.templates.yearSelector({ year: year })
+
+        @updateSummary()
     # ---------------------------------------------------------------
     updateYearSelection: (event)->
         debug 'AppView.updateYearSelection'
@@ -613,7 +622,12 @@ AppView = Backbone.View.extend {
             content: content
         }
 
+        debug contentList
+        debug summary
+
         @$('.reviewblock').html AppView.templates.reviewBlock(summary)
+        @$('.reviewblock').toggleClass 'regionselected', (@selectedRegionInfo isnt undefined)
+        @$('.reviewblock').toggleClass 'yearselected', (@selectedYear isnt undefined)
     # ---------------------------------------------------------------
 },{ templates: { # ==================================================
     # templates here

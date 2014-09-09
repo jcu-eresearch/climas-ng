@@ -50,18 +50,24 @@ AppView = Backbone.View.extend {
     events:
         'click .btn-change': 'toggleForms'
         'click .btn-compare': 'toggleSplitter'
-        'click .btn-copy-ltr': 'copyMapLeftToRight'
-        'click .btn-copy-rtl': 'copyMapRightToLeft'
+        'click .btn-copy.ltr': 'copyMapLeftToRight'
+        'click .btn-copy.rtl': 'copyMapRightToLeft'
         'leftmapupdate': 'leftSideUpdate'
         'rightmapupdate': 'rightSideUpdate'
         'change select.left': 'leftSideUpdate'
         'change select.right': 'rightSideUpdate'
+        'change input.left': 'leftSideUpdate'
+        'change input.right': 'rightSideUpdate'
     # ---------------------------------------------------------------
     tick: ()->
         # if @map
         if false
-            debug @map.getPixelOrigin()
-        setTimeout(@tick, 2000)
+        # if @leftInfo
+            # debug @map.getPixelOrigin()
+            debug @leftInfo.scenario
+        else
+            debug 'tick'
+        setTimeout(@tick, 1000)
     # ---------------------------------------------------------------
     initialize: ()->
         debug 'AppView.initialize'
@@ -133,7 +139,8 @@ AppView = Backbone.View.extend {
 
         @$('#rightmapspp').val @leftInfo.speciesName
         @$('#rightmapyear').val @leftInfo.year
-        @$('#rightmapscenario').val @leftInfo.scenario
+        @$('input[name=rightmapscenario]').each (index, item)=>
+            $(item).prop 'checked', ($(item).val() == @leftInfo.scenario)
         @$('#rightmapgcm').val @leftInfo.gcm
 
         @rightSideUpdate()
@@ -145,7 +152,8 @@ AppView = Backbone.View.extend {
 
         @$('#leftmapspp').val @rightInfo.speciesName
         @$('#leftmapyear').val @rightInfo.year
-        @$('#leftmapscenario').val @rightInfo.scenario
+        @$('input[name=leftmapscenario]').each (index, item)=>
+            $(item).prop 'checked', ($(item).val() == @rightInfo.scenario)
         @$('#leftmapgcm').val @rightInfo.gcm
 
         @leftSideUpdate()
@@ -157,20 +165,23 @@ AppView = Backbone.View.extend {
 
         # bail if that's not a real species
         if sppName in @speciesSciNameList
-            @$('.btn-copy-rtl').prop 'disabled', false
+            @$('.btn-copy.rtl').prop 'disabled', false
         else
-            @$('.btn-copy-rtl').prop 'disabled', true
+            @$('.btn-copy.rtl').prop 'disabled', true
             return false
 
         newLeftInfo = {
             speciesName: sppName
             year: @$('#leftmapyear').val()
-            scenario: @$('#leftmapscenario').val()
+            scenario: @$('input[name=leftmapscenario]:checked').val()
             gcm: @$('#leftmapgcm').val()
         }
 
         # bail if nothing changed
         return false if @leftInfo and _.isEqual newLeftInfo, @leftInfo
+
+        # save the new setup
+        @leftInfo = newLeftInfo
 
         # also bail if they're both same species at baseline
         if (
@@ -180,9 +191,6 @@ AppView = Backbone.View.extend {
             newLeftInfo.year == 'baseline'
         )
             return false
-
-        # save the new setup
-        @leftInfo = newLeftInfo
 
         # apply the changes to the map
         @addMapLayer 'left'
@@ -197,15 +205,15 @@ AppView = Backbone.View.extend {
 
         # bail if that's not a real species
         if sppName in @speciesSciNameList
-            @$('.btn-copy-ltr').prop 'disabled', false
+            @$('.btn-copy.ltr').prop 'disabled', false
         else
-            @$('.btn-copy-ltr').prop 'disabled', true
+            @$('.btn-copy.ltr').prop 'disabled', true
             return false
 
         newRightInfo = {
             speciesName: sppName
             year: @$('#rightmapyear').val()
-            scenario: @$('#rightmapscenario').val()
+            scenario: @$('input[name=rightmapscenario]:checked').val()
             gcm: @$('#rightmapgcm').val()
         }
 
@@ -540,8 +548,10 @@ AppView = Backbone.View.extend {
     """
     # ---------------------------------------------------------------
     leftForm: _.template """
-        <fieldset>
-            <button class="btn-copy-rtl">copy right map &laquo;</button>
+        <fieldset class="blank">
+            <button type="button" class="btn-change">hide settings</button>
+            <button type="button" class="btn-compare">show right map</button>
+            <button type="button" class="btn-copy rtl">copy right map &laquo;</button>
         </fieldset>
         <fieldset>
             <legend>time point</legend>
@@ -559,8 +569,8 @@ AppView = Backbone.View.extend {
         </fieldset>
         <fieldset>
             <legend>emission scenario</legend>
-            <label><span>RCP 4.5</span> <input name="leftmapscenario" type="radio" value="RCP45"> lower emissions</label>
-            <label><span>RCP 8.5</span> <input name="leftmapscenario" type="radio" value="RCP85" checked="checked"> business as usual</label>
+            <label><span>RCP 4.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> lower emissions</label>
+            <label><span>RCP 8.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85"> business as usual</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
@@ -569,47 +579,41 @@ AppView = Backbone.View.extend {
                 <option value="all" selected="selected">50th percentile</option>
                 <option value="90th">90th percentile</option>
             </select>
-        </fieldset><fieldset>
-            <legend></legend>
-            <button class="btn-change">hide settings</button>
-        </fieldset><fieldset>
-            <button class="btn-compare">compare +/-</button>
         </fieldset>
     """
     # ---------------------------------------------------------------
     rightForm: _.template """
+        <fieldset class="blank">
+            <button type="button" class="btn-change">hide settings</button>
+            <button type="button" class="btn-compare">hide right map</button>
+            <button type="button" class="btn-copy ltr">&raquo; copy left map</button>
+        </fieldset>
         <fieldset>
-        <button class="btn-copy-ltr">&raquo; copy left map</button>
-        </fieldset><fieldset>
-        <select class="right" id="rightmapyear">
-            <option value="baseline">baseline</option>
-            <option>2015</option>
-            <option>2025</option>
-            <option>2035</option>
-            <option>2045</option>
-            <option>2055</option>
-            <option>2065</option>
-            <option>2075</option>
-            <option>2085</option>
-        </select>
-        </fieldset><fieldset>
-        <select class="right" id="rightmapscenario">
-            <option value="RCP3PD">RCP 3PD</option>
-            <option value="RCP45">RCP 4.5</option>
-            <option value="RCP6">RCP 6</option>
-            <option value="RCP85" selected="selected">RCP 8.5</option>
-        </select>
-        </fieldset><fieldset>
-        <select class="right" id="rightmapgcm">
-            <option value="10th">10th percentile</option>
-            <option value="all" selected="selected">50th percentile</option>
-            <option value="90th">90th percentile</option>
-        </select>
-        </fieldset><fieldset>
-        <legend></legend>
-        <button class="btn-change">hide settings</button>
-        </fieldset><fieldset>
-        <button class="btn-compare">compare +/-</button>
+            <legend>time point</legend>
+            <select class="left" id="rightmapyear">
+                <option value="baseline">current</option>
+                <option>2015</option>
+                <option>2025</option>
+                <option>2035</option>
+                <option>2045</option>
+                <option>2055</option>
+                <option>2065</option>
+                <option>2075</option>
+                <option>2085</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>emission scenario</legend>
+            <label><span>RCP 4.5</span> <input name="rightmapscenario" class="right" type="radio" value="RCP45"> lower emissions</label>
+            <label><span>RCP 8.5</span> <input name="rightmapscenario" class="right" type="radio" value="RCP85" checked="checked"> business as usual</label>
+        </fieldset>
+        <fieldset>
+            <legend>model summary</legend>
+            <select class="right" id="rightmapgcm">
+                <option value="10th">10th percentile</option>
+                <option value="all" selected="selected">50th percentile</option>
+                <option value="90th">90th percentile</option>
+            </select>
         </fieldset>
     """
     # ---------------------------------------------------------------

@@ -32,15 +32,16 @@ class RegionReportView(object):
             'format': 'pdf'
         }
 
-        root_section = SectionData('/var/climaswebapp/climasng/reportcontent/sections')
+        root_section = SectionData(self.request.registry.settings['climas.report_section_path'])
+
+        print(root_section.toJson())
 
         da = DocAssembler(
             doc_data,
             root_section,
             settings={
                 'region_url_pattern': 'http://localhost:8080/regiondata/${region_type}/${region_id}',
-                'region_data_path_pattern': 'http://localhost:8080/regiondata/${region_type}/${region_id}',
-                'region_image_path_pattern': 'http://localhost:8080/regiondata/${region_type}/${region_id}',
+                'region_data_path_pattern': self.request.registry.settings['climas.region_data_path'] + '/${region_type}/${region_id}',
             },
         )
 
@@ -49,11 +50,12 @@ class RegionReportView(object):
 
             print(tfpath)
 
-            args = ('-o', tfpath)
+            args = ('-o', tfpath, '--template=' + self.request.registry.settings['climas.doc_template_path'] + '/default.latex')
             doc = pypandoc.convert(da.result(), 'latex', format='markdown', extra_args=args)
 
             response = FileResponse(tfpath)
-            response.content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            # response.content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            # response.content_disposition = "attachment; filename=CliMAS-Report.docx"
             response.content_type = "application/pdf"
             response.content_disposition = "attachment; filename=CliMAS-Report.pdf"
             return response

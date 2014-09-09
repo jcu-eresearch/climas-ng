@@ -70,10 +70,13 @@ body {
             // a div inside the tag is a wrapper
             position: absolute;
             top: @tagcontentpad;
-            left: @sidepad; // from common.less
             height: (@tagheight - @tagcontentpad - @tagcontentpad);
+            left: @sidepad; // from common.less
             right: @sidepad;
+            left: 0;
+            right: 0;
             transition: 0.25s;
+            padding: 0 1em;
             > span {
                 // a span in a wrapper never has linebreaks
                 white-space: no-wrap;
@@ -96,8 +99,9 @@ body {
                 font-size: (100% * @inputfontzoom);
                 height: 100%;
                 padding: 0 0.5em;
-                width: (30 - @sidepad);
+                width: (50 - @sidepad);
                 margin: 0;
+                // margin-left: (-1 * @sidepad);
             }
         }
         > div.edit {
@@ -186,11 +190,13 @@ body {
             display: block;
             width: 100%;
             text-align: center;
-            font-size: inherit;
-            font-family: inherit;
         }
+        // select, button {
+        //     border-radius: 0;
+        //     border-width: 1px;
+        // }
         button {
-            padding: 0.25em 0;
+            // padding: 0.25em 0;
         }
         label {
             input[type="radio"] {
@@ -203,35 +209,51 @@ body {
             }
         }
         fieldset {
-            margin-top: 2em;
+            position: relative;
+            margin-top: 1.66em;
+            padding-top: 1.66em; // space for the absolutely-positioned legend
+            // background-image: radial-gradient(ellipse 49% 99% at center top, rgba(255,255,255, 0.5), rgba(255,255,255, 0.25) 66%, rgba(255,255,255, 0) 100%);
+            background-image: linear-gradient(to bottom, rgba(255,255,255, 0.33), rgba(255,255,255, 0.15));
+            border-radius: 4px;
+            &:first-of-type { margin-top: 0; }
+            &.blank { background-image: none; padding-top: 0; }
         }
         legend {
-            // background-image: linear-gradient(to left, rgba(255,255,255, 0.5), rgba(255,255,255, 0) 80%);
-            // border-top-right-radius: 2px;
-            // border-bottom-right-radius: 2px;
-
-            background-image: radial-gradient(ellipse 49% 99% at center bottom, rgba(255,255,255, 0.5), rgba(255,255,255, 0.25) 66%, rgba(255,255,255, 0) 100%);
-            border-bottom: 1px solid rgba(255,255,255, 0.66);
-            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 5%;
+            width: 90%;
+            background-image: radial-gradient(ellipse 49% 99% at center bottom, rgba(255,255,255, 0.66), rgba(255,255,255, 0.25) 50%, rgba(255,255,255, 0) 100%);
             letter-spacing: 0.33em;
-            // font-weight: 400;
             text-align: center;
-            line-height: 0.89;
             text-transform: uppercase;
-            padding: 1em 0.1em 0;
-            margin: 0 0 0.5em;
+            text-shadow: -1px 0 0.5px darken(saturate(@bodybackground,40%),15%), 1px 0 0.5px #fff, 1px 0 0.5px #fff;
+            padding: 0.15em 0;
             font-size: 66%;
         }
         p {
             margin: 0 0 1em;
         }
+
+        .btn-change, .btn-compare {
+            width: 48%;
+            height: 2.66em;
+            float: left;
+            line-height: 1.0;
+        }
+        .btn-compare {
+            float: right;
+        }
+
     }
-    .side.form .btn-copy-rtl {
+    .side.form .btn-copy {
+        clear: both;
+        margin-top: (2.66em + 0.5em); // height of change and compare buttons, plus actual margin
         visibility: hidden;
         opacity: 0;
         transition: all 0.33s;
     }
-    &.split .side.form .btn-copy-rtl {
+    &.split .side.form .btn-copy {
         visibility: visible;
         opacity: 1;
     }

@@ -9,6 +9,7 @@ from decimal import Decimal
 
 class SectionData(object):
 
+    # ---------------------------------------------------------------
     def __init__(self, sectiondir, parent=None):
         self._parent = parent
         self._dir = sectiondir
@@ -46,10 +47,30 @@ class SectionData(object):
     ## parent -------------------------------------------------------
     @property
     def parent(self): return self._parent
-
-
+    # ---------------------------------------------------------------
+    #     {
+    #         id: 'intro'
+    #         name: 'Introduction'
+    #         description: 'title, credits, and introductory paragraphs.'
+    #         presence: 'required'
+    #         sections: [
+    #             { ... },
+    #             { ... }
+    #         ]
+    #     }
+    def to_data_object(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "presence": self.presence,
+            "sections": [subsect.to_data_object() for subsect in self.sections]
+        }
+    # ---------------------------------------------------------------
+    def toJson(self):
+        return json.dumps(self.to_data_object())
+    # ---------------------------------------------------------------
     def fetch_data(self):
-
         try:
             with open(os.path.join(self._dir, 'meta.json')) as meta_file:
                 self._metadata = json.load(meta_file)
@@ -87,56 +108,11 @@ class SectionData(object):
             sections.append(section)
 
         self._sections = sections
-
-
+    # ---------------------------------------------------------------
     def __iter__(self):
         yield self
         for sect in self._sections:
             for subsect in sect:
                yield subsect
-
-#    def fetchSections(self, dir, parent_section=None):
-#        # (recursively) get sections.
-#
-#        # grab a list of dirs
-#        # Python doesn't love you at all, so it lacks a function to
-#        # get dirs.  So this starts a 'walk', which is a generator
-#        # that returns directory listings for a dir tree.  The first
-#        # item returned (fetched by .next()) is the current dir, and
-#        # the content is (path, dirlist, filelist) so the [1] gets
-#        # just the dirs.
-#        dirs = os.walk(dir).next()[1]
-#        # sort here so they're in order for the filtering that happens below.
-#        dirs.sort()
-#
-#        # pull out sections that are named with number-dot at the start
-#        # section_dirs = [s.split('.', 1)[1] for s in dirs if re.match(r'\d+\.', s)]
-#        section_dirs = [s for s in dirs if re.match(r'\d+\.', s)]
-#
-#        # now add the dir names that *don't* start with number-dot
-#        section_dirs.extend( [s for s in dirs if not re.match(r'\d+\.', s)] )
-#
-#        sections = []
-#        for section_dir in section_dirs:
-#            sname = re.sub(r'^\d+\.', '', section_dir)
-#            section = {}
-#            try:
-#                with open(os.path.join(dir, section_dir, 'meta.json')) as metadata:
-#                    section = json.load(metadata)
-#                    if parent_section is not None:
-#                        section['id'] = parent_section['id'] + '.' + section['id']
-#                    section['contentpath'] = os.path.join(dir, section_dir, 'content.md')
-#                    section['sections'] = self.fetchSections(os.path.join(dir, section_dir), section)
-#                    sections.append(section)
-#            except IOError:
-#                # yep that's fine, no metadata.
-#                pass
-#
-#        print("sections:")
-#        print(sections)
-#
-#        return sections
-#
-#
-#    def sections(self):
-#        return self._sections
+    # ---------------------------------------------------------------
+    # ---------------------------------------------------------------

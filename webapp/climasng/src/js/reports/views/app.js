@@ -32,7 +32,7 @@
     tagName: 'form',
     className: '',
     id: 'reportform',
-    speciesDataUrl: "" + location.protocol + "//" + location.host + "/speciesdata",
+    dataUrl: "" + location.protocol + "//" + location.host + "/data",
     rasterApiUrl: "" + location.protocol + "//localhost:10600/api/raster/1/wms_data_url",
     trackSplitter: false,
     trackPeriod: 100,
@@ -48,7 +48,8 @@
       _.bindAll.apply(_, [this].concat(_.functions(this)));
       this.fetchReportSections();
       this.fetchRegions();
-      return this.fetchYears();
+      this.fetchYears();
+      return this.updateSummary();
     },
     render: function() {
       debug('AppView.render');
@@ -72,7 +73,7 @@
     fetchReportSections: function() {
       var fetch;
       debug('AppView.fetchReportSections');
-      fetch = $.Deferred();
+      fetch = $.ajax(this.dataUrl + '/reportsections');
       fetch.done((function(_this) {
         return function(data) {
           var sectionselect;
@@ -82,180 +83,11 @@
           return _this.buildReportSectionList(_this.possibleSections, sectionselect);
         };
       })(this));
-      setTimeout(function() {
-        return fetch.resolve({
-          sections: [
-            {
-              id: 'intro',
-              name: 'Introduction',
-              description: 'title, credits, and introductory paragraphs.',
-              presence: 'required',
-              sections: []
-            }, {
-              id: 'climatereview',
-              name: 'Climate Review',
-              description: 'a description of the region\'s current and projected climate.',
-              presence: 'optional',
-              sections: [
-                {
-                  id: 'temperature',
-                  name: 'Temperature',
-                  description: 'current and projected temperature.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'rainfall',
-                  name: 'Rainfall',
-                  description: 'current and projected precipitation.',
-                  presence: 'optional',
-                  sections: []
-                }
-              ]
-            }, {
-              id: 'biodiversity',
-              name: 'Biodiversity Review',
-              description: 'a description of the region\'s current and projected biodiversity.',
-              presence: 'optional',
-              sections: [
-                {
-                  id: 'overall',
-                  name: 'Overall',
-                  description: 'current and projected biodiversity over all modelled species.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'mammals',
-                  name: 'Mammals',
-                  description: 'current and projected biodiversity over mammal species.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'amphibians',
-                  name: 'Amphibians',
-                  description: 'current and projected biodiversity over amphibian species.',
-                  presence: 'optional',
-                  sections: [
-                    {
-                      id: 'allamphibians',
-                      name: 'All',
-                      description: 'current and projected biodiversity over all amphibian species.',
-                      presence: 'optional',
-                      sections: []
-                    }, {
-                      id: 'streamfrogs',
-                      name: 'Stream frogs',
-                      description: 'current and projected biodiversity over stream frogs.',
-                      presence: 'optional',
-                      sections: []
-                    }
-                  ]
-                }, {
-                  id: 'reptiles',
-                  name: 'Reptiles',
-                  description: 'current and projected biodiversity over reptile species.',
-                  presence: 'optional',
-                  sections: [
-                    {
-                      id: 'allreptiles',
-                      name: 'All',
-                      description: 'current and projected biodiversity over all reptile species.',
-                      presence: 'optional',
-                      sections: []
-                    }, {
-                      id: 'turtles',
-                      name: 'Turtles',
-                      description: 'current and projected biodiversity over turtles.',
-                      presence: 'optional',
-                      sections: []
-                    }
-                  ]
-                }, {
-                  id: 'birds',
-                  name: 'Birds',
-                  description: 'current and projected biodiversity over bird species.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'freshwaterfish',
-                  name: 'Freshwater fish',
-                  description: 'current and projected biodiversity over freshwater fish species.',
-                  presence: 'optional',
-                  sections: []
-                }
-              ]
-            }, {
-              id: 'pests',
-              name: 'Pest Species',
-              description: 'climate suitability and distribution of pest species.',
-              presence: 'optional',
-              sections: [
-                {
-                  id: 'pestplants',
-                  name: 'Pest Plants',
-                  description: 'summary of projections for selected pest plants.',
-                  presence: 'optional',
-                  sections: []
-                }
-              ]
-            }, {
-              id: 'appendixes',
-              name: 'Appendices',
-              description: 'tables and other appendices.',
-              presence: 'required',
-              sections: [
-                {
-                  id: 'observedmammallist',
-                  name: 'Mammals Present',
-                  description: 'list of mammals currently or projected to be present in region.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'observedamphibianslist',
-                  name: 'Amphibians Present',
-                  description: 'list of amphibians currently or projected to be present in region.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'observedstreamfrogslist',
-                  name: 'Steam Frogs Present',
-                  description: 'list of stream frogs currently or projected to be present in region.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'observedreptileslist',
-                  name: 'Reptiles Present',
-                  description: 'list of reptiles currently or projected to be present in region.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'observedturtleslist',
-                  name: 'Turtles Present',
-                  description: 'list of turtles currently or projected to be present in region.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'observedbirdslist',
-                  name: 'Birds Present',
-                  description: 'list of birds currently or projected to be present in region.',
-                  presence: 'optional',
-                  sections: []
-                }, {
-                  id: 'science',
-                  name: 'Science',
-                  description: 'description of the climate and species distribution modelling used to generate the data in the report.',
-                  presence: 'required',
-                  sections: []
-                }
-              ]
-            }
-          ]
-        });
-      }, 500 + (500 * Math.random()));
       return fetch.promise();
     },
     buildReportSectionList: function(data, wrapper) {
       debug('AppView.buildReportSectionList');
-      return $.each(data, (function(_this) {
+      $.each(data, (function(_this) {
         return function(index, item) {
           var selectorRow, subsections;
           selectorRow = $(AppView.templates.sectionSelector(item));
@@ -267,6 +99,7 @@
           }
         };
       })(this));
+      return this.updateSummary();
     },
     updateSectionSelection: function(event) {
       debug('AppView.updateSectionSelection');
@@ -277,7 +110,7 @@
       $.each(sectionList, (function(_this) {
         return function(index, item) {
           var selectionControl, selector, _ref;
-          selector = _this.$("#section-" + item.id);
+          selector = _this.$("#section-" + (item.id.replace(/\./g, '\\.')));
           selectionControl = selector.find('input');
           if (selectionControl.prop('checked')) {
             selector.removeClass('unselected');
@@ -481,14 +314,6 @@
                 }
               ]
             }, {
-              id: 'ibra',
-              name: 'IBRA bioregion',
-              regions: []
-            }, {
-              id: 'park',
-              name: 'Parks, reserves',
-              regions: []
-            }, {
               id: 'state',
               name: 'State, territory',
               regions: [
@@ -530,7 +355,7 @@
       this.regions = data.regiontypes;
       regionselect = this.$('.regionselect');
       regionselect.empty().removeClass('loading');
-      return $.each(this.regions, (function(_this) {
+      $.each(this.regions, (function(_this) {
         return function(index, regionType) {
           var reg, regionTypeRow;
           regionType.optionList = [
@@ -549,6 +374,7 @@
           return regionselect.append(regionTypeRow);
         };
       })(this));
+      return this.updateSummary();
     },
     updateRegionSelection: function(event) {
       var selectedType;
@@ -562,7 +388,7 @@
             selector.addClass('typeselected');
             _this.selectedRegionType = regionType.id;
             _this.selectedRegion = $(selector.find('select')).val();
-            if (_this.selectedRegion === null) {
+            if (_this.selectedRegion === '') {
               return selector.removeClass('regionselected');
             } else {
               selector.addClass('regionselected');
@@ -599,13 +425,14 @@
       this.years = data.years;
       yearselect = this.$('.yearselect');
       yearselect.empty().removeClass('loading');
-      return $.each(this.years, (function(_this) {
+      $.each(this.years, (function(_this) {
         return function(index, year) {
           return yearselect.append(AppView.templates.yearSelector({
             year: year
           }));
         };
       })(this));
+      return this.updateSummary();
     },
     updateYearSelection: function(event) {
       debug('AppView.updateYearSelection');
@@ -696,7 +523,11 @@
         year: this.selectedYear,
         content: content
       };
-      return this.$('.reviewblock').html(AppView.templates.reviewBlock(summary));
+      debug(contentList);
+      debug(summary);
+      this.$('.reviewblock').html(AppView.templates.reviewBlock(summary));
+      this.$('.reviewblock').toggleClass('regionselected', this.selectedRegionInfo !== void 0);
+      return this.$('.reviewblock').toggleClass('yearselected', this.selectedYear !== void 0);
     }
   }, {
     templates: {

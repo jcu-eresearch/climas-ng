@@ -3,7 +3,7 @@
 
 @background: #2d4048;
 @headerbackground: #242732;
-@bodybackground: lighten(#efe6c5, 2%);
+@bodybackground: lighten(#efe6c5, 5%);
 
 // go get Lato for much prettiness
 @import (less) url(http://fonts.googleapis.com/css?family=Lato:300,400,900,400italic);
@@ -29,6 +29,21 @@ a {
     text-decoration: none;
     &:hover { text-decoration: underline; }
 }
+
+ // form stuff
+input, select, option, button {
+    font-size: 90%;
+    font-family: inherit;
+    padding: 0.15em 0.5em;
+}
+
+select, button {
+    background-color: rgba(255,255,255, 0.33);
+    border: 1px outset fadeout(@bodybackground, 50%);
+    border-radius: 3px;
+    &:hover { background-color: rgba(255,255,255, 0.66); }
+}
+
 
 @sidepad: 4%;
 // innersidepad is the size of sidepad, if you've been narrowed by the sidepad.
