@@ -548,11 +548,6 @@ AppView = Backbone.View.extend {
     """
     # ---------------------------------------------------------------
     leftForm: _.template """
-        <fieldset class="blank">
-            <button type="button" class="btn-change">hide settings</button>
-            <button type="button" class="btn-compare">show right map</button>
-            <button type="button" class="btn-copy rtl">copy right map &laquo;</button>
-        </fieldset>
         <fieldset>
             <legend>time point</legend>
             <select class="left" id="leftmapyear">
@@ -580,14 +575,14 @@ AppView = Backbone.View.extend {
                 <option value="90th">90th percentile</option>
             </select>
         </fieldset>
+        <fieldset class="blank">
+            <button type="button" class="btn-change">hide settings</button>
+            <button type="button" class="btn-compare">show right map</button>
+            <button type="button" class="btn-copy rtl">copy right map &laquo;</button>
+        </fieldset>
     """
     # ---------------------------------------------------------------
     rightForm: _.template """
-        <fieldset class="blank">
-            <button type="button" class="btn-change">hide settings</button>
-            <button type="button" class="btn-compare">hide right map</button>
-            <button type="button" class="btn-copy ltr">&raquo; copy left map</button>
-        </fieldset>
         <fieldset>
             <legend>time point</legend>
             <select class="left" id="rightmapyear">
@@ -614,6 +609,11 @@ AppView = Backbone.View.extend {
                 <option value="all" selected="selected">50th percentile</option>
                 <option value="90th">90th percentile</option>
             </select>
+        </fieldset>
+        <fieldset class="blank">
+            <button type="button" class="btn-change">hide settings</button>
+            <button type="button" class="btn-compare">hide right map</button>
+            <button type="button" class="btn-copy ltr">&raquo; copy left map</button>
         </fieldset>
     """
     # ---------------------------------------------------------------
