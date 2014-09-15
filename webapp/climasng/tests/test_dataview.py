@@ -16,7 +16,7 @@ class TestDataView(ClimasTestCase):
         # pretend we're asking for the demo_species data
         req = testing.DummyRequest()
         req.matchdict = {
-            'data_name': 'demo_species'
+            'data_name': 'test_fixture_species'
         }
         view = DataView(req)
         info = view()
