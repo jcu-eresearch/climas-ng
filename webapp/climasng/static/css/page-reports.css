@@ -643,25 +643,25 @@ textarea {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v10/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v10/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v10/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: italic;
   font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v10/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
 }
 body {
   padding: 0;
@@ -687,6 +687,24 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+input,
+select,
+option,
+button {
+  font-size: 90%;
+  font-family: inherit;
+  padding: 0.15em 0.5em;
+}
+select,
+button {
+  background-color: rgba(255, 255, 255, 0.33);
+  border: 1px outset rgba(245, 239, 217, 0.5);
+  border-radius: 3px;
+}
+select:hover,
+button:hover {
+  background-color: rgba(255, 255, 255, 0.66);
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {
@@ -763,7 +781,7 @@ header.page h1 {
   text-shadow: 2px 2px 5px #000;
 }
 header.page p {
-  color: #faf7ed;
+  color: #fdfcf9;
   float: left;
   padding: 0 0 0 4%;
   margin: 0;
@@ -856,7 +874,7 @@ nav .main.menu > li.current a {
   opacity: 1;
 }
 nav .main.menu > li > a {
-  color: #f1e9cd;
+  color: #f5efd9;
   text-shadow: 0 1px 0 #2e3240, 0 -1px 0 #1e212a;
   opacity: 0.5;
   filter: alpha(opacity=50);
@@ -890,7 +908,7 @@ nav ul li ul > li {
 }
 nav ul li ul > li.current,
 nav ul li ul > li:hover {
-  background: #f1e9cd;
+  background: #f5efd9;
 }
 /* main content - - - - - - - - - - - - - - - - */
 .maincontent {
@@ -902,7 +920,7 @@ nav ul li ul > li:hover {
   overflow-y: scroll;
   margin: 0 4%;
   padding: 3em 4%;
-  background: #f1e9cd;
+  background: #f5efd9;
   line-height: 1.6;
 }
 .maincontent .textcolumn {
@@ -977,7 +995,7 @@ div.mspp-panel {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: #f1e9cd;
+  background: #f5efd9;
   margin: 0;
   padding: 0;
   line-height: 1.4;
@@ -1129,15 +1147,16 @@ body {
   margin: 0 auto;
 }
 #reportform .reviewblock {
+  font-size: 90%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 1em 1em 0.25em;
+  padding: 1em 1.33em 0.25em;
   margin-top: 3em;
   position: fixed;
   right: 8%;
   top: 120px;
-  width: 22em;
+  width: 20em;
   background: rgba(0, 0, 0, 0.05);
 }
 #reportform .reviewblock h1 {
@@ -1170,25 +1189,74 @@ body {
   padding: 0.33em 2em;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  background: #fff1bf;
-  background: -webkit-gradient(linear, left top, left bottom, from(#fffae8), to(#ffe996));
-  background: -webkit-linear-gradient(top, #fffae8, #ffe996);
-  background: linear-gradient(to bottom, #fffae8, #ffe996);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffae8', endColorstr='#ffe996');
+  background: #fff5cf;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fffdf7), to(#ffeca6));
+  background: -webkit-linear-gradient(top, #fffdf7, #ffeca6);
+  background: linear-gradient(to bottom, #fffdf7, #ffeca6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffdf7', endColorstr='#ffeca6');
 }
 #reportform .reviewblock button:hover {
-  background: #fff7d9;
-  background: -webkit-gradient(linear, left top, left bottom, from(#fffefc), to(#ffe482));
-  background: -webkit-linear-gradient(top, #fffefc, #ffe482);
-  background: linear-gradient(to bottom, #fffefc, #ffe482);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffefc', endColorstr='#ffe482');
+  background: #fffae8;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffe791));
+  background: -webkit-linear-gradient(top, #ffffff, #ffe791);
+  background: linear-gradient(to bottom, #ffffff, #ffe791);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffe791');
 }
-#reportform .reviewblock:empty {
-  display: none;
+#reportform .reviewblock:after {
+  content: 'select year and region\a to see a report summary';
+  white-space: pre;
+  color: #000;
+  text-shadow: none;
+  padding: 1.2em 1em;
+  line-height: 1.2em;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: -2em;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#reportform .reviewblock p,
+#reportform .reviewblock ul {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  color: transparent;
+  opacity: 0.33;
+  text-shadow: 0 0 6px #000000, 0 0 12px #000000;
+}
+#reportform .reviewblock button {
+  visibility: hidden;
+}
+#reportform .reviewblock.yearselected p,
+#reportform .reviewblock.regionselected p,
+#reportform .reviewblock.yearselected ul,
+#reportform .reviewblock.regionselected ul {
+  color: transparent;
+  text-shadow: 0 0 6px #000000, 0 0 12px rgba(0, 0, 0, 0);
+  opacity: 0.66;
+}
+#reportform .reviewblock.yearselected:after,
+#reportform .reviewblock.regionselected:after {
+  opacity: 0.66;
+}
+#reportform .reviewblock.yearselected.regionselected p,
+#reportform .reviewblock.yearselected.regionselected ul {
+  color: #000;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0), 0 0 12px rgba(0, 0, 0, 0);
+  opacity: 1;
+}
+#reportform .reviewblock.yearselected.regionselected:after {
+  opacity: 0;
+}
+#reportform .reviewblock.yearselected.regionselected button {
+  visibility: visible;
 }
 #reportform .formblock {
-  padding-right: 25em;
-  min-width: 30em;
+  padding-right: 23em;
+  min-width: 26em;
 }
 #reportform .formblock h1 {
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0.33)), to(rgba(255, 255, 255, 0)));
@@ -1212,9 +1280,9 @@ body {
   margin-bottom: 3em;
 }
 #reportform .formblock .select.yearselect {
-  -webkit-column-width: 12em;
-  -moz-column-width: 12em;
-  column-width: 12em;
+  -webkit-column-width: 8em;
+  -moz-column-width: 8em;
+  column-width: 8em;
 }
 #reportform .formblock .regiontypeselector {
   margin: -1.33em 0;
@@ -1232,10 +1300,11 @@ body {
   border-radius: 2px;
 }
 #reportform .formblock .regiontypeselector .name:hover {
-  background: #f7f2e1;
+  background: #faf7ed;
 }
 #reportform .formblock .regiontypeselector .name input {
   margin: 0 0.5em 0 0;
+  cursor: pointer;
 }
 #reportform .formblock .regiontypeselector .regionselectorwrapper {
   position: absolute;
@@ -1245,10 +1314,10 @@ body {
   height: 2em;
   line-height: 2em;
   width: 66%;
-  border: 1px solid #ece1b9;
+  border: 1px solid #efe6c5;
   border-radius: 2px;
   overflow: hidden;
-  background-color: rgba(247, 242, 225, 0.67);
+  background-color: rgba(250, 247, 237, 0.67);
 }
 #reportform .formblock .regiontypeselector .regionselectorwrapper:after {
   color: #999;
@@ -1305,7 +1374,7 @@ body {
   border-radius: 2px;
 }
 #reportform .formblock .yearrow .name:hover {
-  background: #f7f2e1;
+  background: #faf7ed;
 }
 #reportform .formblock .yearrow .name input {
   margin: 0 0.5em 0 0;
@@ -1323,11 +1392,11 @@ body {
   background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
 }
 #reportform .formblock .sectionselector .name {
-  background: #f1e9cd;
+  background: #f5efd9;
   float: left;
   font-weight: 900;
   padding: 0.5em 0.5em 0.25em;
-  margin: 0 0.33em 0 -4.5em;
+  margin: 0 0.33em 0 -2.5em;
   cursor: pointer;
   border-radius: 2px;
 }
@@ -1335,7 +1404,7 @@ body {
   content: ': ';
 }
 #reportform .formblock .sectionselector .name:hover {
-  background: #f7f2e1;
+  background: #faf7ed;
 }
 #reportform .formblock .sectionselector .name input {
   margin: 0 0.5em 0 0;
@@ -1345,7 +1414,7 @@ body {
   margin: 0 0 0 3em;
 }
 #reportform .formblock .sectionselector .subsections {
-  margin-left: 2em;
+  margin-left: 1em;
   padding: 0 0 1em 1em;
   overflow: hidden;
   -webkit-transition: all 1s;
@@ -1357,26 +1426,26 @@ body {
 }
 #reportform .formblock .sectionselector.hassubsections {
   background-image: none;
-  border-left: 1px solid #e6d8a5;
+  border-left: 1px solid #e9ddb1;
 }
 #reportform .formblock .sectionselector.hassubsections > .name {
-  border-bottom: 1px solid #e6d8a5;
+  border-bottom: 1px solid #e9ddb1;
 }
 #reportform .formblock .sectionselector.hassubsections:after {
   display: block;
   content: ' ';
   height: 1px;
   width: 1em;
-  border-bottom: 1px solid #e6d8a5;
+  border-bottom: 1px solid #e9ddb1;
 }
 #reportform .formblock .sectionselector {
-  margin: 2em 0 2em 4em;
+  margin: 2em 0 2em 2em;
 }
 #reportform .formblock .subsections .sectionselector {
-  margin: 1em 0 1em 4em;
+  margin: 1em 0 1em 2em;
 }
 #reportform .formblock .subsections .subsections .sectionselector {
-  margin: 0.5em 0 0.5em 4em;
+  margin: 0.5em 0 0.5em 2em;
 }
 #reportform .formblock .sectionselector.unselected {
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(200, 0, 0, 0.1)), to(rgba(255, 255, 255, 0)));

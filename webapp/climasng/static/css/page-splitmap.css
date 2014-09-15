@@ -643,25 +643,25 @@ textarea {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v10/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v10/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v10/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: italic;
   font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v10/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
 }
 body {
   padding: 0;
@@ -687,6 +687,24 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+input,
+select,
+option,
+button {
+  font-size: 90%;
+  font-family: inherit;
+  padding: 0.15em 0.5em;
+}
+select,
+button {
+  background-color: rgba(255, 255, 255, 0.33);
+  border: 1px outset rgba(245, 239, 217, 0.5);
+  border-radius: 3px;
+}
+select:hover,
+button:hover {
+  background-color: rgba(255, 255, 255, 0.66);
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {
@@ -763,7 +781,7 @@ header.page h1 {
   text-shadow: 2px 2px 5px #000;
 }
 header.page p {
-  color: #faf7ed;
+  color: #fdfcf9;
   float: left;
   padding: 0 0 0 4%;
   margin: 0;
@@ -856,7 +874,7 @@ nav .main.menu > li.current a {
   opacity: 1;
 }
 nav .main.menu > li > a {
-  color: #f1e9cd;
+  color: #f5efd9;
   text-shadow: 0 1px 0 #2e3240, 0 -1px 0 #1e212a;
   opacity: 0.5;
   filter: alpha(opacity=50);
@@ -890,7 +908,7 @@ nav ul li ul > li {
 }
 nav ul li ul > li.current,
 nav ul li ul > li:hover {
-  background: #f1e9cd;
+  background: #f5efd9;
 }
 /* main content - - - - - - - - - - - - - - - - */
 .maincontent {
@@ -902,7 +920,7 @@ nav ul li ul > li:hover {
   overflow-y: scroll;
   margin: 0 4%;
   padding: 3em 4%;
-  background: #f1e9cd;
+  background: #f5efd9;
   line-height: 1.6;
 }
 .maincontent .textcolumn {
@@ -977,7 +995,7 @@ div.mspp-panel {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: #f1e9cd;
+  background: #f5efd9;
   margin: 0;
   padding: 0;
   line-height: 1.4;
@@ -1149,11 +1167,14 @@ body {
 .splitmap .tag > div {
   position: absolute;
   top: 0.5em;
-  left: 4%;
   height: 3em;
+  left: 4%;
   right: 4%;
+  left: 0;
+  right: 0;
   -webkit-transition: 0.25s;
   transition: 0.25s;
+  padding: 0 1em;
 }
 .splitmap .tag > div > span {
   white-space: no-wrap;
@@ -1178,7 +1199,7 @@ body {
   font-size: 125%;
   height: 100%;
   padding: 0 0.5em;
-  width: 26%;
+  width: 46%;
   margin: 0;
 }
 .splitmap .tag > div.edit {
@@ -1291,11 +1312,6 @@ body {
   display: block;
   width: 100%;
   text-align: center;
-  font-size: inherit;
-  font-family: inherit;
-}
-.splitmap .side.form button {
-  padding: 0.25em 0;
 }
 .splitmap .side.form label {
   text-align: left;
@@ -1308,31 +1324,57 @@ body {
   font-variant: small-caps;
 }
 .splitmap .side.form fieldset {
-  margin-top: 2em;
+  position: relative;
+  margin-top: 1.66em;
+  padding-top: 1.66em;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.33)), to(rgba(255, 255, 255, 0.15)));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.33), rgba(255, 255, 255, 0.15));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.33), rgba(255, 255, 255, 0.15));
+  border-radius: 4px;
+}
+.splitmap .side.form fieldset:first-of-type {
+  margin-top: 0;
+}
+.splitmap .side.form fieldset.blank {
+  background-image: none;
+  padding-top: 0;
 }
 .splitmap .side.form legend {
-  background-image: -webkit-radial-gradient(ellipse 49% 99% at center bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.25) 66%, rgba(255, 255, 255, 0) 100%);
-  background-image: radial-gradient(ellipse 49% 99% at center bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.25) 66%, rgba(255, 255, 255, 0) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.66);
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  background-image: -webkit-radial-gradient(ellipse 49% 99% at center bottom, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+  background-image: radial-gradient(ellipse 49% 99% at center bottom, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
   letter-spacing: 0.33em;
   text-align: center;
-  line-height: 0.89;
   text-transform: uppercase;
-  padding: 1em 0.1em 0;
-  margin: 0 0 0.5em;
+  text-shadow: -1px 0 0.5px #fde384, 1px 0 0.5px #ffffff, 1px 0 0.5px #ffffff;
+  padding: 0.15em 0;
   font-size: 66%;
 }
 .splitmap .side.form p {
   margin: 0 0 1em;
 }
-.splitmap .side.form .btn-copy-rtl {
+.splitmap .side.form .btn-change,
+.splitmap .side.form .btn-compare {
+  width: 48%;
+  height: 2.66em;
+  float: left;
+  line-height: 1.0;
+}
+.splitmap .side.form .btn-compare {
+  float: right;
+}
+.splitmap .side.form .btn-copy {
+  clear: both;
+  margin-top: 3.16em;
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 0.33s;
   transition: all 0.33s;
 }
-.splitmap.split .side.form .btn-copy-rtl {
+.splitmap.split .side.form .btn-copy {
   visibility: visible;
   opacity: 1;
 }

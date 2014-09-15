@@ -2,25 +2,25 @@
   font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v10/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v10/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v10/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: italic;
   font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(http://themes.googleusercontent.com/static/fonts/lato/v7/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v10/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
 }
 body {
   padding: 0;
@@ -46,6 +46,24 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+input,
+select,
+option,
+button {
+  font-size: 90%;
+  font-family: inherit;
+  padding: 0.15em 0.5em;
+}
+select,
+button {
+  background-color: rgba(255, 255, 255, 0.33);
+  border: 1px outset rgba(245, 239, 217, 0.5);
+  border-radius: 3px;
+}
+select:hover,
+button:hover {
+  background-color: rgba(255, 255, 255, 0.66);
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {
@@ -122,7 +140,7 @@ header.page h1 {
   text-shadow: 2px 2px 5px #000;
 }
 header.page p {
-  color: #faf7ed;
+  color: #fdfcf9;
   float: left;
   padding: 0 0 0 4%;
   margin: 0;
@@ -215,7 +233,7 @@ nav .main.menu > li.current a {
   opacity: 1;
 }
 nav .main.menu > li > a {
-  color: #f1e9cd;
+  color: #f5efd9;
   text-shadow: 0 1px 0 #2e3240, 0 -1px 0 #1e212a;
   opacity: 0.5;
   filter: alpha(opacity=50);
@@ -249,7 +267,7 @@ nav ul li ul > li {
 }
 nav ul li ul > li.current,
 nav ul li ul > li:hover {
-  background: #f1e9cd;
+  background: #f5efd9;
 }
 /* main content - - - - - - - - - - - - - - - - */
 .maincontent {
@@ -261,7 +279,7 @@ nav ul li ul > li:hover {
   overflow-y: scroll;
   margin: 0 4%;
   padding: 3em 4%;
-  background: #f1e9cd;
+  background: #f5efd9;
   line-height: 1.6;
 }
 .maincontent .textcolumn {
@@ -336,7 +354,7 @@ div.mspp-panel {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: #f1e9cd;
+  background: #f5efd9;
   margin: 0;
   padding: 0;
   line-height: 1.4;
