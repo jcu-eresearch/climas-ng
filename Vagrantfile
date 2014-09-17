@@ -207,36 +207,42 @@ SCRIPT_TERMINATOR
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # Vagrant configuration happens here.
-  config.vm.box     = "centos-65-x64-vbox4.3.6"
-  config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box"
+    # Vagrant configuration happens here.
+    config.vm.box     = "centos-65-x64-vbox4.3.6"
+    config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box"
 
-  # Disable automatic box update checking?  Not recommended.
-  # config.vm.box_check_update = false
+    # Disable automatic box update checking?  Not recommended.
+    # config.vm.box_check_update = false
 
-  # Port forwarding
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
-  config.vm.network "forwarded_port", guest: 10600, host: 10600
+    # Port forwarding
+    config.vm.network "forwarded_port", guest: 8080, host: 8080
+    config.vm.network "forwarded_port", guest: 10600, host: 10600
 
-  # Agent forwarding on SSH?
-  # config.ssh.forward_agent = true
+    # Agent forwarding on SSH?
+    # config.ssh.forward_agent = true
 
-  # Share additional folders
-  config.vm.synced_folder "./webapp", "/var/climaswebapp"
-  config.vm.synced_folder "../climasng-data", "/var/climaswebapp-testdata"
+    # Share additional folders
+    config.vm.synced_folder "./webapp", "/var/climaswebapp"
+    config.vm.synced_folder "../climasng-data", "/var/climaswebapp-testdata"
+    config.vm.synced_folder "/Volumes/DanielsDisk/work/CliMAS-NG/datasubset", "/var/climaswebapp-subset"
 
-  # Provider-specific config
-  # Example for VirtualBox:
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
+    # Provider-specific config
+    # Example for VirtualBox:
+    # config.vm.provider "virtualbox" do |vb|
+    #   # Don't boot with headless mode
+    #   vb.gui = true
+    #
+    #   # Use VBoxManage to customize the VM. For example to change memory:
+    #   vb.customize ["modifyvm", :id, "--memory", "1024"]
+    # end
+    config.vm.provider :virtualbox do |vb|
+        # vb.customize ["modifyvm", :id, "--ioapic", "on"]
+        vb.name = "CliMAS NG"
+        vb.cpus = 3
+        vb.memory = 1024
+    end
 
-  # provision the VM via a shell script, provided inline (as a variable, set above)
-  config.vm.provision :shell, :inline => $provisioning_script
+    # provision the VM via a shell script, provided inline (as a variable, set above)
+    config.vm.provision :shell, :inline => $provisioning_script
 
 end
