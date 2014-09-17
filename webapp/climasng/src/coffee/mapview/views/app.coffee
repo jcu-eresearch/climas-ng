@@ -75,6 +75,8 @@ AppView = Backbone.View.extend {
         # more annoying version of bindAll requires this concat stuff
         _.bindAll.apply _, [this].concat _.functions(this)
 
+        @speciesSciNameList = []
+
         # kick off the fetching of the species list
         @speciesInfoFetchProcess = @fetchSpeciesInfo()
 
@@ -117,6 +119,9 @@ AppView = Backbone.View.extend {
 
         @splitLine = @$ '.splitline'
         @splitThumb = @$ '.splitthumb'
+
+        @leftSideUpdate()
+        @rightSideUpdate()
     # ---------------------------------------------------------------
     resolvePlaceholders: (strWithPlaceholders, replacements)->
         ans = strWithPlaceholders
@@ -158,85 +163,70 @@ AppView = Backbone.View.extend {
 
         @leftSideUpdate()
     # ---------------------------------------------------------------
-    leftSideUpdate: ()->
-        debug 'AppView.leftSideUpdate'
+    sideUpdate: (side)->
+        debug 'AppView.sideUpdate (' + side + ')'
 
-        sppName = @$('#leftmapspp').val()
-
-        # bail if that's not a real species
-        if sppName in @speciesSciNameList
-            @$('.btn-copy.rtl').prop 'disabled', false
-        else
-            @$('.btn-copy.rtl').prop 'disabled', true
-            return false
-
-        newLeftInfo = {
-            speciesName: sppName
-            year: @$('#leftmapyear').val()
-            scenario: @$('input[name=leftmapscenario]:checked').val()
-            gcm: @$('#leftmapgcm').val()
+        newInfo = {
+            speciesName: @$('#' + side + 'mapspp').val()
+            year: @$('#' + side + 'mapyear').val()
+            scenario: @$('input[name=' + side + 'mapscenario]:checked').val()
+            gcm: @$('#' + side + 'mapgcm').val()
         }
 
-        # bail if nothing changed
-        return false if @leftInfo and _.isEqual newLeftInfo, @leftInfo
+        # if we're at baseline, disable the future-y things
+        atBaseline = (newInfo.year == 'baseline')
+        @$(
+            'input[name=' + side + 'mapscenario], #' + side + 'mapgcm'
+        ).prop 'disabled', atBaseline
+        # now add a disabled style to the fieldsets holding disabled items
+        @$('fieldset').removeClass 'disabled'
+        @$(
+            'input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled'
+        ).closest('fieldset').addClass 'disabled'
 
-        # save the new setup
-        @leftInfo = newLeftInfo
+        # is it a real species?
+        buttonClass = if side == 'left' then 'ltr' else 'rtl'
+        if newInfo.speciesName in @speciesSciNameList
+            # it's real, let people copy to the other side
+            @$('.btn-copy.' + buttonClass).prop 'disabled', false
+        else
+            # it's not real, disable copy and bail out right now
+            @$('.btn-copy.' + buttonClass).prop 'disabled', true
+            return false
+
+        currInfo = if side == 'left' then @leftInfo else @rightInfo
+        # bail if nothing changed
+        return false if currInfo and _.isEqual newInfo, currInfo
 
         # also bail if they're both same species at baseline
         if (
-            @leftInfo and
-            newLeftInfo.speciesName == @leftInfo.speciesName and
-            newLeftInfo.year == @leftInfo.year and
-            newLeftInfo.year == 'baseline'
+            currInfo and
+            newInfo.speciesName == currInfo.speciesName and
+            newInfo.year == currInfo.year and
+            newInfo.year == 'baseline'
         )
             return false
 
+        # if we got here, something has changed.
+
+        if side is 'left'
+            # save the new setup
+            @leftInfo = newInfo
+        else
+            @rightInfo = newInfo
+
         # apply the changes to the map
-        @addMapLayer 'left'
+        @addMapLayer side
 
         # apply the changes to the tag
-        @addMapTag 'left'
+        @addMapTag side
+
+    # ---------------------------------------------------------------
+    leftSideUpdate: ()->
+        return @sideUpdate 'left'
     # ---------------------------------------------------------------
     rightSideUpdate: ()->
-        debug 'AppView.rightSideUpdate'
-
-        sppName = @$('#rightmapspp').val()
-
-        # bail if that's not a real species
-        if sppName in @speciesSciNameList
-            @$('.btn-copy.ltr').prop 'disabled', false
-        else
-            @$('.btn-copy.ltr').prop 'disabled', true
-            return false
-
-        newRightInfo = {
-            speciesName: sppName
-            year: @$('#rightmapyear').val()
-            scenario: @$('input[name=rightmapscenario]:checked').val()
-            gcm: @$('#rightmapgcm').val()
-        }
-
-        # bail if nothing changed
-        return false if @rightInfo and _.isEqual newRightInfo, @rightInfo
-
-        # also bail if they're both same species at baseline
-        if (
-            @rightInfo and
-            newRightInfo.speciesName == @rightInfo.speciesName and
-            newRightInfo.year == @rightInfo.year and
-            newRightInfo.year == 'baseline'
-        )
-            return false
-
-        # save the new setup
-        @rightInfo = newRightInfo
-
-        # apply the changes to the map
-        @addMapLayer 'right'
-
-        # apply the changes to the tag
-        @addMapTag 'right'
+        return @sideUpdate 'right'
     # ---------------------------------------------------------------
     addMapTag: (side)->
         debug 'AppView.addMapTag'
@@ -266,22 +256,27 @@ AppView = Backbone.View.extend {
         sideInfo = @leftInfo if side == 'left'
         sideInfo = @rightInfo if side == 'right'
 
+        # work out the string that gets to the projection point they want
         futureModelPoint = [
-            sideInfo.scenario
-            sideInfo.gcm
+            '/dispersal/deciles/' + sideInfo.scenario
             sideInfo.year
+            sideInfo.gcm
         ].join '_'
-        futureModelPoint = '1990' if sideInfo.year == 'baseline'
+
+        # if they want current, just get the bioclim current projection
+        futureModelPoint = '/realized/vet.suit.cur' if sideInfo.year == 'baseline'
+
+        # now make that into a URL
         mapData = [
-            @resolvePlaceholders @speciesDataUrl
-            sideInfo.speciesName.replace(' ', '_')
-            'output'
+            @resolvePlaceholders @speciesDataUrl, {
+                sppName: sideInfo.speciesName.replace ' ', '_'
+                sppGroup: @speciesGroups[sideInfo.speciesName]
+            }
             futureModelPoint + '.asc.gz'
         ].join '/'
 
         layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
             DATA_URL: mapData
-            # layers: 'Demo WMS'
             layers: 'DEFAULT'
             format: 'image/png'
             transparent: true
@@ -292,8 +287,6 @@ AppView = Backbone.View.extend {
         layer.on 'loading', ()=> @$el.addClass loadClass
         layer.on 'load', ()=> @$el.removeClass loadClass
 
-        layer.addTo @map
-
         if side == 'left'
             @map.removeLayer @leftLayer if @leftLayer
             @leftLayer = layer
@@ -301,6 +294,8 @@ AppView = Backbone.View.extend {
         if side == 'right'
             @map.removeLayer @rightLayer if @rightLayer
             @rightLayer = layer
+
+        layer.addTo @map
 
         @resizeThings() # re-establish the splitter
 
@@ -343,14 +338,15 @@ AppView = Backbone.View.extend {
         debug 'AppView.fetchSpeciesInfo'
 
         return $.ajax({
-            url: '/speciesdata/species.json',
+            url: '/data/species',
             dataType: 'json'
         }).done (data)=>
             speciesLookupList = []
             speciesSciNameList = []
+            speciesGroups = {}
 
             # in order to avoid making a function in the inner loop,
-            # here's a function returns a function that writes a
+            # here's a function returning a function that writes a
             # common name into the given sciName.  This is partial
             # function application, which is a bit like currying.
             commonNameWriter = (sciName)=>
@@ -361,10 +357,11 @@ AppView = Backbone.View.extend {
                         value: sciName
                     }
 
-            $.each data, (sciName, commonNames)=>
+            $.each data, (sciName, sppInfo)=>
                 speciesSciNameList.push sciName
-                if commonNames
-                    $.each commonNames, commonNameWriter sciName
+                speciesGroups[sciName] = sppInfo.group
+                if sppInfo.commonNames
+                    $.each sppInfo.commonNames, commonNameWriter sciName
                 else
                     speciesLookupList.push {
                         label: sciName
@@ -373,6 +370,7 @@ AppView = Backbone.View.extend {
 
             @speciesLookupList = speciesLookupList
             @speciesSciNameList = speciesSciNameList
+            @speciesGroups = speciesGroups
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
     # form creation
@@ -527,7 +525,7 @@ AppView = Backbone.View.extend {
             <button class="btn-compare">show/hide comparison map</button>
         </div>
         <div class="edit">
-            <input id="leftmapspp" name="leftmapspp" placeholder="&hellip; species or group &hellip;" />
+            <input id="leftmapspp" class="left" name="leftmapspp" placeholder="&hellip; species or group &hellip;" />
             <!--
             <button class="btn-change">hide settings</button>
             <button class="btn-compare">compare +/-</button>
@@ -543,7 +541,7 @@ AppView = Backbone.View.extend {
             <button class="btn-compare">show/hide comparison map</button>
         </div>
         <div class="edit">
-            <input id="rightmapspp" name="rightmapspp" placeholder="&hellip; species or group &hellip;" />
+            <input id="rightmapspp" class="right" name="rightmapspp" placeholder="&hellip; species or group &hellip;" />
         </div>
     """
     # ---------------------------------------------------------------
@@ -565,14 +563,14 @@ AppView = Backbone.View.extend {
         <fieldset>
             <legend>emission scenario</legend>
             <label><span>RCP 4.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> lower emissions</label>
-            <label><span>RCP 8.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85"> business as usual</label>
+            <label><span>RCP 8.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85" checked="checked"> business as usual</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
             <select class="left" id="leftmapgcm">
-                <option value="10th">10th percentile</option>
-                <option value="all" selected="selected">50th percentile</option>
-                <option value="90th">90th percentile</option>
+                <option value="tenth">10th percentile</option>
+                <option value="fiftieth" selected="selected">50th percentile</option>
+                <option value="ninetieth">90th percentile</option>
             </select>
         </fieldset>
         <fieldset class="blank">
@@ -585,7 +583,7 @@ AppView = Backbone.View.extend {
     rightForm: _.template """
         <fieldset>
             <legend>time point</legend>
-            <select class="left" id="rightmapyear">
+            <select class="right" id="rightmapyear">
                 <option value="baseline">current</option>
                 <option>2015</option>
                 <option>2025</option>
@@ -605,9 +603,9 @@ AppView = Backbone.View.extend {
         <fieldset>
             <legend>model summary</legend>
             <select class="right" id="rightmapgcm">
-                <option value="10th">10th percentile</option>
-                <option value="all" selected="selected">50th percentile</option>
-                <option value="90th">90th percentile</option>
+                <option value="tenth">10th percentile</option>
+                <option value="fiftieth" selected="selected">50th percentile</option>
+                <option value="ninetieth">90th percentile</option>
             </select>
         </fieldset>
         <fieldset class="blank">

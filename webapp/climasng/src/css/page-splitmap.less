@@ -215,6 +215,10 @@ body {
             // background-image: radial-gradient(ellipse 49% 99% at center top, rgba(255,255,255, 0.5), rgba(255,255,255, 0.25) 66%, rgba(255,255,255, 0) 100%);
             background-image: linear-gradient(to bottom, rgba(255,255,255, 0.33), rgba(255,255,255, 0.15));
             border-radius: 4px;
+            &.disabled {
+                opacity: 0.33;
+                filter: blur(1px);
+            }
             &:first-of-type { margin-top: 0; }
             &.blank { background-image: none; padding-top: 0; }
         }
@@ -252,10 +256,12 @@ body {
         visibility: hidden;
         opacity: 0;
         transition: all 0.33s;
+        &:disabled { opacity: 0.33; }
     }
     &.split .side.form .btn-copy {
         visibility: visible;
         opacity: 1;
+        &:disabled { opacity: 0.33; }
     }
 
     #mapwrapper {

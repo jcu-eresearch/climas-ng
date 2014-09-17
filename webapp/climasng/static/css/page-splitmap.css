@@ -1332,6 +1332,11 @@ body {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.33), rgba(255, 255, 255, 0.15));
   border-radius: 4px;
 }
+.splitmap .side.form fieldset.disabled {
+  opacity: 0.33;
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
+}
 .splitmap .side.form fieldset:first-of-type {
   margin-top: 0;
 }
@@ -1370,13 +1375,18 @@ body {
   clear: both;
   margin-top: 3.16em;
   visibility: hidden;
-  opacity: 0;
   -webkit-transition: all 0.33s;
   transition: all 0.33s;
+}
+.splitmap .side.form .btn-copy:disabled {
+  opacity: 0.33;
 }
 .splitmap.split .side.form .btn-copy {
   visibility: visible;
   opacity: 1;
+}
+.splitmap.split .side.form .btn-copy:disabled {
+  opacity: 0.33;
 }
 .splitmap #mapwrapper {
   position: absolute;

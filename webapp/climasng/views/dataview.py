@@ -6,6 +6,7 @@ from pyramid.view import view_config
 import pyramid.httpexceptions as httpexceptions
 
 from climasng.docassembly.sectiondata import SectionData
+from climasng.data import speciesdata
 
 # -------------------------------------------------------------------
 
@@ -19,13 +20,21 @@ class DataView(object):
 
         data_name = self.request.matchdict['data_name']
 
+        data_path = os.path.join(os.path.dirname(__file__), '..', 'data')
+
         # if they wanted the report section list, get that
         if data_name == 'reportsections':
             root_section = SectionData(self.request.registry.settings['climas.report_section_path'])
             return Response(body=root_section.toJson(), content_type='application/json')
 
+        elif data_name == 'species':
+            species_file = os.path.join(data_path, data_name + '.json')
+            if not os.path.isfile(species_file):
+                # species.json doesn't exist, create it
+                speciesdata.createSpeciesJson(self.request.registry.settings['climas.species_data_path'])
+
         return FileResponse(
-            os.path.join(os.path.dirname(__file__), '..', 'data', self.request.matchdict['data_name'] + '.json'),
+            os.path.join(data_path, data_name + '.json'),
             request=self.request,
             content_type='application/json'
         )

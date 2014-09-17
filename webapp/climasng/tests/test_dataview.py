@@ -32,6 +32,3 @@ class TestDataView(ClimasTestCase):
 
         view_answer = json.loads(info.body)
         self.assertEqual(view_answer, correct_answer)
-
-
-
