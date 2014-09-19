@@ -29,7 +29,7 @@ def main(global_config, **settings):
     # now get all the table reflection done
     Base.prepare(engine)
 
-    config.add_static_view('static', 'static', cache_max_age=3600)
+    config.add_static_view('static', 'climasng:static/', cache_max_age=3600)
 
     config.add_route('test', '/test/')
 

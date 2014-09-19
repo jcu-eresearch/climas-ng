@@ -118,9 +118,9 @@ chown vagrant:vagrant /var/bccvlviz
 sudo -u vagrant git clone https://github.com/jcu-eresearch/BCCVL_Visualiser.git /var/bccvlviz
 pushd /var/bccvlviz/BCCVL_Visualiser
 sudo -u vagrant /usr/local/bin/virtualenv-2.7 .
-sudo -u vagrant ./bin/pip install setuptools --upgrade
-sudo -u vagrant ./bin/pip install numpy --upgrade
-sudo -u vagrant ./bin/python ./bootstrap.py
+sudo -u vagrant ./bin/pip2.7 install setuptools --upgrade
+sudo -u vagrant ./bin/pip2.7 install numpy==1.8.2
+sudo -u vagrant ./bin/python2.7 ./bootstrap.py
 sudo -u vagrant ./bin/buildout
 popd
 

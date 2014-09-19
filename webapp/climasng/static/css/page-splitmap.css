@@ -1375,6 +1375,7 @@ body {
   clear: both;
   margin-top: 3.16em;
   visibility: hidden;
+  opacity: 0;
   -webkit-transition: all 0.33s;
   transition: all 0.33s;
 }
