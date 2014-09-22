@@ -5,7 +5,8 @@
 		CliMAS Next Generation
 	</title>
 	<meta content="width=device-width" name="viewport" />
-	<link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
+    <link rel="author" href="static/humans.txt" />
+    <link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
 	<link href="${request.static_path('climasng:static/css/page-textual.css')}" rel="stylesheet" />
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,400italic' rel='stylesheet' type='text/css' /> -->
 </head>

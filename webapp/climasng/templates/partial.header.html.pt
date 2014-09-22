@@ -1,4 +1,4 @@
-<div class="disclaimer" onclick="$(this).toggleClass('show');">
+<!-- <div class="disclaimer" onclick="$(this).toggleClass('show');">
 	<h1>This Is A Demonstration Site Only<br><small>(click to hide)</small></h1>
 	<p>
 		This is a demonstration site made to exercise features of
@@ -13,6 +13,7 @@
 	</p>
 	<h1 class="bottom">Demonstration Only<br><small>(click for info)</small></h1>
 </div>
+-->
 <header class="page clearfix">
 	<h1>CliMAS</h1>
 	<a href="http://tropicaldatahub.org/">
