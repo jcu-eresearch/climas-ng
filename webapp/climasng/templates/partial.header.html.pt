@@ -55,14 +55,6 @@
 				<a href="${request.route_path('reports')}">Create Reports</a>
 			</li>
 
-			<!-- reports  - - - - - - - - - - - - - - - - - - - - -->
-			<li tal:condition="request.matched_route.name == 'oldreports'" class="current">
-				<a>(old reports)</a>
-			</li>
-			<li tal:condition="not:request.matched_route.name == 'oldreports'">
-				<a href="${request.route_path('oldreports')}">(old reports)</a>
-			</li>
-
 		</ul>
 	</nav>
 </header>
