@@ -33,6 +33,7 @@
     className: 'splitmap showforms',
     id: 'splitmap',
     speciesDataUrl: window.mapConfig.speciesDataUrl,
+    biodivDataUrl: window.mapConfig.biodivDataUrl,
     rasterApiUrl: window.mapConfig.rasterApiUrl,
     trackSplitter: false,
     trackPeriod: 100,
@@ -59,8 +60,11 @@
     initialize: function() {
       debug('AppView.initialize');
       _.bindAll.apply(_, [this].concat(_.functions(this)));
+      this.namesList = [];
       this.speciesSciNameList = [];
-      return this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
+      this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
+      this.biodivList = [];
+      return this.biodivInfoFetchProcess = this.fetchBiodivInfo();
     },
     render: function() {
       debug('AppView.render');
@@ -149,7 +153,7 @@
       this.$('fieldset').removeClass('disabled');
       this.$('input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled').closest('fieldset').addClass('disabled');
       buttonClass = side === 'left' ? 'ltr' : 'rtl';
-      if (_ref = newInfo.speciesName, __indexOf.call(this.speciesSciNameList, _ref) >= 0) {
+      if (_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) {
         this.$('.btn-copy.' + buttonClass).prop('disabled', false);
       } else {
         this.$('.btn-copy.' + buttonClass).prop('disabled', true);
@@ -201,7 +205,7 @@
       }
     },
     addMapLayer: function(side) {
-      var futureModelPoint, layer, loadClass, mapData, sideInfo;
+      var futureModelPoint, isBiodiversity, layer, loadClass, mapData, sideInfo, _ref;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -209,16 +213,31 @@
       if (side === 'right') {
         sideInfo = this.rightInfo;
       }
-      futureModelPoint = ['/dispersal/deciles/' + sideInfo.scenario, sideInfo.year, sideInfo.gcm].join('_');
-      if (sideInfo.year === 'baseline') {
-        futureModelPoint = '/realized/vet.suit.cur';
+      isBiodiversity = (_ref = sideInfo.speciesName, __indexOf.call(this.biodivList, _ref) >= 0);
+      futureModelPoint = '';
+      mapData = {};
+      if (isBiodiversity) {
+        futureModelPoint = ['/biodiversity/deciles/biodiversity', sideInfo.scenario, sideInfo.year, sideInfo.gcm].join('_');
+        if (sideInfo.year === 'baseline') {
+          futureModelPoint = '/biodiversity/biodiversity_current';
+        }
+        mapData = [
+          this.resolvePlaceholders(this.biodivDataUrl, {
+            sppGroup: sideInfo.speciesName
+          }), futureModelPoint + '.asc.gz'
+        ].join('/');
+      } else {
+        futureModelPoint = ['/dispersal/deciles/' + sideInfo.scenario, sideInfo.year, sideInfo.gcm].join('_');
+        if (sideInfo.year === 'baseline') {
+          futureModelPoint = '/realized/vet.suit.cur';
+        }
+        mapData = [
+          this.resolvePlaceholders(this.speciesDataUrl, {
+            sppName: sideInfo.speciesName.replace(' ', '_'),
+            sppGroup: this.speciesGroups[sideInfo.speciesName]
+          }), futureModelPoint + '.asc.gz'
+        ].join('/');
       }
-      mapData = [
-        this.resolvePlaceholders(this.speciesDataUrl, {
-          sppName: sideInfo.speciesName.replace(' ', '_'),
-          sppGroup: this.speciesGroups[sideInfo.speciesName]
-        }), futureModelPoint + '.asc.gz'
-      ].join('/');
       layer = L.tileLayer.wms(this.resolvePlaceholders(this.rasterApiUrl), {
         DATA_URL: mapData,
         layers: 'DEFAULT',
@@ -323,14 +342,41 @@
         };
       })(this));
     },
+    fetchBiodivInfo: function() {
+      debug('AppView.fetchBiodivInfo');
+      return $.ajax({
+        url: '/data/biodiversity',
+        dataType: 'json'
+      }).done((function(_this) {
+        return function(data) {
+          var biodivList, biodivLookupList;
+          biodivList = [];
+          biodivLookupList = [];
+          $.each(data, function(biodivName, biodivInfo) {
+            var biodivCapName;
+            biodivCapName = biodivName.replace(/^./, function(c) {
+              return c.toUpperCase();
+            });
+            biodivList.push(biodivName);
+            return biodivLookupList.push({
+              label: "Biodiversity of " + biodivCapName,
+              value: biodivName
+            });
+          });
+          _this.biodivList = biodivList;
+          return _this.biodivLookupList = biodivLookupList;
+        };
+      })(this));
+    },
     buildLeftForm: function() {
       debug('AppView.buildLeftForm');
-      return this.speciesInfoFetchProcess.done((function(_this) {
+      return $.when(this.speciesInfoFetchProcess, this.biodivInfoFetchProcess).done((function(_this) {
         return function() {
           var $leftmapspp;
           $leftmapspp = _this.$('#leftmapspp');
+          _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
           return $leftmapspp.autocomplete({
-            source: _this.speciesLookupList,
+            source: _this.biodivLookupList.concat(_this.speciesLookupList),
             appendTo: _this.$el,
             close: function() {
               return _this.$el.trigger('leftmapupdate');
@@ -341,12 +387,13 @@
     },
     buildRightForm: function() {
       debug('AppView.buildRightForm');
-      return this.speciesInfoFetchProcess.done((function(_this) {
+      return $.when(this.speciesInfoFetchProcess, this.biodivInfoFetchProcess).done((function(_this) {
         return function() {
           var $rightmapspp;
           $rightmapspp = _this.$('#rightmapspp');
+          _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
           return $rightmapspp.autocomplete({
-            source: _this.speciesLookupList,
+            source: _this.biodivLookupList.concat(_this.speciesLookupList),
             appendTo: _this.$el,
             close: function() {
               return _this.$el.trigger('rightmapupdate');

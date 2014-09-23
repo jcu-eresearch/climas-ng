@@ -6,7 +6,7 @@ from pyramid.view import view_config
 import pyramid.httpexceptions as httpexceptions
 
 from climasng.docassembly.sectiondata import SectionData
-from climasng.data import speciesdata
+from climasng.data import datafinder
 
 # -------------------------------------------------------------------
 
@@ -31,7 +31,13 @@ class DataView(object):
             species_file = os.path.join(data_path, data_name + '.json')
             if not os.path.isfile(species_file):
                 # species.json doesn't exist, create it
-                speciesdata.createSpeciesJson(self.request.registry.settings['climas.species_data_path'])
+                datafinder.createSpeciesJson(self.request.registry.settings['climas.species_data_path'])
+
+        elif data_name == 'biodiversity':
+            biodiversity_file = os.path.join(data_path, data_name + '.json')
+            if not os.path.isfile(biodiversity_file):
+                # biodiversity.json doesn't exist, create it
+                datafinder.createBiodiversityJson(self.request.registry.settings['climas.species_data_path'])
 
         return FileResponse(
             os.path.join(data_path, data_name + '.json'),

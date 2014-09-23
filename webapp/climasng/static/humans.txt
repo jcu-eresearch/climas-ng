@@ -7,11 +7,10 @@ Twitter: @danielbaird
 Location: Townsville, Australia
 
 Data preparation: Erin Graham
-Site: 
+Site: erin.graham@my.jcu.edu.au
+Location: Townsville, Australia
 
 Jeremy
-
-
 
 /* THANKS */
 Name: name or url
@@ -19,10 +18,11 @@ Name: name or url
                     [...]
 
 /* SITE */
-Server side: Python/Pyramid app, wasn't much fun to write
-Client side: Hand-rolled javascript hooked onto a Backbone frame that Daniel is embarassed by.  Leaflet for map display.
+Server side: Python/Pyramid app, wasn't much fun to write.
+
+Client side: Hand-rolled javascript hooked onto a Backbone frame that Daniel is embarassed by.  Leaflet for map display, jQuery for fetching data and managing the DOM.
 
 /* TOOLS */
-Daniel used Sublime Text 2 on OSX Mavericks for editing, and Vagrant for running Linux testing VMs.
+Daniel used Sublime Text 2 on OSX Mavericks for editing, and Vagrant for running Linux testing VMs.  LESSCSS for CSS (plus autoprefixer), CoffeeScript + Browserify for JavaScript, all hooked up with Gulp.
 
 Erin used R (and James Cook Uni's HPC) via a Windows machine for grinding the data.

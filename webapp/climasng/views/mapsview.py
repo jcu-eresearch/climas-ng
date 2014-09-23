@@ -15,6 +15,7 @@ class MapsView(object):
     def __call__(self):
         return {
             'species_data_url': self.request.registry.settings['climas.species_data_url'],
+            'biodiv_data_url': self.request.registry.settings['climas.biodiv_data_url'],
             'raster_api_url': self.request.registry.settings['climas.raster_api_url']
         }
 

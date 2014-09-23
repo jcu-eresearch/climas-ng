@@ -41,6 +41,7 @@ AppView = Backbone.View.extend {
     # ---------------------------------------------------------------
     # some settings
     speciesDataUrl: window.mapConfig.speciesDataUrl
+    biodivDataUrl: window.mapConfig.biodivDataUrl
     rasterApiUrl: window.mapConfig.rasterApiUrl
     # ---------------------------------------------------------------
     # tracking the splitter bar
@@ -75,10 +76,14 @@ AppView = Backbone.View.extend {
         # more annoying version of bindAll requires this concat stuff
         _.bindAll.apply _, [this].concat _.functions(this)
 
-        @speciesSciNameList = []
+        # kick off the fetching of the species and biodiversity lists
+        @namesList = []
 
-        # kick off the fetching of the species list
+        @speciesSciNameList = []
         @speciesInfoFetchProcess = @fetchSpeciesInfo()
+
+        @biodivList = []
+        @biodivInfoFetchProcess = @fetchBiodivInfo()
 
         # @tick()
     # ---------------------------------------------------------------
@@ -184,9 +189,9 @@ AppView = Backbone.View.extend {
             'input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled'
         ).closest('fieldset').addClass 'disabled'
 
-        # is it a real species?
+        # is it a real species or biodiv name?
         buttonClass = if side == 'left' then 'ltr' else 'rtl'
-        if newInfo.speciesName in @speciesSciNameList
+        if newInfo.speciesName in @namesList
             # it's real, let people copy to the other side
             @$('.btn-copy.' + buttonClass).prop 'disabled', false
         else
@@ -256,24 +261,55 @@ AppView = Backbone.View.extend {
         sideInfo = @leftInfo if side == 'left'
         sideInfo = @rightInfo if side == 'right'
 
-        # work out the string that gets to the projection point they want
-        futureModelPoint = [
-            '/dispersal/deciles/' + sideInfo.scenario
-            sideInfo.year
-            sideInfo.gcm
-        ].join '_'
+        # is it a biodiversity map?
+        isBiodiversity = sideInfo.speciesName in @biodivList
 
-        # if they want current, just get the bioclim current projection
-        futureModelPoint = '/realized/vet.suit.cur' if sideInfo.year == 'baseline'
+        futureModelPoint = ''
+        mapData = {}
 
-        # now make that into a URL
-        mapData = [
-            @resolvePlaceholders @speciesDataUrl, {
-                sppName: sideInfo.speciesName.replace ' ', '_'
-                sppGroup: @speciesGroups[sideInfo.speciesName]
-            }
-            futureModelPoint + '.asc.gz'
-        ].join '/'
+        if isBiodiversity
+            # they're looking for a biodiversity map.
+            futureModelPoint = [
+                '/biodiversity/deciles/biodiversity'
+                sideInfo.scenario
+                sideInfo.year
+                sideInfo.gcm
+            ].join '_'
+
+            # if they want current, just get the current biodiv
+            futureModelPoint = '/biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
+
+            # now make that into a URL
+            mapData = [
+                @resolvePlaceholders @biodivDataUrl, {
+                    sppGroup: sideInfo.speciesName
+                }
+                futureModelPoint + '.asc.gz'
+            ].join '/'
+
+        else
+            # it's a plain old species map they're after.
+
+            # work out the string that gets to the projection point they want
+            futureModelPoint = [
+                '/dispersal/deciles/' + sideInfo.scenario
+                sideInfo.year
+                sideInfo.gcm
+            ].join '_'
+
+            # if they want current, just get the bioclim current projection
+            futureModelPoint = '/realized/vet.suit.cur' if sideInfo.year == 'baseline'
+
+            # now make that into a URL
+            mapData = [
+                @resolvePlaceholders @speciesDataUrl, {
+                    sppName: sideInfo.speciesName.replace ' ', '_'
+                    sppGroup: @speciesGroups[sideInfo.speciesName]
+                }
+                futureModelPoint + '.asc.gz'
+            ].join '/'
+
+        # now we've made a url, add that as a map
 
         layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
             DATA_URL: mapData
@@ -356,6 +392,7 @@ AppView = Backbone.View.extend {
                         label: cn + sciNamePostfix
                         value: sciName
                     }
+            # that's it.. this'll be used in the loop below.
 
             $.each data, (sciName, sppInfo)=>
                 speciesSciNameList.push sciName
@@ -363,14 +400,34 @@ AppView = Backbone.View.extend {
                 if sppInfo.commonNames
                     $.each sppInfo.commonNames, commonNameWriter sciName
                 else
-                    speciesLookupList.push {
+                    speciesLookupList.push
                         label: sciName
                         value: sciName
-                    }
 
             @speciesLookupList = speciesLookupList
             @speciesSciNameList = speciesSciNameList
             @speciesGroups = speciesGroups
+    # ---------------------------------------------------------------
+    fetchBiodivInfo: ()->
+        debug 'AppView.fetchBiodivInfo'
+
+        return $.ajax({
+            url: '/data/biodiversity',
+            dataType: 'json'
+        }).done (data)=>
+            biodivList = []
+            biodivLookupList = []
+
+            $.each data, (biodivName, biodivInfo)=>
+                biodivCapName = biodivName.replace /^./, (c)-> c.toUpperCase()
+                biodivList.push biodivName
+                biodivLookupList.push
+                    label: "Biodiversity of " + biodivCapName
+                    value: biodivName
+
+            @biodivList = biodivList
+            @biodivLookupList = biodivLookupList
+
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
     # form creation
@@ -378,10 +435,14 @@ AppView = Backbone.View.extend {
     buildLeftForm: ()->
         debug 'AppView.buildLeftForm'
 
-        @speciesInfoFetchProcess.done =>
+        $.when(@speciesInfoFetchProcess, @biodivInfoFetchProcess).done =>
             $leftmapspp = @$ '#leftmapspp'
+
+            # while we're here, make a big single list of acceptable names
+            @namesList = @biodivList.concat @speciesSciNameList
+
             $leftmapspp.autocomplete {
-                source: @speciesLookupList
+                source: @biodivLookupList.concat @speciesLookupList
                 appendTo: @$el
                 close: => @$el.trigger 'leftmapupdate'
             }
@@ -389,10 +450,14 @@ AppView = Backbone.View.extend {
     buildRightForm: ()->
         debug 'AppView.buildRightForm'
 
-        @speciesInfoFetchProcess.done =>
+        $.when(@speciesInfoFetchProcess, @biodivInfoFetchProcess).done =>
             $rightmapspp = @$ '#rightmapspp'
+
+            # while we're here, make a big single list of acceptable names
+            @namesList = @biodivList.concat @speciesSciNameList
+
             $rightmapspp.autocomplete {
-                source: @speciesLookupList
+                source: @biodivLookupList.concat @speciesLookupList
                 appendTo: @$el
                 close: => @$el.trigger 'rightmapupdate'
             }

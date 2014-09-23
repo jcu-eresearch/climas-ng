@@ -65,3 +65,8 @@ webapp/bin
 # we have to ignore lib dirs because they get scattered about
 # everywhere, but DON'T ignore the static lib dir
 !webapp/climasng/static/lib
+
+# ignore the biodiversity.json and species.json files that are built
+# on first access
+webapp/climasng/data/species.json
+webapp/climasng/data/biodiversity.json
