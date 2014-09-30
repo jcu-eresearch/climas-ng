@@ -441,11 +441,10 @@ AppView = Backbone.View.extend {
             # while we're here, make a big single list of acceptable names
             @namesList = @biodivList.concat @speciesSciNameList
 
-            $leftmapspp.autocomplete {
+            $leftmapspp.autocomplete
                 source: @biodivLookupList.concat @speciesLookupList
                 appendTo: @$el
                 close: => @$el.trigger 'leftmapupdate'
-            }
     # ---------------------------------------------------------------
     buildRightForm: ()->
         debug 'AppView.buildRightForm'
