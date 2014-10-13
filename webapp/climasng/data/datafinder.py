@@ -12,7 +12,7 @@ def createSpeciesJson(source_data_path):
     # then record that as a species / taxon record.
 
     # here's a regex to test for species dirs:
-    one_km_regex = re.compile(r'/(\w+)/models/(\w+)/1km$')
+    one_km_regex = re.compile(r'/(\w+)/species/(\w+)/1km$')
 
     # we'll get the species common name from here:
     common_names = {}
