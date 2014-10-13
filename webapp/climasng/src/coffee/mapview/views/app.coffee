@@ -51,8 +51,8 @@ AppView = Backbone.View.extend {
     events:
         'click .btn-change': 'toggleForms'
         'click .btn-compare': 'toggleSplitter'
-        'click .btn-copy.ltr': 'copyMapLeftToRight'
-        'click .btn-copy.rtl': 'copyMapRightToLeft'
+        'click .btn-copy.left-valid-map': 'copyMapLeftToRight'
+        'click .btn-copy.right-valid-map': 'copyMapRightToLeft'
         'leftmapupdate': 'leftSideUpdate'
         'rightmapupdate': 'rightSideUpdate'
         'change select.left': 'leftSideUpdate'
@@ -190,13 +190,14 @@ AppView = Backbone.View.extend {
         ).closest('fieldset').addClass 'disabled'
 
         # is it a real species or biodiv name?
-        buttonClass = if side == 'left' then 'ltr' else 'rtl'
+        mapValidQuery = '.' + side + '-valid-map'
         if newInfo.speciesName in @namesList
-            # it's real, let people copy to the other side
-            @$('.btn-copy.' + buttonClass).prop 'disabled', false
+            # it's real, enable the things that need valid species
+            # e.g. downloads, copy to the other side, etc
+            @$(mapValidQuery).removeClass('disabled').prop 'disabled', false
         else
-            # it's not real, disable copy and bail out right now
-            @$('.btn-copy.' + buttonClass).prop 'disabled', true
+            # it's not real, disable those things and bail out right now
+            @$(mapValidQuery).addClass('disabled').prop 'disabled', true
             return false
 
         currInfo = if side == 'left' then @leftInfo else @rightInfo
@@ -265,26 +266,35 @@ AppView = Backbone.View.extend {
         isBiodiversity = sideInfo.speciesName in @biodivList
 
         futureModelPoint = ''
-        mapData = {}
+        mapUrl = ''
+        zipUrl = ''
 
         if isBiodiversity
             # they're looking for a biodiversity map.
             futureModelPoint = [
-                '/biodiversity/deciles/biodiversity'
+                'biodiversity/deciles/biodiversity'
                 sideInfo.scenario
                 sideInfo.year
                 sideInfo.gcm
             ].join '_'
 
             # if they want current, just get the current biodiv
-            futureModelPoint = '/biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
+            futureModelPoint = 'biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
 
             # now make that into a URL
-            mapData = [
+            mapUrl = [
                 @resolvePlaceholders @biodivDataUrl, {
                     sppGroup: sideInfo.speciesName
                 }
-                futureModelPoint + '.asc.gz'
+                futureModelPoint + '.tif'
+            ].join '/'
+
+            zipUrl = [
+                @resolvePlaceholders @biodivDataUrl, {
+                    sppGroup: sideInfo.speciesName
+                }
+                'biodiversity'
+                sideInfo.speciesName + '.zip'
             ].join '/'
 
         else
@@ -300,19 +310,32 @@ AppView = Backbone.View.extend {
             # if they want current, just get the bioclim current projection
             futureModelPoint = '/realized/vet.suit.cur' if sideInfo.year == 'baseline'
 
+            sppFileName = sideInfo.speciesName.replace ' ', '_'
+
             # now make that into a URL
-            mapData = [
+            mapUrl = [
                 @resolvePlaceholders @speciesDataUrl, {
-                    sppName: sideInfo.speciesName.replace ' ', '_'
+                    sppName: sppFileName
                     sppGroup: @speciesGroups[sideInfo.speciesName]
                 }
-                futureModelPoint + '.asc.gz'
+                futureModelPoint + '.tif'
             ].join '/'
 
-        # now we've made a url, add that as a map
+            zipUrl = [
+                @resolvePlaceholders @speciesDataUrl, {
+                    sppName: sppFileName
+                    sppGroup: @speciesGroups[sideInfo.speciesName]
+                }
+                sppFileName + '.zip'
+            ].join '/'
 
+        # we've made urls, add them to the download links
+        @$('#' + side + 'mapdl').attr 'href', mapUrl
+        @$('#' + side + 'archivedl').attr 'href', zipUrl
+
+        # we've made a url, start the map layer loading
         layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
-            DATA_URL: mapData
+            DATA_URL: mapUrl
             layers: 'DEFAULT'
             format: 'image/png'
             transparent: true
@@ -640,7 +663,9 @@ AppView = Backbone.View.extend {
         <fieldset class="blank">
             <button type="button" class="btn-change">hide settings</button>
             <button type="button" class="btn-compare">show right map</button>
-            <button type="button" class="btn-copy rtl">copy right map &laquo;</button>
+            <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
+            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
+            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this species<br>(<1Gb zip)</a>
         </fieldset>
     """
     # ---------------------------------------------------------------
@@ -675,7 +700,9 @@ AppView = Backbone.View.extend {
         <fieldset class="blank">
             <button type="button" class="btn-change">hide settings</button>
             <button type="button" class="btn-compare">hide right map</button>
-            <button type="button" class="btn-copy ltr">&raquo; copy left map</button>
+            <button type="button" class="btn-copy left-valid-map">&raquo; copy left map</button>
+            <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
+            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this species<br>(<1Gb zip)</a>
         </fieldset>
     """
     # ---------------------------------------------------------------
