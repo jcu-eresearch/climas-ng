@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 
-# This copies data for a specific species into it's final resting place.
+# This copies data for a specific taxon into it's final resting place.
 # set env vars:
-#   CLIMAS_SRC place to copy from (specific species dir)
+#   CLIMAS_SRC place to copy from (specific taxon dir)
 #   CLIMAS_DEST place to copy to, root of the tree
-#   CLIMAS_SPP the species name (cap genus with underscore: "Genusname_speciesname")
 #   CLIMAS_TAXON the taxon name (lowercase plural: "mammals")
 #
 # e.g.:
-# CLIMAS_SRC = /rdsi/ccimpacts/NRM/mammals/models/Acrobates_pygmaeus/1km
+# CLIMAS_SRC = /rdsi/ccimpacts/NRM/mammals
 # CLIMAS_DEST = /rdsi/climas/maps
 # CLIMAS_TAXON = mammals
-# CLIMAS_SPP = Acrobates_pygmaeus
 #
 # ..then this script will put maps at:
-# /rdsi/climas/maps/mammals/species/Acrobates_pygmaeus/1km/**
+# /rdsi/climas/maps/mammals/biodiversity/**
 
 import os
 import sys
@@ -43,7 +41,7 @@ def log(message, level=2):
         else:
             if message is not '.':
                 # if it's not a dot, add an initial newline and prefix
-                sys.stdout.write("\nCLIMAS SPP PREP: ")
+                sys.stdout.write("\nCLIMAS TAXA PREP: ")
 
             # dots don't need initial newlines
             sys.stdout.write(message)
@@ -58,6 +56,7 @@ def log2(message):
 # -------------------------------------------------------------------
 def log3(message):
     log(message, 3)
+# -------------------------------------------------------------------
 # -------------------------------------------------------------------
 # creates dir if necessary
 def ensure_exists(dir):
@@ -136,16 +135,13 @@ def make_geotiff(ascii_gzip, dest_dir):
 # -------------------------------------------------------------------
 # -------------------------------------------------------------------
 log1("\n")
-# check we have species name and taxon
-spp = os.environ.get('CLIMAS_SPP')
+# check we have taxon name
 taxon = os.environ.get('CLIMAS_TAXON')
 
-if not spp:
-    bailout('species name (' + str(spp) + ') is unconvincing')
 if not taxon:
-    bailout('species taxon (' + str(taxon) + ') is unconvincing')
+    bailout('taxon name (' + str(taxon) + ') is unconvincing')
 
-log1('Processing ' + spp + ' in ' + taxon)
+log1('Processing taxon ' + taxon)
 
 # check we have source and destination in environment vars
 source = os.environ.get('CLIMAS_SRC')
@@ -169,71 +165,45 @@ if not os.access(dest, os.W_OK):
     bailout('destination (' + dest + ') is not writable')
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Create destination species dir
-log2('creating spp dir')
-taxon_dir = os.path.join(dest, taxon)
-ensure_exists(taxon_dir)
-onek_dir = os.path.join(taxon_dir, 'species', spp, '1km')
-create_or_recreate(onek_dir)
-log2('will drop data files into ' + onek_dir)
+# Create destination taxa dir
+log2('creating taxa biodiversity dir')
+biodiv_dir = os.path.join(dest, taxon, 'biodiversity')
+ensure_exists(biodiv_dir)
+log2('will drop data files into ' + biodiv_dir)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# start the zip file for this species
-log2('creating spp zip file')
-zip_path = os.path.join(onek_dir, spp + '.zip')
+# start the zip file for this taxa
+log2('creating taxa zip file')
+zip_path = os.path.join(biodiv_dir, taxon + '.zip')
 # start an uncompressed zip file
 zip_f = zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_STORED, True)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# occurrence and background points
-log2('processing occurrences and background points')
+# current biodiversity map
+log2('processing current biodiversity')
+src_pattern = os.path.join(source, 'biodiversity_current.asc.gz')
+dest_subdir = ''
 
-dest_subdir = 'points'
-
-src_pattern = os.path.join(source, '..', '..', '..', '1km_bkgd.csv')
-copy_over(src_pattern, dest_subdir, zip_f)
-
-src_pattern = os.path.join(source, 'occur.csv')
-copy_over(src_pattern, dest_subdir, zip_f)
+copy_over(src_pattern, dest_subdir, zip_f, biodiv_dir)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# suitability files
-log2('processing suitability')
-src_pattern = os.path.join(source, 'suitability', '*.asc.gz')
-dest_subdir = 'suitability'
+# projected biodiversity files, per GCM
+log2('processing GCM-specific projected biodiversity maps')
 
-copy_over(src_pattern, dest_subdir, zip_f)
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# realized files
-log2('processing current realised')
-src_pattern = os.path.join(source, 'realized', 'vet.suit.cur.asc.gz')
-dest_subdir = 'realized'
-dest_dir = os.path.join(onek_dir, dest_subdir)
-create_or_recreate(dest_dir)
-
-copy_over(src_pattern, dest_subdir, zip_f, onek_dir)
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# projected realized files, per GCM
-log2('processing future dispersal-realised')
-
-# there's dirs in the realized/ dir, each with model-point projections
-for gcm_dir in glob.glob(os.path.join(source, 'dispersal', 'RCP*')):
-    gcm_subdir = gcm_dir.replace(source + '/', '')
+# there's dirs in the biodiv dir, each with model-point projections
+for gcm_dir in glob.glob(os.path.join(biodiv_dir, 'RCP*')):
+    gcm_subdir = gcm_dir.replace(biodiv_dir + '/', '', 1)
     src_pattern = os.path.join(gcm_dir, '*.asc.gz')
     copy_over(src_pattern, gcm_subdir, zip_f)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# projected realized files, summarised deciles across GCMs
-log2('processing future dispersal-realised deciles')
+# biodiversity decile files
+log2('processing projected biodiversity decile summaries')
+src_pattern = os.path.join(source, 'deciles', '*.asc.gz')
+dest_subdir = 'deciles'
+create_or_recreate(os.path.join(biodiv_dir, dest_subdir))
 
-src_pattern = os.path.join(source, 'dispersal/deciles', '*.asc.gz')
-dest_subdir = 'dispersal/deciles'
-dest_dir = os.path.join(onek_dir, dest_subdir)
-create_or_recreate(dest_dir)
-
-copy_over(src_pattern, dest_subdir, zip_f, onek_dir)
+copy_over(src_pattern, dest_subdir, zip_f, biodiv_dir)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # close the zip file
@@ -242,20 +212,6 @@ zip_f.close()
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 log3('all done.')
 log1("\n")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
