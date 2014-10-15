@@ -119,10 +119,28 @@ for dir, subdirs, files in os.walk(source):
             taxon = match.group(2)
             spp = match.group(3)
 
+            # if spp[0:16] in [
+            #     'Strophurus_cilia',
+            #     'Strophurus_elder',
+            #     'Strophurus_krisa',
+            #     'Strophurus_spini',
+            #     'Strophurus_taeni',
+            #     'Strophurus_willi',
+            #     'Suta_flagellum',
+            #     'Suta_gouldii',
+            #     'Suta_punctata',
+            #     'Suta_suta',
+            #     'Tiliqua_adelaide',
+            #     'Tiliqua_multifas',
+            #     'Tiliqua_nigrolut',
+            #     'Tiliqua_occipita'
+            #     ]:
+
             wait_for_queue_space()
 
             command = process_species.substitute(src=spp_dir, dest=dest, taxon=taxon, spp=spp)
             os.system(command)
+
         except Exception as e:
             print("problem dealing with dir " + match.group(0) + ': ' + str(e))
 
