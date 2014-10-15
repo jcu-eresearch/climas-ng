@@ -1292,8 +1292,9 @@ body {
   background: #efe6c5;
   top: 4em;
   bottom: 0;
+  overflow-y: scroll;
   width: 15em;
-  padding: 0.5em 1em 0;
+  padding: 0.5em 1em;
   text-align: center;
 }
 .splitmap .side.form.right {

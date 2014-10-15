@@ -17,15 +17,3 @@ import datafinder
 
 datafinder.createSpeciesJson(datadir)
 datafinder.createBiodiversityJson(datadir)
-
-
-
-
-
-
-
-
-
-
-
-
