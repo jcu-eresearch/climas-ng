@@ -297,6 +297,11 @@ AppView = Backbone.View.extend {
                 sideInfo.speciesName + '.zip'
             ].join '/'
 
+            # update the download links
+            @$('#' + side + 'mapdl').attr 'href', mapUrl
+            @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
+            @$('#' + side + 'archivedl').attr 'href', zipUrl
+
         else
             # it's a plain old species map they're after.
 
@@ -329,9 +334,10 @@ AppView = Backbone.View.extend {
                 sppFileName + '.zip'
             ].join '/'
 
-        # we've made urls, add them to the download links
-        @$('#' + side + 'mapdl').attr 'href', mapUrl
-        @$('#' + side + 'archivedl').attr 'href', zipUrl
+            # update the download links
+            @$('#' + side + 'mapdl').attr 'href', mapUrl
+            @$('#' + side + 'archivedl').html 'download this species<br>(~2Gb zip)'
+            @$('#' + side + 'archivedl').attr 'href', zipUrl
 
         # we've made a url, start the map layer loading
         layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
@@ -665,7 +671,7 @@ AppView = Backbone.View.extend {
             <button type="button" class="btn-compare">show right map</button>
             <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
             <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this species<br>(<1Gb zip)</a>
+            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
         </fieldset>
     """
     # ---------------------------------------------------------------
@@ -702,7 +708,7 @@ AppView = Backbone.View.extend {
             <button type="button" class="btn-compare">hide right map</button>
             <button type="button" class="btn-copy left-valid-map">&raquo; copy left map</button>
             <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this species<br>(<1Gb zip)</a>
+            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this set of maps<br>(<2Gb zip)</a>
         </fieldset>
     """
     # ---------------------------------------------------------------
