@@ -119,6 +119,11 @@ for dir, subdirs, files in os.walk(source):
             taxon = match.group(2)
             spp = match.group(3)
 
+            ## add this in (and indent the three code lines after it)
+            ## if you want to run ONLY specific species.
+            ## the truncation to 16 chars is for matching HPC job
+            ## names, which are max 16 chars long.
+
             # if spp[0:16] in [
             #     'Strophurus_cilia',
             #     'Strophurus_elder',
@@ -137,7 +142,6 @@ for dir, subdirs, files in os.walk(source):
             #     ]:
 
             wait_for_queue_space()
-
             command = process_species.substitute(src=spp_dir, dest=dest, taxon=taxon, spp=spp)
             os.system(command)
 
