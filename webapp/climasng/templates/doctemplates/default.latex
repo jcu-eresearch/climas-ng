@@ -76,6 +76,8 @@ $if(verbatim-in-note)$
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
+\let\oldlongtable\longtable
+\renewcommand{\longtable}{\footnotesize\oldlongtable}
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -88,6 +90,7 @@ $if(graphics)$
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
+
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
@@ -133,6 +136,12 @@ $if(lang)$
   \usepackage[$lang$]{babel}
 \fi
 $endif$
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+\let\oldendlongtable\endlongtable
+\renewcommand{\endlongtable}{\oldendlongtable\clearpage}
+
 
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
