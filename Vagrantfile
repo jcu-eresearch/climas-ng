@@ -68,7 +68,7 @@ __=" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  disabling stuff..  @@@
 wget -nv http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar -zxvf install-tl-unx.tar.gz
 pushd install-tl-unx*
-install-tl --profile=/var/climaswebapp/texlive-install.profile
+./install-tl --profile=/var/climaswebapp/texlive-install.profile
 popd
 
 echo ''
