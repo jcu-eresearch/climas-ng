@@ -28,28 +28,19 @@ class Species(Base):
 
 # -------------------------------------------------------------------
 class PresenceList(Base):
-    # CREATE TABLE "presence_lists" (
+    # CREATE TABLE "presences" (
     #     "species_id" INTEGER NOT NULL,
     #     "region_id" INTEGER NOT NULL,
-    #     "presence2015low" VARCHAR(4),
-    #     "presence2025low" VARCHAR(4),
-    #     "presence2035low" VARCHAR(4),
-    #     "presence2045low" VARCHAR(4),
-    #     "presence2055low" VARCHAR(4),
-    #     "presence2065low" VARCHAR(4),
-    #     "presence2075low" VARCHAR(4),
-    #     "presence2085low" VARCHAR(4),
-    #     "presence2015high" VARCHAR(4),
-    #     "presence2025high" VARCHAR(4),
-    #     "presence2035high" VARCHAR(4),
-    #     "presence2045high" VARCHAR(4),
-    #     "presence2055high" VARCHAR(4),
-    #     "presence2065high" VARCHAR(4),
-    #     "presence2075high" VARCHAR(4),
-    #     "presence2085high" VARCHAR(4), occurrences INTEGER not null default 0,
-    #     PRIMARY KEY("species_id", "region_id")
-    # );
-    __tablename__ = 'presence_lists'
+    #     "year" INTEGER NOT NULL,
+    #     "current" VARCHAR(7),
+    #     "RCP45_10th" VARCHAR(4),
+    #     "RCP45_50th" VARCHAR(4),
+    #     "RCP45_90th" VARCHAR(4),
+    #     "RCP85_10th" VARCHAR(4),
+    #     "RCP85_50th" VARCHAR(4),
+    #     "RCP85_90th" VARCHAR(4),
+    #     PRIMARY KEY("species_id", "region_id", "year")
+    __tablename__ = 'presences'
 
 # -------------------------------------------------------------------
 class RegionType(Base):
