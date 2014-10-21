@@ -71,6 +71,10 @@ webapp/bin
 webapp/climasng/data/species.json
 webapp/climasng/data/biodiversity.json
 
-# ignore the old db stuff that's there for copying from
+# ignore some db stuff
 webapp/climasng/db/sqlbuilder/old
+webapp/climasng/db/sqlbuilder/*.sql
+webapp/climasng/db/sqlbuilder/*.sqlite
+webapp/climasng/db/*.sqlite
+
 
