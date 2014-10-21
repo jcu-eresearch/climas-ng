@@ -2,5 +2,6 @@
     "id": "temperature",
     "name": "Temperature",
     "description": "current and projected temperature.",
+    "initial": "included",
     "presence": "optional"
 }

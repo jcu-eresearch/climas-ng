@@ -2,5 +2,6 @@
     "id": "amphibians",
     "name": "Amphibians",
     "description": "current and projected biodiversity over amphibian species.",
+    "initial": "included",
     "presence": "optional"
 }

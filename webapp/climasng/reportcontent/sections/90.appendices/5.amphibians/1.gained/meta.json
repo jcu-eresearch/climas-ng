@@ -1,0 +1,7 @@
+{
+    "id": "amphibiansgained",
+    "name": "Amphibians Gained",
+    "description": "Amphibians not currently present that may move into the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

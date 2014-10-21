@@ -1,0 +1,7 @@
+{
+    "id": "streamfrogs",
+    "name": "Stream frogs",
+    "description": "current and projected biodiversity over stream frogs.",
+    "initial": "included",
+    "presence": "optional"
+}

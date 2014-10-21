@@ -1,0 +1,7 @@
+{
+    "id": "Amphibiansappendix",
+    "name": "Amphibians",
+    "description": "Lists of amphibian species.",
+    "initial": "included",
+    "presence": "optional"
+}

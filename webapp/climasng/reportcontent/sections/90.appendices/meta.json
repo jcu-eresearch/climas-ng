@@ -1,0 +1,8 @@
+{
+    "id": "appendices",
+    "name": "Appendices",
+    "description": "various species lists.",
+    "initial": "included",
+    "presence": "optional"
+}
+

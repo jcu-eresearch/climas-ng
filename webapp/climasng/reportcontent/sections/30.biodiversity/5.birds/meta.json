@@ -2,5 +2,6 @@
     "id": "birds",
     "name": "Birds",
     "description": "current and projected biodiversity over bird species.",
+    "initial": "included",
     "presence": "optional"
 }

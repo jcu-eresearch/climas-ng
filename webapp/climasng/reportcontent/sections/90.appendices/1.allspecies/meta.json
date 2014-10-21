@@ -1,0 +1,7 @@
+{
+    "id": "sppallappendix",
+    "name": "Species",
+    "description": "Species lists across all modelled taxa.",
+    "initial": "excluded",
+    "presence": "optional"
+}

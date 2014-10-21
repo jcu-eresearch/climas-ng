@@ -1,0 +1,8 @@
+{
+    "id": "pests",
+    "name": "Pest Species",
+    "description": "climate suitability and distribution of pest species.",
+    "initial": "included",
+    "presence": "optional"
+}
+

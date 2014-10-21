@@ -2,5 +2,6 @@
     "id": "reptiles",
     "name": "Reptiles",
     "description": "current and projected biodiversity over reptile species.",
+    "initial": "included",
     "presence": "optional"
 }

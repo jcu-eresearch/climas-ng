@@ -2,5 +2,6 @@
     "id": "overall",
     "name": "Overall",
     "description": "current and projected biodiversity over all modelled species.",
+    "initial": "included",
     "presence": "optional"
 }

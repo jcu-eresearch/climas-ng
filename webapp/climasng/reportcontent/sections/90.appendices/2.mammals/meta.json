@@ -1,0 +1,7 @@
+{
+    "id": "Mammalsappendix",
+    "name": "Mammals",
+    "description": "Lists of mammal species.",
+    "initial": "included",
+    "presence": "optional"
+}

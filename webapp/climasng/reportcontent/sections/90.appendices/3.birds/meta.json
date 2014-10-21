@@ -1,0 +1,7 @@
+{
+    "id": "Birdsappendix",
+    "name": "Birds",
+    "description": "Lists of bird species.",
+    "initial": "included",
+    "presence": "optional"
+}

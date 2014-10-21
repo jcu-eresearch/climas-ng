@@ -2,5 +2,6 @@
     "id": "intro",
     "name": "Introduction",
     "description": "title, credits, and introductory paragraphs.",
+    "initial": "included",
     "presence": "required"
 }

@@ -2,5 +2,6 @@
     "id": "rainfall",
     "name": "Rainfall",
     "description": "current and projected precipitation.",
+    "initial": "included",
     "presence": "optional"
 }
