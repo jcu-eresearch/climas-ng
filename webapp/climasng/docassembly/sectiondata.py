@@ -32,6 +32,10 @@ class SectionData(object):
     @property
     def presence(self): return self._metadata['presence']
 
+    ## initial ------------------------------------------------------
+    @property
+    def initial(self): return self._metadata['initial']
+
     ## sections -----------------------------------------------------
     @property
     def sections(self): return self._sections
@@ -43,6 +47,26 @@ class SectionData(object):
     ## contentpath --------------------------------------------------
     @property
     def contentpath(self): return os.path.join(self._dir, 'content.md')
+
+    ## querypath ----------------------------------------------------
+    @property
+    def querypath(self): return os.path.join(self._dir, 'content.sql')
+
+    ## isquery ------------------------------------------------------
+    @property
+    def is_query(self): return os.path.exists( self.querypath )
+
+    ## rowtemplate --------------------------------------------------
+    @property
+    def rowtemplatepath(self): return os.path.join(self._dir, 'rowtemplate.md')
+
+    ## oddrowtemplate -----------------------------------------------
+    @property
+    def oddrowtemplatepath(self): return os.path.join(self._dir, 'rowtemplate-odd.md')
+
+    ## has_oddrowtemplate -------------------------------------------
+    @property
+    def has_oddrowtemplate(self): return os.path.exists( self.oddrowtemplatepath )
 
     ## parent -------------------------------------------------------
     @property
@@ -59,13 +83,17 @@ class SectionData(object):
     #         ]
     #     }
     def to_data_object(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "description": self.description,
-            "presence": self.presence,
-            "sections": [subsect.to_data_object() for subsect in self.sections]
-        }
+        try:
+            return {
+                "id": self.id,
+                "name": self.name,
+                "description": self.description,
+                "presence": self.presence,
+                "initial": self.initial,
+                "sections": [subsect.to_data_object() for subsect in self.sections]
+            }
+        except Exception as e:
+            print(self.dir)
     # ---------------------------------------------------------------
     def toJson(self):
         return json.dumps(self.to_data_object())
@@ -81,6 +109,7 @@ class SectionData(object):
                 'id': '',
                 'name': '(no name provided)',
                 'description': '(no description provided)',
+                'initial': 'included',
                 'presence': 'required'
             }
 
@@ -95,12 +124,9 @@ class SectionData(object):
         # sort here so they're in order for the filtering that happens below.
         dirs.sort()
 
-        # pull out sections that are named with number-dot at the start
-        # section_dirs = [s.split('.', 1)[1] for s in dirs if re.match(r'\d+\.', s)]
-        section_dirs = [s for s in dirs if re.match(r'\d+\.', s)]
+        # only include sections that are named with number-dot at the start
+        section_dirs = [s for s in dirs if re.match(r'^\d+\.', s)]
 
-        # now add the dir names that *don't* start with number-dot
-        section_dirs.extend( [s for s in dirs if not re.match(r'\d+\.', s)] )
         sections = []
         for section_dir in section_dirs:
             sname = re.sub(r'^\d+\.', '', section_dir)

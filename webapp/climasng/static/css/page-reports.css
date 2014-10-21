@@ -1203,7 +1203,7 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffe791');
 }
 #reportform .reviewblock:after {
-  content: 'select year and region\a to see a report summary';
+  content: 'select year and region\a to see a report summary\a and download a report';
   white-space: pre;
   color: #000;
   text-shadow: none;
@@ -1313,7 +1313,7 @@ body {
   margin-top: -1em;
   height: 2em;
   line-height: 2em;
-  width: 66%;
+  width: 50%;
   border: 1px solid #efe6c5;
   border-radius: 2px;
   overflow: hidden;
@@ -1356,8 +1356,8 @@ body {
 }
 #reportform .formblock .regiontypeselector.typeselected.regionselected {
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 200, 0, 0.1)), to(rgba(255, 255, 255, 0)));
-  background-image: -webkit-linear-gradient(right, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
-  background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
+  background-image: -webkit-linear-gradient(right, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 100%);
 }
 #reportform .formblock .yearrow {
   border-radius: 2px;
@@ -1381,15 +1381,15 @@ body {
 }
 #reportform .formblock .yearrow.yearselected {
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 200, 0, 0.1)), to(rgba(255, 255, 255, 0)));
-  background-image: -webkit-linear-gradient(right, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
-  background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
+  background-image: -webkit-linear-gradient(right, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 100%);
 }
 #reportform .formblock .sectionselector {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 200, 0, 0.1)), to(rgba(255, 255, 255, 0)));
-  background-image: -webkit-linear-gradient(right, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
-  background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 66%);
+  background-image: -webkit-linear-gradient(right, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(to left, rgba(0, 200, 0, 0.1), rgba(255, 255, 255, 0) 100%);
 }
 #reportform .formblock .sectionselector .name {
   background: #f5efd9;
@@ -1410,7 +1410,8 @@ body {
   margin: 0 0.5em 0 0;
 }
 #reportform .formblock .sectionselector .description {
-  padding: 0.5em 0.5em 0.66em 0;
+  line-height: 1.05;
+  padding: 0.75em 0.5em 0.66em 0;
   margin: 0 0 0 3em;
 }
 #reportform .formblock .sectionselector .subsections {
@@ -1439,18 +1440,18 @@ body {
   border-bottom: 1px solid #e9ddb1;
 }
 #reportform .formblock .sectionselector {
-  margin: 2em 0 2em 2em;
-}
-#reportform .formblock .subsections .sectionselector {
   margin: 1em 0 1em 2em;
 }
-#reportform .formblock .subsections .subsections .sectionselector {
+#reportform .formblock .subsections .sectionselector {
   margin: 0.5em 0 0.5em 2em;
 }
+#reportform .formblock .subsections .subsections .sectionselector {
+  margin: 0.25em 0 0.25em 2em;
+}
 #reportform .formblock .sectionselector.unselected {
-  background-image: -webkit-gradient(linear, right top, left top, from(rgba(200, 0, 0, 0.1)), to(rgba(255, 255, 255, 0)));
-  background-image: -webkit-linear-gradient(right, rgba(200, 0, 0, 0.1), rgba(255, 255, 255, 0) 66%);
-  background-image: linear-gradient(to left, rgba(200, 0, 0, 0.1), rgba(255, 255, 255, 0) 66%);
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(220, 150, 150, 0.1)), to(rgba(255, 255, 255, 0)));
+  background-image: -webkit-linear-gradient(right, rgba(220, 150, 150, 0.1), rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(to left, rgba(220, 150, 150, 0.1), rgba(255, 255, 255, 0) 100%);
 }
 #reportform .formblock .sectionselector.unselected .description {
   opacity: 0.66;

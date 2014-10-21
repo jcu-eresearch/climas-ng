@@ -127,226 +127,12 @@
     fetchRegions: function() {
       var fetch;
       debug('AppView.fetchRegions');
-      fetch = $.Deferred();
+      fetch = $.ajax(this.dataUrl + '/reportregions');
       fetch.done((function(_this) {
         return function(data) {
           return _this.buildRegionList(data);
         };
       })(this));
-      setTimeout(function() {
-        return fetch.resolve({
-          regiontypes: [
-            {
-              id: 'nrm',
-              name: 'NRM region',
-              regions: [
-                {
-                  id: 'NRM_ACT',
-                  name: 'ACT'
-                }, {
-                  id: 'NRM_Adelaide_and_Mount_Lofty_Ranges',
-                  name: 'Adelaide and Mount Lofty Ranges'
-                }, {
-                  id: 'NRM_Alinytjara_Wilurara',
-                  name: 'Alinytjara Wilurara'
-                }, {
-                  id: 'NRM_Avon',
-                  name: 'Avon'
-                }, {
-                  id: 'NRM_Border_Rivers-Gwydir',
-                  name: 'Border Rivers-Gwydir'
-                }, {
-                  id: 'NRM_Border_Rivers_Maranoa-Balonne',
-                  name: 'Border Rivers Maranoa-Balonne'
-                }, {
-                  id: 'NRM_Burdekin',
-                  name: 'Burdekin'
-                }, {
-                  id: 'NRM_Burnett_Mary',
-                  name: 'Burnett Mary'
-                }, {
-                  id: 'NRM_Cape_York',
-                  name: 'Cape York'
-                }, {
-                  id: 'NRM_Central_West',
-                  name: 'Central West'
-                }, {
-                  id: 'NRM_Condamine',
-                  name: 'Condamine'
-                }, {
-                  id: 'NRM_Cooperative_Management_Area',
-                  name: 'Cooperative Management Area'
-                }, {
-                  id: 'NRM_Corangamite',
-                  name: 'Corangamite'
-                }, {
-                  id: 'NRM_Desert_Channels',
-                  name: 'Desert Channels'
-                }, {
-                  id: 'NRM_East_Gippsland',
-                  name: 'East Gippsland'
-                }, {
-                  id: 'NRM_Eyre_Peninsula',
-                  name: 'Eyre Peninsula'
-                }, {
-                  id: 'NRM_Fitzroy',
-                  name: 'Fitzroy'
-                }, {
-                  id: 'NRM_Glenelg_Hopkins',
-                  name: 'Glenelg Hopkins'
-                }, {
-                  id: 'NRM_Goulburn_Broken',
-                  name: 'Goulburn Broken'
-                }, {
-                  id: 'NRM_Hawkesbury-Nepean',
-                  name: 'Hawkesbury-Nepean'
-                }, {
-                  id: 'NRM_Hunter-Central_Rivers',
-                  name: 'Hunter-Central_Rivers'
-                }, {
-                  id: 'NRM_Kangaroo_Island',
-                  name: 'Kangaroo Island'
-                }, {
-                  id: 'NRM_Lachlan',
-                  name: 'Lachlan'
-                }, {
-                  id: 'NRM_Lower_Murray_Darling',
-                  name: 'Lower Murray Darling'
-                }, {
-                  id: 'NRM_Mackay_Whitsunday',
-                  name: 'Mackay Whitsunday'
-                }, {
-                  id: 'NRM_Mallee',
-                  name: 'Mallee'
-                }, {
-                  id: 'NRM_Murray',
-                  name: 'Murray'
-                }, {
-                  id: 'NRM_Murrumbidgee',
-                  name: 'Murrumbidgee'
-                }, {
-                  id: 'NRM_Namoi',
-                  name: 'Namoi'
-                }, {
-                  id: 'NRM_North',
-                  name: 'North'
-                }, {
-                  id: 'NRM_North_Central',
-                  name: 'North Central'
-                }, {
-                  id: 'NRM_North_East',
-                  name: 'North East'
-                }, {
-                  id: 'NRM_North_West',
-                  name: 'North West'
-                }, {
-                  id: 'NRM_Northern_Agricultural',
-                  name: 'Northern Agricultural'
-                }, {
-                  id: 'NRM_Northern_Gulf',
-                  name: 'Northern Gulf'
-                }, {
-                  id: 'NRM_Northern_Rivers',
-                  name: 'Northern Rivers'
-                }, {
-                  id: 'NRM_Northern_Territory',
-                  name: 'Northern Territory'
-                }, {
-                  id: 'NRM_Northern_and_Yorke',
-                  name: 'Northern and Yorke'
-                }, {
-                  id: 'NRM_Perth',
-                  name: 'Perth'
-                }, {
-                  id: 'NRM_Port_Phillip_and_Western_Port',
-                  name: 'Port Phillip and Western Port'
-                }, {
-                  id: 'NRM_Rangelands',
-                  name: 'Rangelands'
-                }, {
-                  id: 'NRM_South',
-                  name: 'South'
-                }, {
-                  id: 'NRM_South_Australian_Arid_Lands',
-                  name: 'South Australian Arid Lands'
-                }, {
-                  id: 'NRM_South_Australian_Murray_Darling_Basin',
-                  name: 'South Australian Murray Darling Basin'
-                }, {
-                  id: 'NRM_South_Coast',
-                  name: 'South Coast'
-                }, {
-                  id: 'NRM_South_East',
-                  name: 'South East'
-                }, {
-                  id: 'NRM_South_East_Queensland',
-                  name: 'South East Queensland'
-                }, {
-                  id: 'NRM_South_West',
-                  name: 'South West'
-                }, {
-                  id: 'NRM_South_West_Queensland',
-                  name: 'South West Queensland'
-                }, {
-                  id: 'NRM_Southern_Gulf',
-                  name: 'Southern Gulf'
-                }, {
-                  id: 'NRM_Southern_Rivers',
-                  name: 'Southern Rivers'
-                }, {
-                  id: 'NRM_Sydney_Metro',
-                  name: 'Sydney Metro'
-                }, {
-                  id: 'NRM_Torres_Strait',
-                  name: 'Torres Strait'
-                }, {
-                  id: 'NRM_West_Gippsland',
-                  name: 'West Gippsland'
-                }, {
-                  id: 'NRM_Western',
-                  name: 'Western'
-                }, {
-                  id: 'NRM_Wet_Tropics',
-                  name: 'Wet Tropics'
-                }, {
-                  id: 'NRM_Wimmera',
-                  name: 'Wimmera'
-                }
-              ]
-            }, {
-              id: 'state',
-              name: 'State, territory',
-              regions: [
-                {
-                  id: 'State_Australian_Capital_Territory',
-                  name: 'ACT'
-                }, {
-                  id: 'State_New_South_Wales',
-                  name: 'New South Wales'
-                }, {
-                  id: 'State_Northern_Territory',
-                  name: 'Northern Territory'
-                }, {
-                  id: 'State_Queensland',
-                  name: 'Queensland'
-                }, {
-                  id: 'State_South_Australia',
-                  name: 'South Australia'
-                }, {
-                  id: 'State_Tasmania',
-                  name: 'Tasmania'
-                }, {
-                  id: 'State_Victoria',
-                  name: 'Victoria'
-                }, {
-                  id: 'State_Western_Australia',
-                  name: 'Western Australia'
-                }
-              ]
-            }
-          ]
-        });
-      }, 500 + (500 * Math.random()));
       return fetch.promise();
     },
     buildRegionList: function(data) {
@@ -451,11 +237,9 @@
       return this.updateSummary();
     },
     sectionId: function(sectionDom) {
-      debug('AppView.sectionId');
       return $(sectionDom).find('input').attr('value');
     },
     sectionName: function(sectionDom) {
-      debug('AppView.sectionName');
       return this.sectionInfo(sectionDom).name;
     },
     sectionInfo: function(sectionDom) {
@@ -468,7 +252,7 @@
         };
       })(this)).get().reverse();
       parentIds.push(this.sectionId(sectionDom));
-      this.selectedSections.push(parentIds.join('.'));
+      this.selectedSections.push(this.sectionId(sectionDom));
       info = {
         sections: this.possibleSections
       };
@@ -523,8 +307,6 @@
         year: this.selectedYear,
         content: content
       };
-      debug(contentList);
-      debug(summary);
       this.$('.reviewblock').html(AppView.templates.reviewBlock(summary));
       this.$('.reviewblock').toggleClass('regionselected', this.selectedRegionInfo !== void 0);
       return this.$('.reviewblock').toggleClass('yearselected', this.selectedYear !== void 0);
@@ -537,7 +319,7 @@
       regionTypeSelector: _.template("<div class=\"regiontypeselector\" id=\"regiontype-<%= id %>\">\n    <label class=\"name\"><input\n        class=\"regiontype\"\n        name=\"regiontype\"\n        type=\"radio\"\n        value=\"<%= id %>\"\n    /> <%= name %>\n    </label>\n    <div class=\"regionselectorwrapper\"><select class=\"regionselector\">\n        <option value=\"\" disabled=\"disabled\" selected=\"selected\">select a region&hellip;</option>\n        <%= optionList %>\n    </select></div>\n</div>"),
       regionSelector: _.template("<option value=\"<%= id %>\"><%= name %></option>"),
       yearSelector: _.template("<div class=\"yearrow\" id=\"year-<%= year %>\">\n    <label class=\"name\"><input\n        class=\"yearselector\"\n        name=\"yearselector\"\n        type=\"radio\"\n        value=\"<%= year %>\"\n    /> <%= year %></label>\n</div>"),
-      sectionSelector: _.template("<div class=\"sectionselector\" id=\"section-<%= id %>\">\n    <label class=\"name\"\n        <% if (presence == 'required') { print('title=\"This section is required\"'); } %>\n    ><input\n        type=\"checkbox\"\n        value=\"<%= id %>\"\n        checked=\"checked\"\n        <% if (presence == 'required') { print('disabled=\"disabled\"'); } %>\n    /> <%= name %></label>\n    <p class=\"description\"><%= description %></p>\n\n</div>"),
+      sectionSelector: _.template("<div class=\"sectionselector<% if (initial != 'included') { print(' unselected'); } %>\" id=\"section-<%= id %>\">\n    <label class=\"name\"\n        <% if (presence == 'required') { print('title=\"This section is required\"'); } %>\n    ><input\n        type=\"checkbox\"\n        value=\"<%= id %>\"\n        <% if (initial == 'included') { print('checked=\"checked\"'); } %>\n        <% if (presence == 'required') { print('disabled=\"disabled\"'); } %>\n    /> <%= name %></label>\n    <p class=\"description\"><%= description %></p>\n\n</div>"),
       subsections: _.template("<div class=\"subsections clearfix\">\n</div>")
     }
   });

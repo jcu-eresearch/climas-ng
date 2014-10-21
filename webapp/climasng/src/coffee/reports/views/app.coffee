@@ -156,139 +156,7 @@ AppView = Backbone.View.extend {
         #                     }
         #                 ]
         #             },{
-        #                 id: 'biodiversity'
-        #                 name: 'Biodiversity Review'
-        #                 description: 'a description of the region\'s current and projected biodiversity.'
-        #                 presence: 'optional'
-        #                 sections: [
-        #                     {
-        #                         id: 'overall'
-        #                         name: 'Overall'
-        #                         description: 'current and projected biodiversity over all modelled species.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'mammals'
-        #                         name: 'Mammals'
-        #                         description: 'current and projected biodiversity over mammal species.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'amphibians'
-        #                         name: 'Amphibians'
-        #                         description: 'current and projected biodiversity over amphibian species.'
-        #                         presence: 'optional'
-        #                         sections: [{
-        #                                 id: 'allamphibians'
-        #                                 name: 'All'
-        #                                 description: 'current and projected biodiversity over all amphibian species.'
-        #                                 presence: 'optional'
-        #                                 sections: []
-        #                             },{
-        #                                 id: 'streamfrogs'
-        #                                 name: 'Stream frogs'
-        #                                 description: 'current and projected biodiversity over stream frogs.'
-        #                                 presence: 'optional'
-        #                                 sections: []
-        #                             }
-        #                         ]
-        #                     },{
-        #                         id: 'reptiles'
-        #                         name: 'Reptiles'
-        #                         description: 'current and projected biodiversity over reptile species.'
-        #                         presence: 'optional'
-        #                         sections: [{
-        #                                 id: 'allreptiles'
-        #                                 name: 'All'
-        #                                 description: 'current and projected biodiversity over all reptile species.'
-        #                                 presence: 'optional'
-        #                                 sections: []
-        #                             },{
-        #                                 id: 'turtles'
-        #                                 name: 'Turtles'
-        #                                 description: 'current and projected biodiversity over turtles.'
-        #                                 presence: 'optional'
-        #                                 sections: []
-        #                             }
-        #                         ]
-        #                     },{
-        #                         id: 'birds'
-        #                         name: 'Birds'
-        #                         description: 'current and projected biodiversity over bird species.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'freshwaterfish'
-        #                         name: 'Freshwater fish'
-        #                         description: 'current and projected biodiversity over freshwater fish species.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     }
-        #                 ]
-        #             },{
-        #                 id: 'pests'
-        #                 name: 'Pest Species'
-        #                 description: 'climate suitability and distribution of pest species.'
-        #                 presence: 'optional'
-        #                 sections: [
-        #                     {
-        #                         id: 'pestplants'
-        #                         name: 'Pest Plants'
-        #                         description: 'summary of projections for selected pest plants.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     }
-        #                 ]
-        #             },{
-        #                 id: 'appendixes'
-        #                 name: 'Appendices'
-        #                 description: 'tables and other appendices.'
-        #                 presence: 'required'
-        #                 sections: [
-        #                     {
-        #                         id: 'observedmammallist'
-        #                         name: 'Mammals Present'
-        #                         description: 'list of mammals currently or projected to be present in region.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'observedamphibianslist'
-        #                         name: 'Amphibians Present'
-        #                         description: 'list of amphibians currently or projected to be present in region.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'observedstreamfrogslist'
-        #                         name: 'Steam Frogs Present'
-        #                         description: 'list of stream frogs currently or projected to be present in region.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'observedreptileslist'
-        #                         name: 'Reptiles Present'
-        #                         description: 'list of reptiles currently or projected to be present in region.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'observedturtleslist'
-        #                         name: 'Turtles Present'
-        #                         description: 'list of turtles currently or projected to be present in region.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'observedbirdslist'
-        #                         name: 'Birds Present'
-        #                         description: 'list of birds currently or projected to be present in region.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'science'
-        #                         name: 'Science'
-        #                         description: 'description of the climate and species distribution modelling used to generate the data in the report.'
-        #                         presence: 'required'
-        #                         sections: []
-        #                     }
-        #                 ]
+        #                 // ...
         #             }
         #         ]
         #     })
@@ -343,103 +211,34 @@ AppView = Backbone.View.extend {
     fetchRegions: ()->
         debug 'AppView.fetchRegions'
 
-        # later this will be an ajax call, for now make a deferred object
-        fetch = $.Deferred()
-
+        fetch = $.ajax @dataUrl + '/reportregions'
         fetch.done (data)=>
             @buildRegionList data
 
-        # pretend it took a while to get the data..
-        setTimeout ()->
-            fetch.resolve({
-                regiontypes: [
-                    {
-                        id: 'nrm'
-                        name: 'NRM region'
-                        regions: [
-                            { id: 'NRM_ACT', name: 'ACT' },
-                            { id: 'NRM_Adelaide_and_Mount_Lofty_Ranges', name: 'Adelaide and Mount Lofty Ranges' },
-                            { id: 'NRM_Alinytjara_Wilurara', name: 'Alinytjara Wilurara' },
-                            { id: 'NRM_Avon', name: 'Avon' },
-                            { id: 'NRM_Border_Rivers-Gwydir', name: 'Border Rivers-Gwydir' },
-                            { id: 'NRM_Border_Rivers_Maranoa-Balonne', name: 'Border Rivers Maranoa-Balonne' },
-                            { id: 'NRM_Burdekin', name: 'Burdekin' },
-                            { id: 'NRM_Burnett_Mary', name: 'Burnett Mary' },
-                            { id: 'NRM_Cape_York', name: 'Cape York' },
-                            { id: 'NRM_Central_West', name: 'Central West' },
-                            { id: 'NRM_Condamine', name: 'Condamine' },
-                            { id: 'NRM_Cooperative_Management_Area', name: 'Cooperative Management Area' },
-                            { id: 'NRM_Corangamite', name: 'Corangamite' },
-                            { id: 'NRM_Desert_Channels', name: 'Desert Channels' },
-                            { id: 'NRM_East_Gippsland', name: 'East Gippsland' },
-                            { id: 'NRM_Eyre_Peninsula', name: 'Eyre Peninsula' },
-                            { id: 'NRM_Fitzroy', name: 'Fitzroy' },
-                            { id: 'NRM_Glenelg_Hopkins', name: 'Glenelg Hopkins' },
-                            { id: 'NRM_Goulburn_Broken', name: 'Goulburn Broken' },
-                            { id: 'NRM_Hawkesbury-Nepean', name: 'Hawkesbury-Nepean' },
-                            { id: 'NRM_Hunter-Central_Rivers', name: 'Hunter-Central_Rivers' },
-                            { id: 'NRM_Kangaroo_Island', name: 'Kangaroo Island' },
-                            { id: 'NRM_Lachlan', name: 'Lachlan' },
-                            { id: 'NRM_Lower_Murray_Darling', name: 'Lower Murray Darling' },
-                            { id: 'NRM_Mackay_Whitsunday', name: 'Mackay Whitsunday' },
-                            { id: 'NRM_Mallee', name: 'Mallee' },
-                            { id: 'NRM_Murray', name: 'Murray' },
-                            { id: 'NRM_Murrumbidgee', name: 'Murrumbidgee' },
-                            { id: 'NRM_Namoi', name: 'Namoi' },
-                            { id: 'NRM_North', name: 'North' },
-                            { id: 'NRM_North_Central', name: 'North Central' },
-                            { id: 'NRM_North_East', name: 'North East' },
-                            { id: 'NRM_North_West', name: 'North West' },
-                            { id: 'NRM_Northern_Agricultural', name: 'Northern Agricultural' },
-                            { id: 'NRM_Northern_Gulf', name: 'Northern Gulf' },
-                            { id: 'NRM_Northern_Rivers', name: 'Northern Rivers' },
-                            { id: 'NRM_Northern_Territory', name: 'Northern Territory' },
-                            { id: 'NRM_Northern_and_Yorke', name: 'Northern and Yorke' },
-                            { id: 'NRM_Perth', name: 'Perth' },
-                            { id: 'NRM_Port_Phillip_and_Western_Port', name: 'Port Phillip and Western Port' },
-                            { id: 'NRM_Rangelands', name: 'Rangelands' },
-                            { id: 'NRM_South', name: 'South' },
-                            { id: 'NRM_South_Australian_Arid_Lands', name: 'South Australian Arid Lands' },
-                            { id: 'NRM_South_Australian_Murray_Darling_Basin', name: 'South Australian Murray Darling Basin' },
-                            { id: 'NRM_South_Coast', name: 'South Coast' },
-                            { id: 'NRM_South_East', name: 'South East' },
-                            { id: 'NRM_South_East_Queensland', name: 'South East Queensland' },
-                            { id: 'NRM_South_West', name: 'South West' },
-                            { id: 'NRM_South_West_Queensland', name: 'South West Queensland' },
-                            { id: 'NRM_Southern_Gulf', name: 'Southern Gulf' },
-                            { id: 'NRM_Southern_Rivers', name: 'Southern Rivers' },
-                            { id: 'NRM_Sydney_Metro', name: 'Sydney Metro' },
-                            { id: 'NRM_Torres_Strait', name: 'Torres Strait' },
-                            { id: 'NRM_West_Gippsland', name: 'West Gippsland' },
-                            { id: 'NRM_Western', name: 'Western' },
-                            { id: 'NRM_Wet_Tropics', name: 'Wet Tropics' },
-                            { id: 'NRM_Wimmera', name: 'Wimmera' }
-                        ]
-                    # },{
-                    #     id: 'ibra'
-                    #     name: 'IBRA bioregion'
-                    #     regions: []
-                    # },{
-                    #     id: 'park'
-                    #     name: 'Parks, reserves'
-                    #     regions: []
-                    },{
-                        id: 'state'
-                        name: 'State, territory'
-                        regions: [
-                            { id: 'State_Australian_Capital_Territory', name: 'ACT' },
-                            { id: 'State_New_South_Wales', name: 'New South Wales' },
-                            { id: 'State_Northern_Territory', name: 'Northern Territory' },
-                            { id: 'State_Queensland', name: 'Queensland' },
-                            { id: 'State_South_Australia', name: 'South Australia' },
-                            { id: 'State_Tasmania', name: 'Tasmania' },
-                            { id: 'State_Victoria', name: 'Victoria' },
-                            { id: 'State_Western_Australia', name: 'Western Australia' }
-                        ]
-                    }
-                ]
-            })
-        , 500 + (500 * Math.random())
+        # # pretend it took a while to get the data..
+        # setTimeout ()->
+        #     fetch.resolve({
+        #         regiontypes: [
+        #             {
+        #                 id: 'nrm'
+        #                 name: 'NRM region'
+        #                 regions: [
+        #                     { id: 'NRM_ACT', name: 'ACT' },
+        #                     { id: 'NRM_Adelaide_and_Mount_Lofty_Ranges', name: 'Adelaide and Mount Lofty Ranges' },
+        #                     { id: 'NRM_Alinytjara_Wilurara', name: 'Alinytjara Wilurara' },
+        #                     { id: 'NRM_Avon', name: 'Avon' },
+        #                     { id: 'NRM_Border_Rivers-Gwydir', name: 'Border Rivers-Gwydir' },
+        #                     // ...
+        #                     { id: 'NRM_Wimmera', name: 'Wimmera' }
+        #                 ]
+        #             },{
+        #                 id: 'ibra'
+        #                 name: 'IBRA bioregion'
+        #                 regions: []
+        #             }
+        #         ]
+        #     })
+        # , 500 + (500 * Math.random())
 
         # now return a promise in case we need to wait for this
         return fetch.promise()
@@ -552,12 +351,12 @@ AppView = Backbone.View.extend {
     # update report summary
     # ---------------------------------------------------------------
     sectionId: (sectionDom)->
-        debug 'AppView.sectionId'
+        # debug 'AppView.sectionId'
 
         $(sectionDom).find('input').attr 'value'
     # ---------------------------------------------------------------
     sectionName: (sectionDom)->
-        debug 'AppView.sectionName'
+        # debug 'AppView.sectionName'
 
         @sectionInfo(sectionDom).name
     # ---------------------------------------------------------------
@@ -569,10 +368,12 @@ AppView = Backbone.View.extend {
         parentIds = parentage.map( (i, elem)=>
             @sectionId elem
         ).get().reverse()
+
         # add this section's own id
         parentIds.push @sectionId(sectionDom)
 
-        @selectedSections.push parentIds.join('.')
+        # while we're here, add this to the selected sections list
+        @selectedSections.push @sectionId(sectionDom)
 
         # now walk into the sections hierarchy
         info = { sections: @possibleSections }
@@ -621,9 +422,6 @@ AppView = Backbone.View.extend {
             year: @selectedYear
             content: content
         }
-
-        debug contentList
-        debug summary
 
         @$('.reviewblock').html AppView.templates.reviewBlock(summary)
         @$('.reviewblock').toggleClass 'regionselected', (@selectedRegionInfo isnt undefined)
@@ -691,13 +489,13 @@ AppView = Backbone.View.extend {
     """
     # ---------------------------------------------------------------
     sectionSelector: _.template """
-        <div class="sectionselector" id="section-<%= id %>">
+        <div class="sectionselector<% if (initial != 'included') { print(' unselected'); } %>" id="section-<%= id %>">
             <label class="name"
                 <% if (presence == 'required') { print('title="This section is required"'); } %>
             ><input
                 type="checkbox"
                 value="<%= id %>"
-                checked="checked"
+                <% if (initial == 'included') { print('checked="checked"'); } %>
                 <% if (presence == 'required') { print('disabled="disabled"'); } %>
             /> <%= name %></label>
             <p class="description"><%= description %></p>

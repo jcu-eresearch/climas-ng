@@ -863,7 +863,7 @@ nav .main.menu > li {
   border-left: 1px solid #2e3240;
 }
 nav .main.menu > li.current {
-  background: -webkit-gradient(linear, left top, left bottom, from(#1e212a), to(#2e3240));
+  background: -webkit-gradient(linear, left top, left bottom, from(top), color-stop(0, #1e212a), to(#2e3240));
   background: -webkit-linear-gradient(top, #1e212a 0, #2e3240 100%);
   background: linear-gradient(top, #1e212a 0, #2e3240 100%);
   border-right: 1px solid #2e3240;
@@ -898,7 +898,7 @@ nav ul li ul {
 }
 nav ul li ul > li {
   background: #cfc6a9;
-  background: -webkit-gradient(linear, left top, left bottom, from(#efe6c5), to(#cfc6a9));
+  background: -webkit-gradient(linear, left top, left bottom, from(top), color-stop(0, #efe6c5), to(#cfc6a9));
   background: -webkit-linear-gradient(top, #efe6c5 0, #cfc6a9 100%);
   background: linear-gradient(top, #efe6c5 0, #cfc6a9 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);

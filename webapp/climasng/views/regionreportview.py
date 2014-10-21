@@ -34,8 +34,6 @@ class RegionReportView(object):
 
         root_section = SectionData(self.request.registry.settings['climas.report_section_path'])
 
-        print(root_section.toJson())
-
         da = DocAssembler(
             doc_data,
             root_section,
@@ -48,10 +46,11 @@ class RegionReportView(object):
         with NamedTemporaryFile(prefix='CliMAS-Report-', suffix='.pdf', delete=True) as tf:
             tfpath = os.path.abspath(tf.name)
 
-            print(tfpath)
-
-            args = ('-o', tfpath, '--template=' + self.request.registry.settings['climas.doc_template_path'] + '/default.latex')
-            doc = pypandoc.convert(da.result(), 'latex', format='markdown', extra_args=args)
+            doc = pypandoc.convert(da.result(), 'latex', format='markdown', extra_args=(
+                '-o', tfpath,
+                '--latex-engine=/usr/local/texlive/2014/bin/x86_64-linux/pdflatex',
+                '--template=' + self.request.registry.settings['climas.doc_template_path'] + '/default.latex'
+            ))
 
             response = FileResponse(tfpath)
             # response.content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"

@@ -108,7 +108,7 @@ body { height: 100% }
         // &:empty { display: none; }
 
         &:after {
-            content: 'select year and region\a to see a report summary';
+            content: 'select year and region\a to see a report summary\a and download a report';
             white-space: pre;
             color: #000;
             text-shadow: none;
@@ -221,7 +221,7 @@ body { height: 100% }
                 margin-top: -1em;
                 height: 2em;
                 line-height: 2em;
-                width: 66%;
+                width: 50%;
                 border: 1px solid darken(@bodybackground, 5%);
                 border-radius: 2px;
                 overflow: hidden;
@@ -264,7 +264,7 @@ body { height: 100% }
             &.typeselected .regionselectorwrapper { display: block; }
 
             &.typeselected.regionselected {
-                background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 66%);
+                background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 100%);
             }
         }
 
@@ -293,7 +293,7 @@ body { height: 100% }
             }
 
             &.yearselected {
-                background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 66%);
+                background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 100%);
             }
         }
 
@@ -302,7 +302,7 @@ body { height: 100% }
         .sectionselector {
             border-top-right-radius: 2px;
             border-bottom-right-radius: 2px;
-            background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 66%);
+            background-image: linear-gradient(to left, rgba(0,200,0, 0.1), rgba(255,255,255, 0) 100%);
 
             .name {
                 background: @bodybackground;
@@ -327,7 +327,8 @@ body { height: 100% }
             }
 
             .description {
-                padding: 0.5em 0.5em 0.66em 0;
+                line-height: 1.05;
+                padding: 0.75em 0.5em 0.66em 0;
                 margin: 0 0 0 3em;
             }
 
@@ -368,12 +369,15 @@ body { height: 100% }
         }
 
         // vertical padding gets smaller for more-nested sections
-        .sectionselector { margin: 2em 0 2em 2em; }
-        .subsections .sectionselector { margin: 1em 0 1em 2em; }
-        .subsections .subsections .sectionselector { margin: 0.5em 0 0.5em 2em; }
+        // .sectionselector { margin: 2em 0 2em 2em; }
+        // .subsections .sectionselector { margin: 1em 0 1em 2em; }
+        // .subsections .subsections .sectionselector { margin: 0.5em 0 0.5em 2em; }
+        .sectionselector { margin: 1em 0 1em 2em; }
+        .subsections .sectionselector { margin: 0.5em 0 0.5em 2em; }
+        .subsections .subsections .sectionselector { margin: 0.25em 0 0.25em 2em; }
 
         .sectionselector.unselected {
-            background-image: linear-gradient(to left, rgba(200,0,0, 0.1), rgba(255,255,255, 0) 66%);
+            background-image: linear-gradient(to left, rgba(220,150,150, 0.1), rgba(255,255,255, 0) 100%);
 
             .description { opacity: 0.66; transition: all 0.25s; }
             &:hover .description { opacity: 1; }

@@ -5,6 +5,11 @@ import os
 from string import Template
 from decimal import Decimal
 
+# database stuff
+from sqlalchemy.exc import DBAPIError
+from sqlalchemy import or_
+from climasng.models import *
+
 from climasng.parsing.prosemaker import ProseMaker
 
 class DocAssembler(object):
@@ -44,15 +49,21 @@ class DocAssembler(object):
         self._region['region_url'] = self._region_url_template.substitute(self._region)
         self._region['region_data_path'] = self._region_data_path_template.substitute(self._region)
 
-        json_string = urllib2.urlopen(self._region['region_url']).read()
-        data = json.loads(
-                    json_string,
-                    parse_float=Decimal,
-                    parse_int=Decimal,
-                    parse_constant=Decimal
+        # add the old climate info
+        clim_json_string = urllib2.urlopen(self._region['region_url'] + '/climate').read()
+        clim_data = json.loads(
+            clim_json_string,
+            parse_float=Decimal, parse_int=Decimal, parse_constant=Decimal
         )
+        self._region.update(clim_data) # merge, clim wins
 
-        self._region.update(data) # merge, json wins
+        # add the new biodiveristy data
+        biodiv_json_string = urllib2.urlopen(self._region['region_url'] + '/biodiversity').read()
+        biodiv_data = json.loads(
+            biodiv_json_string,
+            parse_float=Decimal, parse_int=Decimal, parse_constant=Decimal
+        )
+        self._region.update(biodiv_data) # merge, biodiv wins
 
         self.addSectionsToData() # add indicators showing included sections
 
@@ -68,7 +79,7 @@ class DocAssembler(object):
         for sect in self._sect_data:
             if sect.id in self._selected_sections:
                 sources.append(self.getSectionSource(sect))
-        self._source = "\n\n".join(sources)
+        self._source = ''.join(sources)
         return self._source
 
 
@@ -82,8 +93,38 @@ class DocAssembler(object):
 
     def getSectionSource(self, sect):
         try:
-            with file(sect.contentpath) as sourcefile:
-                return sourcefile.read()
+            source = []
+            with open(sect.contentpath) as contentf:
+                # start with the normal content
+                source.append( contentf.read() )
+                # if it's a query, run the query and append the result
+                if sect.is_query:
+                    with open(sect.querypath) as qf, open(sect.rowtemplatepath) as rtf:
+                        query = qf.read()
+                        region_name = ' '.join(self._region_id.split('_')[1:])
+                        print(region_name)
+                        result_set = DBSession.execute(query, {
+                            "year": self._year,
+                            "regionname": region_name,
+                            "regiontype": self._region_type
+                        })
+                        # separate template for odd and even rows
+                        even_row = Template(rtf.read())
+                        odd_row = even_row
+                        if sect.has_oddrowtemplate:
+                            with open(sect.oddrowtemplatepath) as ortf:
+                                odd_row = Template(ortf.read())
+                        index = -1
+                        # now resolve the row template with this row's data
+                        for result in result_set:
+                            index += 1
+                            if index % 2 != 0:
+                                source.append(odd_row.safe_substitute(result))
+                            else:
+                                source.append(even_row.safe_substitute(result))
+
+                return ''.join(source)
+
         except IOError as e:
             return ''
 
