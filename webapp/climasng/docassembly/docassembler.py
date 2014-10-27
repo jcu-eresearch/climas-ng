@@ -32,6 +32,8 @@ class DocAssembler(object):
         self._format = doc_data['format']
         self._year = doc_data['year']
 
+        self._section_debug = self._settings.get('section_debug', False)
+
         self.getRegionData()
         self.getSource()
 
@@ -94,6 +96,17 @@ class DocAssembler(object):
     def getSectionSource(self, sect):
         try:
             source = []
+            if self._section_debug:
+                # work out a shortish path to this section
+                this_file_dirs = __file__.split(os.path.sep)
+                sect_dirs = sect.contentpath.split(os.path.sep)[:-1]
+                for dir in this_file_dirs:
+                    if sect_dirs[0] == dir:
+                        sect_dirs = sect_dirs[1:]
+                    else:
+                        break
+                # write out the shortish path to the content
+                source.append("\n\n* * *\n( `" + os.path.sep.join(sect_dirs) + "` )\n\n")
             with open(sect.contentpath) as contentf:
                 # start with the normal content
                 source.append( contentf.read() )
@@ -102,7 +115,6 @@ class DocAssembler(object):
                     with open(sect.querypath) as qf, open(sect.rowtemplatepath) as rtf:
                         query = qf.read()
                         region_name = ' '.join(self._region_id.split('_')[1:])
-                        print(region_name)
                         result_set = DBSession.execute(query, {
                             "year": self._year,
                             "regionname": region_name,
