@@ -40,6 +40,7 @@ class RegionReportView(object):
             settings={
                 'region_url_pattern': 'http://localhost:8080/regiondata/${region_type}/${region_id}',
                 'region_data_path_pattern': self.request.registry.settings['climas.region_data_path'] + '/${region_type}/${region_id}',
+                'section_debug': True
             },
         )
 
