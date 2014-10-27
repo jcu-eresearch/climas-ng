@@ -68,6 +68,24 @@ class TestProseMakerConditions(ProseMakerTestCase):
             for sample_doc in sample_docs:
                 self.assertParses(sample_doc, sample_result)
     # ------------------------------------------------------- test --
+    def test_pm_condition_rangeinequality_varnum_comparison(self):
+        self.pm.data = { 'one': 1, 'two': 2, 'aten': 10 }
+        samples = {
+            # these sources should result in 'showing'
+            'showing':  [   '[[aten >3< 6]]showing',
+                            '[[6 >3< aten]]showing'
+            ],
+            # all these docs should result in ''
+            '':         [   '[[aten >2< 11]]hiding',
+                            '[[11 >2< aten]]hiding',
+                            '[[aten >5< 6]]hiding',
+                            '[[1 >0< one]]hiding'
+            ]
+        }
+        for sample_result, sample_docs in samples.items():
+            for sample_doc in sample_docs:
+                self.assertParses(sample_doc, sample_result)
+    # ------------------------------------------------------- test --
     def test_pm_condition_rangeleftrocket_litnum_comparison(self):
         samples = {
             # these sources should result in 'showing'
