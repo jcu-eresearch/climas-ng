@@ -1,0 +1,7 @@
+{
+    "id": "appendicesgained",
+    "name": "Species Gained",
+    "description": "Lists of species not currently present that may move into the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

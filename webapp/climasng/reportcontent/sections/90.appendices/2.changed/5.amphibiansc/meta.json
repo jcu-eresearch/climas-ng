@@ -1,0 +1,7 @@
+{
+    "id": "amphibianschanged",
+    "name": "Amphibians",
+    "description": "Amphibians gained or lost in the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

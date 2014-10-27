@@ -1,0 +1,7 @@
+{
+    "id": "reptilesgained",
+    "name": "Reptiles",
+    "description": "Reptiles not currently present that may move into the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

@@ -1,9 +1,11 @@
 
-###Rainfall
+### Rainfall
 
 Currently, the mean annual rainfall for {{ rg_name }} is {{baseline_p_mean, round}} mL, experiencing a range of averages between {{baseline_p_min, round}} mL and {{baseline_p_max, round}} mL.
 
-Future rainfall projections are much more variable.  By {{rpt_year}}, rainfall is projected to be in the range {{ hi_{{rpt_year}}_p_mean_10th, round}} &ndash; {{ hi_{{rpt_year}}_p_mean_90th, round}} mL.
+Future rainfall projections are much more variable.  GCM projections for {{rpt_year}} fall in the range {{ hi_{{rpt_year}}_p_mean_10th, round}} &ndash; {{ hi_{{rpt_year}}_p_mean_90th, round}} mL.
+
+TODO: DELETE THE FOLLOWING BIT
 
 - baseline_p_mean {{baseline_p_mean}}
 - hi_2065_p_mean_10th {{hi_2065_p_mean_10th}}

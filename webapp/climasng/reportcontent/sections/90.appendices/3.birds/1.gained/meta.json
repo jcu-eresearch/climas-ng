@@ -1,7 +1,0 @@
-{
-    "id": "birdsgained",
-    "name": "Birds Gained",
-    "description": "Birds not currently present that may move into the region.",
-    "initial": "excluded",
-    "presence": "optional"
-}

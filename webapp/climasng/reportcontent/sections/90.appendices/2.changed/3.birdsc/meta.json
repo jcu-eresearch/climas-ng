@@ -1,0 +1,7 @@
+{
+    "id": "birdschanged",
+    "name": "Birds",
+    "description": "Birds gained or lost in the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

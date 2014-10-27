@@ -1,7 +1,0 @@
-{
-    "id": "sppallpresent",
-    "name": "Species Present",
-    "description": "Species across all modelled taxa gained, lost or maintained in the region.",
-    "initial": "included",
-    "presence": "optional"
-}

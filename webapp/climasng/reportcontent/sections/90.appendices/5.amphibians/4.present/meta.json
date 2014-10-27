@@ -1,7 +1,0 @@
-{
-    "id": "amphibianspresent",
-    "name": "Amphibians Present",
-    "description": "Amphibians gained, lost or maintained in the region.",
-    "initial": "included",
-    "presence": "optional"
-}

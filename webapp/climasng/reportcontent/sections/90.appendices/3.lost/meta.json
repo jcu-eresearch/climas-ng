@@ -1,0 +1,7 @@
+{
+    "id": "appendiceslost",
+    "name": "Species Lost",
+    "description": "Lists of species currently present that may leave the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

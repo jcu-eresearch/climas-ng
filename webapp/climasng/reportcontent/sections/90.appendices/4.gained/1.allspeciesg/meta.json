@@ -1,0 +1,7 @@
+{
+    "id": "sppallgained",
+    "name": "All Species",
+    "description": "All modelled species not currently present that may move into the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

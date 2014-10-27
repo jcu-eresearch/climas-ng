@@ -1,7 +1,0 @@
-{
-     "id": "allreptiles",
-     "name": "All",
-     "description": "current and projected biodiversity over all reptile species.",
-    "initial": "included",
-     "presence": "optional"
-}

@@ -1,0 +1,7 @@
+{
+    "id": "appendicespresent",
+    "name": "Species Present",
+    "description": "Lists of species maintained, gained, or lost in the region.",
+    "initial": "included",
+    "presence": "optional"
+}

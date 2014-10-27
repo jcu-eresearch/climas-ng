@@ -6,8 +6,7 @@ All of Australia is projected to experience warming in the future.  The mean ann
 [[ hi_{{rpt_year}}_t_mean_50th > baseline_t_mean ]]
 By {{rpt_year}}, mean regional temperature is projected to be in the range {{ hi_{{rpt_year}}_t_mean_10th, round 0.1 }} &ndash; {{ hi_{{rpt_year}}_t_mean_90th, round 0.1 }}&deg;C, a mean {{hi_{{rpt_year}}_t_mean_50th - baseline_t_mean, change}} of {{ hi_{{rpt_year}}_t_mean_50th - baseline_t_mean, round 0.1, absolute }}&deg;C.
 [[ rpt_year != 2085 ]]
-By 2085 mean temperatures in the region are likely to be in the range {{ hi_2085_t_mean_10th, round 0.1 }} &ndash; {{ hi_2085_t_mean_90th, round 0.1 }}&deg;C.
-
+By 2085 most GCMs project that mean temperatures in the region will fall in the range {{ hi_2085_t_mean_10th, round 0.1 }} &ndash; {{ hi_2085_t_mean_90th, round 0.1 }}&deg;C.
 [[always]]
 
 Figure 1 tracks increase of mean annual temperature in {{ rg_name }} between 2015 and 2085.

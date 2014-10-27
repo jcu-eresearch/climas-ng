@@ -1,0 +1,7 @@
+{
+    "id": "appendiceschanged",
+    "name": "Species Gained and Lost",
+    "description": "Lists of species that may be gained or lost.",
+    "initial": "excluded",
+    "presence": "optional"
+}

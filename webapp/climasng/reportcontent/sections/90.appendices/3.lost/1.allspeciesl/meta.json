@@ -1,0 +1,7 @@
+{
+    "id": "sppalllost",
+    "name": "All Species",
+    "description": "Species currently present that may be lost to the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

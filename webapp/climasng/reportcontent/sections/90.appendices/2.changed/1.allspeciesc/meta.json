@@ -1,0 +1,7 @@
+{
+    "id": "sppallchanged",
+    "name": "All Species",
+    "description": "Species across all modelled taxa gained or lost in the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

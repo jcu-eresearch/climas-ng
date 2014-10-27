@@ -1,0 +1,7 @@
+{
+    "id": "mammalslost",
+    "name": "Mammals",
+    "description": "Mammals currently present that may be lost to the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

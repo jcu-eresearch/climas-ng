@@ -1,7 +1,0 @@
-{
-    "id": "mammalspresent",
-    "name": "Mammals Present",
-    "description": "Mammals gained, lost or maintained in the region.",
-    "initial": "included",
-    "presence": "optional"
-}

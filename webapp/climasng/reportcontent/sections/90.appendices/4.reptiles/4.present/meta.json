@@ -1,7 +1,0 @@
-{
-    "id": "reptilespresent",
-    "name": "Reptiles Present",
-    "description": "Reptiles gained, lost or maintained in the region.",
-    "initial": "included",
-    "presence": "optional"
-}

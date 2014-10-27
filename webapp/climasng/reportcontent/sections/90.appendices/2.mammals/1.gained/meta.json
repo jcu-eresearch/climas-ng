@@ -1,7 +1,0 @@
-{
-    "id": "mammalsgained",
-    "name": "Mammals Gained",
-    "description": "Mammals not currently present that may move into the region.",
-    "initial": "excluded",
-    "presence": "optional"
-}

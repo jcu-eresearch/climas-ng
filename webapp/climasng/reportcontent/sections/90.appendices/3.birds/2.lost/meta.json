@@ -1,7 +1,0 @@
-{
-    "id": "birdslost",
-    "name": "Birds Lost",
-    "description": "Birds currently present that may be lost to the region.",
-    "initial": "excluded",
-    "presence": "optional"
-}
