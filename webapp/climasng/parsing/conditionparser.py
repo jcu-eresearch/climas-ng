@@ -158,6 +158,15 @@ class ConditionVisitor(NodeVisitor):
         return (left_min <= left <= left_max)
 
 
+    def visit_range_neq_comparison(self, node, (left, ws1, pre, range, post, ws2, right)):
+        if isinstance(range, Percentage):
+            range = right * range / Decimal(100)
+
+        left_min = right - range
+        left_max = right + range
+        return not(left_min <= left <= left_max)
+
+
     def visit_range_rightrocket_comparison(self, node, (left, ws1, pre, range, post, ws2, right)):
         if isinstance(range, Percentage):
             range = right * range / Decimal(100)
@@ -284,7 +293,7 @@ class ConditionParser(object):
             percentage = numeric percent_sign
             percent_sign = "%"
 
-            comparison = range_eq_comparison / range_leftrocket_comparison / range_rightrocket_comparison / range_muchlessthan_comparison / range_muchgreaterthan_comparison / simple_comparison
+            comparison = range_eq_comparison / range_neq_comparison / range_leftrocket_comparison / range_rightrocket_comparison / range_muchlessthan_comparison / range_muchgreaterthan_comparison / simple_comparison
 
             simple_comparison = value ws simple_comparator ws value
 
@@ -307,6 +316,10 @@ class ConditionParser(object):
             range_eq_comparison = value ws range_eq_prev range range_eq_post ws value
             range_eq_prev = "="
             range_eq_post = "="
+
+            range_neq_comparison = value ws range_neq_prev range range_neq_post ws value
+            range_neq_prev = ">"
+            range_neq_post = "<"
 
             range_rightrocket_comparison = value ws range_rr_prev range range_rr_post ws value
             range_rr_prev = "="
