@@ -76,8 +76,13 @@ $if(verbatim-in-note)$
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
+% rewrite the longtable command to switch font to footnote size
 \let\oldlongtable\longtable
 \renewcommand{\longtable}{\footnotesize\oldlongtable}
+\let\oldendlongtable\endlongtable
+\renewcommand{\endlongtable}{\oldendlongtable\clearpage}
+\captionsetup{font={bf,footnotesize}}
+\LTcapwidth=8cm
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -138,10 +143,6 @@ $if(lang)$
 $endif$
 \usepackage{titlesec}
 \newcommand{\sectionbreak}{\clearpage}
-
-\let\oldendlongtable\endlongtable
-\renewcommand{\endlongtable}{\oldendlongtable\clearpage}
-
 
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
