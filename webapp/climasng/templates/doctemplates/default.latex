@@ -83,6 +83,7 @@ $if(tables)$
 \renewcommand{\endlongtable}{\oldendlongtable\clearpage}
 \captionsetup{font={bf,footnotesize}}
 \LTcapwidth=8cm
+\renewcommand*{\arraystretch}{1.1}
 $endif$
 $if(graphics)$
 \usepackage{graphicx}

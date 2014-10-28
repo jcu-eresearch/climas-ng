@@ -1,7 +1,7 @@
 
 ### Regional Biodiversity Implications
 
-{{rg_name}} currently hosts {{baseline_b_all_count}} species.
+{{rg_name}} currently hosts {{baseline_b_all_count}} species.  [[ hi_{{rpt_year}}_b_all_gain_50th > baseline_b_all_count / 5 OR hi_{{rpt_year}}_b_all_loss_50th > baseline_b_all_count / 5]]By {{rpt_year}} biodiversity in this region is projected to undergo significant change.
 
 [[  hi_{{rpt_year}}_b_all_count_90th > baseline_b_all_count
 AND hi_{{rpt_year}}_b_all_count_10th >= baseline_b_all_count ]]
@@ -67,65 +67,14 @@ Some models project gains of up to {{hi_{{rpt_year}}_b_all_gain_90th}} species, 
 [[ hi_{{rpt_year}}_b_all_gain_90th == 0 ]]
 However, models agree that by {{rpt_year}} no new species will enter the region.
 
+[[ hi_{{rpt_year}}_b_all_gain_90th > 0 ]]
+In light of possible species gains, it is important to consider that even Australian natives may behave like invasive pests when entering new space.  Interaction with other species has not been modelled.
 
 [[always]]
 
-
-(old stuff below)
-
-[[  hi_{{rpt_year}}_b_all_gain_50th == 0
-and hi_{{rpt_year}}_b_all_loss_50th == 0
-]]
-
-{{rg_name}} currently hosts {{baseline_b_all_count}} species. Median projections estimate that in {{rpt_year}} the region will remain suitable for all of those species.
-[[  hi_{{rpt_year}}_b_all_gain_50th == 0
-and hi_{{rpt_year}}_b_all_loss_50th == 0
-and hi_{{rpt_year}}_b_all_count_10th >5%< hi_{{rpt_year}}_b_all_count_90th]]  GCMs do not all agree, and projections for species count varies from {{hi_{{rpt_year}}_b_all_count_10th}} to {{hi_{{rpt_year}}_b_all_count_90th}}.[[always]]
-
-[[ hi_{{rpt_year}}_b_all_gain_50th == hi_{{rpt_year}}_b_all_loss_50th ]]
-{{rg_name}} currently has climate suitable for {{baseline_b_all_count}}
-species. By  {{rpt_year}}, the total number of species is projected to stay the same, however a change in climate suitability suggests a change in species composition.  The climate is projected to become
-unsuitable for $$hi_{{rpt_year}}_b_all_loss_50th species and suitable for $$high_total_added {{rpt_year}} species.
-
-[[  hi_{{rpt_year}}_b_all_gain_50th > 0
-and hi_{{rpt_year}}_b_all_loss_50th == 0
-]]
-{{rg_name}} currently has climate suitable for {{baseline_b_all_count}}
-species. By  {{rpt_year}} this number is projected to increase by $$high_delta_up_{{rpt_year}} species to $$high_total_total_{{rpt_year}}.
-The climate is likely to remain suitable for species currently
-found in the region.
-
-[[     hi_{{rpt_year}}_b_all_gain_50th > hi_{{rpt_year}}_b_all_loss_50th
-    and hi_{{rpt_year}}_b_all_loss_50th > 0
-]]
-{{rg_name}} currently has climate suitable for {{baseline_b_all_count}}
-species. By  {{rpt_year}} this number is projected to increase to $$high_total_total_{{rpt_year}} species.
-While there is an overall increase in biodiversity, the region is
-likely to lose suitable climate space for of some species currently found in the region.  The climate is projected to become unsuitable for $$hi_{{rpt_year}}_b_all_loss_50th species and suitable for $$hi_{{rpt_year}}_b_all_gain_50th species species from outside the region.
-
-[[      hi_{{rpt_year}}_b_all_gain_50th == 0
-    and hi_{{rpt_year}}_b_all_loss_50th  > 0
-]]
-{{rg_name}} currently has climate suitable for $$high_total_current
-species. By  {{rpt_year}} this number is projected to decrease by $$high_delta_down_{{rpt_year}} to $$high_total_total_{{rpt_year}}.
-
-[[    hi_{{rpt_year}}_b_all_loss_50th > hi_{{rpt_year}}_b_all_gain_50th
-    and hi_{{rpt_year}}_b_all_gain_50th > 0
-]]
-{{rg_name}} currently has climate suitable for {{baseline_b_all_count}}
-species. By  {{rpt_year}} this number is projected to decrease to $$high_total_total_{{rpt_year}} species. While there is an overall decrease in biodiversity, the climate space of the region is likely to become suitable for some species currently not found in the region.  The climate is projected to become unsuitable for $$hi_{{rpt_year}}_b_all_loss_50th species and suitable for $$hi_{{rpt_year}}_b_all_gain_50th species from outside the region.
-
-[[ hi_{{rpt_year}}_b_all_gain_50th > 0 ]]
-Note that independent movement of species
-into new climate space is limited by the capacity of a species to
-disperse.  In light of possible species gains, it is important to
-consider that even Australian natives may behave like invasive pests
-when invading new space.  Species movement capacity and interaction
-with other species is not modelled here.
-
-[[ always ]]
-
 ### Tabular Biodiversity Summary
+
+\renewcommand*{\arraystretch}{2.0}
 
 Table: Current and Future Species Counts in {{rg_name}} in {{rpt_year}} for Low and High Emission Scenarios
 
@@ -135,4 +84,7 @@ Table: Current and Future Species Counts in {{rg_name}} in {{rpt_year}} for Low 
 | Birds | {{baseline_b_bird_count}} | {{lo_{{rpt_year}}_b_bird_count_50th}} (+{{lo_{{rpt_year}}_b_bird_gain_50th}} -{{lo_{{rpt_year}}_b_bird_loss_50th}}) | {{hi_{{rpt_year}}_b_bird_count_50th}} (+{{hi_{{rpt_year}}_b_bird_gain_50th}} -{{hi_{{rpt_year}}_b_bird_loss_50th}}) |
 | Reptiles | {{baseline_b_reptile_count}} | {{lo_{{rpt_year}}_b_reptile_count_50th}} (+{{lo_{{rpt_year}}_b_reptile_gain_50th}} -{{lo_{{rpt_year}}_b_reptile_loss_50th}}) | {{hi_{{rpt_year}}_b_reptile_count_50th}} (+{{hi_{{rpt_year}}_b_reptile_gain_50th}} -{{hi_{{rpt_year}}_b_reptile_loss_50th}}) |
 | Amphibians | {{baseline_b_amphibian_count}} | {{lo_{{rpt_year}}_b_amphibian_count_50th}} (+{{lo_{{rpt_year}}_b_amphibian_gain_50th}} -{{lo_{{rpt_year}}_b_amphibian_loss_50th}}) | {{hi_{{rpt_year}}_b_amphibian_count_50th}} (+{{hi_{{rpt_year}}_b_amphibian_gain_50th}} -{{hi_{{rpt_year}}_b_amphibian_loss_50th}}) |
+
+\renewcommand*{\arraystretch}{1.1}
+
 
