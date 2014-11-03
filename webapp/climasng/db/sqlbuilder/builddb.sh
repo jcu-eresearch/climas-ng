@@ -13,9 +13,9 @@ echo 'prepping species info'
 ./makesppsql.py
 
 echo 'adding species'
-sqlite3 -batch climasng.sqlite < sppnames.sql
+sqlite3 climasng.sqlite < sppnames.sql
 
 echo 'adding presences'
-sqlite3 -batch climasng.sqlite < spppresences.sql
+sqlite3 climasng.sqlite < spppresences.sql
 
 cp climasng.sqlite ..
