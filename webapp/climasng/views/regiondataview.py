@@ -23,7 +23,7 @@ class RegionDataView(object):
                 data_path,
                 srm['regiontype'],
                 srm['regionid'],
-                srm['regionid'] + '.' + srm['datatype'] + '.json'
+                srm['regionid'] + '.json'
             ),
             request=self.request
         )

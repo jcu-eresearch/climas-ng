@@ -54,7 +54,7 @@ def main(global_config, **settings):
 
     config.add_route('speciesdata', '/speciesdata/{data_name:.*}')
 
-    config.add_route('regiondata', '/regiondata/{regiontype}/{regionid}/{datatype}/')
+    config.add_route('regiondata', '/regiondata/{regiontype}/{regionid}')
 
     config.add_static_view(name='olddata/regions', path=settings['climas.old_report_data_path'])
 
