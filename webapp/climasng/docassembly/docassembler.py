@@ -51,21 +51,12 @@ class DocAssembler(object):
         self._region['region_url'] = self._region_url_template.substitute(self._region)
         self._region['region_data_path'] = self._region_data_path_template.substitute(self._region)
 
-        # add the old climate info
-        clim_json_string = urllib2.urlopen(self._region['region_url'] + '/climate').read()
-        clim_data = json.loads(
-            clim_json_string,
+        json_string = urllib2.urlopen(self._region['region_url']).read()
+        new_data = json.loads(
+            json_string,
             parse_float=Decimal, parse_int=Decimal, parse_constant=Decimal
         )
-        self._region.update(clim_data) # merge, clim wins
-
-        # add the new biodiveristy data
-        biodiv_json_string = urllib2.urlopen(self._region['region_url'] + '/biodiversity').read()
-        biodiv_data = json.loads(
-            biodiv_json_string,
-            parse_float=Decimal, parse_int=Decimal, parse_constant=Decimal
-        )
-        self._region.update(biodiv_data) # merge, biodiv wins
+        self._region.update(new_data) # merge, new_data wins
 
         self.addSectionsToData() # add indicators showing included sections
 
