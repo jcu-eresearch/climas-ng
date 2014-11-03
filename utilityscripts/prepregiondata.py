@@ -5,12 +5,19 @@ import sys
 import shutil
 import glob
 import re
-import simplejson
+# import simplejson as json
+import json
 from decimal import Decimal
 
-biodiv_src = '/Volumes/DanielsDisk/work/CliMAS-NG/regions-biodiv'
-climate_src = '/Volumes/DanielsDisk/work/CliMAS-NG/regions-original'
-dest = '/Volumes/DanielsDisk/work/CliMAS-NG/regions-output'
+## dev paths
+# biodiv_src = '/Volumes/DanielsDisk/work/CliMAS-NG/regions-biodiv'
+# climate_src = '/Volumes/DanielsDisk/work/CliMAS-NG/regions-original'
+# dest = '/Volumes/DanielsDisk/work/CliMAS-NG/regions-output'
+
+## HPC paths
+biodiv_src = '/rdsi/ccimpacts/NRM/summary'
+climate_src = '/rdsi/ccimpacts/NRM/prior_region_summaries'
+dest = '/rdsi/climas/regions-test'
 
 remaps = {
     'rainfall_current_min': 'baseline_p_min',
@@ -71,6 +78,17 @@ for year in ['2015','2025','2035','2045','2055','2065','2075','2085']:
     remaps['temperature_high_' + year + '_ninetieth_max'] = 'hi_' + year + '_t_max_90th'
 
 
+# In python 2.6 simplejson exists, but doesn't support use_decimal.
+# I don't know how to test for use_decimal support, so I have to
+# abandon simplejson's native support and use this alternative
+# solution from Stack Overflow:
+# http://stackoverflow.com/questions/1960516/python-json-serialize-a-decimal-object
+class DecimalEncoder(json.JSONEncoder):
+    def _iterencode(self, o, markers=None):
+        if isinstance(o, Decimal):
+            return (str(o) for o in [o])
+        return super(DecimalEncoder, self)._iterencode(o, markers)
+# now use cls=DecimalEncoder in json.dump(s) calls.
 
 clim_src_dirs = glob.glob(climate_src + '/*')
 
@@ -84,11 +102,18 @@ for clim_src_dir in clim_src_dirs:
         os.makedirs(dest_dir)
 
         #
+        # copy over any useful graphics
+        #
+        graphs = glob.glob(os.path.join(clim_src_dir, '*.png'))
+        for graphfile in graphs:
+            shutil.copy(graphfile, dest_dir)
+
+        #
         # read in climate data
         #
         clim_file = os.path.join(clim_src_dir, 'data.json')
         with open(clim_file) as cf:
-            clim = simplejson.load(
+            clim = json.load(
                 cf,
                 # can't use simplejson's use_decimal arg here because
                 # that only applies to floats, we want ints etc as well.
@@ -113,7 +138,7 @@ for clim_src_dir in clim_src_dirs:
         #
         biodiv_file = os.path.join(biodiv_src, reg_id_string + '.txt')
         with open(biodiv_file) as bf:
-            biodiv = simplejson.load(
+            biodiv = json.load(
                 bf,
                 parse_float=Decimal,
                 parse_int=Decimal,
@@ -131,11 +156,14 @@ for clim_src_dir in clim_src_dirs:
         #
         output_file = os.path.join(dest_dir, reg_id_string + '.json')
         with open(output_file, 'w') as of:
-            simplejson.dump(new_data, of, indent=4, use_decimal=True, sort_keys=True)
+            # json.dump(new_data, of, indent=4, use_decimal=True, sort_keys=True)
+            json.dump(new_data, of, indent=4, sort_keys=True, cls=DecimalEncoder)
 
+        sys.stdout.write('.')
+        sys.stdout.flush()
     else:
         # not a dir, skip it
         pass
 
-
+print('done.')
 
