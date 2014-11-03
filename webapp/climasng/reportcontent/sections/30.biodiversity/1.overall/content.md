@@ -80,10 +80,10 @@ Table: Current and Future Species Counts in {{rg_name}} in {{year}} for Low and 
 
 | Class | Current | \parbox[b]{3.5cm}{\centering Low Emissions Scenario \\ in {{year}} \\ count (+gained -lost)} | \parbox[b]{3.5cm}{\centering High Emissions Scenario \\ in {{year}} \\ count (+gained -lost)} |
 |:----- |:-------:|:-------------------------:|:--------------------------:|
-| Mammals | {{baseline_b_mammal_count}} | {{lo_{{year}}_b_mammal_count_50th}} (+{{lo_{{year}}_b_mammal_gain_50th}} -{{lo_{{year}}_b_mammal_loss_50th}}) | {{hi_{{year}}_b_mammal_count_50th}} (+{{hi_{{year}}_b_mammal_gain_50th}} -{{hi_{{year}}_b_mammal_loss_50th}}) |
-| Birds | {{baseline_b_bird_count}} | {{lo_{{year}}_b_bird_count_50th}} (+{{lo_{{year}}_b_bird_gain_50th}} -{{lo_{{year}}_b_bird_loss_50th}}) | {{hi_{{year}}_b_bird_count_50th}} (+{{hi_{{year}}_b_bird_gain_50th}} -{{hi_{{year}}_b_bird_loss_50th}}) |
-| Reptiles | {{baseline_b_reptile_count}} | {{lo_{{year}}_b_reptile_count_50th}} (+{{lo_{{year}}_b_reptile_gain_50th}} -{{lo_{{year}}_b_reptile_loss_50th}}) | {{hi_{{year}}_b_reptile_count_50th}} (+{{hi_{{year}}_b_reptile_gain_50th}} -{{hi_{{year}}_b_reptile_loss_50th}}) |
-| Amphibians | {{baseline_b_amphibian_count}} | {{lo_{{year}}_b_amphibian_count_50th}} (+{{lo_{{year}}_b_amphibian_gain_50th}} -{{lo_{{year}}_b_amphibian_loss_50th}}) | {{hi_{{year}}_b_amphibian_count_50th}} (+{{hi_{{year}}_b_amphibian_gain_50th}} -{{hi_{{year}}_b_amphibian_loss_50th}}) |
+| Mammals | {{baseline_b_mammals_count}} | {{lo_{{year}}_b_mammals_count_50th}} (+{{lo_{{year}}_b_mammals_gain_50th}} -{{lo_{{year}}_b_mammals_loss_50th}}) | {{hi_{{year}}_b_mammals_count_50th}} (+{{hi_{{year}}_b_mammals_gain_50th}} -{{hi_{{year}}_b_mammals_loss_50th}}) |
+| Birds | {{baseline_b_birds_count}} | {{lo_{{year}}_b_birds_count_50th}} (+{{lo_{{year}}_b_birds_gain_50th}} -{{lo_{{year}}_b_birds_loss_50th}}) | {{hi_{{year}}_b_birds_count_50th}} (+{{hi_{{year}}_b_birds_gain_50th}} -{{hi_{{year}}_b_birds_loss_50th}}) |
+| Reptiles | {{baseline_b_reptiles_count}} | {{lo_{{year}}_b_reptiles_count_50th}} (+{{lo_{{year}}_b_reptiles_gain_50th}} -{{lo_{{year}}_b_reptiles_loss_50th}}) | {{hi_{{year}}_b_reptiles_count_50th}} (+{{hi_{{year}}_b_reptiles_gain_50th}} -{{hi_{{year}}_b_reptiles_loss_50th}}) |
+| Amphibians | {{baseline_b_amphibians_count}} | {{lo_{{year}}_b_amphibians_count_50th}} (+{{lo_{{year}}_b_amphibians_gain_50th}} -{{lo_{{year}}_b_amphibians_loss_50th}}) | {{hi_{{year}}_b_amphibians_count_50th}} (+{{hi_{{year}}_b_amphibians_gain_50th}} -{{hi_{{year}}_b_amphibians_loss_50th}}) |
 
 \renewcommand*{\arraystretch}{1.1}
 
