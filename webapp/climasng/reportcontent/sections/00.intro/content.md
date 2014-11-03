@@ -14,7 +14,7 @@ Patterns of biodiversity are already shifting as a result of the changing climat
 
 ## Regional Future Climate[[section_biodiversity > 0]] and Species Distribution[[always]]
 
-This report uses future Global Circulation Models (GCMs) to project the impact of both low and high emissions scenarios on climate[[section_biodiversity > 0]] and biodiversity[[always]] in the future.  It shows how annual mean temperature and rainfall change decadally to 2085 and the resulting regional spatial pattern of change in 2085[[rpt_year == 2085]].[[rpt_year < 2085]], but discussion focuses on the projected climate[[section_biodiversity > 0]] and biodiversity situation[[rpt_year < 2085]] in {{rpt_year}}.
+This report uses future Global Circulation Models (GCMs) to project the impact of both low and high emissions scenarios on climate[[section_biodiversity > 0]] and biodiversity[[always]] in the future.  It shows how annual mean temperature and rainfall change decadally to 2085 and the resulting regional spatial pattern of change in 2085[[year == 2085]].[[year < 2085]], but discussion focuses on the projected climate[[section_biodiversity > 0]] and biodiversity situation[[year < 2085]] in {{year}}.
 [[always]]
 
 [[section_biodiversity > 0]]
