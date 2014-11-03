@@ -29,17 +29,17 @@ remaps = {
     'temperature_current_max': 'baseline_t_max'
 }
 for year in ['2015','2025','2035','2045','2055','2065','2075','2085']:
-    remaps['rainfall_low_' + year + '_tenth_min'] = 'low_' + year + '_p_min_10th'
-    remaps['rainfall_low_' + year + '_fiftieth_min'] = 'low_' + year + '_p_min_50th'
-    remaps['rainfall_low_' + year + '_ninetieth_min'] = 'low_' + year + '_p_min_90th'
+    remaps['rainfall_low_' + year + '_tenth_min'] = 'lo_' + year + '_p_min_10th'
+    remaps['rainfall_low_' + year + '_fiftieth_min'] = 'lo_' + year + '_p_min_50th'
+    remaps['rainfall_low_' + year + '_ninetieth_min'] = 'lo_' + year + '_p_min_90th'
 
-    remaps['rainfall_low_' + year + '_tenth_mean'] = 'low_' + year + '_p_mean_10th'
-    remaps['rainfall_low_' + year + '_fiftieth_mean'] = 'low_' + year + '_p_mean_50th'
-    remaps['rainfall_low_' + year + '_ninetieth_mean'] = 'low_' + year + '_p_mean_90th'
+    remaps['rainfall_low_' + year + '_tenth_mean'] = 'lo_' + year + '_p_mean_10th'
+    remaps['rainfall_low_' + year + '_fiftieth_mean'] = 'lo_' + year + '_p_mean_50th'
+    remaps['rainfall_low_' + year + '_ninetieth_mean'] = 'lo_' + year + '_p_mean_90th'
 
-    remaps['rainfall_low_' + year + '_tenth_max'] = 'low_' + year + '_p_max_10th'
-    remaps['rainfall_low_' + year + '_fiftieth_max'] = 'low_' + year + '_p_max_50th'
-    remaps['rainfall_low_' + year + '_ninetieth_max'] = 'low_' + year + '_p_max_90th'
+    remaps['rainfall_low_' + year + '_tenth_max'] = 'lo_' + year + '_p_max_10th'
+    remaps['rainfall_low_' + year + '_fiftieth_max'] = 'lo_' + year + '_p_max_50th'
+    remaps['rainfall_low_' + year + '_ninetieth_max'] = 'lo_' + year + '_p_max_90th'
 
     remaps['rainfall_high_' + year + '_tenth_min'] = 'hi_' + year + '_p_min_10th'
     remaps['rainfall_high_' + year + '_fiftieth_min'] = 'hi_' + year + '_p_min_50th'
@@ -53,17 +53,17 @@ for year in ['2015','2025','2035','2045','2055','2065','2075','2085']:
     remaps['rainfall_high_' + year + '_fiftieth_max'] = 'hi_' + year + '_p_max_50th'
     remaps['rainfall_high_' + year + '_ninetieth_max'] = 'hi_' + year + '_p_max_90th'
 
-    remaps['temperature_low_' + year + '_tenth_min'] = 'low_' + year + '_t_min_10th'
-    remaps['temperature_low_' + year + '_fiftieth_min'] = 'low_' + year + '_t_min_50th'
-    remaps['temperature_low_' + year + '_ninetieth_min'] = 'low_' + year + '_t_min_90th'
+    remaps['temperature_low_' + year + '_tenth_min'] = 'lo_' + year + '_t_min_10th'
+    remaps['temperature_low_' + year + '_fiftieth_min'] = 'lo_' + year + '_t_min_50th'
+    remaps['temperature_low_' + year + '_ninetieth_min'] = 'lo_' + year + '_t_min_90th'
 
-    remaps['temperature_low_' + year + '_tenth_mean'] = 'low_' + year + '_t_mean_10th'
-    remaps['temperature_low_' + year + '_fiftieth_mean'] = 'low_' + year + '_t_mean_50th'
-    remaps['temperature_low_' + year + '_ninetieth_mean'] = 'low_' + year + '_t_mean_90th'
+    remaps['temperature_low_' + year + '_tenth_mean'] = 'lo_' + year + '_t_mean_10th'
+    remaps['temperature_low_' + year + '_fiftieth_mean'] = 'lo_' + year + '_t_mean_50th'
+    remaps['temperature_low_' + year + '_ninetieth_mean'] = 'lo_' + year + '_t_mean_90th'
 
-    remaps['temperature_low_' + year + '_tenth_max'] = 'low_' + year + '_t_max_10th'
-    remaps['temperature_low_' + year + '_fiftieth_max'] = 'low_' + year + '_t_max_50th'
-    remaps['temperature_low_' + year + '_ninetieth_max'] = 'low_' + year + '_t_max_90th'
+    remaps['temperature_low_' + year + '_tenth_max'] = 'lo_' + year + '_t_max_10th'
+    remaps['temperature_low_' + year + '_fiftieth_max'] = 'lo_' + year + '_t_max_50th'
+    remaps['temperature_low_' + year + '_ninetieth_max'] = 'lo_' + year + '_t_max_90th'
 
     remaps['temperature_high_' + year + '_tenth_min'] = 'hi_' + year + '_t_min_10th'
     remaps['temperature_high_' + year + '_fiftieth_min'] = 'hi_' + year + '_t_min_50th'
@@ -106,7 +106,11 @@ for clim_src_dir in clim_src_dirs:
         #
         graphs = glob.glob(os.path.join(clim_src_dir, '*.png'))
         for graphfile in graphs:
-            shutil.copy(graphfile, dest_dir)
+            destination = os.path.join(
+                dest_dir,
+                os.path.basename(graphfile).replace('.', '_').replace('_png', '.png')
+            )
+            shutil.copy(graphfile, destination)
 
         #
         # read in climate data
