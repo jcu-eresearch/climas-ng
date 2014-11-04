@@ -4,33 +4,29 @@
 {{rg_name}} currently hosts {{baseline_b_all_count}} species.  [[ hi_{{year}}_b_all_gain_50th > baseline_b_all_count / 5 OR hi_{{year}}_b_all_loss_50th > baseline_b_all_count / 5]]By {{year}} biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_all_count_90th > baseline_b_all_count
-AND hi_{{year}}_b_all_count_10th >= baseline_b_all_count ]]
-Models agree that regional biodiversity will increase, by between {{hi_{{year}}_b_all_count_10th - baseline_b_all_count}} and {{hi_{{year}}_b_all_count_90th - baseline_b_all_count}} species.
+AND hi_{{year}}_b_all_count_10th >= baseline_b_all_count ]]Models agree that regional biodiversity will increase, by between {{hi_{{year}}_b_all_count_10th - baseline_b_all_count}} and {{hi_{{year}}_b_all_count_90th - baseline_b_all_count}} species.
 
 [[  hi_{{year}}_b_all_count_90th > baseline_b_all_count
 AND hi_{{year}}_b_all_count_10th < baseline_b_all_count
 AND hi_{{year}}_b_all_count_50th > baseline_b_all_count
 AND hi_{{year}}_b_all_count_90th - hi_{{year}}_b_all_count_50th < hi_{{year}}_b_all_count_50th - baseline_b_all_count
-]]
-Most models predict an increase in this species count, by up to {{hi_{{year}}_b_all_count_90th - baseline_b_all_count, absolute}} species, however some models predict a decrease of as many as {{hi_{{year}}_b_all_count_10th - baseline_b_all_count, absolute}} species.
+]]Most models predict an increase in this species count, by up to {{hi_{{year}}_b_all_count_90th - baseline_b_all_count, absolute}} species, however some models predict a decrease of as many as {{hi_{{year}}_b_all_count_10th - baseline_b_all_count, absolute}} species.
 
 [[  hi_{{year}}_b_all_count_90th > baseline_b_all_count
 AND hi_{{year}}_b_all_count_10th < baseline_b_all_count
 AND hi_{{year}}_b_all_count_90th - hi_{{year}}_b_all_count_50th >= hi_{{year}}_b_all_count_50th - baseline_b_all_count
 AND hi_{{year}}_b_all_count_50th - hi_{{year}}_b_all_count_10th >= baseline_b_all_count - hi_{{year}}_b_all_count_50th
-]]
-There is little agreement between models on whether this species count will increase or decrease. Projections range from a decrease of as many as {{hi_{{year}}_b_all_count_10th - baseline_b_all_count, absolute}} species to an increase of up to {{hi_{{year}}_b_all_count_90th - baseline_b_all_count, absolute}} species.
+]]There is little agreement between models on whether this species count will increase or decrease. Projections range from a decrease of as many as {{hi_{{year}}_b_all_count_10th - baseline_b_all_count, absolute}} species to an increase of up to {{hi_{{year}}_b_all_count_90th - baseline_b_all_count, absolute}} species.
 
 [[  hi_{{year}}_b_all_count_90th > baseline_b_all_count
 AND hi_{{year}}_b_all_count_10th < baseline_b_all_count
 AND hi_{{year}}_b_all_count_50th < baseline_b_all_count
 AND hi_{{year}}_b_all_count_50th - hi_{{year}}_b_all_count_10th < baseline_b_all_count - hi_{{year}}_b_all_count_50th
-]]
-Most models predict a decrease in this species count, by as much as {{hi_{{year}}_b_all_count_10th - baseline_b_all_count}}, however some predict an increase of as many as {{hi_{{year}}_b_all_count_90th - baseline_b_all_count}} species.
+]]Most models predict a decrease in this species count, by as much as {{hi_{{year}}_b_all_count_10th - baseline_b_all_count}}, however some predict an increase of as many as {{hi_{{year}}_b_all_count_90th - baseline_b_all_count}} species.
 
 [[  hi_{{year}}_b_all_count_90th <= baseline_b_all_count
-AND hi_{{year}}_b_all_count_10th < baseline_b_all_count ]]
-Almost all models agree on a decrease in this species count, by between {{hi_{{year}}_b_all_count_90th - baseline_b_all_count, absolute}} and {{hi_{{year}}_b_all_count_10th - baseline_b_all_count, absolute}}.
+AND hi_{{year}}_b_all_count_10th < baseline_b_all_count
+]]Almost all models agree on a decrease in this species count, by between {{hi_{{year}}_b_all_count_90th - baseline_b_all_count, absolute}} and {{hi_{{year}}_b_all_count_10th - baseline_b_all_count, absolute}}.
 
 [[always]]
 
