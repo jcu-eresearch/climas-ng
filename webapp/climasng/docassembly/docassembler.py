@@ -97,7 +97,7 @@ class DocAssembler(object):
                     else:
                         break
                 # write out the shortish path to the content
-                source.append("\n\n* * *\n( `" + os.path.sep.join(sect_dirs) + "` )\n\n")
+                source.append("\n\n( ` -- " + os.path.sep.join(sect_dirs) + " -- ` )\n\n")
             with open(sect.contentpath) as contentf:
                 # start with the normal content
                 source.append( contentf.read() )
