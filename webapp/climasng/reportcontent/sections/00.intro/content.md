@@ -18,4 +18,4 @@ This report uses future Global Circulation Models (GCMs) to project the impact o
 [[always]]
 
 [[section_biodiversity > 0]]
-Biodiversity changes, including climate space losses and gains, is summarised[[section_appendices > 0]], and detailed lists of all species lost, gained, or kept are reported[[section_biodiversity > 0]].[[always]]
+Biodiversity changes, including climate space losses and gains, is also summarised[[section_appendices > 0]], and detailed lists of all species lost, gained, or kept are reported[[section_biodiversity > 0]].[[always]]
