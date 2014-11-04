@@ -11,20 +11,27 @@ for line in fileinput.input():
 content = ''.join(content)
 
 content = content.replace("rg_name", "region")
-content = content.replace("hi_{{rpt_year}}_b_all_count_", "biodiv_")
+content = content.replace("hi_{{year}}_b_all_count_", "biodiv_")
 content = content.replace("baseline_b_all_count", "current_biodiv")
 
-content = content.replace("hi_{{rpt_year}}_b_all_loss_", "loss_")
-content = content.replace("hi_{{rpt_year}}_b_all_gain_", "gain_")
+content = content.replace("hi_{{year}}_b_all_loss_", "loss_")
+content = content.replace("hi_{{year}}_b_all_gain_", "gain_")
+
+for tp in ['t','p']:
+    content = content.replace(tp + "_mean",               tp)
+    content = content.replace("hi_{{year}}_" + tp + "_",  tp + "_")
+    content = content.replace("hi_2085_" + tp + "_",      tp + "85_")
+    content = content.replace("lo_{{year}}_" + tp + "_",  "low_" + tp + "_")
+    content = content.replace("lo_2085_" + tp + "_",      "low_" + tp + "85_")
 
 for taxon in ['mammal', 'bird', 'reptile', 'amphibian']:
     content = content.replace('baseline_b_' + taxon + '_count', 'current_' + taxon[:1])
     for scen in ['lo','hi']:
-        content = content.replace(scen + '_{{rpt_year}}_b_' + taxon + '_count_50th', scen + '_' + taxon[:1] + '')
-        content = content.replace(scen + '_{{rpt_year}}_b_' + taxon + '_gain_50th', scen + '_' + taxon[:1] + '_gain')
-        content = content.replace(scen + '_{{rpt_year}}_b_' + taxon + '_loss_50th', scen + '_' + taxon[:1] + '_loss')
+        content = content.replace(scen + '_{{year}}_b_' + taxon + '_count_50th', scen + '_' + taxon[:1] + '')
+        content = content.replace(scen + '_{{year}}_b_' + taxon + '_gain_50th', scen + '_' + taxon[:1] + '_gain')
+        content = content.replace(scen + '_{{year}}_b_' + taxon + '_loss_50th', scen + '_' + taxon[:1] + '_loss')
 
-content = content.replace("rpt_year", "year")
+# content = content.replace("rpt_year", "year")
 
 # headings
 content = re.sub(r'^(#+)(.*?)$', r'<p>\1<b>\2</b></p>', content, 0, re.M)
@@ -51,7 +58,8 @@ content = re.sub(r'\{\{\s*([^\}]*?)\s*\}\}', r'<span class="sub"><span class="pu
 content = '''
 <style>
     body {
-        /* max-width: 30em; */
+        max-width: 40em;
+        margin: 0 auto;
         padding: 1em 3em;
         line-height: 1.4;
     }
@@ -60,6 +68,7 @@ content = '''
         border-radius: 0.7em;
     }
     span.punc {
+        opacity: 0.2;
         text-transform: uppercase;
         font-size: 90%;
         font-weight: bold;
