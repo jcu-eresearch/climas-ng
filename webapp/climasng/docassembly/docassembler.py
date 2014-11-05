@@ -88,7 +88,9 @@ class DocAssembler(object):
         try:
             source = []
             if self._section_debug:
-                # work out a shortish path to this section
+                # work out a shortish path to this section by taking
+                # the full path to the section content, and removing
+                # the initial part that is in common with this file.
                 this_file_dirs = __file__.split(os.path.sep)
                 sect_dirs = sect.contentpath.split(os.path.sep)[:-1]
                 for dir in this_file_dirs:
