@@ -10,13 +10,13 @@ for line in fileinput.input():
 # here's the content in a big string
 content = ''.join(content)
 
+# region name
 content = content.replace("rg_name", "region")
-content = content.replace("hi_{{year}}_b_all_count_", "biodiv_")
-content = content.replace("baseline_b_all_count", "current_biodiv")
 
-content = content.replace("hi_{{year}}_b_all_loss_", "loss_")
-content = content.replace("hi_{{year}}_b_all_gain_", "gain_")
+# section-included detectors
+content = re.sub(r'(\[\[\s*)section_([_\w]+)\s+>\s+0(\s*\]\])', r'\1<span class="punc">includes?</span> \2\3', content)
 
+# temperature and precipitation
 for tp in ['t','p']:
     content = content.replace(tp + "_mean",               tp)
     content = content.replace("hi_{{year}}_" + tp + "_",  tp + "_")
@@ -24,12 +24,20 @@ for tp in ['t','p']:
     content = content.replace("lo_{{year}}_" + tp + "_",  "low_" + tp + "_")
     content = content.replace("lo_2085_" + tp + "_",      "low_" + tp + "85_")
 
+# biodiversity counts
+content = content.replace("hi_{{year}}_b_all_count_", "biodiv_")
+content = content.replace("baseline_b_all_count", "current_biodiv")
+content = content.replace("hi_{{year}}_b_all_loss_", "loss_")
+content = content.replace("hi_{{year}}_b_all_gain_", "gain_")
+
+# taxon biodiversity
 for taxon in ['mammal', 'bird', 'reptile', 'amphibian']:
     content = content.replace('baseline_b_' + taxon + '_count', 'current_' + taxon[:1])
     for scen in ['lo','hi']:
         content = content.replace(scen + '_{{year}}_b_' + taxon + '_count_50th', scen + '_' + taxon[:1] + '')
         content = content.replace(scen + '_{{year}}_b_' + taxon + '_gain_50th', scen + '_' + taxon[:1] + '_gain')
         content = content.replace(scen + '_{{year}}_b_' + taxon + '_loss_50th', scen + '_' + taxon[:1] + '_loss')
+
 
 # content = content.replace("rpt_year", "year")
 
