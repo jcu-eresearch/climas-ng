@@ -1,0 +1,7 @@
+{
+    "id": "crayfish",
+    "name": "Freshwater crayfish",
+    "description": "current and projected biodiversity over freshwater crayfish species.",
+    "initial": "included",
+    "presence": "optional"
+}
