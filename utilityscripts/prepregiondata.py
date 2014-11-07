@@ -97,6 +97,7 @@ for clim_src_dir in clim_src_dirs:
         # it's a dir, assume it's a region dir
         reg_id_string = os.path.basename(clim_src_dir)
         reg_type, reg_name = reg_id_string.split('_', 1)
+        reg_name = reg_name.replace('_', ' ')
 
         dest_dir = os.path.join(dest, reg_type, reg_id_string)
         os.makedirs(dest_dir)
@@ -154,6 +155,55 @@ for clim_src_dir in clim_src_dirs:
         #
         for biodiv_datum in biodiv:
             new_data[biodiv_datum] = biodiv[biodiv_datum]
+
+        #
+        # add nice region names
+        #
+        # fancy-up a pretty version of the name for humans to read:
+        reg_nice_name = reg_name
+
+        # NRM regions get called "Northern Thingy Region"
+        if reg_type == 'NRM':
+            reg_nice_name += ' NRM Region'
+
+        # IBRA regions get called "Northern Thingy Bioregion"
+        if reg_type == 'IBRA':
+            reg_nice_name += ' IBRA Bioregion'
+        # States just get called "Thingy" (no suffix)
+
+        # put the fancy name into a phrase for use in textual descriptions:
+
+        reg_name_phrase = reg_nice_name
+
+        if reg_type == 'NRM':
+            # NRM Regions get called 'the Australian NRM region of ...'
+            reg_name_phrase = 'the Australian NRM region of ' + reg_name
+            reg_name_title_phrase = 'the Australian NRM Region of ' + reg_name
+
+        elif reg_type == 'IBRA':
+            # IBRA Regions get called 'the Australian IBRA bioregion of ...'
+            reg_name_phrase = 'the Australian IBRA bioregion of ' + reg_name
+            reg_name_title_phrase = 'the Australian IBRA Bioregion of ' + reg_name
+
+        elif reg_type == 'State' and reg_name.startswith('Australian'):
+            # Territories starting with 'Australian' get called 'the [Australian]...'
+            reg_name_phrase = 'the ' + reg_name
+            reg_name_title_phrase = reg_name_phrase
+
+        elif reg_type == 'State' and reg_name.endswith('Territory'):
+            # Other territories get called 'the ...[Territory] of Australia'
+            reg_name_phrase = 'the ' + reg_name + ' of Australia'
+            reg_name_title_phrase = reg_name_phrase
+
+        elif reg_type == 'State':
+            # States get called 'the Australian state of ...'
+            reg_name_phrase = 'the Australian state of ' + reg_name
+            reg_name_title_phrase = 'the Australian State of ' + reg_name
+
+        new_data['rg_name'] = reg_name
+        new_data['rg_nicename'] = reg_nice_name
+        new_data['rg_namephrase'] = reg_name_phrase
+        new_data['rg_nametitlephrase'] = reg_name_title_phrase
 
         #
         # write out final json file

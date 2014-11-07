@@ -1,9 +1,9 @@
 
-<span>Climate Change</span> and <span>Biodiversity Report</span>
+[[section_climatereview > 0]]Climate Change[[section_climatereview > 0 AND section_biodiversity > 0]] and[[section_biodiversity > 0]] Biodiversity[[always]] Report
 ================================================================
 for
 ===
-{{ rg_name }}
+{{ rg_nametitlephrase }}
 ==================
 
 Prepared by the James Cook University eResearch Centre and the Centre for Tropical Biodiversity and Climate Change using species occurence data from the Atlas of Living Australia (ALA) and climate layers derived from http://climascope.tyndall.ac.uk prepared by Jeremy VanDerWal.
