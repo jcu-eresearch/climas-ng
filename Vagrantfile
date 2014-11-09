@@ -225,6 +225,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder "./webapp", "/var/climaswebapp"
     config.vm.synced_folder "../climasng-data", "/var/climaswebapp-testdata"
     config.vm.synced_folder "/Volumes/DanielsDisk/work/CliMAS-NG/datasubset", "/var/climaswebapp-subset"
+    config.vm.synced_folder "/Volumes/DanielsDisk/work/CliMAS-NG/regions-output", "/var/climaswebapp-regions"
 
     # Provider-specific config
     # Example for VirtualBox:
