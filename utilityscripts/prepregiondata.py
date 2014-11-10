@@ -173,9 +173,12 @@ for clim_src_dir in clim_src_dirs:
 
         # put the fancy name into a phrase for use in textual descriptions:
 
-        reg_name_phrase = reg_nice_name
+        if reg_type == 'NRM' and reg_name.endswith('Area'):
+            # special handling for "the Something Area"
+            reg_name_phrase = 'the Australian NRM ' + reg_name
+            reg_name_title_phrase = 'the Australian NRM ' + reg_name
 
-        if reg_type == 'NRM':
+        elif reg_type == 'NRM':
             # NRM Regions get called 'the Australian NRM region of ...'
             reg_name_phrase = 'the Australian NRM region of ' + reg_name
             reg_name_title_phrase = 'the Australian NRM Region of ' + reg_name
@@ -199,6 +202,11 @@ for clim_src_dir in clim_src_dirs:
             # States get called 'the Australian state of ...'
             reg_name_phrase = 'the Australian state of ' + reg_name
             reg_name_title_phrase = 'the Australian State of ' + reg_name
+
+        else:
+            reg_name_phrase = reg_nice_name
+            reg_name_title_phrase = reg_name_phrase.title()
+
 
         new_data['rg_name'] = reg_name
         new_data['rg_nicename'] = reg_nice_name
