@@ -1,4 +1,11 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[10pt,$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+% force all figures to be placed HERE (usual default is to float
+% them to the next page in preference to leaving a blank space).
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
 $if(fontfamily)$
 \usepackage{$fontfamily$}
 $else$
@@ -49,6 +56,9 @@ $endif$
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+% page size and margins (overridden by the pandoc stuff below if you
+% use the pandoc command line options)
+\usepackage[a4paper,top=3cm,bottom=4cm,left=3cm,right=7cm]{geometry}
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
@@ -94,7 +104,7 @@ $if(graphics)$
 % Scale images if necessary, so that they will not overflow the page
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=1.2\maxwidth,height=\maxheight,keepaspectratio}
+\setkeys{Gin}{width=15cm,height=\maxheight,keepaspectratio}
 $endif$
 
 \ifxetex
@@ -146,38 +156,40 @@ $endif$
 \titleformat
   {\section}
   [display]
-  {\normalfont\Huge\bfseries\center}
-  {\thepart}
-  {0.5ex}
-  {\vspace{1ex}}
-  [\vspace{5ex}]
+  {\normalfont\Huge\bfseries\centering}
+  {}
+  {5ex}
+  {\rule{\textwidth}{0.3pt}\vspace{2ex}
+  }
+  [\vspace{1ex}\rule{\textwidth}{0.3pt}\vspace{5ex}]
 
 \titleformat
   {\subsection}
   [display]
   {\normalfont\LARGE\bfseries\raggedright}
-  {\thepart}
+  {}
   {0.5ex}
   {\vspace{1ex}}
-  [\vspace{-2ex}\rule{\textwidth}{0.3pt}\vspace{2ex}]
+  [\vspace{-2ex}\rule{15cm}{0.3pt}\vspace{1ex}]
 
 \titleformat
   {\subsubsection}
   [display]
   {\normalfont\large\bfseries\raggedright}
-  {\thepart}
+  {}
   {1ex}
-  {\vspace{1ex}}
+  {\vspace{0.66ex}}
 
 \titleformat
   {\paragraph}
   [display]
   {\normalfont\normalsize\bfseries\raggedright}
-  {\thepart}
+  {}
   {1ex}
-  {\vspace{0.5ex}}
+  {\vspace{0.33ex}}
 
 \newcommand{\subsectionbreak}{\clearpage}
+\raggedright
 
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
