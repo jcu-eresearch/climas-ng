@@ -1,7 +1,0 @@
-{
-    "id": "Reptilesappendix",
-    "name": "Reptiles",
-    "description": "Lists of reptile species.",
-    "initial": "included",
-    "presence": "optional"
-}

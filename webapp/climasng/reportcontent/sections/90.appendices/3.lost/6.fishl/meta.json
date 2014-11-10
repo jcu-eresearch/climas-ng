@@ -1,0 +1,7 @@
+{
+    "id": "fishlost",
+    "name": "Freshwater fish",
+    "description": "Freshwater fish currently present that may be lost to the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

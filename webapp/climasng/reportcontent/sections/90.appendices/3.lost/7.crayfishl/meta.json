@@ -1,0 +1,7 @@
+{
+    "id": "crayfishlost",
+    "name": "Freshwater crayfish",
+    "description": "Freshwater crayfish currently present that may be lost to the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}

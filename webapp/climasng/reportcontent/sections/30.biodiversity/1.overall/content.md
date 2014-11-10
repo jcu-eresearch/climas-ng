@@ -1,5 +1,5 @@
 
-#### Regional Biodiversity Implications
+### Regional Biodiversity Implications
 
 {{rg_name}} currently hosts {{baseline_b_all_count}} species.  [[ hi_{{year}}_b_all_gain_50th > baseline_b_all_count / 5 OR hi_{{year}}_b_all_loss_50th > baseline_b_all_count / 5]]By {{year}} biodiversity in this region is projected to undergo significant change. [[never]]
 
@@ -36,17 +36,17 @@ Even a relatively stable species count may be the result of gains offset by loss
 [[ hi_{{year}}_b_all_count_50th >5%< baseline_b_all_count]]
 Changes to the region's species count may not be the full story, as gains and losses offset each other.[[never]]
 
-[[ hi_{{year}}_b_all_loss_10th > 0 ]]
-Models agree that by {{year}}, between {{hi_{{year}}_b_all_loss_10th}} and {{hi_{{year}}_b_all_loss_90th}} of current species will be lost to the region, with a median expected loss of {{hi_{{year}}_b_all_loss_50th}} species.
+[[ hi_{{year}}_b_all_loss_90th > 0 ]]
+Models agree that by {{year}}, between {{hi_{{year}}_b_all_loss_90th}} and {{hi_{{year}}_b_all_loss_10th}} of current species will be lost to the region, with a median expected loss of {{hi_{{year}}_b_all_loss_50th}} species.
 
-[[  hi_{{year}}_b_all_loss_10th == 0
+[[  hi_{{year}}_b_all_loss_90th == 0
 and hi_{{year}}_b_all_loss_50th > 0 ]]
-Most models project a loss of some species by {{year}}, with a median of {{hi_{{year}}_b_all_loss_50th}} lost species and some models predicting losses of up to {{hi_{{year}}_b_all_loss_90th}} species.
+Most models project a loss of some species by {{year}}, with a median of {{hi_{{year}}_b_all_loss_50th}} lost species and some models predicting losses of up to {{hi_{{year}}_b_all_loss_10th}} species.
 
-[[ hi_{{year}}_b_all_loss_50th == 0 and hi_{{year}}_b_all_loss_90th < 0 ]]
-Some models project losses of up to {{hi_{{year}}_b_all_loss_90th}} species, however most models agree that by {{year}} no species will be lost.
+[[ hi_{{year}}_b_all_loss_50th == 0 and hi_{{year}}_b_all_loss_10th < 0 ]]
+Some models project losses of up to {{hi_{{year}}_b_all_loss_10th}} species, however most models agree that by {{year}} no species will be lost.
 
-[[ hi_{{year}}_b_all_loss_90th == 0 ]]
+[[ hi_{{year}}_b_all_loss_10th == 0 ]]
 Models agree however that by {{year}}, no species currently in {{rg_name}} will be lost to the region.
 
 [[always]]
@@ -72,7 +72,7 @@ In light of possible species gains, it is important to consider that even Austra
 
 [[always]]
 
-#### Tabular Biodiversity Summary
+### Tabular Biodiversity Summary
 
 \renewcommand*{\arraystretch}{2.0}
 

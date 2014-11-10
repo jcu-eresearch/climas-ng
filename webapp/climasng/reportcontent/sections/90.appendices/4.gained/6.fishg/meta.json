@@ -1,0 +1,7 @@
+{
+    "id": "fishgained",
+    "name": "Freshwater fish",
+    "description": "Freshwater fish not currently present that may move into the region.",
+    "initial": "excluded",
+    "presence": "optional"
+}
