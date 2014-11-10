@@ -1,5 +1,5 @@
 
-## Projection of Future Climate
+## Future Climate
 
 Climate data was sourced from the Australian Water Availability Project (AWAP) to calculate important climate variables such as current annual mean temperature, temperature seasonality, and annual precipitation.  We calculated likely future climate for each climate variable considered important to vertebrate distributions using 18 global climate models (GCMs) for representative concentration pathways (RCPs) representing high and low emission scenarios at 8 time steps between 2015 and 2085.
 

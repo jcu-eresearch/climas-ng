@@ -1,5 +1,5 @@
 
-## Projection of Future Species Distribution
+## Future Species Distribution
 
 Species distribution models were generated using climate data and species observation records.
 

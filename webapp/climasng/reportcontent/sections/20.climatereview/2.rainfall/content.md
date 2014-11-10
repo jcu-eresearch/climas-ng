@@ -1,5 +1,5 @@
 
-### Rainfall
+#### Rainfall
 
 Currently, the mean annual rainfall across {{rg_name}} is {{baseline_p_mean, round}} mL, with areas within the region experiencing a range of averages between {{baseline_p_min, round}} mL and {{baseline_p_max, round}} mL.
 

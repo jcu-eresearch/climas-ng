@@ -143,7 +143,41 @@ $if(lang)$
 \fi
 $endif$
 \usepackage{titlesec}
-\newcommand{\sectionbreak}{\clearpage}
+\titleformat
+  {\section}
+  [display]
+  {\normalfont\Huge\bfseries\center}
+  {\thepart}
+  {0.5ex}
+  {\vspace{1ex}}
+  [\vspace{5ex}]
+
+\titleformat
+  {\subsection}
+  [display]
+  {\normalfont\LARGE\bfseries\raggedright}
+  {\thepart}
+  {0.5ex}
+  {\vspace{1ex}}
+  [\vspace{-2ex}\rule{\textwidth}{0.3pt}\vspace{2ex}]
+
+\titleformat
+  {\subsubsection}
+  [display]
+  {\normalfont\large\bfseries\raggedright}
+  {\thepart}
+  {1ex}
+  {\vspace{1ex}}
+
+\titleformat
+  {\paragraph}
+  [display]
+  {\normalfont\normalsize\bfseries\raggedright}
+  {\thepart}
+  {1ex}
+  {\vspace{0.5ex}}
+
+\newcommand{\subsectionbreak}{\clearpage}
 
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}

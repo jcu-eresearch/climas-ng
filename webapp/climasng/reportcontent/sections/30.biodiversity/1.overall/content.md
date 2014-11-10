@@ -1,5 +1,5 @@
 
-### Regional Biodiversity Implications
+#### Regional Biodiversity Implications
 
 {{rg_name}} currently hosts {{baseline_b_all_count}} species.  [[ hi_{{year}}_b_all_gain_50th > baseline_b_all_count / 5 OR hi_{{year}}_b_all_loss_50th > baseline_b_all_count / 5]]By {{year}} biodiversity in this region is projected to undergo significant change. [[never]]
 
@@ -72,7 +72,7 @@ In light of possible species gains, it is important to consider that even Austra
 
 [[always]]
 
-### Tabular Biodiversity Summary
+#### Tabular Biodiversity Summary
 
 \renewcommand*{\arraystretch}{2.0}
 

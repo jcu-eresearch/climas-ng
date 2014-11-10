@@ -1,5 +1,5 @@
 
-### Temperature
+#### Temperature
 
 All of Australia is projected to experience warming in the future.  Mean average temperature across {{rg_name}} ranges from {{baseline_t_min, round 0.1}} to {{baseline_t_max, round 0.1}}&deg;C, averaging {{baseline_t_mean, round 0.1}}&deg;C across the region.
 
