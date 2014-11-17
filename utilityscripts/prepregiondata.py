@@ -143,12 +143,17 @@ for clim_src_dir in clim_src_dirs:
         #
         biodiv_file = os.path.join(biodiv_src, reg_id_string + '.txt')
         with open(biodiv_file) as bf:
-            biodiv = json.load(
-                bf,
-                parse_float=Decimal,
-                parse_int=Decimal,
-                parse_constant=Decimal
-            )
+            try:
+                biodiv = json.load(
+                    bf,
+                    parse_float=Decimal,
+                    parse_int=Decimal,
+                    parse_constant=Decimal
+                )
+            except Exception as e:
+                print("\nError handling file '"+ biodiv_file +"'!")
+                raise
+
 
         #
         # merge in biodiv info
