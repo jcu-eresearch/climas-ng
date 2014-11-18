@@ -679,6 +679,7 @@ body {
   body {
     background: #2d4048;
     color: #222;
+    min-width: 800px;
   }
 }
 a {
@@ -1256,7 +1257,7 @@ body {
 }
 #reportform .formblock {
   padding-right: 23em;
-  min-width: 26em;
+  min-width: 24em;
 }
 #reportform .formblock h1 {
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0.33)), to(rgba(255, 255, 255, 0)));

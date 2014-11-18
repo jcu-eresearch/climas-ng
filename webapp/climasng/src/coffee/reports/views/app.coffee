@@ -73,6 +73,9 @@ AppView = Backbone.View.extend {
         @fetchYears()
 
         @updateSummary()
+
+        @hash = '' # current hash, assume blank
+        @checkUrl()
         # @tick()
     # ---------------------------------------------------------------
     render: ()->
@@ -80,6 +83,13 @@ AppView = Backbone.View.extend {
 
         @$el.append AppView.templates.layout {}
         $('#contentwrap .maincontent').append @$el
+
+    # ---------------------------------------------------------------
+    # check / update the hash part of the URL and match form fields
+    # ---------------------------------------------------------------
+    checkUrl: ()->
+        hash = window.location.hash
+        return if @hash is hash
 
     # ---------------------------------------------------------------
     # actually go get the report

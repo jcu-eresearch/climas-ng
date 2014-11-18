@@ -17,11 +17,13 @@ body {
     color: #000;
     background: #eee;
     -moz-osx-font-smoothing: grayscale; /* light-text-on-dark is too bold on Macs */
+
 }
 
 @media screen { body {
         background: @background;
         color: #222;
+        min-width: 800px;
 }   }
 
 a {
@@ -280,6 +282,7 @@ nav ul li ul {
 }
 
 /* main content - - - - - - - - - - - - - - - - */
+
 
 .maincontent {
     position: absolute;

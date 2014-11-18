@@ -49,12 +49,21 @@
       this.fetchReportSections();
       this.fetchRegions();
       this.fetchYears();
-      return this.updateSummary();
+      this.updateSummary();
+      this.hash = '';
+      return this.checkUrl();
     },
     render: function() {
       debug('AppView.render');
       this.$el.append(AppView.templates.layout({}));
       return $('#contentwrap .maincontent').append(this.$el);
+    },
+    checkUrl: function() {
+      var hash;
+      hash = window.location.hash;
+      if (this.hash === hash) {
+
+      }
     },
     getReport: function() {
       var form;

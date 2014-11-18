@@ -679,6 +679,7 @@ body {
   body {
     background: #2d4048;
     color: #222;
+    min-width: 800px;
   }
 }
 a {
