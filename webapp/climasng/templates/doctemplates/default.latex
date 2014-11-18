@@ -189,6 +189,10 @@ $endif$
   {\vspace{0.33ex}}
 
 \newcommand{\subsectionbreak}{\clearpage}
+\usepackage{draftwatermark}
+\SetWatermarkText{DRAFT}
+\SetWatermarkScale{1}
+
 \raggedright
 
 $if(title)$
