@@ -12,6 +12,28 @@ pres_sqlf.write('begin transaction;' + "\n")
 # file list
 files = glob.glob('speciesdata/*.csv')
 
+# skip these regions (not covered by data)
+region_skip_list = [
+    'State-9',
+    'NRM-3',
+    'NRM-11',
+    'NRM-12',
+    'NRM-23',
+    'NRM-33',
+    'NRM-41',
+    'NRM-48',
+    'IBRA-18',
+    'IBRA-42',
+    'IBRA-64',
+    'IBRA-66',
+    'IBRA-79',
+    'subWA-1',
+    'subNT-1',
+    'subNT-2',
+    'subNT-3',
+    'subNT-4'
+]
+
 for taxacsv in files:
     print('   ' + taxacsv)
     last_class = ''
@@ -40,6 +62,9 @@ for taxacsv in files:
             if reg_type == 'Kimberly':   reg_type = 'subWA'
             if reg_type == 'NT':         reg_type = 'subNT'
             reg_shid = row['shapefile_id']
+
+            if reg_type + '-' + str(reg_shid) in region_skip_list:
+                continue
 
             for year in [2015, 2025, 2035, 2045, 2055, 2065, 2075, 2085]:
                 value_list = ["'" + row['current'] + "'"]

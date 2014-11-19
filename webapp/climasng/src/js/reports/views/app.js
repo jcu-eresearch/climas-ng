@@ -44,25 +44,62 @@
       'click .getreport': 'getReport'
     },
     initialize: function() {
+      var regFetch, sectFetch, yearFetch;
       debug('AppView.initialize');
       _.bindAll.apply(_, [this].concat(_.functions(this)));
-      this.fetchReportSections();
-      this.fetchRegions();
-      this.fetchYears();
-      this.updateSummary();
       this.hash = '';
-      return this.checkUrl();
+      sectFetch = this.fetchReportSections();
+      regFetch = this.fetchRegions();
+      yearFetch = this.fetchYears();
+      this.updateSummary();
+      $.when(sectFetch, regFetch, yearFetch).then((function(_this) {
+        return function() {
+          return _this.checkHash();
+        };
+      })(this));
+      return $(window).on('hashchange', (function(_this) {
+        return function() {
+          console.log('checking again');
+          return _this.checkHash();
+        };
+      })(this));
     },
     render: function() {
       debug('AppView.render');
       this.$el.append(AppView.templates.layout({}));
       return $('#contentwrap .maincontent').append(this.$el);
     },
-    checkUrl: function() {
-      var hash;
+    checkHash: function() {
+      var hash, hashList, hashPair, _fn, _i, _len;
       hash = window.location.hash;
-      if (this.hash === hash) {
-
+      if (this.hash === hash || hash.length < 2) {
+        return;
+      }
+      hashList = hash.substring(1).split('/');
+      _fn = (function(_this) {
+        return function(hashPair) {
+          var parts;
+          parts = hashPair.split('=');
+          if (parts.length === 2) {
+            return _this.applyHashElement(parts[0], parts[1]);
+          }
+        };
+      })(this);
+      for (_i = 0, _len = hashList.length; _i < _len; _i++) {
+        hashPair = hashList[_i];
+        _fn(hashPair);
+      }
+      return this.hash = window.location.hash;
+    },
+    applyHashElement: function(elem, value) {
+      var regiontype;
+      if (elem === 'region') {
+        regiontype = value.split('_')[0];
+        this.$('input[type=radio][name=regiontype][value="' + regiontype + '"]').click();
+        this.$('select.regionselector option[value="' + value + '"]').parent().val(value).change();
+      }
+      if (elem === 'year') {
+        return this.$('input[type=radio][name=year][value="' + value + '"]').click();
       }
     },
     getReport: function() {
@@ -231,7 +268,7 @@
     },
     updateYearSelection: function(event) {
       debug('AppView.updateYearSelection');
-      this.selectedYear = this.$('[name=yearselector]:checked').val();
+      this.selectedYear = this.$('[name=year]:checked').val();
       $.each(this.years, (function(_this) {
         return function(index, year) {
           var selector;
@@ -327,7 +364,7 @@
       reviewContentItem: _.template("<li>item</li>"),
       regionTypeSelector: _.template("<div class=\"regiontypeselector\" id=\"regiontype-<%= id %>\">\n    <label class=\"name\"><input\n        class=\"regiontype\"\n        name=\"regiontype\"\n        type=\"radio\"\n        value=\"<%= id %>\"\n    /> <%= name %>\n    </label>\n    <div class=\"regionselectorwrapper\"><select class=\"regionselector\">\n        <option value=\"\" disabled=\"disabled\" selected=\"selected\">select a region&hellip;</option>\n        <%= optionList %>\n    </select></div>\n</div>"),
       regionSelector: _.template("<option value=\"<%= id %>\"><%= name %></option>"),
-      yearSelector: _.template("<div class=\"yearrow\" id=\"year-<%= year %>\">\n    <label class=\"name\"><input\n        class=\"yearselector\"\n        name=\"yearselector\"\n        type=\"radio\"\n        value=\"<%= year %>\"\n    /> <%= year %></label>\n</div>"),
+      yearSelector: _.template("<div class=\"yearrow\" id=\"year-<%= year %>\">\n    <label class=\"name\"><input\n        class=\"year\"\n        name=\"year\"\n        type=\"radio\"\n        value=\"<%= year %>\"\n    /> <%= year %></label>\n</div>"),
       sectionSelector: _.template("<div class=\"sectionselector<% if (initial != 'included') { print(' unselected'); } %>\" id=\"section-<%= id %>\">\n    <label class=\"name\"\n        <% if (presence == 'required') { print('title=\"This section is required\"'); } %>\n    ><input\n        type=\"checkbox\"\n        value=\"<%= id %>\"\n        <% if (initial == 'included') { print('checked=\"checked\"'); } %>\n        <% if (presence == 'required') { print('disabled=\"disabled\"'); } %>\n    /> <%= name %></label>\n    <p class=\"description\"><%= description %></p>\n\n</div>"),
       subsections: _.template("<div class=\"subsections clearfix\">\n</div>")
     }

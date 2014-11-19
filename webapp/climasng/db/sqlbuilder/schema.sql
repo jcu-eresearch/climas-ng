@@ -1,7 +1,9 @@
 PRAGMA foreign_keys=OFF;
 
 BEGIN TRANSACTION;
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE TABLE "region_types" (
     "regiontype" VARCHAR(16) NOT NULL,
     "regiontypename_singular" VARCHAR(32),
@@ -29,19 +31,21 @@ INSERT INTO "region_types" VALUES(
     'IBRA bioregions',
     'http://www.environment.gov.au/parks/nrs/science/bioregion-framework/ibra/'
 );
-INSERT INTO "region_types" VALUES(
-    'subWA',
-    'Rangelands NRM subregion',
-    'Rangelands NRM subregions',
-    ''
-);
-INSERT INTO "region_types" VALUES(
-    'subNT',
-    'Territory NRM subregion',
-    'Territory NRM subregions',
-    ''
-);
+-- INSERT INTO "region_types" VALUES(
+--     'subWA',
+--     'Rangelands NRM subregion',
+--     'Rangelands NRM subregions',
+--     ''
+-- );
+-- INSERT INTO "region_types" VALUES(
+--     'subNT',
+--     'Territory NRM subregion',
+--     'Territory NRM subregions',
+--     ''
+-- );
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE TABLE "regions" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "type_local_code" VARCHAR(16),
@@ -54,7 +58,9 @@ CREATE TABLE "regions" (
     "includes_significant_sea" BOOLEAN,
     "region_type_regiontype" VARCHAR(16) NOT NULL
 );
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE TABLE "species" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "taxon" VARCHAR(32),
@@ -62,7 +68,9 @@ CREATE TABLE "species" (
     "scientific_name" VARCHAR(128),
     "common_name" VARCHAR(64)
 );
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE TABLE "presences" (
 
     "species_id" INTEGER NOT NULL,
@@ -79,7 +87,9 @@ CREATE TABLE "presences" (
 
     PRIMARY KEY("species_id", "region_id", "year")
 );
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 CREATE INDEX "index_presence_region" ON "presences" ("region_id");
 CREATE INDEX "index_presence_species" ON "presences" ("species_id");
 
@@ -88,5 +98,7 @@ CREATE INDEX "index_regions_shapefile_id" ON "regions" ("shapefile_id");
 
 CREATE UNIQUE INDEX "index_species_scientific_name" on "species" ("scientific_name");
 CREATE INDEX "index_species_taxon" on "species" ("taxon");
+
 -- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 COMMIT;

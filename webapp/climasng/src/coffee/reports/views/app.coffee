@@ -67,15 +67,23 @@ AppView = Backbone.View.extend {
         # more annoying version of bindAll requires this concat stuff
         _.bindAll.apply _, [this].concat _.functions(this)
 
+        @hash = '' # current hash, assume blank
+
         # kick off the fetching of stuff
-        @fetchReportSections()
-        @fetchRegions()
-        @fetchYears()
+        sectFetch = @fetchReportSections()
+        regFetch = @fetchRegions()
+        yearFetch = @fetchYears()
 
         @updateSummary()
 
-        @hash = '' # current hash, assume blank
-        @checkUrl()
+        # once stuff is all fetched, check the hatch
+        $.when(sectFetch, regFetch, yearFetch).then ()=>
+            @checkHash()
+
+        $(window).on 'hashchange', ()=>
+            console.log 'checking again'
+            @checkHash()
+
         # @tick()
     # ---------------------------------------------------------------
     render: ()->
@@ -87,10 +95,37 @@ AppView = Backbone.View.extend {
     # ---------------------------------------------------------------
     # check / update the hash part of the URL and match form fields
     # ---------------------------------------------------------------
-    checkUrl: ()->
+    checkHash: ()->
         hash = window.location.hash
-        return if @hash is hash
+        return if @hash is hash or hash.length < 2
+        # so the hash is different from what we expect. we should
+        # update the form controls.
+        hashList = hash.substring(1).split '/'
+        for hashPair in hashList
+            do (hashPair)=>
+                parts = hashPair.split '='
+                if parts.length is 2
+                    @applyHashElement parts[0], parts[1]
+        @hash = window.location.hash
+    # ---------------------------------------------------------------
+    applyHashElement: (elem, value)->
+        if elem is 'region'
+            # the region will specify region type as the first bit of it's id
+            regiontype = value.split('_')[0]
+            @$('input[type=radio][name=regiontype][value="' + regiontype + '"]').click()
+            # use the full id for the region in the region dropdown
+            @$('select.regionselector option[value="' + value + '"]').parent().val(value).change()
 
+        if elem is 'year'
+            @$('input[type=radio][name=year][value="' + value + '"]').click()
+
+            # # if it's sections, check all the inputs
+            # if parts[0] is 'sections'
+            #     console.log 'sections'
+            # else
+            #     # attempt to set a form field to the given value
+            #     $('select.' + parts[0] + 'selector option[value="' + parts[1] + '"]').parent().val(parts[1]).change()
+            #     $('input[type="radio"][name="' + parts[0] + '"][value="' + parts[1] + '"]').click()
     # ---------------------------------------------------------------
     # actually go get the report
     # ---------------------------------------------------------------
@@ -135,44 +170,7 @@ AppView = Backbone.View.extend {
             sectionselect.empty().removeClass 'loading'
             @buildReportSectionList @possibleSections, sectionselect
 
-        # # pretend it took a while to get the data..
-        # setTimeout ()->
-        #     fetch.resolve({
-        #         sections: [
-        #             {
-        #                 id: 'intro'
-        #                 name: 'Introduction'
-        #                 description: 'title, credits, and introductory paragraphs.'
-        #                 presence: 'required'
-        #                 sections: []
-        #             },{
-        #                 id: 'climatereview'
-        #                 name: 'Climate Review'
-        #                 description: 'a description of the region\'s current and projected climate.'
-        #                 presence: 'optional'
-        #                 sections: [
-        #                     {
-        #                         id: 'temperature'
-        #                         name: 'Temperature'
-        #                         description: 'current and projected temperature.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     },{
-        #                         id: 'rainfall'
-        #                         name: 'Rainfall'
-        #                         description: 'current and projected precipitation.'
-        #                         presence: 'optional'
-        #                         sections: []
-        #                     }
-        #                 ]
-        #             },{
-        #                 // ...
-        #             }
-        #         ]
-        #     })
-        # , 500 + (500 * Math.random())
-
-        # now return a promise in case we need to wait for this
+        # now return a promise to wait on
         return fetch.promise()
     # ---------------------------------------------------------------
     buildReportSectionList: (data, wrapper)->
@@ -225,32 +223,28 @@ AppView = Backbone.View.extend {
         fetch.done (data)=>
             @buildRegionList data
 
-        # # pretend it took a while to get the data..
-        # setTimeout ()->
-        #     fetch.resolve({
-        #         regiontypes: [
-        #             {
-        #                 id: 'nrm'
-        #                 name: 'NRM region'
-        #                 regions: [
-        #                     { id: 'NRM_ACT', name: 'ACT' },
-        #                     { id: 'NRM_Adelaide_and_Mount_Lofty_Ranges', name: 'Adelaide and Mount Lofty Ranges' },
-        #                     { id: 'NRM_Alinytjara_Wilurara', name: 'Alinytjara Wilurara' },
-        #                     { id: 'NRM_Avon', name: 'Avon' },
-        #                     { id: 'NRM_Border_Rivers-Gwydir', name: 'Border Rivers-Gwydir' },
-        #                     // ...
-        #                     { id: 'NRM_Wimmera', name: 'Wimmera' }
-        #                 ]
-        #             },{
-        #                 id: 'ibra'
-        #                 name: 'IBRA bioregion'
-        #                 regions: []
-        #             }
+        ## the returned data looks like this:
+        # { regiontypes: [
+        #     {
+        #         id: 'nrm'
+        #         name: 'NRM region'
+        #         regions: [
+        #             { id: 'NRM_ACT', name: 'ACT' },
+        #             { id: 'NRM_Adelaide_and_Mount_Lofty_Ranges', name: 'Adelaide and Mount Lofty Ranges' },
+        #             { id: 'NRM_Alinytjara_Wilurara', name: 'Alinytjara Wilurara' },
+        #             { id: 'NRM_Avon', name: 'Avon' },
+        #             { id: 'NRM_Border_Rivers-Gwydir', name: 'Border Rivers-Gwydir' },
+        #             // ...
+        #             { id: 'NRM_Wimmera', name: 'Wimmera' }
         #         ]
-        #     })
-        # , 500 + (500 * Math.random())
+        #     },{
+        #         id: 'ibra'
+        #         name: 'IBRA bioregion'
+        #         regions: []
+        #     }
+        # ]}
 
-        # now return a promise in case we need to wait for this
+        # now return a promise to wait for
         return fetch.promise()
     # ---------------------------------------------------------------
     buildRegionList: (data)->
@@ -344,7 +338,7 @@ AppView = Backbone.View.extend {
     updateYearSelection: (event)->
         debug 'AppView.updateYearSelection'
 
-        @selectedYear = @$('[name=yearselector]:checked').val()
+        @selectedYear = @$('[name=year]:checked').val()
 
         $.each @years, (index, year)=>
             # find the selection checkbox..
@@ -490,8 +484,8 @@ AppView = Backbone.View.extend {
     yearSelector: _.template """
         <div class="yearrow" id="year-<%= year %>">
             <label class="name"><input
-                class="yearselector"
-                name="yearselector"
+                class="year"
+                name="year"
                 type="radio"
                 value="<%= year %>"
             /> <%= year %></label>
