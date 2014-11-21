@@ -68,6 +68,14 @@ class SectionData(object):
     @property
     def has_oddrowtemplate(self): return os.path.exists( self.oddrowtemplatepath )
 
+    ## emptytemplate -----------------------------------------------
+    @property
+    def emptytemplatepath(self): return os.path.join(self._dir, 'rowtemplate-empty.md')
+
+    ## has_emptytemplate -------------------------------------------
+    @property
+    def has_emptytemplate(self): return os.path.exists( self.emptytemplatepath )
+
     ## parent -------------------------------------------------------
     @property
     def parent(self): return self._parent

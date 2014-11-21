@@ -113,20 +113,27 @@ class DocAssembler(object):
                             "regionname": region_name,
                             "regiontype": self._region_type
                         })
+
                         # separate template for odd and even rows
                         even_row = Template(rtf.read())
                         odd_row = even_row
                         if sect.has_oddrowtemplate:
                             with open(sect.oddrowtemplatepath) as ortf:
                                 odd_row = Template(ortf.read())
-                        index = -1
+                        index = 0
                         # now resolve the row template with this row's data
                         for result in result_set:
                             index += 1
-                            if index % 2 != 0:
+                            if index % 2 == 0:
                                 source.append(odd_row.safe_substitute(result))
                             else:
                                 source.append(even_row.safe_substitute(result))
+
+                        # separate template for no results?
+                        if index < 1 and sect.has_emptytemplate:
+                            with open(sect.emptytemplatepath) as mtf:
+                                source.append(mtf.read())
+
 
                 return ''.join(source)
 
