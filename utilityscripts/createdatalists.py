@@ -9,7 +9,7 @@
 
 ## HPC / prod paths
 jsondir = '/var/climaswebapp/climasng/data'
-datadir = '/rdsi/climas/taxa-test'
+datadir = '/rdsi/climas/taxa'
 
 import sys
 sys.path.append(jsondir)

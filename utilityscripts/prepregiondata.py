@@ -17,7 +17,7 @@ from decimal import Decimal
 ## HPC paths
 biodiv_src = '/rdsi/ccimpacts/NRM/summary'
 climate_src = '/rdsi/ccimpacts/NRM/prior_region_summaries'
-dest = '/rdsi/climas/regions-test'
+dest = '/rdsi/climas/regions-new'
 
 remaps = {
     'rainfall_current_min': 'baseline_p_min',

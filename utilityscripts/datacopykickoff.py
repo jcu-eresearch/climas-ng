@@ -16,7 +16,7 @@ import time
 
 ## HPC paths
 source = '/rdsi/ccimpacts/NRM'
-dest = '/rdsi/climas/taxa-test'
+dest = '/rdsi/climas/taxa-new'
 
 here = os.path.dirname(os.path.realpath(__file__))
 
