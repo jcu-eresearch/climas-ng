@@ -74,14 +74,15 @@ AppView = Backbone.View.extend {
         regFetch = @fetchRegions()
         yearFetch = @fetchYears()
 
-        @updateSummary()
 
         # once stuff is all fetched, check the hatch
         $.when(sectFetch, regFetch, yearFetch).then ()=>
             @checkHash()
+            @updateSummary()
 
+        # can't use normal Backbone view events, coz "window" isn't
+        # part of the app's view.
         $(window).on 'hashchange', ()=>
-            console.log 'checking again'
             @checkHash()
 
         # @tick()
@@ -98,19 +99,27 @@ AppView = Backbone.View.extend {
     checkHash: ()->
         hash = window.location.hash
         return if @hash is hash or hash.length < 2
-        # so the hash is different from what we expect. we should
-        # update the form controls.
+
+        # the hash was updated, so update the form controls
+        hashData = @splitHash(hash)
+        @applyHashElement(key, value) for key, value of hashData
+
+        @hash = window.location.hash
+    # ---------------------------------------------------------------
+    # returns the data object that a hash string holds
+    splitHash: (hash)->
+        hashData = {}
         hashList = hash.substring(1).split '/'
         for hashPair in hashList
             do (hashPair)=>
                 parts = hashPair.split '='
                 if parts.length is 2
-                    @applyHashElement parts[0], parts[1]
-        @hash = window.location.hash
+                    hashData[parts[0]] = parts[1]
+        return hashData
     # ---------------------------------------------------------------
     applyHashElement: (elem, value)->
         if elem is 'region'
-            # the region will specify region type as the first bit of it's id
+            # the region will specify region type as the first bit of its id
             regiontype = value.split('_')[0]
             @$('input[type=radio][name=regiontype][value="' + regiontype + '"]').click()
             # use the full id for the region in the region dropdown
@@ -119,13 +128,22 @@ AppView = Backbone.View.extend {
         if elem is 'year'
             @$('input[type=radio][name=year][value="' + value + '"]').click()
 
-            # # if it's sections, check all the inputs
-            # if parts[0] is 'sections'
-            #     console.log 'sections'
-            # else
-            #     # attempt to set a form field to the given value
-            #     $('select.' + parts[0] + 'selector option[value="' + parts[1] + '"]').parent().val(parts[1]).change()
-            #     $('input[type="radio"][name="' + parts[0] + '"][value="' + parts[1] + '"]').click()
+        # # if it's sections, check all the inputs
+        # if elem is 'sections'
+        #     console.log 'sections'
+    # ---------------------------------------------------------------
+    makeHash: ()->
+        debug 'AppView.makeHash'
+
+        hashItems = @splitHash window.location.hash
+
+        if @selectedYear
+            hashItems.year = @selectedYear
+        if @selectedRegion and @selectedRegion != ''
+            hashItems.region = @selectedRegion
+
+        newHash = (key + '=' + hashItems[key] for key of hashItems).join '/'
+        location.hash = '/' + newHash
     # ---------------------------------------------------------------
     # actually go get the report
     # ---------------------------------------------------------------
@@ -430,6 +448,9 @@ AppView = Backbone.View.extend {
         @$('.reviewblock').html AppView.templates.reviewBlock(summary)
         @$('.reviewblock').toggleClass 'regionselected', (@selectedRegionInfo isnt undefined)
         @$('.reviewblock').toggleClass 'yearselected', (@selectedYear isnt undefined)
+
+        # finally, this is a good time to update the hash too
+        @makeHash()
     # ---------------------------------------------------------------
 },{ templates: { # ==================================================
     # templates here

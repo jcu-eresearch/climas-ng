@@ -51,15 +51,14 @@
       sectFetch = this.fetchReportSections();
       regFetch = this.fetchRegions();
       yearFetch = this.fetchYears();
-      this.updateSummary();
       $.when(sectFetch, regFetch, yearFetch).then((function(_this) {
         return function() {
-          return _this.checkHash();
+          _this.checkHash();
+          return _this.updateSummary();
         };
       })(this));
       return $(window).on('hashchange', (function(_this) {
         return function() {
-          console.log('checking again');
           return _this.checkHash();
         };
       })(this));
@@ -70,18 +69,28 @@
       return $('#contentwrap .maincontent').append(this.$el);
     },
     checkHash: function() {
-      var hash, hashList, hashPair, _fn, _i, _len;
+      var hash, hashData, key, value;
       hash = window.location.hash;
       if (this.hash === hash || hash.length < 2) {
         return;
       }
+      hashData = this.splitHash(hash);
+      for (key in hashData) {
+        value = hashData[key];
+        this.applyHashElement(key, value);
+      }
+      return this.hash = window.location.hash;
+    },
+    splitHash: function(hash) {
+      var hashData, hashList, hashPair, _fn, _i, _len;
+      hashData = {};
       hashList = hash.substring(1).split('/');
       _fn = (function(_this) {
         return function(hashPair) {
           var parts;
           parts = hashPair.split('=');
           if (parts.length === 2) {
-            return _this.applyHashElement(parts[0], parts[1]);
+            return hashData[parts[0]] = parts[1];
           }
         };
       })(this);
@@ -89,7 +98,7 @@
         hashPair = hashList[_i];
         _fn(hashPair);
       }
-      return this.hash = window.location.hash;
+      return hashData;
     },
     applyHashElement: function(elem, value) {
       var regiontype;
@@ -101,6 +110,26 @@
       if (elem === 'year') {
         return this.$('input[type=radio][name=year][value="' + value + '"]').click();
       }
+    },
+    makeHash: function() {
+      var hashItems, key, newHash;
+      debug('AppView.makeHash');
+      hashItems = this.splitHash(window.location.hash);
+      if (this.selectedYear) {
+        hashItems.year = this.selectedYear;
+      }
+      if (this.selectedRegion && this.selectedRegion !== '') {
+        hashItems.region = this.selectedRegion;
+      }
+      newHash = ((function() {
+        var _results;
+        _results = [];
+        for (key in hashItems) {
+          _results.push(key + '=' + hashItems[key]);
+        }
+        return _results;
+      })()).join('/');
+      return location.hash = '/' + newHash;
     },
     getReport: function() {
       var form;
@@ -355,7 +384,8 @@
       };
       this.$('.reviewblock').html(AppView.templates.reviewBlock(summary));
       this.$('.reviewblock').toggleClass('regionselected', this.selectedRegionInfo !== void 0);
-      return this.$('.reviewblock').toggleClass('yearselected', this.selectedYear !== void 0);
+      this.$('.reviewblock').toggleClass('yearselected', this.selectedYear !== void 0);
+      return this.makeHash();
     }
   }, {
     templates: {
