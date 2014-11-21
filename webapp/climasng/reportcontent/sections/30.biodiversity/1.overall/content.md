@@ -84,6 +84,8 @@ Table: Current and Future Species Counts in {{rg_name}} in {{year}} for Low and 
 | Birds | {{baseline_b_birds_count}} | {{lo_{{year}}_b_birds_count_50th}} (+{{lo_{{year}}_b_birds_gain_50th}} -{{lo_{{year}}_b_birds_loss_50th}}) | {{hi_{{year}}_b_birds_count_50th}} (+{{hi_{{year}}_b_birds_gain_50th}} -{{hi_{{year}}_b_birds_loss_50th}}) |
 | Reptiles | {{baseline_b_reptiles_count}} | {{lo_{{year}}_b_reptiles_count_50th}} (+{{lo_{{year}}_b_reptiles_gain_50th}} -{{lo_{{year}}_b_reptiles_loss_50th}}) | {{hi_{{year}}_b_reptiles_count_50th}} (+{{hi_{{year}}_b_reptiles_gain_50th}} -{{hi_{{year}}_b_reptiles_loss_50th}}) |
 | Amphibians | {{baseline_b_amphibians_count}} | {{lo_{{year}}_b_amphibians_count_50th}} (+{{lo_{{year}}_b_amphibians_gain_50th}} -{{lo_{{year}}_b_amphibians_loss_50th}}) | {{hi_{{year}}_b_amphibians_count_50th}} (+{{hi_{{year}}_b_amphibians_gain_50th}} -{{hi_{{year}}_b_amphibians_loss_50th}}) |
+| Freshwater fish | {{baseline_b_fish_count}} | {{lo_{{year}}_b_fish_count_50th}} (+{{lo_{{year}}_b_fish_gain_50th}} -{{lo_{{year}}_b_fish_loss_50th}}) | {{hi_{{year}}_b_fish_count_50th}} (+{{hi_{{year}}_b_fish_gain_50th}} -{{hi_{{year}}_b_fish_loss_50th}}) |
+| Crayfish | {{baseline_b_crayfish_count}} | {{lo_{{year}}_b_crayfish_count_50th}} (+{{lo_{{year}}_b_crayfish_gain_50th}} -{{lo_{{year}}_b_crayfish_loss_50th}}) | {{hi_{{year}}_b_crayfish_count_50th}} (+{{hi_{{year}}_b_crayfish_gain_50th}} -{{hi_{{year}}_b_crayfish_loss_50th}}) |
 
 \renewcommand*{\arraystretch}{1.1}
 

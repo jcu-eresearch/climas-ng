@@ -3,7 +3,7 @@
 
 Currently, the mean annual rainfall across {{rg_name}} is {{baseline_p_mean, round}} mL, with areas within the region experiencing a range of averages between {{baseline_p_min, round}} mL and {{baseline_p_max, round}} mL.
 
-![Figure 3: Average Projected rainfall]({{region_data_path}}/absolute_climate_rainfall.png)
+![Figure 3: Average projected rainfall]({{region_data_path}}/absolute_climate_rainfall.png)
 
 Future rainfall projections are much more variable than temperature.  Projections for {{year}} fall in the range {{hi_{{year}}_p_mean_10th, round}} &ndash; {{hi_{{year}}_p_mean_90th, round}} mL, an average {{hi_{{year}}_p_mean_50th - baseline_p_mean, change}} of {{hi_{{year}}_p_mean_50th - baseline_p_mean, round, absolute}} mL.
 
@@ -42,7 +42,7 @@ Almost all models agree on a decrease in rainfall, by between {{hi_{{year}}_p_me
 
 Figure 4 shows the median projected change in annual average rainfall across {{rg_name}}, in low and high emission scenarios.
 
-![Figure 4: Projected rainfall Change]({{region_data_path}}/delta_rainfall.png)
+![Figure 4: Projected rainfall change]({{region_data_path}}/delta_rainfall.png)
 
 [[year < 2085]]Note that this figure shows projections for 2085.[[always]]
 
