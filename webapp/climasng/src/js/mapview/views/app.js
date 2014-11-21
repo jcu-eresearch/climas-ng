@@ -192,10 +192,7 @@
       tag = "<b><i>" + info.speciesName + "</i></b>";
       if (info.year === 'baseline') {
         tag = "current " + tag + " distribution";
-      } else if (info.gcm === 'all') {
-        tag = "<b>median</b> projections for " + tag + " in <b>" + info.year + "</b> if <b>" + info.scenario + "</b>";
-      } else {
-        tag = "<b>" + info.gcm + "</b> projections for " + tag + " in <b>" + info.year + "</b> if <b>" + info.scenario + "</b>";
+        tag = "<b>" + info.gcm + "</b> percentile projections for " + tag + " in <b>" + info.year + "</b> if <b>" + info.scenario + "</b>";
       }
       if (side === 'left') {
         this.leftTag.find('.leftlayername').html(tag);
@@ -205,7 +202,7 @@
       }
     },
     addMapLayer: function(side) {
-      var futureModelPoint, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, zipUrl, _ref;
+      var futureModelPoint, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, val, zipUrl, _ref;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -287,7 +284,26 @@
         this.rightLayer = layer;
       }
       layer.addTo(this.map);
-      return this.resizeThings();
+      this.resizeThings();
+      if (ga && typeof ga === 'function') {
+        if (sideInfo.year === 'baseline') {
+          val = 1990;
+        } else {
+          val = parseInt(sideInfo.year, 10);
+        }
+        val = val + {
+          'tenth': 0.1,
+          'fiftieth': 0.5,
+          'ninetieth': 0.9
+        }[sideInfo.gcm];
+        return ga('send', {
+          'hitType': 'event',
+          'eventCategory': 'mapshow',
+          'eventAction': sideInfo.speciesName,
+          'eventLabel': sideInfo.scenario,
+          'eventValue': val
+        });
+      }
     },
     centreMap: function(repeatedlyFor) {
       var later, recentre, _i, _results;

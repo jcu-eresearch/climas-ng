@@ -244,10 +244,7 @@ AppView = Backbone.View.extend {
 
         if info.year is 'baseline'
             tag = "current #{tag} distribution"
-        else if info.gcm is 'all'
-            tag = "<b>median</b> projections for #{tag} in <b>#{info.year}</b> if <b>#{info.scenario}</b>"
-        else
-            tag = "<b>#{info.gcm}</b> projections for #{tag} in <b>#{info.year}</b> if <b>#{info.scenario}</b>"
+            tag = "<b>#{info.gcm}</b> percentile projections for #{tag} in <b>#{info.year}</b> if <b>#{info.scenario}</b>"
 
 
         if side == 'left'
@@ -363,6 +360,25 @@ AppView = Backbone.View.extend {
         layer.addTo @map
 
         @resizeThings() # re-establish the splitter
+
+        # log this as an action in Google Analytics
+        if ga and typeof(ga) == 'function'
+            # we have a ga thing which is probaby a google analytics thing.
+            # "value" is year.percentile, eg. for 90th percentile in 2055,
+            # we will send 2055.9 as the value.
+            if sideInfo.year == 'baseline'
+                val = 1990
+            else
+                val = parseInt(sideInfo.year, 10)
+            val = val + { 'tenth': 0.1, 'fiftieth': 0.5, 'ninetieth': 0.9 }[sideInfo.gcm]
+
+            ga('send', {
+                'hitType': 'event',
+                'eventCategory': 'mapshow',
+                'eventAction': sideInfo.speciesName,
+                'eventLabel': sideInfo.scenario,
+                'eventValue': val
+            })
 
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------

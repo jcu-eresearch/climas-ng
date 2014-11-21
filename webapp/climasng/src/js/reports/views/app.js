@@ -143,7 +143,16 @@
       form.push('<input type="hidden" name="sections" value="' + this.selectedSections.join(' ') + '">');
       form.push('</form>');
       this.$el.append(form.join('\n'));
-      return this.$('#reportform').submit();
+      this.$('#reportform').submit();
+      if (ga && typeof ga === 'function') {
+        return ga('send', {
+          'hitType': 'event',
+          'eventCategory': 'reportdownload',
+          'eventAction': this.selectedRegionType,
+          'eventLabel': this.selectedRegion,
+          'eventValue': parseInt(this.selectedYear, 10)
+        });
+      }
     },
     fetchReportSections: function() {
       var fetch;

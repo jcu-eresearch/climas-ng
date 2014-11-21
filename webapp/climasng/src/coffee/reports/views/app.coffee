@@ -171,6 +171,16 @@ AppView = Backbone.View.extend {
         @$el.append form.join '\n'
         @$('#reportform').submit()
 
+        # log this as an action in Google Analytics
+        if ga and typeof(ga) == 'function'
+            # we have a ga thing which is probaby a google analytics thing.
+            ga('send', {
+                'hitType': 'event',
+                'eventCategory': 'reportdownload',
+                'eventAction': @selectedRegionType,
+                'eventLabel': @selectedRegion,
+                'eventValue': parseInt(@selectedYear, 10)
+            })
     # ---------------------------------------------------------------
     # deal with report sections
     # ---------------------------------------------------------------
