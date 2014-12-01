@@ -66,9 +66,8 @@ Some models project gains of up to {{hi_{{year}}_b_all_gain_90th}} species, howe
 [[ hi_{{year}}_b_all_gain_90th == 0 ]]
 However, models agree that by {{year}} no new species will enter the region.
 
-[[ hi_{{year}}_b_all_gain_90th > 0 ]]
-
-In light of possible species gains, it is important to consider that even Australian natives may behave like invasive pests when entering new space.  Interaction with other species has not been modelled.
+[[ hi_{{year}}_b_all_gain_90th > 0 OR hi_{{year}}_b_all_loss_10th > 0 ]]
+In light of possible species gains or losses, it is important to note that interactions with other species have not been modelled.
 
 [[always]]
 
@@ -76,7 +75,7 @@ In light of possible species gains, it is important to consider that even Austra
 
 \renewcommand*{\arraystretch}{2.0}
 
-Table: Current and Future Species Counts in {{rg_name}} in {{year}} for Low and High Emission Scenarios
+Table: Current and future species counts in {{rg_name}} in {{year}} for low and high emission scenarios
 
 | Class | Current | \parbox[b]{3.5cm}{\centering Low Emissions Scenario \\ in {{year}} \\ count (+gained -lost)} | \parbox[b]{3.5cm}{\centering High Emissions Scenario \\ in {{year}} \\ count (+gained -lost)} |
 |:----- |:-------:|:-------------------------:|:--------------------------:|

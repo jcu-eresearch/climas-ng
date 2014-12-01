@@ -3,14 +3,14 @@
 
 All of Australia is projected to experience warming in the future.  Mean average temperature across {{rg_name}} ranges from {{baseline_t_min, round 0.1}} to {{baseline_t_max, round 0.1}}&deg;C, averaging {{baseline_t_mean, round 0.1}}&deg;C across the region.
 
+![Figure 1: Average projected temperature]({{region_data_path}}/absolute_climate_temperature.png)
+
+Figure 1 tracks mean annual temperature projections in {{rg_name}} between 2015 and 2085.
+
 [[ hi_{{year}}_t_mean_50th >0.1> baseline_t_mean ]]
 By {{year}}, the mean temperature across the region for the high emission scenario is projected to be in the range {{hi_{{year}}_t_mean_10th, round 0.1}} to {{hi_{{year}}_t_mean_90th, round 0.1}}&deg;C, an average {{hi_{{year}}_t_mean_50th - baseline_t_mean, change}} of {{hi_{{year}}_t_mean_50th - baseline_t_mean, round 0.1, absolute}}&deg;C.
 [[ year != 2085 ]]By 2085, most GCMs project that annual mean temperature across the region will fall in the range {{hi_2085_t_mean_10th, round 0.1}} &ndash; {{hi_2085_t_mean_90th, round 0.1}}&deg;C in the high emission scenario, with the best estimate being {{hi_2085_t_mean_50th, round 0.1}}&deg;C.
 [[always]]
-
-![Figure 1: Average projected temperature]({{region_data_path}}/absolute_climate_temperature.png)
-
-Figure 1 tracks mean annual temperature projections in {{rg_name}} between 2015 and 2085.
 
 ![Figure 2: Projected temperature change]({{region_data_path}}/delta_temperature.png)
 

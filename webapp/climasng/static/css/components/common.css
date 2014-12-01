@@ -310,6 +310,8 @@ nav ul li ul > li:hover {
 }
 .maincontent .credits img {
   border: none;
+  max-width: 190px;
+  max-height: 140px;
 }
 /* footer - - - - - - - - - - - - - - - - - - - */
 footer.page {
