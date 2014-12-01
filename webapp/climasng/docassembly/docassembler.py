@@ -30,7 +30,7 @@ class DocAssembler(object):
         self._region_data_path_template = Template(self._settings['region_data_path_pattern'])
         self._selected_sections = doc_data['selected_sections']
         self._format = doc_data['format_dest']
-        self._year = doc_data['year']
+        self._year = int(doc_data['year'])
 
         self._section_debug = self._settings.get('section_debug', False)
 
