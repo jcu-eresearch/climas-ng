@@ -18,7 +18,7 @@ install_reqs = [
     'parsimonious',
     'coverage',
     'simplejson',
-    'pypandoc'
+    'pypandoc==0.8.3'
 ]
 
 setup_reqs = [
