@@ -286,6 +286,7 @@ nav ul li ul > li:hover {
 .maincontent .textcolumn {
   max-width: 40em;
   margin: 0 auto;
+  padding-bottom: 5em;
 }
 .maincontent h1,
 .maincontent h2,

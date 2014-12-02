@@ -1,9 +1,93 @@
-<p><i>This is a demo of CliMAS "Next Generation".  The text below is copied forward from the original CliMAS Reports project and is certainly incorrect and/or out of date.</i></p>
+<p><i>This is a demo of CliMAS "Next Generation".  Information provided by this site has not been checked and should be considered incorrect and/or out of date.</i></p>
 
 <p><b><a href="https://www.signupanywhere.com/signup/Qz4dIG8D">Sign up to be notified when CliMAS launches</a></b></p>
-
 <h2>The science</h2>
-
 <p>
-    ...
+    This project takes future climate projections and uses them to
+    produce estimates of future species distributions.  This process
+    involves several steps.
+</p>
+<h3>Generating species distributions</h3>
+<p>
+    Species occurrences were vetted for accuracy and
+    plausibility.  These occurrences were compared
+    statistically to current climate data at 0.01&deg;
+    geographic resolution (often referred to as &ldquo;1
+    km&rdquo; resolution) to produce a statistical model
+    that predicts species survival given specified
+    climate values.  This model is known as a Species
+    Distribution Model or SDM and one was created for
+    each species.
+</p><p>
+    Using the SDM and current climate conditions, a
+    climate suitability map was created for each species.
+    These suitability maps were then clipped by experts
+    to remove areas with suitable climate that did not
+    current host the species.  This produced an estimate
+    of the current species distribution.
+</p>
+<h3>Projecting future climate</h3>
+<p>
+    Future climate projections must account for a broad
+    range of factors, such as population growth, land use,
+    energy demand, and new technology.  The IPCC has defined
+    a set of scenarios to represent potential futures.
+</p><p>
+    This project uses two of the four IPCC scenarios.
+    RCP8.5, a scenario with continuing high emission
+    of greenhouse gases, was selected to represent a
+    "business as usual" future.  RCP4.5, a scenario in
+    which greenhouse gas emission stabilises before 2100,
+    was selected to represent a lower emission future.
+</p><p>
+    18 different global climate models or GCMs were used to
+    generate climate projections for each selected RCP and
+    each decadal time step from 2015 to 2085.
+</p>
+<h3>Projecting future species distributions</h3>
+<p>
+    The SDM for each species was then applied to future
+    climate projections to create climate suitability
+    maps.  These suitability maps were then clipped based
+    on a realistic dispersal rate to remove areas that
+    had newly suitable climate but could not be reached
+    by the species.  A diagram demonstrating this process
+    is shown below.
+</p><p>
+    <img src="/static/images/dispersal.png" style="display: block; width: 100%; margin: 0 auto">
+</p><p>
+    Dispersal and suitability for freshwater fish and crayfish,
+    and selected stream-dependent species of frogs and turtles,
+    was calculated using stream flow data in addition to climate
+    factors.
+</p><p>
+    The dispersal-clipped projections of different GCMs were
+    summarised using the median or 50th percentile as a "best
+    estimate", and the 10th and 90th percentiles to give an
+    indication of variability between models.  This summarising
+    across models produced the projected species distribution
+    maps displayed in CliMAS' map interface.
+</p>
+<h3>Generating biodiversity values</h3>
+<p>
+    Maps for the species in each given taxa were reduced to
+    a binary value of present or not-present.  Calculating the
+    number of different species present at a given point (with
+    10th, 50th and 90th percentile summaries across GCMs)
+    produced the taxa biodiversity maps available in the map
+    interface.
+</p>
+<h3>Regional summaries</h3>
+<p>
+    Projected species distributions were overlaid with region
+    borders for each of the reportable regions.  This allowed
+    the species potentially present in the region at a given
+    projected future point to be listed.
+</p><p>
+    Similarly, region borders were used to clip temperature and
+    rainfall values for current and future projections.  This
+    provided numerical climate summary data with 10th 50th and
+    90th percentiles, and this information is available along
+    with species presence summaries from CliMAS' reports
+    generation interface.
 </p>
