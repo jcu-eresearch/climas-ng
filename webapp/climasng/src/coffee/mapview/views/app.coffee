@@ -235,7 +235,7 @@ AppView = Backbone.View.extend {
         return @sideUpdate 'right'
     # ---------------------------------------------------------------
     addMapTag: (side)->
-        debug 'AppView.addMapTag'
+        console.log 'AppView.addMapTag'
 
         info = @leftInfo if side == 'left'
         info = @rightInfo if side == 'right'
@@ -244,6 +244,7 @@ AppView = Backbone.View.extend {
 
         if info.year is 'baseline'
             tag = "current #{tag} distribution"
+        else
             tag = "<b>#{info.gcm}</b> percentile projections for #{tag} in <b>#{info.year}</b> if <b>#{info.scenario}</b>"
 
 

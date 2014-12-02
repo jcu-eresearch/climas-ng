@@ -182,7 +182,7 @@
     },
     addMapTag: function(side) {
       var info, tag;
-      debug('AppView.addMapTag');
+      console.log('AppView.addMapTag');
       if (side === 'left') {
         info = this.leftInfo;
       }
@@ -192,6 +192,7 @@
       tag = "<b><i>" + info.speciesName + "</i></b>";
       if (info.year === 'baseline') {
         tag = "current " + tag + " distribution";
+      } else {
         tag = "<b>" + info.gcm + "</b> percentile projections for " + tag + " in <b>" + info.year + "</b> if <b>" + info.scenario + "</b>";
       }
       if (side === 'left') {
