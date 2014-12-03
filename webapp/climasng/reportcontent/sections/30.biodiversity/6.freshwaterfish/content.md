@@ -4,25 +4,25 @@
 {{rg_name}} currently hosts {{baseline_b_fish_count}} freshwater fish species.  [[ hi_{{year}}_b_fish_gain_50th > baseline_b_fish_count / 5 OR hi_{{year}}_b_fish_loss_50th > baseline_b_fish_count / 5]]By {{year}} fish biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_fish_count_90th > baseline_b_fish_count
-AND hi_{{year}}_b_fish_count_10th >= baseline_b_fish_count ]]Models agree that regional biodiversity of freshwater fish will increase, by between {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count}} and {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count}} species.
+AND hi_{{year}}_b_fish_count_10th >= baseline_b_fish_count ]]Models agree that regional biodiversity of freshwater fish is likely to increase, by between {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count}} and {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count}} species.
 
 [[  hi_{{year}}_b_fish_count_90th > baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_10th < baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_50th > baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_90th - hi_{{year}}_b_fish_count_50th < hi_{{year}}_b_fish_count_50th - baseline_b_fish_count
-]]Most models predict an increase in this species count, by up to {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count, absolute}} species, however some models predict a decrease of as many as {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count, absolute}} species.
+]]Most models predict a possible increase in this species count, by up to {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count, absolute}} species, however some models predict a decrease of as many as {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count, absolute}} species.
 
 [[  hi_{{year}}_b_fish_count_90th > baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_10th < baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_90th - hi_{{year}}_b_fish_count_50th >= hi_{{year}}_b_fish_count_50th - baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_50th - hi_{{year}}_b_fish_count_10th >= baseline_b_fish_count - hi_{{year}}_b_fish_count_50th
-]]There is little agreement between models on whether this species count will increase or decrease. Projections range from a decrease of as many as {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count, absolute}} species to an increase of up to {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count, absolute}} species.
+]]There is little agreement between models on whether this species count will increase or decrease. Projections range from a decrease of as many as {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count, absolute}} species to a possible increase of up to {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count, absolute}} species.
 
 [[  hi_{{year}}_b_fish_count_90th > baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_10th < baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_50th < baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_50th - hi_{{year}}_b_fish_count_10th < baseline_b_fish_count - hi_{{year}}_b_fish_count_50th
-]]Most models predict a decrease in this species count, by as much as {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count}}, however some predict an increase of as many as {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count}} species.
+]]Most models predict a decrease in this species count, by as much as {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count}}, however some predict a possible increase of as many as {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count}} species.
 
 [[  hi_{{year}}_b_fish_count_90th <= baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_10th < baseline_b_fish_count
@@ -51,24 +51,23 @@ Models agree however that by {{year}}, no fish species currently in {{rg_name}} 
 
 [[always]]
 
-Climate variation in {{rg_name}} may also result in the arrival of species of freshwater fish previously not found in the region.[[never]]
+Climate variation in {{rg_name}} may also result in the arrival of species of freshwater fish not previously found in the region.  Projected gains discussed here are plausible when considering only climate and dispersal factors, but in reality may be ruled out by factors not included in the modelling.  Gains described here should be considered maximums.[[never]]
 
 [[ hi_{{year}}_b_fish_gain_10th > 0 ]]
-Models agree that by {{year}}, between {{hi_{{year}}_b_fish_gain_10th}} and {{hi_{{year}}_b_fish_gain_90th}} additional fish species will live in the region, with a median expected gain of {{hi_{{year}}_b_fish_gain_50th}} species.
+The climate in {{rg_name}} is projected to become suitable for fish species that could enter the region by {{year}}.  Model estimates of the number of these potentially gained species range from {{hi_{{year}}_b_fish_gain_10th}} to {{hi_{{year}}_b_fish_gain_90th}}, with a median estimate of {{hi_{{year}}_b_fish_gain_50th}} species.
 
 [[  hi_{{year}}_b_fish_gain_10th == 0
 and hi_{{year}}_b_fish_gain_50th > 0 ]]
-Most models project some fish species arriving by {{year}}, with a median of {{hi_{{year}}_b_fish_gain_50th}} new species and some models predicting up to {{hi_{{year}}_b_fish_gain_90th}} new species.
+Most models project that the climate in {{rg_name}} will become suitable for some fish species that could enter the region by {{year}}.  The median estimate of the number of these potentially gained species is {{hi_{{year}}_b_fish_gain_50th}} species, with some models estimating up to {{hi_{{year}}_b_fish_gain_90th}} species.
 
 [[ hi_{{year}}_b_fish_gain_50th == 0 and hi_{{year}}_b_fish_gain_90th < 0 ]]
-Some models project gains of up to {{hi_{{year}}_b_fish_gain_90th}} species, however most models agree that by {{year}} no new freshwater fish species will arrive.
+Some models project that the climate in {{rg_name}} will become suitable for up to {{hi_{{year}}_b_fish_gain_90th}} fish species that could enter the region by {{year}}.  Most models however agree that the region will not support additional species.
 
 [[ hi_{{year}}_b_fish_gain_90th == 0 ]]
-However, models agree that by {{year}} no new freshwater fish species will enter the region.
+However, models agree that by {{year}} no new freshwater fish species will be supported by the climate in {{rg_name}}.
 
-[[ hi_{{year}}_b_fish_gain_90th > 0 ]]
-
-In light of possible species gains, it is important to consider that even Australian natives may behave like invasive pests when entering new space.  Interaction with other species has not been modelled.
+[[ hi_{{year}}_b_fish_gain_90th > 0 OR hi_{{year}}_b_fish_loss_10th > 0 ]]
+In light of possible species gains or losses, it is important to note that interactions with other species have not been modelled.
 
 [[always]]
 
