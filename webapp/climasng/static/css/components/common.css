@@ -329,7 +329,9 @@ footer.page {
   background: #242732;
 }
 footer.page p {
-  padding: 0;
+  display: inline;
+  display: inline-block;
+  padding: 0 1em;
   margin: 0;
   opacity: 0.5;
   -webkit-transition: opacity 0.33s ease-in-out;

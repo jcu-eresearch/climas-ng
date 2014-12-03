@@ -1,28 +1,39 @@
 
-/* TEAM */
+TEAM
+
+Scientist: Jeremy VanDerWal
+Site: jjvanderwal.com
+Twitter: @jeremyvanderwal
+Location: Townsville, Australia
+
+Scientist: Erin Graham
+Site: erin.graham@my.jcu.edu.au
+Location: Townsville, Australia
 
 Software maker: Daniel Baird
 Site: danielbaird.com
 Twitter: @danielbaird
 Location: Townsville, Australia
 
-Data preparation: Erin Graham
-Site: erin.graham@my.jcu.edu.au
-Location: Townsville, Australia
 
-Jeremy
+SITE
 
-/* THANKS */
-Name: name or url
+Server side: Python/Pyramid app, wasn't much 
+fun to write.
 
-                    [...]
+Client side: Hand-rolled javascript hooked 
+onto a Backbone thing that Daniel is embarassed 
+by.  Leaflet for map display, jQuery for 
+fetching data and managing the DOM.
 
-/* SITE */
-Server side: Python/Pyramid app, wasn't much fun to write.
 
-Client side: Hand-rolled javascript hooked onto a Backbone frame that Daniel is embarassed by.  Leaflet for map display, jQuery for fetching data and managing the DOM.
+TOOLS
 
-/* TOOLS */
-Daniel used Sublime Text 2 on OSX Mavericks for editing, and Vagrant for running Linux testing VMs.  LESSCSS for CSS (plus autoprefixer), CoffeeScript + Browserify for JavaScript, all hooked up with Gulp.
+Daniel used Sublime Text 2 on OSX for editing,
+and Vagrant for running Linux testing VMs.
+LESSCSS and autoprefixer for CSS, CoffeeScript + 
+Browserify for JavaScript, all hooked up with 
+Gulp.  Mostly Diet Coke for caffeination.
 
-Erin used R (and James Cook Uni's HPC) via a Windows machine for grinding the data.
+Jeremy and Erin used maxent and R (and James Cook
+Uni's HPC) for grinding the data.
