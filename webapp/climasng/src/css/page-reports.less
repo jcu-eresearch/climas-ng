@@ -31,26 +31,41 @@ body { height: 100% }
     padding: 0;
 }
 
-#reportform {
-    // --------------------------------------------------------------
-    @reviewblockwidth: 20em;
-    @formbordercolor: darken(@bodybackground, 10%);
-    @sectiondividercolor: darken(@bodybackground, 30%);
-    @sectiondividercolor: #666;
-    // --------------------------------------------------------------
+// --------------------------------------------------------------
+@reviewblockwidth: 20em;
+@formbordercolor: darken(@bodybackground, 10%);
+@sectiondividercolor: darken(@bodybackground, 30%);
+@sectiondividercolor: #666;
+// --------------------------------------------------------------
 
+@media (max-width: 850px) {
+    #reportform .reviewblock {
+        position: relative;
+    }
+}
+
+@media (min-width: 851px) {
+    #reportform .formblock {
+        padding-right: (@reviewblockwidth + 3em);
+    }
+    #reportform .reviewblock {
+        position: fixed;
+        right: (2 * @sidepad);
+        top: @headerheight;
+        width: @reviewblockwidth;
+    }
+}
+
+#reportform {
     max-width: 65em;
     margin: 0 auto;
+    padding-bottom: 3em;
 
     .reviewblock {
         font-size: 90%;
         box-sizing: border-box;
         padding: 1em 1.33em 0.25em;
         margin-top: 3em;
-        position: fixed;
-        right: (2 * @sidepad);
-        top: @headerheight;
-        width: @reviewblockwidth;
 
         background: rgba(0,0,0, 0.05);
         // background: fadeout(lighten(@bodybackground, 5%), 10%);
@@ -115,7 +130,7 @@ body { height: 100% }
             padding: 1.2em 1em;
             line-height: 1.2em;
             position: absolute;
-            top: 50%;
+            top: 30%;
             left: 0;
             right: 0;
             margin-top: -2em;
@@ -163,7 +178,7 @@ body { height: 100% }
 
     // --------------------------------------------------------------
     .formblock {
-        padding-right: (@reviewblockwidth + 3em);
+        // padding-right: (@reviewblockwidth + 3em);
         min-width: 24em;
 
         // ----------------------------------------------------------

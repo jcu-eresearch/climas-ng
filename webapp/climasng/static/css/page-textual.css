@@ -1147,4 +1147,5 @@ body {
   z-index: 1;
   min-height: 100px;
   padding: 0;
+  min-width: 800px;
 }

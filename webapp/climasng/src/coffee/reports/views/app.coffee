@@ -466,7 +466,6 @@ AppView = Backbone.View.extend {
     # templates here
     # ---------------------------------------------------------------
     layout: _.template """
-        <div class="reviewblock"></div>
         <div class="formblock">
             <h1>Report on</h1>
             <div class="loading select regionselect">loading available regions..</div>
@@ -477,6 +476,7 @@ AppView = Backbone.View.extend {
             <h1>Including</h1>
             <div class="loading select sectionselect">loading available sections..</div>
         </div>
+        <div class="reviewblock"></div>
     """
     # ---------------------------------------------------------------
     reviewBlock: _.template """

@@ -1147,9 +1147,11 @@ body {
   left: 0;
   z-index: 1;
   min-height: 100px;
+  min-width: 640px;
   padding: 0;
 }
 .splitmap {
+  background: #efe6c5;
   height: 100%;
   width: 100%;
 }
@@ -1274,6 +1276,12 @@ body {
 }
 .splitmap .loader.right img {
   float: left;
+}
+.splitmap .side.form.right {
+  display: none;
+}
+.splitmap.split .side.form.right {
+  display: block;
 }
 .splitmap.split.showforms .loader.right {
   right: 15em;

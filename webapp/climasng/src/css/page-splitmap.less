@@ -32,6 +32,7 @@ body {
     left: 0;
     z-index: 1;
     min-height: 100px;
+    min-width: 640px;
     padding: 0;
     // background: @background;
 }
@@ -40,6 +41,7 @@ body {
 @tagcontentpad: (@tagheight / 8);
 .splitmap {
 
+    background: #efe6c5;
     @sideformwidth: 15em;
 
     @right_z: 10000;
@@ -164,9 +166,14 @@ body {
         border-bottom-left-radius: 50% 50%;
         img { float: left; }
     }
+
+    & .side.form.right { display: none }
+    &.split .side.form.right { display: block }
+
     &.split.showforms .loader.right { right: @sideformwidth; }
     &.leftloading  .loader.left  { opacity: 0.5; width: @loaderheight; height: @loaderheight; margin-top: (-1 * @loaderheight / 2); }
     &.rightloading .loader.right { opacity: 0.5; width: @loaderheight; height: @loaderheight; margin-top: (-1 * @loaderheight / 2); }
+
 
     .side.form {
         position: absolute;
