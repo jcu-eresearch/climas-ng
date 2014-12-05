@@ -236,14 +236,12 @@ nav .main.menu > li.current a {
 nav .main.menu > li > a {
   color: #f5efd9;
   text-shadow: 0 1px 0 #2e3240, 0 -1px 0 #1e212a;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  -webkit-transition: opacity 0.1s ease-in-out;
-  transition: opacity 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 nav .main.menu > li > a:hover {
-  opacity: 1;
-  filter: alpha(opacity=100);
+  color: white;
+  text-shadow: 0 1px 0 #000000, 0 -1px 0 #000000, 0 0 2px #000000, 0 0 4px #000000, 0 0 6px #000000;
 }
 /*
     normal: efe6c5 / 239,230,197
