@@ -167,10 +167,11 @@ insert into regions values(163,null,87,'Warren','Warren',null,null,1,0,'IBRA');
 insert into regions values(164,null,88,'Wet Tropics','Wet Tropics',null,null,1,0,'IBRA');
 insert into regions values(165,null,89,'Yalgoo','Yalgoo',null,null,1,0,'IBRA');
 
--- insert into regions values(166,null,1,'Kimberley','Kimberley',null,null,1,0,'subWA');
--- insert into regions values(167,null,1,'Top End','Top End',null,null,1,0,'subNT');
--- insert into regions values(168,null,2,'Table Lands','Table Lands',null,null,1,0,'subNT');
--- insert into regions values(169,null,3,'Arid Lands','Arid Lands',null,null,1,0,'subNT');
--- insert into regions values(170,null,4,'Gulf Savanna','Gulf Savanna',null,null,1,0,'subNT');
+-- insert into regions values(166,null,1,'Kimberley','Kimberley',null,null,1,0,'Kimberly');
+-- insert into regions values(167,null,1,'Top End','Top End',null,null,1,0,'NT');
+-- insert into regions values(168,null,2,'Table Lands','Table Lands',null,null,1,0,'NT');
+-- insert into regions values(169,null,3,'Arid Lands','Arid Lands',null,null,1,0,'NT');
+-- insert into regions values(170,null,4,'Gulf Savanna','Gulf Savanna',null,null,1,0,'NT');
+
 
 COMMIT;

@@ -32,13 +32,13 @@ INSERT INTO "region_types" VALUES(
     'http://www.environment.gov.au/parks/nrs/science/bioregion-framework/ibra/'
 );
 -- INSERT INTO "region_types" VALUES(
---     'subWA',
+--     'Kimberly',
 --     'Rangelands NRM subregion',
 --     'Rangelands NRM subregions',
 --     ''
 -- );
 -- INSERT INTO "region_types" VALUES(
---     'subNT',
+--     'NT',
 --     'Territory NRM subregion',
 --     'Territory NRM subregions',
 --     ''

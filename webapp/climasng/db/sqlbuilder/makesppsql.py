@@ -27,11 +27,11 @@ region_skip_list = [
     'IBRA-64',
     'IBRA-66',
     'IBRA-79',
-    'subWA-1',
-    'subNT-1',
-    'subNT-2',
-    'subNT-3',
-    'subNT-4'
+    'Kimberly-1',
+    'NT-1',
+    'NT-2',
+    'NT-3',
+    'NT-4'
 ]
 
 for taxacsv in files:
@@ -58,9 +58,10 @@ for taxacsv in files:
             # add the presences
             #
             reg_type = row['region_type']
-            if reg_type == 'Kimberley':  reg_type = 'subWA'
-            if reg_type == 'Kimberly':   reg_type = 'subWA'
-            if reg_type == 'NT':         reg_type = 'subNT'
+            # # actually use the original-data type names after all
+            # if reg_type == 'Kimberley':  reg_type = 'subWA'
+            # if reg_type == 'Kimberly':   reg_type = 'subWA'
+            # if reg_type == 'NT':         reg_type = 'subNT'
             reg_shid = row['shapefile_id']
 
             if reg_type + '-' + str(reg_shid) in region_skip_list:
