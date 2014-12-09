@@ -208,6 +208,16 @@ for clim_src_dir in clim_src_dirs:
             reg_name_phrase = 'the Australian state of ' + reg_name
             reg_name_title_phrase = 'the Australian State of ' + reg_name
 
+        elif reg_type == 'Kimberly':
+            # sub-region of the Rangelands NRM gets called that
+            reg_name_phrase = 'the Rangelands NRM subregion of ' + reg_name
+            reg_name_title_phrase = 'the Rangelands NRM Subregion of ' + reg_name
+
+        elif reg_type == 'NT':
+            # sub-region of the Rangelands NRM gets called that
+            reg_name_phrase = 'the Territory NRM subregion of ' + reg_name
+            reg_name_title_phrase = 'the Territory NRM Subregion of ' + reg_name
+
         else:
             reg_name_phrase = reg_nice_name
             reg_name_title_phrase = reg_name_phrase.title()
