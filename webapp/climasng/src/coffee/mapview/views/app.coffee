@@ -182,7 +182,6 @@ AppView = Backbone.View.extend {
 
         # if we're at baseline, disable the future-y things
         atBaseline = (newInfo.year == 'baseline')
-        console.log(side + 'atBaseline = ' + atBaseline)
         @$(
             'input[name=' + side + 'mapscenario], #' + side + 'mapgcm'
         ).prop 'disabled', atBaseline
@@ -238,7 +237,7 @@ AppView = Backbone.View.extend {
         return @sideUpdate 'right'
     # ---------------------------------------------------------------
     addMapTag: (side)->
-        console.log 'AppView.addMapTag'
+        debug 'AppView.addMapTag'
 
         info = @leftInfo if side == 'left'
         info = @rightInfo if side == 'right'

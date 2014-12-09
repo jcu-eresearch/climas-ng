@@ -149,7 +149,6 @@
         gcm: this.$('#' + side + 'mapgcm').val()
       };
       atBaseline = newInfo.year === 'baseline';
-      console.log(side + 'atBaseline = ' + atBaseline);
       this.$('input[name=' + side + 'mapscenario], #' + side + 'mapgcm').prop('disabled', atBaseline);
       this.$('.' + side + '.side.form fieldset').removeClass('disabled');
       this.$('input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled').closest('fieldset').addClass('disabled');
@@ -183,7 +182,7 @@
     },
     addMapTag: function(side) {
       var info, tag;
-      console.log('AppView.addMapTag');
+      debug('AppView.addMapTag');
       if (side === 'left') {
         info = this.leftInfo;
       }
