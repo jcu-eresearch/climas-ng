@@ -1,7 +1,7 @@
 
 ### Regional Biodiversity Implications
 
-{{rg_name}} currently hosts {{baseline_b_all_count}} species.  [[ hi_{{year}}_b_all_gain_50th > baseline_b_all_count / 5 OR hi_{{year}}_b_all_loss_50th > baseline_b_all_count / 5]]By {{year}} biodiversity in this region is projected to undergo significant change. [[never]]
+{{rg_name}} currently overlaps the estimated distributions of {{baseline_b_all_count}} species.  [[ hi_{{year}}_b_all_gain_50th > baseline_b_all_count / 5 OR hi_{{year}}_b_all_loss_50th > baseline_b_all_count / 5]]By {{year}} biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_all_count_90th > baseline_b_all_count
 AND hi_{{year}}_b_all_count_10th >= baseline_b_all_count ]]Models agree that regional biodiversity is likely to increase, by between {{hi_{{year}}_b_all_count_10th - baseline_b_all_count}} and {{hi_{{year}}_b_all_count_90th - baseline_b_all_count}} species.

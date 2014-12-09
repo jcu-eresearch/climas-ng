@@ -1,7 +1,7 @@
 
 ### Regional Biodiversity Implications for Freshwater Fish
 
-{{rg_name}} currently hosts {{baseline_b_fish_count}} freshwater fish species.  [[ hi_{{year}}_b_fish_gain_50th > baseline_b_fish_count / 5 OR hi_{{year}}_b_fish_loss_50th > baseline_b_fish_count / 5]]By {{year}} fish biodiversity in this region is projected to undergo significant change. [[never]]
+{{rg_name}} currently overlaps the estimated distributions of {{baseline_b_fish_count}} freshwater fish species.  [[ hi_{{year}}_b_fish_gain_50th > baseline_b_fish_count / 5 OR hi_{{year}}_b_fish_loss_50th > baseline_b_fish_count / 5]]By {{year}} fish biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_fish_count_90th > baseline_b_fish_count
 AND hi_{{year}}_b_fish_count_10th >= baseline_b_fish_count ]]Models agree that regional biodiversity of freshwater fish is likely to increase, by between {{hi_{{year}}_b_fish_count_10th - baseline_b_fish_count}} and {{hi_{{year}}_b_fish_count_90th - baseline_b_fish_count}} species.

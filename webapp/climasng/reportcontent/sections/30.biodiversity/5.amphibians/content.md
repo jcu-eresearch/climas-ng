@@ -1,7 +1,7 @@
 
 ### Regional Biodiversity Implications for Amphibians
 
-{{rg_name}} currently hosts {{baseline_b_amphibians_count}} amphibian species.  [[ hi_{{year}}_b_amphibians_gain_50th > baseline_b_amphibians_count / 5 OR hi_{{year}}_b_amphibians_loss_50th > baseline_b_amphibians_count / 5]]By {{year}} amphibian biodiversity in this region is projected to undergo significant change. [[never]]
+{{rg_name}} currently overlaps the estimated distributions of {{baseline_b_amphibians_count}} amphibian species.  [[ hi_{{year}}_b_amphibians_gain_50th > baseline_b_amphibians_count / 5 OR hi_{{year}}_b_amphibians_loss_50th > baseline_b_amphibians_count / 5]]By {{year}} amphibian biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_amphibians_count_90th > baseline_b_amphibians_count
 AND hi_{{year}}_b_amphibians_count_10th >= baseline_b_amphibians_count ]]Models agree that regional amphibian biodiversity is likely to increase, by between {{hi_{{year}}_b_amphibians_count_10th - baseline_b_amphibians_count}} and {{hi_{{year}}_b_amphibians_count_90th - baseline_b_amphibians_count}} species.

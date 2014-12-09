@@ -1,7 +1,7 @@
 
 ### Regional Biodiversity Implications for Crayfish
 
-{{rg_name}} currently hosts {{baseline_b_crayfish_count}} crayfish species that were modelled.  [[ hi_{{year}}_b_crayfish_gain_50th > baseline_b_crayfish_count / 5 OR hi_{{year}}_b_crayfish_loss_50th > baseline_b_crayfish_count / 5]]By {{year}} crayfish biodiversity in this region is projected to undergo significant change. [[never]]
+{{rg_name}} currently overlaps the estimated distributions of {{baseline_b_crayfish_count}} crayfish species that were modelled.  [[ hi_{{year}}_b_crayfish_gain_50th > baseline_b_crayfish_count / 5 OR hi_{{year}}_b_crayfish_loss_50th > baseline_b_crayfish_count / 5]]By {{year}} crayfish biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_crayfish_count_90th > baseline_b_crayfish_count
 AND hi_{{year}}_b_crayfish_count_10th >= baseline_b_crayfish_count ]]Models agree that regional biodiversity of crayfish is likely to increase, by between {{hi_{{year}}_b_crayfish_count_10th - baseline_b_crayfish_count}} and {{hi_{{year}}_b_crayfish_count_90th - baseline_b_crayfish_count}} species.

@@ -1,7 +1,7 @@
 
 ### Regional Biodiversity Implications for Reptiles
 
-{{rg_name}} currently hosts {{baseline_b_reptiles_count}} reptilian species.  [[ hi_{{year}}_b_reptiles_gain_50th > baseline_b_reptiles_count / 5 OR hi_{{year}}_b_reptiles_loss_50th > baseline_b_reptiles_count / 5]]By {{year}} reptilian biodiversity in this region is projected to undergo significant change. [[never]]
+{{rg_name}} currently overlaps the estimated distributions of {{baseline_b_reptiles_count}} reptilian species.  [[ hi_{{year}}_b_reptiles_gain_50th > baseline_b_reptiles_count / 5 OR hi_{{year}}_b_reptiles_loss_50th > baseline_b_reptiles_count / 5]]By {{year}} reptilian biodiversity in this region is projected to undergo significant change. [[never]]
 
 [[  hi_{{year}}_b_reptiles_count_90th > baseline_b_reptiles_count
 AND hi_{{year}}_b_reptiles_count_10th >= baseline_b_reptiles_count ]]Models agree that regional reptilian biodiversity is likely to increase, by between {{hi_{{year}}_b_reptiles_count_10th - baseline_b_reptiles_count}} and {{hi_{{year}}_b_reptiles_count_90th - baseline_b_reptiles_count}} species.
