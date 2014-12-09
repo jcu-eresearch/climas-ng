@@ -699,13 +699,13 @@ button {
 }
 select,
 button {
-  background-color: rgba(255, 255, 255, 0.33);
+  background-color: rgba(255, 255, 255, 0.5);
   border: 1px outset rgba(245, 239, 217, 0.5);
   border-radius: 3px;
 }
 select:hover,
 button:hover {
-  background-color: rgba(255, 255, 255, 0.66);
+  background-color: rgba(255, 255, 255, 0.75);
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {

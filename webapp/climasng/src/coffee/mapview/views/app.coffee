@@ -85,6 +85,8 @@ AppView = Backbone.View.extend {
         @biodivList = []
         @biodivInfoFetchProcess = @fetchBiodivInfo()
 
+        # @sideUpdate('left')
+
         # @tick()
     # ---------------------------------------------------------------
     render: ()->
@@ -180,11 +182,12 @@ AppView = Backbone.View.extend {
 
         # if we're at baseline, disable the future-y things
         atBaseline = (newInfo.year == 'baseline')
+        console.log(side + 'atBaseline = ' + atBaseline)
         @$(
             'input[name=' + side + 'mapscenario], #' + side + 'mapgcm'
         ).prop 'disabled', atBaseline
         # now add a disabled style to the fieldsets holding disabled items
-        @$('fieldset').removeClass 'disabled'
+        @$('.' + side + '.side.form fieldset').removeClass 'disabled'
         @$(
             'input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled'
         ).closest('fieldset').addClass 'disabled'

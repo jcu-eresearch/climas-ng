@@ -149,8 +149,9 @@
         gcm: this.$('#' + side + 'mapgcm').val()
       };
       atBaseline = newInfo.year === 'baseline';
+      console.log(side + 'atBaseline = ' + atBaseline);
       this.$('input[name=' + side + 'mapscenario], #' + side + 'mapgcm').prop('disabled', atBaseline);
-      this.$('fieldset').removeClass('disabled');
+      this.$('.' + side + '.side.form fieldset').removeClass('disabled');
       this.$('input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled').closest('fieldset').addClass('disabled');
       mapValidQuery = '.' + side + '-valid-map';
       if (_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) {
