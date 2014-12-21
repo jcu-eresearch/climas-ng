@@ -335,7 +335,6 @@ AppView = Backbone.View.extend {
         setTimeout ()->
             fetch.resolve({
                 years: [
-                    '2015'
                     '2025'
                     '2035'
                     '2045'
@@ -345,7 +344,7 @@ AppView = Backbone.View.extend {
                     '2085'
                 ]
             })
-        , 500 + (500 * Math.random())
+        , 50 + (50 * Math.random())
 
         # now return a promise in case we need to wait for this
         return fetch.promise()

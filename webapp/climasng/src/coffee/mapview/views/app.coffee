@@ -662,7 +662,6 @@ AppView = Backbone.View.extend {
             <legend>time point</legend>
             <select class="left" id="leftmapyear">
                 <option value="baseline">current</option>
-                <option>2015</option>
                 <option>2025</option>
                 <option>2035</option>
                 <option>2045</option>
@@ -699,7 +698,6 @@ AppView = Backbone.View.extend {
             <legend>time point</legend>
             <select class="right" id="rightmapyear">
                 <option value="baseline">current</option>
-                <option>2015</option>
                 <option>2025</option>
                 <option>2035</option>
                 <option>2045</option>
