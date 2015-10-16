@@ -42,7 +42,7 @@ for taxon in ['mammal', 'bird', 'reptile', 'amphibian']:
 # content = content.replace("rpt_year", "year")
 
 # headings
-content = re.sub(r'^(#+)(.*?)$', r'<p>\1<b>\2</b></p>', content, 0, re.M)
+content = re.sub(r'^(#+)(.*?)$', r'<big><p>\1<b>\2</b></p></big>', content, 0, re.M)
 
 # newlines (in tables)
 content = re.sub(r'\|\n', r'<br>', content)
@@ -66,13 +66,14 @@ content = re.sub(r'\{\{\s*([^\}]*?)\s*\}\}', r'<span class="sub"><span class="pu
 content = '''
 <style>
     body {
-        max-width: 40em;
+        max-width: 35em;
         margin: 0 auto;
         padding: 1em 3em;
         line-height: 1.4;
+        font-family: Cambria, Book Antiqua, Palatino, Georgia, serif;
+        font-size: 16pt;
     }
     span {
-        padding: 0.25em 0.1em;
         border-radius: 0.7em;
     }
     span.punc {
@@ -84,16 +85,18 @@ content = '''
         padding: 0.1em 0.33em 0.1em 0.15em;
     }
     span.condition {
+        padding: 0.25em 0.1em;
         display: inline-block;
         vertical-align: middle;
         line-height: 1.1;
         font-family: sans-serif;
-        font-size: 80%;
+        font-size: 70%;
         background: #cef;
         color: #369;
         border: 1px solid #bdf;
     }
     span.sub {
+        padding: 0 0.1em;
         font-style: italic;
         background: #e8fff0;
         color: #063;
