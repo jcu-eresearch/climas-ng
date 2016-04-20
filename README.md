@@ -6,4 +6,4 @@ CliMAS NG
 
 Climate Maps for Australian Species, *Next Generation*
 
-Running here: https://climas.hpc.jcu.edu.au
+Running here: http://climas.hpc.jcu.edu.au
