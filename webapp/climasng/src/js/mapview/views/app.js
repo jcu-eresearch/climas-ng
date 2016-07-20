@@ -85,7 +85,7 @@
         subdomains: '1234',
         base: 'base',
         type: 'maptile',
-        scheme: 'terrain.day',
+        scheme: 'normal.day',
         app_id: 'l2Rye6zwq3u2cHZpVIPO',
         app_code: 'MpXSlNLcLSQIpdU6XHB0TQ',
         mapID: 'newest',
