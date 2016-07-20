@@ -122,9 +122,9 @@ AppView = Backbone.View.extend {
         L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
             attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>'
             subdomains: '1234'
-            base: 'base'
+            base: 'aerial'
             type: 'maptile'
-            scheme: 'normal.day'
+            scheme: 'terrain.day'
             app_id: 'l2Rye6zwq3u2cHZpVIPO'
             app_code: 'MpXSlNLcLSQIpdU6XHB0TQ'
             mapID: 'newest'
