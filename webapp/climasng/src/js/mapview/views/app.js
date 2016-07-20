@@ -80,10 +80,19 @@
         zoom: 5
       });
       this.map.on('move', this.resizeThings);
-      L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+      L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+        attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
         subdomains: '1234',
+        base: 'base',
+        type: 'maptile',
+        scheme: 'terrain.day',
+        app_id: 'l2Rye6zwq3u2cHZpVIPO',
+        app_code: 'MpXSlNLcLSQIpdU6XHB0TQ',
+        mapID: 'newest',
         maxZoom: 18,
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>,\ntiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>'
+        language: 'eng',
+        format: 'png8',
+        size: '256'
       }).addTo(this.map);
       this.leftForm = this.$('.left.form');
       this.buildLeftForm();

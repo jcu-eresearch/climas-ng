@@ -106,13 +106,32 @@ AppView = Backbone.View.extend {
             zoom: 5
         }
         @map.on 'move', @resizeThings
-        L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+
+        ## removed MapQuest base layer 2016-07-20 due to licencing changes
+        # L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+        #     subdomains: '1234'
+        #     maxZoom: 18
+        #     attribution: '''
+        #     Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>,
+        #     tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>
+        #     '''
+        # }).addTo @map
+        #
+        ## replaced with HERE maps base layer
+
+        L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+            attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>'
             subdomains: '1234'
+            base: 'base'
+            type: 'maptile'
+            scheme: 'terrain.day'
+            app_id: 'l2Rye6zwq3u2cHZpVIPO'
+            app_code: 'MpXSlNLcLSQIpdU6XHB0TQ'
+            mapID: 'newest'
             maxZoom: 18
-            attribution: '''
-            Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>,
-            tiles &copy; <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>
-            '''
+            language: 'eng'
+            format: 'png8'
+            size: '256'
         }).addTo @map
 
         @leftForm = @$ '.left.form'

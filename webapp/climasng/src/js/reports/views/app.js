@@ -286,7 +286,7 @@
         return fetch.resolve({
           years: ['2025', '2035', '2045', '2055', '2065', '2075', '2085']
         });
-      }, 500 + (500 * Math.random()));
+      }, 50 + (50 * Math.random()));
       return fetch.promise();
     },
     buildYearList: function(data) {
