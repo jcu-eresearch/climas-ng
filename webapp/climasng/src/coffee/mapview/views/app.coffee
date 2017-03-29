@@ -102,8 +102,8 @@ AppView = Backbone.View.extend {
         $('#contentwrap').append @$el
 
         @map = L.map 'map', {
-            center: [-20, 136]
-            zoom: 5
+            center: [0, 0]
+            zoom: 3
         }
         @map.on 'move', @resizeThings
 
@@ -332,7 +332,7 @@ AppView = Backbone.View.extend {
             ].join '_'
 
             # if they want current, just get the bioclim current projection
-            futureModelPoint = '/realized/vet.suit.cur' if sideInfo.year == 'baseline'
+            futureModelPoint = '/current' if sideInfo.year == 'baseline'
 
             sppFileName = sideInfo.speciesName.replace ' ', '_'
 
@@ -678,6 +678,39 @@ AppView = Backbone.View.extend {
     # ---------------------------------------------------------------
     leftForm: _.template """
         <fieldset>
+            <legend>temperature change</legend>
+            <select class="left" id="leftmapdegs">
+                <option value="baseline">current</option>
+                <option value="1.5">1.5 &deg;C</option>
+                <option value="2.0">2.0 &deg;C</option>
+                <option value="2.7">2.7 &deg;C</option>
+                <option value="3.2">3.2 &deg;C</option>
+                <option value="4.5">4.5 &deg;C</option>
+                <option value="6.0">6.0 &deg;C</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>adaptation via range shift</legend>
+            <label><span>allow</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> species can adapt by shifting ranges</label>
+            <label><span>deny</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85" checked="checked"> species cannot shift ranges</label>
+        </fieldset>
+        <fieldset>
+            <legend>model summary</legend>
+            <select class="left" id="leftmapgcm">
+                <option value="tenth">10th percentile</option>
+                <option value="fiftieth" selected="selected">50th percentile</option>
+                <option value="ninetieth">90th percentile</option>
+            </select>
+        </fieldset>
+        <fieldset class="blank">
+            <button type="button" class="btn-change">hide settings</button>
+            <button type="button" class="btn-compare">show right map</button>
+            <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
+            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
+            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
+        </fieldset>
+
+        <fieldset>
             <legend>time point</legend>
             <select class="left" id="leftmapyear">
                 <option value="baseline">current</option>
@@ -694,21 +727,6 @@ AppView = Backbone.View.extend {
             <legend>emission scenario</legend>
             <label><span>RCP 4.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> lower emissions</label>
             <label><span>RCP 8.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85" checked="checked"> business as usual</label>
-        </fieldset>
-        <fieldset>
-            <legend>model summary</legend>
-            <select class="left" id="leftmapgcm">
-                <option value="tenth">10th percentile</option>
-                <option value="fiftieth" selected="selected">50th percentile</option>
-                <option value="ninetieth">90th percentile</option>
-            </select>
-        </fieldset>
-        <fieldset class="blank">
-            <button type="button" class="btn-change">hide settings</button>
-            <button type="button" class="btn-compare">show right map</button>
-            <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
-            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
         </fieldset>
     """
     # ---------------------------------------------------------------

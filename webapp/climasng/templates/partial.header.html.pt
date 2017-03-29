@@ -1,8 +1,8 @@
-<!--
+<!-- -->
 <div class="disclaimer" onclick="$(this).toggleClass('show');">
 	<h1>Unverified Data!<br><small>(click to hide)</small></h1>
 	<p>
-		The CliMAS NG project that has produced this website is
+		The Wallace project that has produced this website is
 		nearing completion, but final checks and verification
 		of data are not yet complete.  Information displayed
 		or provided by this site should be assumed out
@@ -11,23 +11,21 @@
 		We love feedback, and take criticism really well, so
 		if you have any comments, please scribble them into an
 		email to: <a href="mailto:daniel.baird@jcu.edu.au">daniel.baird@jcu.edu.au</a>
-	</p><p style="text-align: center;">
-		<b><a href="https://www.signupanywhere.com/signup/Qz4dIG8D">Sign up to be notified when CliMAS launches</a></b>
 	</p>
 	<h1 class="bottom">Unverified Data!<br><small>(click for info)</small></h1>
 </div>
--->
+<!-- -->
 <header class="page clearfix">
-	<h1>CliMAS</h1>
+	<h1>Wallace Initiative: The Revenge</h1>
 	<a href="http://tropicaldatahub.org/">
 		<img class="logo" src="${request.static_path('climasng:static/images/tdhlogo.png')}" />
 	</a>
-	<p>Climate change and biodiversity in Australia</p>
+	<p>Climate change and biodiversity across the world</p>
 	<nav>
 		<ul class="main menu clearfix mspp-main-menu">
 			<!-- landing page, doco - - - - - - - - - - - - - - - -->
 			<li tal:condition="request.matched_route.name in ['home', 'science', 'credits']" class="current">
-				<a>About CliMAS</a>
+				<a>About Wallace Initiative</a>
 				<ul>
 					<li tal:condition="request.matched_route.name == 'home'" class="current"><a>About</a></li>
 					<li tal:condition="not:request.matched_route.name == 'home'"><a href="${request.route_path('home')}">About</a></li>
@@ -40,7 +38,7 @@
 				</ul>
 			</li>
 			<li tal:condition="not:request.matched_route.name in ['home', 'science', 'credits']">
-				<a href="${request.route_path('home')}">About CliMAS</a>
+				<a href="${request.route_path('home')}">About Wallace Initiative</a>
 			</li>
 
 			<!-- maps - - - - - - - - - - - - - - - - - - - - - - -->

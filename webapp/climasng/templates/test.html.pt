@@ -1,67 +1,22 @@
 <!DOCTYPE html>
 <html class="no-js" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
-<head>
-    <meta charset="utf-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <title>
-        CliMAS Next Generation
-    </title>
-    <meta content="width=device-width" name="viewport" />
 
-    <link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
-    <link href='http://fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
-    <link href="${request.static_path('climasng:static/lib/leaflet.css')}" rel="stylesheet" />
-    <link href="${request.static_path('climasng:static/lib/jqueryui-css/ui-lightness/jquery-ui-1.10.4.custom.min.css')}" rel="stylesheet" />
-    <script src="${request.static_path('climasng:static/lib/html5shiv.js')}"></script>
-
-    <!-- this page's css -->
-    <link href="${request.static_path('climasng:static/css/page-splitmap.css')}" rel="stylesheet" />
-</head>
+<div metal:use-macro="load: partial.textual.dochead.html.pt"></div><!-- ::partial:: -->
 
 <body>
-    <header class="page clearfix">
-        <h1>CliMAS</h1>
-        <a href="http://tropicaldatahub.org/">
-            <img class="logo" src="${request.static_path('climasng:static/images/tdhlogo.png')}" />
-        </a>
-        <p>Climate change and biodiversity in Australia</p>
-        <nav>
-            <ul class="main menu clearfix">
-                <li class="current">
-                    <a>View Maps</a>
-                </li>
-                <li>
-                    <a>Create Reports</a>
-                </li>
-                <li>
-                    <a>About CliMAS</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <div metal:use-macro="load: partial.header.html.pt"></div><!-- ::partial:: -->
 
     <div id="contentwrap" class="contentwrap">
-        <!-- generated stuff will go here -->
+        <div class="maincontent">
+            <div class="textcolumn">
+                This is the CliMAS test page.
+            </div>
+        </div>
     </div>
 
-    <footer class="page clearfix">
-        <p>
-            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
-                <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" />
-            </a>
-            This work is licensed under a
-            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.en_US">
-                Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License
-            </a>.
-        </p>
-    </footer>
+    <div metal:use-macro="load: partial.footer.html.pt"></div><!-- ::partial:: -->
 
     <!-- JS goes down here, where civilised people put it -->
     <script src="${request.static_path('climasng:static/lib/jquery-1.11.0.js')}"></script>
-    <script src="${request.static_path('climasng:static/lib/jquery-ui-1.10.4.custom.min.js')}"></script>
-    <script src="${request.static_path('climasng:static/lib/lodash.compat.js')}"></script>
-    <script src="${request.static_path('climasng:static/lib/backbone.js')}"></script>
-    <script src="${request.static_path('climasng:static/lib/leaflet-src.js')}"></script>
-    <script src="${request.static_path('climasng:static/js/page-splitmap.js')}"></script>
 </body>
 </html>
