@@ -77,6 +77,9 @@ webapp/climasng/db/sqlbuilder/*.sql
 webapp/climasng/db/sqlbuilder/*.sqlite
 webapp/climasng/db/*.sqlite
 
+# ignore npm libraries
+webapp/node_modules
+webapp/old-nm
 
-
+# random tester
 utilityscripts/test.html
