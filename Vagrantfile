@@ -131,6 +131,7 @@ pushd /var/climaswebapp
     popd
 
 popd
+service supervisord restart
 
 SCRIPT_TERMINATOR
 
@@ -388,7 +389,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision :shell, :inline => $boot_provisioning, :run => "always"
 
 
-
-
-
 end
+
+
+
+
+
+
+
+
+
