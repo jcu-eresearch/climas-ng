@@ -194,22 +194,22 @@ AppView = Backbone.View.extend {
 
         newInfo = {
             speciesName: @$('#' + side + 'mapspp').val()
-            year: @$('#' + side + 'mapyear').val()
-            scenario: @$('input[name=' + side + 'mapscenario]:checked').val()
-            gcm: @$('#' + side + 'mapgcm').val()
-
             degs: @$('#' + side + 'mapdegs').val()
             range: @$('input[name=' + side + 'maprange]:checked').val()
             confidence: @$('#' + side + 'mapconfidence').val()
+
+            year: @$('#' + side + 'mapyear').val()
+            scenario: @$('input[name=' + side + 'mapscenario]:checked').val()
+            gcm: @$('#' + side + 'mapgcm').val()
         }
 
-        # if we're at baseline, disable the future-y things
-        atBaseline = (newInfo.degs == 'current')
+        # if we're looking for current, disable the future-y things
+        atCurrent = (newInfo.degs == 'current')
         @$( [
                 'input[name=' + side + 'maprange]'
-                '#' + side + 'mapcofidence'
+                '#' + side + 'mapconfidence'
             ].join ','
-        ).prop 'disabled', atBaseline
+        ).prop 'disabled', atCurrent 
         # now add a disabled style to the fieldsets holding disabled items
         @$('.' + side + '.side.form fieldset').removeClass 'disabled'
         @$(
@@ -231,12 +231,13 @@ AppView = Backbone.View.extend {
         # bail if nothing changed
         return false if currInfo and _.isEqual newInfo, currInfo
 
-        # also bail if they're both same species at baseline
+        # also bail if they're both same species at current, a
+        # kind of special case of being "the same"
         if (
             currInfo and
             newInfo.speciesName == currInfo.speciesName and
-            newInfo.year == currInfo.year and
-            newInfo.year == 'baseline'
+            newInfo.degs == currInfo.degs and
+            newInfo.degs == 'current'
         )
             return false
 
@@ -332,13 +333,13 @@ AppView = Backbone.View.extend {
 
             # work out the string that gets to the projection point they want
             futureModelPoint = [
-                '/dispersal/deciles/TEMP',
+                '/TEMP',
                 sideInfo.degs,
-
+                sideInfo.confidence + '.' + sideInfo.range
             ].join '_'
 
-            # if they want current, just get the bioclim current projection
-            futureModelPoint = '/current' if sideInfo.year == 'current'
+            # if they want current, just get the current projection
+            futureModelPoint = '/current' if sideInfo.degs == 'current'
 
             sppFileName = sideInfo.speciesName.replace ' ', '_'
 
@@ -392,6 +393,10 @@ AppView = Backbone.View.extend {
         layer.addTo @map
 
         @resizeThings() # re-establish the splitter
+
+        # if we're local, log the map URL to the console
+        if window.location.hostname == 'localhost'
+            console.log 'map URL is: ', mapUrl
 
         # log this as an action in Google Analytics
         if ga and typeof(ga) == 'function'
@@ -701,9 +706,9 @@ AppView = Backbone.View.extend {
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span style="min-width: 4ch">none</span> <input name="leftmaprange" class="left" type="radio" value=".0disp" checked="checked"> species cannot shift ranges</label>
-            <label><span style="min-width: 4ch">50y</span> <input name="leftmaprange" class="left" type="radio" value=".50disp"> allow 50 years of range adaptation</label>
-            <label><span style="min-width: 4ch">100y</span> <input name="leftmaprange" class="left" type="radio" value=".100disp"> allow 100 years of range adaptation</label>
+            <label><span style="min-width: 4ch">none</span> <input name="leftmaprange" class="left" type="radio" value="0disp" checked="checked"> species cannot shift ranges</label>
+            <label><span style="min-width: 4ch">50y</span> <input name="leftmaprange" class="left" type="radio" value="50disp"> allow 50 years of range adaptation</label>
+            <label><span style="min-width: 4ch">100y</span> <input name="leftmaprange" class="left" type="radio" value="100disp"> allow 100 years of range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
