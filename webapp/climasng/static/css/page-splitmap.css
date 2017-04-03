@@ -1332,7 +1332,13 @@ body {
   text-align: center;
 }
 .splitmap .side.form label {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   text-align: left;
+  line-height: 1.1;
+  padding: 0.5em 0 0.5em 4ch;
+  text-indent: -4ch;
 }
 .splitmap .side.form label input[type="radio"] {
   margin: 0 0.33em;
@@ -1340,6 +1346,10 @@ body {
 .splitmap .side.form label span {
   text-transform: lowercase;
   font-variant: small-caps;
+  text-indent: 0;
+  display: inline-block;
+  min-width: 4ch;
+  text-align: right;
 }
 .splitmap .side.form fieldset {
   position: relative;

@@ -207,13 +207,28 @@ body {
             // padding: 0.25em 0;
         }
         label {
+            box-sizing: border-box;
+
+            // min-width of the span that precedes the radio
+            // button as a kind of terse label.
+            @pre-radio-span-width: 4ch;
+
+            text-align: left;
+            line-height: 1.1;
+            padding: 0.5em 0 0.5em @pre-radio-span-width;
+            text-indent: (-1 * @pre-radio-span-width);
+
             input[type="radio"] {
                 margin: 0 0.33em;
             }
-            text-align: left;
             span {
                 text-transform: lowercase;
                 font-variant: small-caps;
+                text-indent: 0;
+
+                display: inline-block;
+                min-width: @pre-radio-span-width;
+                text-align: right;
             }
         }
         fieldset {

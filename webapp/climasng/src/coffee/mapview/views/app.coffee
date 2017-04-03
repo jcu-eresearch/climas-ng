@@ -197,17 +197,23 @@ AppView = Backbone.View.extend {
             year: @$('#' + side + 'mapyear').val()
             scenario: @$('input[name=' + side + 'mapscenario]:checked').val()
             gcm: @$('#' + side + 'mapgcm').val()
+
+            degs: @$('#' + side + 'mapdegs').val()
+            range: @$('input[name=' + side + 'maprange]:checked').val()
+            confidence: @$('#' + side + 'mapconfidence').val()
         }
 
         # if we're at baseline, disable the future-y things
-        atBaseline = (newInfo.year == 'baseline')
-        @$(
-            'input[name=' + side + 'mapscenario], #' + side + 'mapgcm'
+        atBaseline = (newInfo.degs == 'current')
+        @$( [
+                'input[name=' + side + 'maprange]'
+                '#' + side + 'mapcofidence'
+            ].join ','
         ).prop 'disabled', atBaseline
         # now add a disabled style to the fieldsets holding disabled items
         @$('.' + side + '.side.form fieldset').removeClass 'disabled'
         @$(
-            'input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled'
+            'input[name^=' + side + ']:disabled, [id^=' + side + ']:disabled'
         ).closest('fieldset').addClass 'disabled'
 
         # is it a real species or biodiv name?
@@ -326,13 +332,13 @@ AppView = Backbone.View.extend {
 
             # work out the string that gets to the projection point they want
             futureModelPoint = [
-                '/dispersal/deciles/' + sideInfo.scenario
-                sideInfo.year
-                sideInfo.gcm
+                '/dispersal/deciles/TEMP',
+                sideInfo.degs,
+
             ].join '_'
 
             # if they want current, just get the bioclim current projection
-            futureModelPoint = '/current' if sideInfo.year == 'baseline'
+            futureModelPoint = '/current' if sideInfo.year == 'current'
 
             sppFileName = sideInfo.speciesName.replace ' ', '_'
 
@@ -341,22 +347,26 @@ AppView = Backbone.View.extend {
                 @resolvePlaceholders @speciesDataUrl, {
                     sppName: sppFileName
                     sppGroup: @speciesGroups[sideInfo.speciesName]
+
                 }
                 futureModelPoint + '.tif'
             ].join '/'
 
-            zipUrl = [
-                @resolvePlaceholders @speciesDataUrl, {
-                    sppName: sppFileName
-                    sppGroup: @speciesGroups[sideInfo.speciesName]
-                }
-                sppFileName + '.zip'
-            ].join '/'
+            ## not offering zipped data for Wallace/Climas Global
+            # zipUrl = [
+            #     @resolvePlaceholders @speciesDataUrl, {
+            #         sppName: sppFileName
+            #         sppGroup: @speciesGroups[sideInfo.speciesName]
+            #     }
+            #     sppFileName + '.zip'
+            # ].join '/'
 
             # update the download links
             @$('#' + side + 'mapdl').attr 'href', mapUrl
-            @$('#' + side + 'archivedl').html 'download this species<br>(~2Gb zip)'
-            @$('#' + side + 'archivedl').attr 'href', zipUrl
+
+            ## not offering zipped data for Wallace/Climas Global
+            # @$('#' + side + 'archivedl').html 'download this species<br>(~2Gb zip)'
+            # @$('#' + side + 'archivedl').attr 'href', zipUrl
 
         # we've made a url, start the map layer loading
         layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
@@ -680,26 +690,29 @@ AppView = Backbone.View.extend {
         <fieldset>
             <legend>temperature change</legend>
             <select class="left" id="leftmapdegs">
-                <option value="baseline">current</option>
+                <option value="current">current</option>
                 <option value="1.5">1.5 &deg;C</option>
-                <option value="2.0">2.0 &deg;C</option>
+                <option value="2">2.0 &deg;C</option>
                 <option value="2.7">2.7 &deg;C</option>
                 <option value="3.2">3.2 &deg;C</option>
                 <option value="4.5">4.5 &deg;C</option>
-                <option value="6.0">6.0 &deg;C</option>
+                <option value="6.5">6.5 &deg;C</option>
             </select>
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span>allow</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> species can adapt by shifting ranges</label>
-            <label><span>deny</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85" checked="checked"> species cannot shift ranges</label>
+            <label><span style="min-width: 4ch">none</span> <input name="leftmaprange" class="left" type="radio" value=".0disp" checked="checked"> species cannot shift ranges</label>
+            <label><span style="min-width: 4ch">50y</span> <input name="leftmaprange" class="left" type="radio" value=".50disp"> allow 50 years of range adaptation</label>
+            <label><span style="min-width: 4ch">100y</span> <input name="leftmaprange" class="left" type="radio" value=".100disp"> allow 100 years of range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
-            <select class="left" id="leftmapgcm">
-                <option value="tenth">10th percentile</option>
-                <option value="fiftieth" selected="selected">50th percentile</option>
-                <option value="ninetieth">90th percentile</option>
+            <select class="left" id="leftmapconfidence">
+                <option value="10">10th percentile</option>
+                <option value="33">33rd percentile</option>
+                <option value="50" selected="selected">50th percentile</option>
+                <option value="66">66th percentile</option>
+                <option value="90">90th percentile</option>
             </select>
         </fieldset>
         <fieldset class="blank">
