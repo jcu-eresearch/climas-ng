@@ -12,6 +12,11 @@ pres_sqlf.write('begin transaction;' + "\n")
 # file list
 files = glob.glob('speciesdata/*.csv')
 
+#
+# BREAKING THIS so it runs quicker for testing. TODO: un-break this.
+#
+files = glob.glob('speciesdata/f*.csv')
+
 # skip these regions (not covered by data)
 region_skip_list = [
     'State-9',

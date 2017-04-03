@@ -355,6 +355,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # config.ssh.forward_agent = true
 
     # Share additional folders
+    #config.vm.synced_folder ".", "/vagrant"
     config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__args: ["--verbose", "--archive", "--delete", "-z"]
 
     config.vm.synced_folder "./webapp", "/var/climaswebapp"
