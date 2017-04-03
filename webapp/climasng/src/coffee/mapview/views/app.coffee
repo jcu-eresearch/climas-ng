@@ -148,6 +148,9 @@ AppView = Backbone.View.extend {
 
         @leftSideUpdate()
         @rightSideUpdate()
+
+        # show the splitter by default
+        @toggleSplitter()
     # ---------------------------------------------------------------
     resolvePlaceholders: (strWithPlaceholders, replacements)->
         ans = strWithPlaceholders
@@ -701,14 +704,16 @@ AppView = Backbone.View.extend {
                 <option value="2.7">2.7 &deg;C</option>
                 <option value="3.2">3.2 &deg;C</option>
                 <option value="4.5">4.5 &deg;C</option>
-                <option value="6.5">6.5 &deg;C</option>
+                <optgroup label="Highly sensitive environment">
+                    <option value="6.5">6.5 &deg;C</option>
+                </optgroup>
             </select>
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span style="min-width: 4ch">none</span> <input name="leftmaprange" class="left" type="radio" value="0disp" checked="checked"> species cannot shift ranges</label>
-            <label><span style="min-width: 4ch">50y</span> <input name="leftmaprange" class="left" type="radio" value="50disp"> allow 50 years of range adaptation</label>
-            <label><span style="min-width: 4ch">100y</span> <input name="leftmaprange" class="left" type="radio" value="100disp"> allow 100 years of range adaptation</label>
+            <label><span>none</span> <input name="leftmaprange" class="left" type="radio" value="0disp" checked="checked"> species cannot shift ranges</label>
+            <label><span>50y</span> <input name="leftmaprange" class="left" type="radio" value="50disp"> allow 50 years of range adaptation</label>
+            <label><span>100y</span> <input name="leftmaprange" class="left" type="radio" value="100disp"> allow 100 years of range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
@@ -728,60 +733,47 @@ AppView = Backbone.View.extend {
             <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
         </fieldset>
 
-        <fieldset>
-            <legend>time point</legend>
-            <select class="left" id="leftmapyear">
-                <option value="baseline">current</option>
-                <option>2025</option>
-                <option>2035</option>
-                <option>2045</option>
-                <option>2055</option>
-                <option>2065</option>
-                <option>2075</option>
-                <option>2085</option>
-            </select>
-        </fieldset>
-        <fieldset>
-            <legend>emission scenario</legend>
-            <label><span>RCP 4.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> lower emissions</label>
-            <label><span>RCP 8.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85" checked="checked"> business as usual</label>
-        </fieldset>
     """
     # ---------------------------------------------------------------
     rightForm: _.template """
         <fieldset>
-            <legend>time point</legend>
-            <select class="right" id="rightmapyear">
-                <option value="baseline">current</option>
-                <option>2025</option>
-                <option>2035</option>
-                <option>2045</option>
-                <option>2055</option>
-                <option>2065</option>
-                <option>2075</option>
-                <option>2085</option>
+            <legend>temperature change</legend>
+            <select class="right" id="rightmapdegs">
+                <option value="current">current</option>
+                <option value="1.5">1.5 &deg;C</option>
+                <option value="2">2.0 &deg;C</option>
+                <option value="2.7">2.7 &deg;C</option>
+                <option value="3.2">3.2 &deg;C</option>
+                <option value="4.5">4.5 &deg;C</option>
+                <optgroup label="Highly sensitive environment">
+                    <option value="6.5">6.5 &deg;C</option>
+                </optgroup>
             </select>
         </fieldset>
         <fieldset>
-            <legend>emission scenario</legend>
-            <label><span>RCP 4.5</span> <input name="rightmapscenario" class="right" type="radio" value="RCP45"> lower emissions</label>
-            <label><span>RCP 8.5</span> <input name="rightmapscenario" class="right" type="radio" value="RCP85" checked="checked"> business as usual</label>
+            <legend>adaptation via range shift</legend>
+            <label><span>none</span> <input name="rightmaprange" class="right" type="radio" value="0disp" checked="checked"> species cannot shift ranges</label>
+            <label><span>50y</span> <input name="rightmaprange" class="right" type="radio" value="50disp"> allow 50 years of range adaptation</label>
+            <label><span>100y</span> <input name="rightmaprange" class="right" type="radio" value="100disp"> allow 100 years of range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
-            <select class="right" id="rightmapgcm">
-                <option value="tenth">10th percentile</option>
-                <option value="fiftieth" selected="selected">50th percentile</option>
-                <option value="ninetieth">90th percentile</option>
+            <select class="right" id="rightmapconfidence">
+                <option value="10">10th percentile</option>
+                <option value="33">33rd percentile</option>
+                <option value="50" selected="selected">50th percentile</option>
+                <option value="66">66th percentile</option>
+                <option value="90">90th percentile</option>
             </select>
         </fieldset>
         <fieldset class="blank">
             <button type="button" class="btn-change">hide settings</button>
-            <button type="button" class="btn-compare">hide right map</button>
-            <button type="button" class="btn-copy left-valid-map">&raquo; copy left map</button>
+            <button type="button" class="btn-compare">show right map</button>
+            <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
             <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this set of maps<br>(<2Gb zip)</a>
+            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
         </fieldset>
+
     """
     # ---------------------------------------------------------------
 }}
