@@ -281,12 +281,16 @@ AppView = Backbone.View.extend {
         info = @rightInfo if side == 'right'
 
         tag = "<b><i>#{info.speciesName}</i></b>"
+        dispLookup = {
+            '0disp': 'no range adaptation'
+            '50disp': '50 years of range adaptation'
+            '100disp': '100 years of range adaptation'
+        }
 
-        if info.year is 'baseline'
+        if info.degs is 'current'
             tag = "current #{tag} distribution"
         else
-            tag = "<b>#{info.gcm}</b> percentile projections for #{tag} in <b>#{info.year}</b> if <b>#{info.scenario}</b>"
-
+            tag = "<b>#{info.confidence}</b> percentile projections for #{tag} at <b>+#{info.degs}&deg;C</b> with <b>#{dispLookup[info.range]}</b>"
 
         if side == 'left'
             @leftTag.find('.leftlayername').html tag
@@ -337,8 +341,8 @@ AppView = Backbone.View.extend {
 
             # update the download links
             @$('#' + side + 'mapdl').attr 'href', mapUrl
-            @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
-            @$('#' + side + 'archivedl').attr 'href', zipUrl
+            # @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
+            # @$('#' + side + 'archivedl').attr 'href', zipUrl
 
         else
             # it's a plain old species map they're after.
@@ -749,7 +753,6 @@ AppView = Backbone.View.extend {
             <button type="button" class="btn-compare">hide/show right map</button>
             <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
             <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
         </fieldset>
 
     """
@@ -790,7 +793,6 @@ AppView = Backbone.View.extend {
             <button type="button" class="btn-compare">hide/show right map</button>
             <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
             <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
         </fieldset>
 
     """
