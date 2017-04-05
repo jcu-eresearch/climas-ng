@@ -551,8 +551,6 @@ AppView = Backbone.View.extend {
 
             $leftmapspp.autocomplete
                 source: @biodivLookupList.concat @speciesLookupList
-                # appendTo: $leftmapspp.closest '.edit'
-                # appendTo: $ '#splitmap'
                 close: => @$el.trigger 'leftmapupdate'
     # ---------------------------------------------------------------
     buildRightForm: ()->
@@ -566,7 +564,6 @@ AppView = Backbone.View.extend {
 
             $rightmapspp.autocomplete {
                 source: @biodivLookupList.concat @speciesLookupList
-                appendTo: $rightmapspp.closest '.edit'
                 close: => @$el.trigger 'rightmapupdate'
             }
     # ---------------------------------------------------------------
