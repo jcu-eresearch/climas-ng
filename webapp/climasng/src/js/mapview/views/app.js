@@ -47,7 +47,8 @@
       'change select.left': 'leftSideUpdate',
       'change select.right': 'rightSideUpdate',
       'change input.left': 'leftSideUpdate',
-      'change input.right': 'rightSideUpdate'
+      'change input.right': 'rightSideUpdate',
+      'change #sync': 'toggleSync'
     },
     tick: function() {
       if (false) {
@@ -188,10 +189,18 @@
       return this.addMapTag(side);
     },
     leftSideUpdate: function() {
-      return this.sideUpdate('left');
+      this.sideUpdate('left');
+      if (this.$('#sync')[0].checked) {
+        debug('Sync checked - syncing right side', 'message');
+        return this.copySppToRightSide();
+      }
     },
     rightSideUpdate: function() {
       return this.sideUpdate('right');
+    },
+    copySppToRightSide: function() {
+      this.$('#rightmapspp').val(this.$('#leftmapspp').val());
+      return this.rightSideUpdate();
     },
     addMapTag: function(side) {
       var info, tag;
@@ -347,6 +356,15 @@
       }
       return this.centreMap();
     },
+    toggleSync: function() {
+      debug('AppView.toggleSync');
+      if (this.$('#sync')[0].checked) {
+        this.$('.rightmapspp').prop('disabled', true);
+        return this.copySppToRightSide();
+      } else {
+        return this.$('.rightmapspp').prop('disabled', false);
+      }
+    },
     fetchSpeciesInfo: function() {
       debug('AppView.fetchSpeciesInfo');
       return $.ajax({
@@ -421,7 +439,6 @@
           _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
           return $leftmapspp.autocomplete({
             source: _this.biodivLookupList.concat(_this.speciesLookupList),
-            appendTo: _this.$el,
             close: function() {
               return _this.$el.trigger('leftmapupdate');
             }
@@ -438,7 +455,7 @@
           _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
           return $rightmapspp.autocomplete({
             source: _this.biodivLookupList.concat(_this.speciesLookupList),
-            appendTo: _this.$el,
+            appendTo: $rightmapspp.closest('.edit'),
             close: function() {
               return _this.$el.trigger('rightmapupdate');
             }
@@ -527,9 +544,9 @@
     }
   }, {
     templates: {
-      layout: _.template("<div class=\"splitline\">&nbsp;</div>\n<div class=\"splitthumb\"><span>&#x276e; &#x276f;</span></div>\n<div class=\"left tag\"><%= leftTag %></div>\n<div class=\"right tag\"><%= rightTag %></div>\n<div class=\"left side form\"><%= leftForm %></div>\n<div class=\"right side form\"><%= rightForm %></div>\n<div class=\"left loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div class=\"right loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div id=\"mapwrapper\"><div id=\"map\"></div></div>"),
-      leftTag: _.template("<div class=\"show\">\n    <span class=\"leftlayername\">plain map</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <input id=\"leftmapspp\" class=\"left\" name=\"leftmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n    <!--\n    <button class=\"btn-change\">hide settings</button>\n    <button class=\"btn-compare\">compare +/-</button>\n    -->\n</div>"),
-      rightTag: _.template("<div class=\"show\">\n    <span class=\"rightlayername\">(no distribution)</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <input id=\"rightmapspp\" class=\"right\" name=\"rightmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
+      layout: _.template("<div clas=\"ui-front\"></div>\n<div class=\"splitline\">&nbsp;</div>\n<div class=\"splitthumb\"><span>&#x276e; &#x276f;</span></div>\n<div class=\"left tag\"><%= leftTag %></div>\n<div class=\"right tag\"><%= rightTag %></div>\n<div class=\"left side form\"><%= leftForm %></div>\n<div class=\"right side form\"><%= rightForm %></div>\n<div class=\"left loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div class=\"right loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div id=\"mapwrapper\"><div id=\"map\"></div></div>"),
+      leftTag: _.template("<div class=\"show\">\n    <span class=\"leftlayername\">plain map</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <label class=\"left syncbox\"></label>\n    <input id=\"leftmapspp\" class=\"left\" type=\"text\" name=\"leftmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
+      rightTag: _.template("<div class=\"show\">\n    <span class=\"rightlayername\">(no distribution)</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <label class=\"right syncbox\"><input id=\"sync\" type=\"checkbox\" value=\"sync\" checked=\"checked\" /> same as left side</label>\n    <input id=\"rightmapspp\" type=\"text\" class=\"right\" name=\"rightmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
       leftForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"left\" id=\"leftmapdegs\">\n        <option value=\"current\">current</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"Highly sensitive environment\">\n            <option value=\"6.5\">6.5 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><span>none</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"0disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><span>50y</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"50disp\"> allow 50 years of range adaptation</label>\n    <label><span>100y</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"100disp\"> allow 100 years of range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <option value=\"33\">33rd percentile</option>\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <option value=\"66\">66th percentile</option>\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"leftmapdl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n    <a id=\"leftarchivedl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download this set of maps<br>(~2Gb zip)</a>\n</fieldset>\n"),
       rightForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"right\" id=\"rightmapdegs\">\n        <option value=\"current\">current</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"Highly sensitive environment\">\n            <option value=\"6.5\">6.5 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><span>none</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"0disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><span>50y</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"50disp\"> allow 50 years of range adaptation</label>\n    <label><span>100y</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"100disp\"> allow 100 years of range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"right\" id=\"rightmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <option value=\"33\">33rd percentile</option>\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <option value=\"66\">66th percentile</option>\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"rightmapdl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n    <a id=\"rightarchivedl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download this set of maps<br>(~2Gb zip)</a>\n</fieldset>\n")
     }

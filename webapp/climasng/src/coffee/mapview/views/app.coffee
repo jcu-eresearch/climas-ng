@@ -59,6 +59,7 @@ AppView = Backbone.View.extend {
         'change select.right': 'rightSideUpdate'
         'change input.left': 'leftSideUpdate'
         'change input.right': 'rightSideUpdate'
+        'change #sync': 'toggleSync'
     # ---------------------------------------------------------------
     tick: ()->
         # if @map
@@ -260,10 +261,18 @@ AppView = Backbone.View.extend {
 
     # ---------------------------------------------------------------
     leftSideUpdate: ()->
-        return @sideUpdate 'left'
+        @sideUpdate 'left'
+        if @$('#sync')[0].checked 
+            debug 'Sync checked - syncing right side', 'message'
+            @copySppToRightSide()
+
     # ---------------------------------------------------------------
     rightSideUpdate: ()->
         return @sideUpdate 'right'
+    # ---------------------------------------------------------------
+    copySppToRightSide: ()->
+        @$('#rightmapspp').val @$('#leftmapspp').val()
+        @rightSideUpdate()
     # ---------------------------------------------------------------
     addMapTag: (side)->
         debug 'AppView.addMapTag'
@@ -452,6 +461,16 @@ AppView = Backbone.View.extend {
             @deactivateSplitter()
         @centreMap()
     # ---------------------------------------------------------------
+    toggleSync: ()->
+        debug 'AppView.toggleSync'
+
+        if @$('#sync')[0].checked
+            # .. checked now, so was unchecked before
+            @$('.rightmapspp').prop 'disabled', true
+            @copySppToRightSide()
+        else
+            @$('.rightmapspp').prop 'disabled', false
+    # ---------------------------------------------------------------
     # ---------------------------------------------------------------
     # ajaxy stuff
     # ---------------------------------------------------------------
@@ -528,7 +547,8 @@ AppView = Backbone.View.extend {
 
             $leftmapspp.autocomplete
                 source: @biodivLookupList.concat @speciesLookupList
-                appendTo: @$el
+                # appendTo: $leftmapspp.closest '.edit'
+                # appendTo: $ '#splitmap'
                 close: => @$el.trigger 'leftmapupdate'
     # ---------------------------------------------------------------
     buildRightForm: ()->
@@ -542,7 +562,7 @@ AppView = Backbone.View.extend {
 
             $rightmapspp.autocomplete {
                 source: @biodivLookupList.concat @speciesLookupList
-                appendTo: @$el
+                appendTo: $rightmapspp.closest '.edit'
                 close: => @$el.trigger 'rightmapupdate'
             }
     # ---------------------------------------------------------------
@@ -655,6 +675,7 @@ AppView = Backbone.View.extend {
     # templates here
     # ---------------------------------------------------------------
     layout: _.template """
+        <div clas="ui-front"></div>
         <div class="splitline">&nbsp;</div>
         <div class="splitthumb"><span>&#x276e; &#x276f;</span></div>
         <div class="left tag"><%= leftTag %></div>
@@ -674,11 +695,8 @@ AppView = Backbone.View.extend {
             <button class="btn-compare">show/hide comparison map</button>
         </div>
         <div class="edit">
-            <input id="leftmapspp" class="left" name="leftmapspp" placeholder="&hellip; species or group &hellip;" />
-            <!--
-            <button class="btn-change">hide settings</button>
-            <button class="btn-compare">compare +/-</button>
-            -->
+            <label class="left syncbox"></label>
+            <input id="leftmapspp" class="left" type="text" name="leftmapspp" placeholder="&hellip; species or group &hellip;" />
         </div>
     """
     # ---------------------------------------------------------------
@@ -690,7 +708,8 @@ AppView = Backbone.View.extend {
             <button class="btn-compare">show/hide comparison map</button>
         </div>
         <div class="edit">
-            <input id="rightmapspp" class="right" name="rightmapspp" placeholder="&hellip; species or group &hellip;" />
+            <label class="right syncbox"><input id="sync" type="checkbox" value="sync" checked="checked" /> same as left side</label>
+            <input id="rightmapspp" type="text" class="right" name="rightmapspp" placeholder="&hellip; species or group &hellip;" />
         </div>
     """
     # ---------------------------------------------------------------

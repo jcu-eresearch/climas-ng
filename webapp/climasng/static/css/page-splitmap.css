@@ -1164,7 +1164,7 @@ body {
   width: 100%;
   left: 0;
   background: #efe6c5;
-  height: 4em;
+  height: 5em;
   overflow: hidden;
 }
 .splitmap .tag.left {
@@ -1177,8 +1177,8 @@ body {
 }
 .splitmap .tag > div {
   position: absolute;
-  top: 0.5em;
-  height: 3em;
+  top: 0.41666667em;
+  height: 4.16666667em;
   left: 4%;
   right: 4%;
   left: 0;
@@ -1196,25 +1196,31 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  height: 2em;
-  line-height: 2em;
+  height: 2.5em;
+  line-height: 2.5em;
   padding: 0 1em;
   margin: 0 0 0 0.5em;
 }
-.splitmap .tag > div input {
+.splitmap .tag > div label.syncbox {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 1.4em;
+  display: block;
+  margin-top: -0.35em;
+}
+.splitmap .tag > div input[type="text"] {
   text-align: inherit;
   vertical-align: middle;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 125%;
-  height: 100%;
+  line-height: 2.21333333em;
+  height: 2.21333333em;
   padding: 0 0.5em;
   width: 46%;
   margin: 0;
-}
-.splitmap .tag > div.edit {
-  line-height: 3em;
 }
 .splitmap .tag > div.show {
   line-height: 1.5em;
@@ -1230,16 +1236,16 @@ body {
   text-decoration: underline;
 }
 .splitmap.showforms .tag > div.edit {
-  top: 0.5em;
+  top: 0.41666667em;
 }
 .splitmap.showforms .tag > div.show {
-  top: 4em;
+  top: 5em;
 }
 .splitmap .tag > div.edit {
-  top: -4em;
+  top: -5em;
 }
 .splitmap .tag > div.show {
-  top: 0.5em;
+  top: 0.41666667em;
 }
 .splitmap .loader {
   z-index: 10000;
@@ -1307,7 +1313,7 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #efe6c5;
-  top: 4em;
+  top: 5em;
   bottom: 0;
   overflow-y: scroll;
   width: 15em;
@@ -1435,7 +1441,7 @@ body {
 }
 .splitmap #mapwrapper {
   position: absolute;
-  top: 4em;
+  top: 5em;
   left: 0;
   right: 0;
   bottom: 0;
