@@ -15,5 +15,8 @@
     "gulp-rename": "~1.0.0",
     "gulp-uglify": "~0.2.1",
     "gulp-util": "~2.2.14"
+  },
+  "scripts": {
+    "build": "gulp build"
   }
 }
