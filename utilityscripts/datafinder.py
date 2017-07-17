@@ -55,17 +55,26 @@ def createSpeciesJson(source_path, output_file):
     # okay, ready to check for modelled species
     #
     species_list = {}
+
+    last_sci_class_order = ''
+
     for dir, subdirs, files in os.walk(source_path):
 
         match = sppdir_regex.search(dir)
 
         if match:
-            sci_class = match.group(1)
+            sci_class = match.group(3)
             sci_name = match.group(7) + ' ' + match.group(8)
             species_list[sci_name] = {
                 "commonNames": common_names.get(sci_name, [""]),
                 "group": sci_class
             }
+
+            # maybe this is a new group?
+            this_sci_class_order = sci_class + '::' + match.group(4)
+            if this_sci_class_order != last_sci_class_order:
+                print('starting ' + this_sci_class_order)
+                last_sci_class_order = this_sci_class_order
 
             # if we found a species dir, we don't need to keep
             # os.walk()ing into its descendent dirs
