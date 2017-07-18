@@ -14,7 +14,7 @@ def createSpeciesJson(source_path, output_file):
     # here's a regex to test for species dirs:
 
     #                group(8) - Species --------------------------------------------.
-    #                           (literal underscore) ----------------------------.  |
+    #                           (a literal underscore) --------------------------.  |
     #                group(7) - Genus ----------------------------------------.  |  |
     #                group(6) - Genus, again ---------------------------.     |  |  |
     #                group(5) - Family ---------------------------.     |     |  |  |
@@ -41,14 +41,14 @@ def createSpeciesJson(source_path, output_file):
     # we'll get the species common name from here:
     common_names = {}
 
-    # cn_file = os.path.join(os.path.dirname(__file__), 'all_species.json')
-    # try:
-    #     # try reading in the list of sci-to-common species names
-    #     with open(cn_file) as f:
-    #         common_names = json.load(f)
-    # except:
-    #     # give up on common names if we can't read them
-    #     common_names = {}
+    cn_file = os.path.join(os.path.dirname(__file__), 'commonnames.json')
+    try:
+        # try reading in the list of sci-to-common species names
+        with open(cn_file) as f:
+            common_names = json.load(f)
+    except:
+        # give up on common names if we can't read them
+        common_names = {}
 
 
     #
@@ -65,8 +65,9 @@ def createSpeciesJson(source_path, output_file):
         if match:
             sci_class = match.group(3)
             sci_name = match.group(7) + ' ' + match.group(8)
+            sci_name_underscore = match.group(7) + '_' + match.group(8)
             species_list[sci_name] = {
-                "commonNames": common_names.get(sci_name, [""]),
+                "commonNames": common_names.get(sci_name_underscore, [""]),
                 "group": sci_class
             }
 
