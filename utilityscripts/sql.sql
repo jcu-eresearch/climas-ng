@@ -4,7 +4,20 @@
  *
  */
 
-/*
+/* 
+
+To use this:
+
+- get a Catalogue Of Life dump, and import it into postgres into a 
+database called `catol`.
+
+- run this at the command line:
+    psql -td catol < sql.sql > sqljson.json
+
+- run:
+    python sqljson2commonnamelist.py
+which reads sqljson.json and produces commonnames.json
+
 
 Query used to join the taxon table to the vernacular (common name) table, 
 but restricting the number of common names retrieved to just the top 5 
@@ -24,6 +37,8 @@ for SQL. The trick here is to:
     all taxonIDs and vernacularNames but now the vernacularNames are numbered,
     match on taxonID to get your species, and filter out the less-preferred 
     names by selecting only small values of rowIndex. Phew!
+- around that is a JSON process that aggregates the rows into a big ol' json
+    object.
 
 */
 
@@ -33,8 +48,8 @@ select array_to_json(array_agg(row_to_json(t))) from (
 		-- *
 		-- vernacular."rowindex",
 		-- vernacular."taxonID",
-		vernacular."vernacularName" as "commonName",
-		concat(taxon."genus", '_', taxon."specificEpithet") as "spp"
+		concat(taxon."genus", '_', taxon."specificEpithet") as "spp",
+		array_agg(vernacular."vernacularName") as "commonNames"
 
 	from
 		/* this subquery takes the ordered common names from the inner subquery and adds
@@ -72,6 +87,9 @@ select array_to_json(array_agg(row_to_json(t))) from (
 
 		/* to do one specific fish with lots of common names */
 		-- and taxon."taxonID" = 32665252
+
+	group by
+		"spp"
 
 ) t
 ;
