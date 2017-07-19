@@ -15,7 +15,7 @@ datadir = '/rdsi/wallace2/W2_website'
 if os.path.isdir('/Users/pvrdwb'):
 
 	## local dev paths
-	jsondir = '/Users/pvrdwb/projects/climas-global/webapp/climasng/static/data'
+	jsondir = '/Users/pvrdwb/projects/climas-global/webapp/climasng/data'
 	datadir = '/Users/pvrdwb/projects/climas-global/testdata'
 
 #################################################
