@@ -15,9 +15,9 @@ require '../util/shims'
 debug = (itemToLog, itemLevel)->
     levels = ['verydebug', 'debug', 'message', 'warning']
 
-    threshold = 'verydebug'
+    # threshold = 'verydebug'
     # threshold = 'debug'
-    # threshold = 'message'
+    threshold = 'message'
     itemLevel = 'debug' unless itemLevel
 
     thresholdNum = levels.indexOf threshold
@@ -484,9 +484,6 @@ AppView = Backbone.View.extend {
             speciesLookupList = []
             speciesSciNameList = []
             speciesUrls = {}
-
-            console.log('got species data.')
-            window.sppData = data
 
             # in order to avoid making a function in the inner loop,
             # here's a function returning a function that writes a

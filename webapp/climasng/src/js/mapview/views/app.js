@@ -12,7 +12,7 @@
   debug = function(itemToLog, itemLevel) {
     var levels, messageNum, threshold, thresholdNum;
     levels = ['verydebug', 'debug', 'message', 'warning'];
-    threshold = 'verydebug';
+    threshold = 'message';
     if (!itemLevel) {
       itemLevel = 'debug';
     }
@@ -377,8 +377,6 @@
           speciesLookupList = [];
           speciesSciNameList = [];
           speciesUrls = {};
-          console.log('got species data.');
-          window.sppData = data;
           commonNameWriter = function(sciName) {
             var sciNamePostfix;
             sciNamePostfix = " (" + sciName + ")";
