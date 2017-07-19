@@ -377,6 +377,8 @@
           speciesLookupList = [];
           speciesSciNameList = [];
           speciesUrls = {};
+          console.log('got species data.');
+          window.sppData = data;
           commonNameWriter = function(sciName) {
             var sciNamePostfix;
             sciNamePostfix = " (" + sciName + ")";

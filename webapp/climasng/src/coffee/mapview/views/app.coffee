@@ -485,6 +485,9 @@ AppView = Backbone.View.extend {
             speciesSciNameList = []
             speciesUrls = {}
 
+            console.log('got species data.')
+            window.sppData = data
+
             # in order to avoid making a function in the inner loop,
             # here's a function returning a function that writes a
             # common name into the given sciName.  This is partial
