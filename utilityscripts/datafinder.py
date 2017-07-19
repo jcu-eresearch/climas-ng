@@ -56,7 +56,7 @@ def createSpeciesJson(source_path, output_file):
     #
     species_list = {}
 
-    last_sci_class_order = ''
+    last_group = ''
 
     for dir, subdirs, files in os.walk(source_path):
 
@@ -77,10 +77,10 @@ def createSpeciesJson(source_path, output_file):
             }
 
             # maybe this is a new group?
-            this_sci_class_order = sci_class + '::' + match.group(4)
-            if this_sci_class_order != last_sci_class_order:
-                print('starting ' + this_sci_class_order)
-                last_sci_class_order = this_sci_class_order
+            this_group = match.group(1) + '::' + match.group(3) + '::' + match.group(4)
+            if this_group != last_group:
+                print('starting ' + this_group)
+                last_group = this_group
 
             # if we found a species dir, we don't need to keep
             # os.walk()ing into its descendent dirs
