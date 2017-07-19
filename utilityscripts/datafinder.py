@@ -64,9 +64,10 @@ def createSpeciesJson(source_path, output_file):
 
         if match:
             spp_path = '/'.join([
-                match(1), match(2), match(3), 
-                match(4), match(5), match(6), 
-                match(7) + '_' + match(8)
+                match.group(1), match.group(2), 
+                match.group(3), match.group(4), 
+                match.group(5), match.group(6), 
+                match.group(7) + '_' + match.group(8)
             ])
             sci_name = match.group(7) + ' ' + match.group(8)
             sci_name_underscore = match.group(7) + '_' + match.group(8)
