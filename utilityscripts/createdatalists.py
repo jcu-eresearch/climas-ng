@@ -8,7 +8,8 @@ import os
 
 
 ## HPC / prod paths
-jsondir = '/var/wallacewebapp/climasng/static/data'
+appdir = '/var/wallacewebapp'
+jsondir = appdir + '/climasng/static/data'
 datadir = '/rdsi/wallace2/W2_website'
 
 if os.path.isdir('/Users/pvrdwb'):
@@ -20,7 +21,7 @@ if os.path.isdir('/Users/pvrdwb'):
 #################################################
 
 import sys
-sys.path.append('.')
+sys.path.append(appdir + '/climasng/data')
 import datafinder
 
 datafinder.createSpeciesJson(datadir, os.path.join(jsondir, 'species.json'))
