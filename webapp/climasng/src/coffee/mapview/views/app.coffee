@@ -348,25 +348,21 @@ AppView = Backbone.View.extend {
             # it's a plain old species map they're after.
 
             # work out the string that gets to the projection point they want
-            futureModelPoint = [
-                '/TEMP',
+            sppFileName = [
+                'TEMP',
                 sideInfo.degs,
                 sideInfo.confidence + '.' + sideInfo.range
             ].join '_'
 
             # if they want current, just get the current projection
-            futureModelPoint = '/current' if sideInfo.degs == 'current'
-
-            sppFileName = sideInfo.speciesName.replace ' ', '_'
+            sppFileName = 'current' if sideInfo.degs == 'current'
 
             # now make that into a URL
             mapUrl = [
                 @resolvePlaceholders @speciesDataUrl, {
-                    sppName: sppFileName
                     sppUrl: @speciesUrls[sideInfo.speciesName]
-
                 }
-                futureModelPoint + '.tif'
+                sppFileName + '.tif'
             ].join '/'
 
             ## not offering zipped data for Wallace/Climas Global
@@ -731,9 +727,8 @@ AppView = Backbone.View.extend {
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span>none</span> <input name="leftmaprange" class="left" type="radio" value="0disp" checked="checked"> species cannot shift ranges</label>
-            <label><span>50y</span> <input name="leftmaprange" class="left" type="radio" value="50disp"> allow 50 years of range adaptation</label>
-            <label><span>100y</span> <input name="leftmaprange" class="left" type="radio" value="100disp"> allow 100 years of range adaptation</label>
+            <label><span>none</span> <input name="leftmaprange" class="left" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
+            <label><span>50y</span> <input name="leftmaprange" class="left" type="radio" value="real.disp"> allow range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
@@ -771,9 +766,8 @@ AppView = Backbone.View.extend {
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span>none</span> <input name="rightmaprange" class="right" type="radio" value="0disp" checked="checked"> species cannot shift ranges</label>
-            <label><span>50y</span> <input name="rightmaprange" class="right" type="radio" value="50disp"> allow 50 years of range adaptation</label>
-            <label><span>100y</span> <input name="rightmaprange" class="right" type="radio" value="100disp"> allow 100 years of range adaptation</label>
+            <label><span>none</span> <input name="rightmaprange" class="right" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
+            <label><span>50y</span> <input name="rightmaprange" class="right" type="radio" value="real.disp"> allow range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>

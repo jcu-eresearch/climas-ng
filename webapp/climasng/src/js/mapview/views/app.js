@@ -259,16 +259,14 @@
         ].join('/');
         this.$('#' + side + 'mapdl').attr('href', mapUrl);
       } else {
-        futureModelPoint = ['/TEMP', sideInfo.degs, sideInfo.confidence + '.' + sideInfo.range].join('_');
+        sppFileName = ['TEMP', sideInfo.degs, sideInfo.confidence + '.' + sideInfo.range].join('_');
         if (sideInfo.degs === 'current') {
-          futureModelPoint = '/current';
+          sppFileName = 'current';
         }
-        sppFileName = sideInfo.speciesName.replace(' ', '_');
         mapUrl = [
           this.resolvePlaceholders(this.speciesDataUrl, {
-            sppName: sppFileName,
-            sppGroup: this.speciesGroups[sideInfo.speciesName]
-          }), futureModelPoint + '.tif'
+            sppUrl: this.speciesUrls[sideInfo.speciesName]
+          }), sppFileName + '.tif'
         ].join('/');
         this.$('#' + side + 'mapdl').attr('href', mapUrl);
       }
@@ -375,10 +373,10 @@
         dataType: 'json'
       }).done((function(_this) {
         return function(data) {
-          var commonNameWriter, speciesGroups, speciesLookupList, speciesSciNameList;
+          var commonNameWriter, speciesLookupList, speciesSciNameList, speciesUrls;
           speciesLookupList = [];
           speciesSciNameList = [];
-          speciesGroups = {};
+          speciesUrls = {};
           commonNameWriter = function(sciName) {
             var sciNamePostfix;
             sciNamePostfix = " (" + sciName + ")";
@@ -391,7 +389,7 @@
           };
           $.each(data, function(sciName, sppInfo) {
             speciesSciNameList.push(sciName);
-            speciesGroups[sciName] = sppInfo.group;
+            speciesUrls[sciName] = sppInfo.path;
             if (sppInfo.commonNames) {
               return $.each(sppInfo.commonNames, commonNameWriter(sciName));
             } else {
@@ -403,7 +401,7 @@
           });
           _this.speciesLookupList = speciesLookupList;
           _this.speciesSciNameList = speciesSciNameList;
-          return _this.speciesGroups = speciesGroups;
+          return _this.speciesUrls = speciesUrls;
         };
       })(this));
     },
@@ -549,8 +547,8 @@
       layout: _.template("<div clas=\"ui-front\"></div>\n<div class=\"splitline\">&nbsp;</div>\n<div class=\"splitthumb\"><span>&#x276e; &#x276f;</span></div>\n<div class=\"left tag\"><%= leftTag %></div>\n<div class=\"right tag\"><%= rightTag %></div>\n<div class=\"left side form\"><%= leftForm %></div>\n<div class=\"right side form\"><%= rightForm %></div>\n<div class=\"left loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div class=\"right loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div id=\"mapwrapper\"><div id=\"map\"></div></div>"),
       leftTag: _.template("<div class=\"show\">\n    <span class=\"leftlayername\">plain map</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <label class=\"left syncbox\"></label>\n    <input id=\"leftmapspp\" class=\"left\" type=\"text\" name=\"leftmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
       rightTag: _.template("<div class=\"show\">\n    <span class=\"rightlayername\">(no distribution)</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <label class=\"right syncbox\"><input id=\"sync\" type=\"checkbox\" value=\"sync\" checked=\"checked\" /> same as left side</label>\n    <input id=\"rightmapspp\" type=\"text\" class=\"right\" name=\"rightmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
-      leftForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"left\" id=\"leftmapdegs\">\n        <option value=\"current\">current</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"Highly sensitive environment\">\n            <option value=\"6.5\">6.5 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><span>none</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"0disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><span>50y</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"50disp\"> allow 50 years of range adaptation</label>\n    <label><span>100y</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"100disp\"> allow 100 years of range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <option value=\"33\">33rd percentile</option>\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <option value=\"66\">66th percentile</option>\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"leftmapdl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n</fieldset>\n"),
-      rightForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"right\" id=\"rightmapdegs\">\n        <option value=\"current\">current</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"Highly sensitive environment\">\n            <option value=\"6.5\">6.5 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><span>none</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"0disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><span>50y</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"50disp\"> allow 50 years of range adaptation</label>\n    <label><span>100y</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"100disp\"> allow 100 years of range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"right\" id=\"rightmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <option value=\"33\">33rd percentile</option>\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <option value=\"66\">66th percentile</option>\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"rightmapdl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n</fieldset>\n")
+      leftForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"left\" id=\"leftmapdegs\">\n        <option value=\"current\">current</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"Highly sensitive environment\">\n            <option value=\"6.5\">6.5 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><span>none</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"no.disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><span>50y</span> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"real.disp\"> allow range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <option value=\"33\">33rd percentile</option>\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <option value=\"66\">66th percentile</option>\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"leftmapdl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n</fieldset>\n"),
+      rightForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"right\" id=\"rightmapdegs\">\n        <option value=\"current\">current</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"Highly sensitive environment\">\n            <option value=\"6.5\">6.5 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><span>none</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"no.disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><span>50y</span> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"real.disp\"> allow range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"right\" id=\"rightmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <option value=\"33\">33rd percentile</option>\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <option value=\"66\">66th percentile</option>\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"rightmapdl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n</fieldset>\n")
     }
   });
 
