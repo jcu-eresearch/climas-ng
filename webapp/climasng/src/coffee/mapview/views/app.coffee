@@ -15,9 +15,9 @@ require '../util/shims'
 debug = (itemToLog, itemLevel)->
     levels = ['verydebug', 'debug', 'message', 'warning']
 
-    # threshold = 'verydebug'
+    threshold = 'verydebug'
     # threshold = 'debug'
-    threshold = 'message'
+    # threshold = 'message'
     itemLevel = 'debug' unless itemLevel
 
     thresholdNum = levels.indexOf threshold

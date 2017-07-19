@@ -12,7 +12,7 @@
   debug = function(itemToLog, itemLevel) {
     var levels, messageNum, threshold, thresholdNum;
     levels = ['verydebug', 'debug', 'message', 'warning'];
-    threshold = 'message';
+    threshold = 'verydebug';
     if (!itemLevel) {
       itemLevel = 'debug';
     }
