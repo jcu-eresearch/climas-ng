@@ -9,7 +9,7 @@ import os
 
 ## HPC / prod paths
 appdir = '/var/wallacewebapp'
-jsondir = appdir + '/climasng/static/data'
+jsondir = appdir + '/climasng/data'
 datadir = '/rdsi/wallace2/W2_website'
 
 if os.path.isdir('/Users/pvrdwb'):
