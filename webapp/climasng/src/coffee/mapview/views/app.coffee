@@ -363,7 +363,7 @@ AppView = Backbone.View.extend {
             mapUrl = [
                 @resolvePlaceholders @speciesDataUrl, {
                     sppName: sppFileName
-                    sppGroup: @speciesGroups[sideInfo.speciesName]
+                    sppUrl: @speciesUrls[sideInfo.speciesName]
 
                 }
                 futureModelPoint + '.tif'
@@ -373,7 +373,7 @@ AppView = Backbone.View.extend {
             # zipUrl = [
             #     @resolvePlaceholders @speciesDataUrl, {
             #         sppName: sppFileName
-            #         sppGroup: @speciesGroups[sideInfo.speciesName]
+            #         sppGroup: @speciesUrls[sideInfo.speciesName]
             #     }
             #     sppFileName + '.zip'
             # ].join '/'
@@ -487,7 +487,7 @@ AppView = Backbone.View.extend {
         }).done (data)=>
             speciesLookupList = []
             speciesSciNameList = []
-            speciesGroups = {}
+            speciesUrls = {}
 
             # in order to avoid making a function in the inner loop,
             # here's a function returning a function that writes a
@@ -504,7 +504,7 @@ AppView = Backbone.View.extend {
 
             $.each data, (sciName, sppInfo)=>
                 speciesSciNameList.push sciName
-                speciesGroups[sciName] = sppInfo.group
+                speciesUrls[sciName] = sppInfo.path
                 if sppInfo.commonNames
                     $.each sppInfo.commonNames, commonNameWriter sciName
                 else
@@ -514,7 +514,7 @@ AppView = Backbone.View.extend {
 
             @speciesLookupList = speciesLookupList
             @speciesSciNameList = speciesSciNameList
-            @speciesGroups = speciesGroups
+            @speciesUrls = speciesUrls
     # ---------------------------------------------------------------
     fetchBiodivInfo: ()->
         debug 'AppView.fetchBiodivInfo'

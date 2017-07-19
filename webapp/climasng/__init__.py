@@ -45,18 +45,17 @@ def main(global_config, **settings):
     config.add_route('data', '/data/{data_name}/')
     config.add_route('doc', '/info/{doc_name}/')
 
-    config.add_route('oldreports', '/oldreports/')
+    # config.add_route('oldreports', '/oldreports/')
 
-
-    config.add_route('oldmap', '/oldmap/')
-    config.add_route('oldspecies', '/oldspecies/{region}/{year}/speciestables.html')
+    # config.add_route('oldmap', '/oldmap/')
+    # config.add_route('oldspecies', '/oldspecies/{region}/{year}/speciestables.html')
     config.add_route('reflector', '/reflector/')
 
     config.add_route('speciesdata', '/speciesdata/{data_name:.*}')
 
     config.add_route('regiondata', '/regiondata/{regiontype}/{regionid}')
 
-    config.add_static_view(name='olddata/regions', path=settings['climas.old_report_data_path'])
+    # config.add_static_view(name='olddata/regions', path=settings['climas.old_report_data_path'])
 
     # add a 404 view that will retry with an appended slash first
     config.add_notfound_view(notfound, append_slash=True)

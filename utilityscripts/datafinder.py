@@ -63,12 +63,16 @@ def createSpeciesJson(source_path, output_file):
         match = sppdir_regex.search(dir)
 
         if match:
-            sci_class = match.group(3)
+            spp_path = '/'.join([
+                match(1), match(2), match(3), 
+                match(4), match(5), match(6), 
+                match(7) + '_' + match(8)
+            ])
             sci_name = match.group(7) + ' ' + match.group(8)
             sci_name_underscore = match.group(7) + '_' + match.group(8)
             species_list[sci_name] = {
                 "commonNames": common_names.get(sci_name_underscore, [""]),
-                "group": sci_class
+                "path": spp_path
             }
 
             # maybe this is a new group?

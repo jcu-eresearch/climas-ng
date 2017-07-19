@@ -69,7 +69,8 @@ select array_to_json(array_agg(row_to_json(t))) from (
 			     	/* priority is the "best" priority number across all the countries that use this name */
 			     	v1."vernacularName" /* the common name we're rating */
 			from      vernacular as "v1"
-			where     v1."language" = 'English'
+			-- where     v1."language" = 'English'
+			where     (v1."language" in ('English', 'Eng', 'Creole, English', 'En') OR v1."language" is null)
 			group by  v1."taxonID", v1."vernacularName"
 			order by  votes desc, priority
 			) as "v2"
