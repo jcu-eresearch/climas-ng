@@ -720,23 +720,23 @@ AppView = Backbone.View.extend {
                 <option value="2.7">2.7 &deg;C</option>
                 <option value="3.2">3.2 &deg;C</option>
                 <option value="4.5">4.5 &deg;C</option>
-                <optgroup label="Highly sensitive environment">
-                    <option value="6.5">6.5 &deg;C</option>
+                <optgroup label="High sensitivity climate">
+                    <option value="6">6.0 &deg;C</option>
                 </optgroup>
             </select>
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span>none</span> <input name="leftmaprange" class="left" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
-            <label><span>50y</span> <input name="leftmaprange" class="left" type="radio" value="real.disp"> allow range adaptation</label>
+            <label><!-- span>none</span --> <input name="leftmaprange" class="left" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
+            <label><!-- span>allow</span --> <input name="leftmaprange" class="left" type="radio" value="real.disp"> allow range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
             <select class="left" id="leftmapconfidence">
                 <option value="10">10th percentile</option>
-                <option value="33">33rd percentile</option>
+                <!-- option value="33">33rd percentile</option -->
                 <option value="50" selected="selected">50th percentile</option>
-                <option value="66">66th percentile</option>
+                <!-- option value="66">66th percentile</option -->
                 <option value="90">90th percentile</option>
             </select>
         </fieldset>
@@ -759,23 +759,23 @@ AppView = Backbone.View.extend {
                 <option value="2.7">2.7 &deg;C</option>
                 <option value="3.2">3.2 &deg;C</option>
                 <option value="4.5">4.5 &deg;C</option>
-                <optgroup label="Highly sensitive environment">
-                    <option value="6.5">6.5 &deg;C</option>
+                <optgroup label="High sensitivity climate">
+                    <option value="6">6.0 &deg;C</option>
                 </optgroup>
             </select>
         </fieldset>
         <fieldset>
             <legend>adaptation via range shift</legend>
-            <label><span>none</span> <input name="rightmaprange" class="right" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
-            <label><span>50y</span> <input name="rightmaprange" class="right" type="radio" value="real.disp"> allow range adaptation</label>
+            <label><!-- span>none</span --> <input name="rightmaprange" class="right" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
+            <label><!-- span>allow</span --> <input name="rightmaprange" class="right" type="radio" value="real.disp"> allow range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
             <select class="right" id="rightmapconfidence">
                 <option value="10">10th percentile</option>
-                <option value="33">33rd percentile</option>
+                <!-- option value="33">33rd percentile</option -->
                 <option value="50" selected="selected">50th percentile</option>
-                <option value="66">66th percentile</option>
+                <!-- option value="66">66th percentile</option -->
                 <option value="90">90th percentile</option>
             </select>
         </fieldset>
