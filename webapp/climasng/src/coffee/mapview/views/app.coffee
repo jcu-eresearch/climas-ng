@@ -744,7 +744,7 @@ AppView = Backbone.View.extend {
             <button type="button" class="btn-change">hide settings</button>
             <button type="button" class="btn-compare">hide/show right map</button>
             <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
-            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
+            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<1Mb GeoTIFF)</a>
         </fieldset>
 
     """
@@ -782,8 +782,8 @@ AppView = Backbone.View.extend {
         <fieldset class="blank">
             <button type="button" class="btn-change">hide settings</button>
             <button type="button" class="btn-compare">hide/show right map</button>
-            <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
-            <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
+            <button type="button" class="btn-copy left-valid-map">copy left map &laquo;</button>
+            <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<1Mb GeoTIFF)</a>
         </fieldset>
 
     """
