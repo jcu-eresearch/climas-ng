@@ -34,6 +34,7 @@ class ApiView(object):
                 "Meercat (Suricata suricatta)"
             ])
             return Response(body=json_content, content_type='application/json')
+
     # ---------------------------------------------------------------
     def oldcode_deleteme():
 

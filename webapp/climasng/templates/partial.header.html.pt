@@ -1,5 +1,40 @@
 <!-- -->
 <div class="disclaimer" onclick="$(this).toggleClass('show');">
+
+	<h1>Alpha test version!<br><small>(click to hide)</small></h1>
+	<p>
+		The Wallace Initiative 3 project that provides 
+		this website and its data are nearing completion. 
+		FINAL CHECKS AND VERIFICATION OF DATA ARE ONGOING!
+		If something looks off on a map it means we have not gotten to it yet.  
+		Therefore information displayed and provided on this website should not be assumed to be an accurate representation of what it will look like in a few weeks time.
+	</p><p>
+		An alpha test version means we need to show it to some people to get an idea of how it works but the website WILL CHANGE.
+		Once this tab says "beta test" it means the website might be ready but we will still be tinkering under the hood and correcting things.
+		Only once this yellow box is gone will it be a public website.
+	</p><p>
+		We love feedback, especially on the look and feel of the website.
+		We usually take criticism well, so if you have any comments, please scribble them into an email to: 
+		<a href="mailto:jeff.price@uea.ac.uk">jeff.price@uea.ac.uk</a>.
+	</p>
+
+<!--
+		The Wallace project that has produced this website is
+		nearing completion, but final checks and verification
+		of data are not yet complete.  Information displayed
+		or provided by this site should be assumed out
+		of date or incorrect.
+	</p><p>
+		We love feedback, and take criticism really well, so
+		if you have any comments, please scribble them into an
+		email to: <a href="mailto:daniel.baird@jcu.edu.au">daniel.baird@jcu.edu.au</a>
+	</p>
+-->
+
+	<h1 class="bottom">Alpha test version!<br><small>(click for info)</small></h1>
+
+
+<!--
 	<h1>Unverified Data!<br><small>(click to hide)</small></h1>
 	<p>
 		The Wallace project that has produced this website is
@@ -13,8 +48,9 @@
 		email to: <a href="mailto:daniel.baird@jcu.edu.au">daniel.baird@jcu.edu.au</a>
 	</p>
 	<h1 class="bottom">Unverified Data!<br><small>(click for info)</small></h1>
+-->
 </div>
-<!-- -->
+
 <header class="page clearfix">
 	<h1>Wallace Initiative: The Revenge</h1>
 	<a href="http://tropicaldatahub.org/">
