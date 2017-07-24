@@ -162,7 +162,7 @@
         scenario: this.$('input[name=' + side + 'mapscenario]:checked').val(),
         gcm: this.$('#' + side + 'mapgcm').val()
       };
-      if (side === 'right') {
+      if (side === 'right' && newInfo.speciesName) {
         console.log('starting spp is |' + newInfo.speciesName + '|');
         speciesName = newInfo.speciesName.match(/.*\((.*)\)$/)[1];
         console.log('regexed spp is ' + '|' + speciesName + '|');
