@@ -210,15 +210,15 @@ AppView = Backbone.View.extend {
 
 
 
-        # testing new naming interface
-        if side is 'right' and newInfo.speciesName
-            console.log('starting spp is |' + newInfo.speciesName + '|')
-            # then the speciesName we want is the bracketed bit at the end
-            speciesName = newInfo.speciesName.match(/.*\((.*)\)$/)[1]
-            console.log('regexed spp is ' + '|' + speciesName + '|')
-            if speciesName.length > 0
-                console.log('spp replaced.')
-                newInfo.speciesName = speciesName
+        # # testing new naming interface
+        # if side is 'right' and newInfo.speciesName
+        #     console.log('starting spp is |' + newInfo.speciesName + '|')
+        #     # then the speciesName we want is the bracketed bit at the end
+        #     speciesName = newInfo.speciesName.match(/.*\((.*)\)$/)[1]
+        #     console.log('regexed spp is ' + '|' + speciesName + '|')
+        #     if speciesName.length > 0
+        #         console.log('spp replaced.')
+        #         newInfo.speciesName = speciesName
 
 
 
