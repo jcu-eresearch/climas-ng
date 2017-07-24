@@ -210,15 +210,29 @@ AppView = Backbone.View.extend {
 
 
 
-        # # testing new naming interface
-        # if side is 'right' and newInfo.speciesName
-        #     console.log('starting spp is |' + newInfo.speciesName + '|')
-        #     # then the speciesName we want is the bracketed bit at the end
-        #     speciesName = newInfo.speciesName.match(/.*\((.*)\)$/)[1]
-        #     console.log('regexed spp is ' + '|' + speciesName + '|')
-        #     if speciesName.length > 0
-        #         console.log('spp replaced.')
-        #         newInfo.speciesName = speciesName
+        # testing new naming interface
+        if side is 'right' and newInfo.speciesName
+
+            console.log 'starting spp is |' + newInfo.speciesName + '|'
+
+            # the speciesName we want is the bracketed bit at the end
+            sciNameMatcher = ///
+                .*          # maybe there's a common name
+                \(          # a literal open paren
+                    (       # start of capture group that gets the sci name
+                        .+  # the sci name (anything inside the parens)
+                    )       # end of capture group
+                \)          # a literal closing paren
+                $           # then the end of the string
+            ///
+
+            sciNameMatch = sciNameMatcher.exec newInfo.speciesName
+
+            if sciNameMatch and sciNameMatch[1]
+                # if it matched, and there's a capture group at .[1], then
+                # the scientific name is what's in the capture group
+                console.log('regexed spp is ' + '|' + sciNameMatch[1] + '|')
+                newInfo.speciesName = sciNameMatch[1]
 
 
 
