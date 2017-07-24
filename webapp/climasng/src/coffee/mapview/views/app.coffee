@@ -231,7 +231,7 @@ AppView = Backbone.View.extend {
             if sciNameMatch and sciNameMatch[1]
                 # if it matched, and there's a capture group at .[1], then
                 # the scientific name is what's in the capture group
-                console.log('regexed spp is ' + '|' + sciNameMatch[1] + '|')
+                console.log 'regexed spp is ' + '|' + sciNameMatch[1] + '|'
                 newInfo.speciesName = sciNameMatch[1]
 
 

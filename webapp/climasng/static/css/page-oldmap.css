@@ -709,6 +709,7 @@ button:hover {
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {
+  line-height: 1.2;
   opacity: 0.66;
   border-radius: 1em;
   border: dotted black 2px;
