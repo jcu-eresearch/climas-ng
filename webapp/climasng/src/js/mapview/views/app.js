@@ -151,7 +151,7 @@
       return this.leftSideUpdate();
     },
     sideUpdate: function(side) {
-      var atCurrent, currInfo, mapValidQuery, newInfo, _ref;
+      var atCurrent, currInfo, mapValidQuery, newInfo, speciesName, _ref;
       debug('AppView.sideUpdate (' + side + ')');
       newInfo = {
         speciesName: this.$('#' + side + 'mapspp').val(),
@@ -162,6 +162,15 @@
         scenario: this.$('input[name=' + side + 'mapscenario]:checked').val(),
         gcm: this.$('#' + side + 'mapgcm').val()
       };
+      if (side === 'right') {
+        console.log('starting spp is |' + newInfo.speciesName + '|');
+        speciesName = newInfo.speciesName.match(/.*\((.*)\)$/)[1];
+        console.log('regexed spp is ' + '|' + speciesName + '|');
+        if (speciesName.length > 0) {
+          console.log('spp replaced.');
+          newInfo.speciesName = speciesName;
+        }
+      }
       atCurrent = newInfo.degs === 'current';
       this.$(['input[name=' + side + 'maprange]', '#' + side + 'mapconfidence'].join(',')).prop('disabled', atCurrent);
       this.$('.' + side + '.side.form fieldset').removeClass('disabled');

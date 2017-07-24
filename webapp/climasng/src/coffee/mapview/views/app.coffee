@@ -207,6 +207,22 @@ AppView = Backbone.View.extend {
             gcm: @$('#' + side + 'mapgcm').val()
         }
 
+
+
+
+        # testing new naming interface
+        if side is 'right'
+            console.log('starting spp is |' + newInfo.speciesName + '|')
+            # then the speciesName we want is the bracketed bit at the end
+            speciesName = newInfo.speciesName.match(/.*\((.*)\)$/)[1]
+            console.log('regexed spp is ' + '|' + speciesName + '|')
+            if speciesName.length > 0
+                console.log('spp replaced.')
+                newInfo.speciesName = speciesName
+
+
+
+
         # if we're looking for current, disable the future-y things
         atCurrent = (newInfo.degs == 'current')
         @$( [
