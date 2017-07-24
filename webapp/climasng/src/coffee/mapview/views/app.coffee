@@ -559,7 +559,7 @@ AppView = Backbone.View.extend {
             @namesList = @biodivList.concat @speciesSciNameList
 
             $rightmapspp.autocomplete {
-                source: @biodivLookupList.concat @speciesLookupList
+                source: 'api/namesearch'
                 close: => @$el.trigger 'rightmapupdate'
             }
     # ---------------------------------------------------------------

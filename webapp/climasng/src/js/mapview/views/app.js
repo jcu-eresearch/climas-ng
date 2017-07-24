@@ -455,7 +455,7 @@
           $rightmapspp = _this.$('#rightmapspp');
           _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
           return $rightmapspp.autocomplete({
-            source: _this.biodivLookupList.concat(_this.speciesLookupList),
+            source: 'api/namesearch',
             close: function() {
               return _this.$el.trigger('rightmapupdate');
             }

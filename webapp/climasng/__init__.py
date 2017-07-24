@@ -39,6 +39,8 @@ def main(global_config, **settings):
 
     config.add_route('maps', '/maps/')
 
+    config.add_route('api', '/api/{command}/')
+
     config.add_route('reports', '/reports/')
     config.add_route('regionreport', '/regionreport/')
 
