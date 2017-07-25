@@ -407,9 +407,19 @@ AppView = Backbone.View.extend {
                 sppFileName + '.tif'
             ].join '/'
 
+            if side == 'right'
+                console.log 'checking if == works identically to "is"'
+
             # if it's the right side, use the new lookup lists
             if side is 'right'
+                console.log 'getting right side map.'
+                console.log 'side info is ', sideInfo
+                console.log '@niceIndex[sideInfo.niceName] is ', @niceIndex[sideInfo.niceName]
                 info = @mapList[@niceIndex[sideInfo.niceName]]
+                console.log 'info is ', info
+                console.log
+                console.log
+                console.log
                 if info
 
                     # set up for the type we're looking at

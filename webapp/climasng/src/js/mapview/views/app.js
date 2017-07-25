@@ -278,7 +278,17 @@
           }), sppFileName + '.tif'
         ].join('/');
         if (side === 'right') {
+          console.log('checking if == works identically to "is"');
+        }
+        if (side === 'right') {
+          console.log('getting right side map.');
+          console.log('side info is ', sideInfo);
+          console.log('@niceIndex[sideInfo.niceName] is ', this.niceIndex[sideInfo.niceName]);
           info = this.mapList[this.niceIndex[sideInfo.niceName]];
+          console.log('info is ', info);
+          console.log;
+          console.log;
+          console.log;
           if (info) {
             url = this.speciesDataUrl;
             ext = '.tif';
