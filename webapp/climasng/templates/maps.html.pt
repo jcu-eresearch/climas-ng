@@ -20,6 +20,7 @@
         // config used by the map-drawing code
         window.mapConfig = {
             speciesDataUrl: '${ species_data_url }',
+            climateDataUrl: '${ climate_data_url }',
             biodivDataUrl: '${ biodiv_data_url }',
             rasterApiUrl: '${ raster_api_url }'
         }
