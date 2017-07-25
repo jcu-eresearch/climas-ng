@@ -65,7 +65,9 @@
       this.speciesSciNameList = [];
       this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
       this.biodivList = [];
-      return this.biodivInfoFetchProcess = this.fetchBiodivInfo();
+      this.biodivInfoFetchProcess = this.fetchBiodivInfo();
+      this.niceNameIndex = {};
+      return this.mapList = {};
     },
     render: function() {
       debug('AppView.render');
@@ -155,26 +157,26 @@
       debug('AppView.sideUpdate (' + side + ')');
       newInfo = {
         speciesName: this.$('#' + side + 'mapspp').val(),
+        mapNiceName: this.$('#' + side + 'mapspp').val(),
+        mapRefName: this.$('#' + side + 'mapspp').val(),
         degs: this.$('#' + side + 'mapdegs').val(),
         range: this.$('input[name=' + side + 'maprange]:checked').val(),
-        confidence: this.$('#' + side + 'mapconfidence').val(),
-        year: this.$('#' + side + 'mapyear').val(),
-        scenario: this.$('input[name=' + side + 'mapscenario]:checked').val(),
-        gcm: this.$('#' + side + 'mapgcm').val()
+        confidence: this.$('#' + side + 'mapconfidence').val()
       };
+      atCurrent = newInfo.degs === 'current';
+      this.$("input[name=" + side + "maprange], #" + side + "mapconfidence").prop('disabled', atCurrent);
+      this.$("." + side + ".side.form fieldset").removeClass('disabled');
+      this.$("input[name^=" + side + "]:disabled, [id^=" + side + "]:disabled").closest('fieldset').addClass('disabled');
       if (side === 'right' && newInfo.speciesName) {
         console.log('starting spp is |' + newInfo.speciesName + '|');
         sciNameMatcher = /.*\((.+)\)$/;
         sciNameMatch = sciNameMatcher.exec(newInfo.speciesName);
         if (sciNameMatch && sciNameMatch[1]) {
           console.log('regexed spp is ' + '|' + sciNameMatch[1] + '|');
+          newInfo.mapRefName = sciNameMatch[1];
           newInfo.speciesName = sciNameMatch[1];
         }
       }
-      atCurrent = newInfo.degs === 'current';
-      this.$(['input[name=' + side + 'maprange]', '#' + side + 'mapconfidence'].join(',')).prop('disabled', atCurrent);
-      this.$('.' + side + '.side.form fieldset').removeClass('disabled');
-      this.$('input[name^=' + side + ']:disabled, [id^=' + side + ']:disabled').closest('fieldset').addClass('disabled');
       mapValidQuery = '.' + side + '-valid-map';
       if (_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) {
         this.$(mapValidQuery).removeClass('disabled').prop('disabled', false);
@@ -464,9 +466,20 @@
           $rightmapspp = _this.$('#rightmapspp');
           _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
           return $rightmapspp.autocomplete({
-            source: '/api/namesearch',
             close: function() {
               return _this.$el.trigger('rightmapupdate');
+            },
+            source: function(req, response) {
+              return $.ajax({
+                url: '/api/namesearch',
+                data: {
+                  term: req.term
+                },
+                success: function(answer) {
+                  console.log(answer);
+                  return response(answer);
+                }
+              });
             }
           });
         };

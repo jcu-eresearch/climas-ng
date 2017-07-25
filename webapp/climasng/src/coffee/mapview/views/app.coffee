@@ -86,6 +86,10 @@ AppView = Backbone.View.extend {
         @biodivList = []
         @biodivInfoFetchProcess = @fetchBiodivInfo()
 
+        # new lists
+        @niceNameIndex = {}
+        @mapList = {}
+
         # @sideUpdate('left')
 
         # @tick()
@@ -196,21 +200,42 @@ AppView = Backbone.View.extend {
     sideUpdate: (side)->
         debug 'AppView.sideUpdate (' + side + ')'
 
+        #
+        # Collect info from the form on that side
+        #
+
         newInfo = {
             speciesName: @$('#' + side + 'mapspp').val()
+
+            mapNiceName: @$('#' + side + 'mapspp').val()
+            mapRefName: @$('#' + side + 'mapspp').val()
+
             degs: @$('#' + side + 'mapdegs').val()
             range: @$('input[name=' + side + 'maprange]:checked').val()
             confidence: @$('#' + side + 'mapconfidence').val()
-
-            year: @$('#' + side + 'mapyear').val()
-            scenario: @$('input[name=' + side + 'mapscenario]:checked').val()
-            gcm: @$('#' + side + 'mapgcm').val()
         }
 
+        #
+        # enable and disable the form parts that don't
+        # apply, eg. if you're looking at current,
+        # disable the future-y things
+        #
+
+        # set disabled for range-adaptation and model-summary-confidence
+        atCurrent = (newInfo.degs == 'current')
+        @$("input[name=#{side}maprange], ##{side}mapconfidence").prop 'disabled', atCurrent
+
+        # now, add a disabled style to the fieldsets holding disabled items
+        @$(".#{side}.side.form fieldset").removeClass 'disabled'
+        @$(
+            "input[name^=#{side}]:disabled, [id^=#{side}]:disabled"
+        ).closest('fieldset').addClass 'disabled'
 
 
 
+        #
         # testing new naming interface
+        #
         if side is 'right' and newInfo.speciesName
 
             console.log 'starting spp is |' + newInfo.speciesName + '|'
@@ -232,23 +257,15 @@ AppView = Backbone.View.extend {
                 # if it matched, and there's a capture group at .[1], then
                 # the scientific name is what's in the capture group
                 console.log 'regexed spp is ' + '|' + sciNameMatch[1] + '|'
+                newInfo.mapRefName = sciNameMatch[1]
                 newInfo.speciesName = sciNameMatch[1]
 
+        #
+        # check if what they typed is an available map
+        #
 
 
 
-        # if we're looking for current, disable the future-y things
-        atCurrent = (newInfo.degs == 'current')
-        @$( [
-                'input[name=' + side + 'maprange]'
-                '#' + side + 'mapconfidence'
-            ].join ','
-        ).prop 'disabled', atCurrent 
-        # now add a disabled style to the fieldsets holding disabled items
-        @$('.' + side + '.side.form fieldset').removeClass 'disabled'
-        @$(
-            'input[name^=' + side + ']:disabled, [id^=' + side + ']:disabled'
-        ).closest('fieldset').addClass 'disabled'
 
         # is it a real species or biodiv name?
         mapValidQuery = '.' + side + '-valid-map'
@@ -589,9 +606,18 @@ AppView = Backbone.View.extend {
             @namesList = @biodivList.concat @speciesSciNameList
 
             $rightmapspp.autocomplete {
-                source: '/api/namesearch'
                 close: => @$el.trigger 'rightmapupdate'
+                # source: '/api/namesearch'
+                source: (req, response)=>
+                    $.ajax { 
+                        url: '/api/namesearch'
+                        data: { term: req.term }
+                        success: (answer)->
+                            console.log(answer)
+                            response(answer)
+                    }
             }
+
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
     # splitter handling
