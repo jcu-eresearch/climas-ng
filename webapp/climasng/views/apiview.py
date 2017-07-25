@@ -39,7 +39,12 @@ class ApiView(object):
                     "type": "species",
                     "mapId": "Suricata suricatta",
                     "path": "Animalia/Chordata/Mammalia/Carnivora/Herpestidae/Suricata/Suricata_suricatta"
-                }
+                },
+                "Climate: precipitation, annual average": {
+                    "type": "climate",
+                    "mapId": "Climate precipitation average",
+                    "path": "precipitation/average"
+                },
             })
             return Response(body=json_content, content_type='application/json')
 

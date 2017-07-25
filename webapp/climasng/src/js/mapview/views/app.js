@@ -33,6 +33,7 @@
     className: 'splitmap showforms',
     id: 'splitmap',
     speciesDataUrl: window.mapConfig.speciesDataUrl,
+    climateDataUrl: window.mapConfig.climateDataUrl,
     biodivDataUrl: window.mapConfig.biodivDataUrl,
     rasterApiUrl: window.mapConfig.rasterApiUrl,
     trackSplitter: false,
@@ -238,7 +239,7 @@
       }
     },
     addMapLayer: function(side) {
-      var futureModelPoint, info, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, val, zipUrl, _ref;
+      var ext, futureModelPoint, info, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, url, val, zipUrl, _ref;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -273,16 +274,22 @@
         }
         mapUrl = [
           this.resolvePlaceholders(this.speciesDataUrl, {
-            sppUrl: this.speciesUrls[sideInfo.speciesName]
+            path: this.speciesUrls[sideInfo.speciesName]
           }), sppFileName + '.tif'
         ].join('/');
         if (side === 'right') {
           info = this.mapList[this.niceIndex[sideInfo.niceName]];
           if (info) {
+            url = this.speciesDataUrl;
+            ext = '.tif';
+            if (info.type === 'climate') {
+              url = this.climateDataUrl;
+              ext = '.asc';
+            }
             mapUrl = [
-              this.resolvePlaceholders(this.speciesDataUrl, {
-                sppUrl: info.path
-              }), sppFileName + '.tif'
+              this.resolvePlaceholders(url, {
+                path: info.path
+              }), sppFileName + ext
             ].join('/');
           } else {
             console.log('Index misalignment -- let me know what you were looking for, daniel@danielbaird.com');

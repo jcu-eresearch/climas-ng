@@ -41,6 +41,7 @@ AppView = Backbone.View.extend {
     # ---------------------------------------------------------------
     # some settings
     speciesDataUrl: window.mapConfig.speciesDataUrl
+    climateDataUrl: window.mapConfig.climateDataUrl
     biodivDataUrl: window.mapConfig.biodivDataUrl
     rasterApiUrl: window.mapConfig.rasterApiUrl
     # ---------------------------------------------------------------
@@ -401,7 +402,7 @@ AppView = Backbone.View.extend {
             # now make that into a URL
             mapUrl = [
                 @resolvePlaceholders @speciesDataUrl, {
-                    sppUrl: @speciesUrls[sideInfo.speciesName]
+                    path: @speciesUrls[sideInfo.speciesName]
                 }
                 sppFileName + '.tif'
             ].join '/'
@@ -410,28 +411,30 @@ AppView = Backbone.View.extend {
             if side is 'right'
                 info = @mapList[@niceIndex[sideInfo.niceName]]
                 if info
+
+                    # set up for the type we're looking at
+
+                    # start by assuming species
+                    url = @speciesDataUrl
+                    ext = '.tif'
+
+                    # override for climate
+                    if info.type is 'climate'
+                        url = @climateDataUrl
+                        ext = '.asc'
+
+                    # now set the URL for this type of map
                     mapUrl = [
-                        @resolvePlaceholders @speciesDataUrl, { sppUrl: info.path }
-                        sppFileName + '.tif'
+                        @resolvePlaceholders url, { path: info.path }
+                        sppFileName + ext
                     ].join '/'
                 else
                     console.log 'Index misalignment -- let me know what you were looking for, daniel@danielbaird.com'
 
-            ## not offering zipped data for Wallace/Climas Global
-            # zipUrl = [
-            #     @resolvePlaceholders @speciesDataUrl, {
-            #         sppName: sppFileName
-            #         sppGroup: @speciesUrls[sideInfo.speciesName]
-            #     }
-            #     sppFileName + '.zip'
-            # ].join '/'
 
             # update the download links
             @$('#' + side + 'mapdl').attr 'href', mapUrl
 
-            ## not offering zipped data for Wallace/Climas Global
-            # @$('#' + side + 'archivedl').html 'download this species<br>(~2Gb zip)'
-            # @$('#' + side + 'archivedl').attr 'href', zipUrl
 
         # we've made a url, start the map layer loading
         layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
