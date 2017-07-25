@@ -87,7 +87,7 @@ AppView = Backbone.View.extend {
         @biodivInfoFetchProcess = @fetchBiodivInfo()
 
         # new lists
-        @niceNameIndex = {}
+        @niceIndex = {}
         @mapList = {}
 
         # @sideUpdate('left')
@@ -610,11 +610,37 @@ AppView = Backbone.View.extend {
                 # source: '/api/namesearch'
                 source: (req, response)=>
                     $.ajax { 
-                        url: '/api/namesearch'
+                        url: '/api/namesearch/'
                         data: { term: req.term }
                         success: (answer)->
-                            console.log(answer)
-                            response(answer)
+                            # answer is a list of possible answers, 
+                            # indexed by "nice" name, eg:
+                            # {
+                            #     "Giraffe (Giraffa camelopardalis)": {
+                            #         "type": "species",
+                            #         "mapId": "Giraffa camelopardalis",
+                            #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
+                            #     },
+                            #     "Meercat (Suricata suricatta)": {
+                            #         "type": "species",
+                            #         "mapId": "Suricata suricatta",
+                            #         "path": "Animalia/Chordata/Mammalia/Carnivora/Herpestidae/Suricata/Suricata_suricatta"
+                            #     }
+                            # }
+                            selectable = []
+
+                            for nice, info of answer
+                                # add each nice name to the completion list
+                                selectable.push nice
+                                # put the data into our local caches
+                                mapList[info.mapId] = info
+                                niceIndex[nice] = info.mapId
+
+                            console.log answer
+                            console.log selectable
+
+                            # finally, give the nice names to the autocomplete
+                            response selectable
                     }
             }
 

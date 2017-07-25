@@ -29,10 +29,18 @@ class ApiView(object):
 
         if command == 'namesearch':
             # initially, serve this static data
-            json_content = json.dumps([
-                "Giraffe (Giraffa camelopardalis)",
-                "Meercat (Suricata suricatta)"
-            ])
+            json_content = json.dumps({
+                "Giraffe (Giraffa camelopardalis)": {
+                    "type": "species",
+                    "mapId": "Giraffa camelopardalis",
+                    "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
+                },
+                "Meercat (Suricata suricatta)": {
+                    "type": "species",
+                    "mapId": "Suricata suricatta",
+                    "path": "Animalia/Chordata/Mammalia/Carnivora/Herpestidae/Suricata/Suricata_suricatta"
+                }
+            })
             return Response(body=json_content, content_type='application/json')
 
     # ---------------------------------------------------------------

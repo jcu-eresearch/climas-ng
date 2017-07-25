@@ -66,7 +66,7 @@
       this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
       this.biodivList = [];
       this.biodivInfoFetchProcess = this.fetchBiodivInfo();
-      this.niceNameIndex = {};
+      this.niceIndex = {};
       return this.mapList = {};
     },
     render: function() {
@@ -471,13 +471,22 @@
             },
             source: function(req, response) {
               return $.ajax({
-                url: '/api/namesearch',
+                url: '/api/namesearch/',
                 data: {
                   term: req.term
                 },
                 success: function(answer) {
+                  var info, nice, selectable;
+                  selectable = [];
+                  for (nice in answer) {
+                    info = answer[nice];
+                    selectable.push(nice);
+                    mapList[info.mapId] = info;
+                    niceIndex[nice] = info.mapId;
+                  }
                   console.log(answer);
-                  return response(answer);
+                  console.log(selectable);
+                  return response(selectable);
                 }
               });
             }
