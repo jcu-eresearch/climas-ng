@@ -15,10 +15,11 @@ require '../util/shims'
 debug = (itemToLog, itemLevel)->
     levels = ['verydebug', 'debug', 'message', 'warning']
 
-    # threshold = 'verydebug'
-    # threshold = 'debug'
-    threshold = 'message'
     itemLevel = 'debug' unless itemLevel
+
+    # threshold = 'verydebug'
+    threshold = 'debug'
+    # threshold = 'message'
 
     thresholdNum = levels.indexOf threshold
     messageNum = levels.indexOf itemLevel
@@ -263,7 +264,7 @@ AppView = Backbone.View.extend {
         #
 
         # is it a real species or biodiv name?
-        if newInfo.speciesName in @namesList or newInfo.niceName in @niceIndex
+        if newInfo.speciesName in @namesList or newInfo.niceName of @niceIndex
             # it's real, enable the things that need valid species
             # e.g. downloads, copy to the other side, etc
             @$(".#{side}-valid-map").removeClass('disabled').prop 'disabled', false
@@ -407,9 +408,6 @@ AppView = Backbone.View.extend {
                 sppFileName + '.tif'
             ].join '/'
 
-            if side == 'right'
-                console.log 'checking if == works identically to "is"'
-
             # if it's the right side, use the new lookup lists
             if side is 'right'
                 console.log 'getting right side map.'
@@ -417,9 +415,7 @@ AppView = Backbone.View.extend {
                 console.log '@niceIndex[sideInfo.niceName] is ', @niceIndex[sideInfo.niceName]
                 info = @mapList[@niceIndex[sideInfo.niceName]]
                 console.log 'info is ', info
-                console.log
-                console.log
-                console.log
+
                 if info
 
                     # set up for the type we're looking at

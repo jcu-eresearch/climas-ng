@@ -12,10 +12,10 @@
   debug = function(itemToLog, itemLevel) {
     var levels, messageNum, threshold, thresholdNum;
     levels = ['verydebug', 'debug', 'message', 'warning'];
-    threshold = 'message';
     if (!itemLevel) {
       itemLevel = 'debug';
     }
+    threshold = 'debug';
     thresholdNum = levels.indexOf(threshold);
     messageNum = levels.indexOf(itemLevel);
     if (thresholdNum > messageNum) {
@@ -154,7 +154,7 @@
       return this.leftSideUpdate();
     },
     sideUpdate: function(side) {
-      var atCurrent, currInfo, newInfo, sciNameMatch, sciNameMatcher, _ref, _ref1;
+      var atCurrent, currInfo, newInfo, sciNameMatch, sciNameMatcher, _ref;
       debug('AppView.sideUpdate (' + side + ')');
       newInfo = {
         speciesName: this.$('#' + side + 'mapspp').val(),
@@ -176,7 +176,7 @@
           newInfo.speciesName = sciNameMatch[1];
         }
       }
-      if ((_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) || (_ref1 = newInfo.niceName, __indexOf.call(this.niceIndex, _ref1) >= 0)) {
+      if ((_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) || newInfo.niceName in this.niceIndex) {
         this.$("." + side + "-valid-map").removeClass('disabled').prop('disabled', false);
       } else {
         this.$("." + side + "-valid-map").addClass('disabled').prop('disabled', true);
@@ -278,17 +278,11 @@
           }), sppFileName + '.tif'
         ].join('/');
         if (side === 'right') {
-          console.log('checking if == works identically to "is"');
-        }
-        if (side === 'right') {
           console.log('getting right side map.');
           console.log('side info is ', sideInfo);
           console.log('@niceIndex[sideInfo.niceName] is ', this.niceIndex[sideInfo.niceName]);
           info = this.mapList[this.niceIndex[sideInfo.niceName]];
           console.log('info is ', info);
-          console.log;
-          console.log;
-          console.log;
           if (info) {
             url = this.speciesDataUrl;
             ext = '.tif';
