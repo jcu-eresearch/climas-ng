@@ -65,7 +65,6 @@
       this.speciesSciNameList = [];
       this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
       this.biodivList = [];
-      this.biodivInfoFetchProcess = this.fetchBiodivInfo();
       this.niceIndex = {};
       return this.mapList = {};
     },
