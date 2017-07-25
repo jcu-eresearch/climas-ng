@@ -481,8 +481,8 @@
                   for (nice in answer) {
                     info = answer[nice];
                     selectable.push(nice);
-                    mapList[info.mapId] = info;
-                    niceIndex[nice] = info.mapId;
+                    _this.mapList[info.mapId] = info;
+                    _this.niceIndex[nice] = info.mapId;
                   }
                   console.log(answer);
                   console.log(selectable);

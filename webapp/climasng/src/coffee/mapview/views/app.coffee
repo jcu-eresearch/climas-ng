@@ -612,7 +612,7 @@ AppView = Backbone.View.extend {
                     $.ajax { 
                         url: '/api/namesearch/'
                         data: { term: req.term }
-                        success: (answer)->
+                        success: (answer)=>
                             # answer is a list of possible answers, 
                             # indexed by "nice" name, eg:
                             # {
@@ -633,8 +633,8 @@ AppView = Backbone.View.extend {
                                 # add each nice name to the completion list
                                 selectable.push nice
                                 # put the data into our local caches
-                                mapList[info.mapId] = info
-                                niceIndex[nice] = info.mapId
+                                @mapList[info.mapId] = info
+                                @niceIndex[nice] = info.mapId
 
                             console.log answer
                             console.log selectable
