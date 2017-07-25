@@ -153,12 +153,11 @@
       return this.leftSideUpdate();
     },
     sideUpdate: function(side) {
-      var atCurrent, currInfo, mapValidQuery, newInfo, sciNameMatch, sciNameMatcher, _ref;
+      var atCurrent, currInfo, newInfo, sciNameMatch, sciNameMatcher, _ref, _ref1;
       debug('AppView.sideUpdate (' + side + ')');
       newInfo = {
         speciesName: this.$('#' + side + 'mapspp').val(),
-        mapNiceName: this.$('#' + side + 'mapspp').val(),
-        mapRefName: this.$('#' + side + 'mapspp').val(),
+        niceName: this.$('#' + side + 'mapspp').val(),
         degs: this.$('#' + side + 'mapdegs').val(),
         range: this.$('input[name=' + side + 'maprange]:checked').val(),
         confidence: this.$('#' + side + 'mapconfidence').val()
@@ -167,21 +166,19 @@
       this.$("input[name=" + side + "maprange], #" + side + "mapconfidence").prop('disabled', atCurrent);
       this.$("." + side + ".side.form fieldset").removeClass('disabled');
       this.$("input[name^=" + side + "]:disabled, [id^=" + side + "]:disabled").closest('fieldset').addClass('disabled');
-      if (side === 'right' && newInfo.speciesName) {
-        console.log('starting spp is |' + newInfo.speciesName + '|');
+      if (side === 'right' && newInfo.niceName) {
+        console.log('starting spp is |' + newInfo.niceName + '|');
         sciNameMatcher = /.*\((.+)\)$/;
-        sciNameMatch = sciNameMatcher.exec(newInfo.speciesName);
+        sciNameMatch = sciNameMatcher.exec(newInfo.niceName);
         if (sciNameMatch && sciNameMatch[1]) {
           console.log('regexed spp is ' + '|' + sciNameMatch[1] + '|');
-          newInfo.mapRefName = sciNameMatch[1];
           newInfo.speciesName = sciNameMatch[1];
         }
       }
-      mapValidQuery = '.' + side + '-valid-map';
-      if (_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) {
-        this.$(mapValidQuery).removeClass('disabled').prop('disabled', false);
+      if ((_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) || (_ref1 = newInfo.niceName, __indexOf.call(this.niceIndex, _ref1) >= 0)) {
+        this.$("." + side + "-valid-map").removeClass('disabled').prop('disabled', false);
       } else {
-        this.$(mapValidQuery).addClass('disabled').prop('disabled', true);
+        this.$("." + side + "-valid-map").addClass('disabled').prop('disabled', true);
         return false;
       }
       currInfo = side === 'left' ? this.leftInfo : this.rightInfo;
@@ -241,7 +238,7 @@
       }
     },
     addMapLayer: function(side) {
-      var futureModelPoint, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, val, zipUrl, _ref;
+      var futureModelPoint, info, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, val, zipUrl, _ref;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -279,6 +276,18 @@
             sppUrl: this.speciesUrls[sideInfo.speciesName]
           }), sppFileName + '.tif'
         ].join('/');
+        if (side === 'right') {
+          info = mapList[niceIndex[sideInfo.niceName]];
+          if (info) {
+            mapUrl = [
+              this.resolvePlaceholders(this.speciesDataUrl, {
+                sppUrl: info.path
+              }), sppFileName + '.tif'
+            ].join('/');
+          } else {
+            console.log('Index misalignment -- let me know what you were looking for, daniel@danielbaird.com');
+          }
+        }
         this.$('#' + side + 'mapdl').attr('href', mapUrl);
       }
       layer = L.tileLayer.wms(this.resolvePlaceholders(this.rasterApiUrl), {

@@ -207,9 +207,7 @@ AppView = Backbone.View.extend {
 
         newInfo = {
             speciesName: @$('#' + side + 'mapspp').val()
-
-            mapNiceName: @$('#' + side + 'mapspp').val()
-            mapRefName: @$('#' + side + 'mapspp').val()
+            niceName: @$('#' + side + 'mapspp').val()
 
             degs: @$('#' + side + 'mapdegs').val()
             range: @$('input[name=' + side + 'maprange]:checked').val()
@@ -235,56 +233,51 @@ AppView = Backbone.View.extend {
 
 
         #
-        # testing new naming interface
+        # for the time being, maintain a valid "terse" name while
+        # I update to the new remote name search scheme
         #
-        if side is 'right' and newInfo.speciesName
+        if side is 'right' and newInfo.niceName
 
-            console.log 'starting spp is |' + newInfo.speciesName + '|'
+            console.log 'starting spp is |' + newInfo.niceName + '|'
 
             # the speciesName we want is the bracketed bit at the end
             sciNameMatcher = ///
-                .*          # maybe there's a common name
-                \(          # a literal open paren
-                    (       # start of capture group that gets the sci name
-                        .+  # the sci name (anything inside the parens)
-                    )       # end of capture group
-                \)          # a literal closing paren
-                $           # then the end of the string
+                .*      # maybe there's a common name, maybe not
+                \(      # a literal open paren
+                (.+)    # the sci name (the parens means capture it)
+                \)      # a literal closing paren
+                $       # then the end of the string
             ///
 
-            sciNameMatch = sciNameMatcher.exec newInfo.speciesName
+            sciNameMatch = sciNameMatcher.exec newInfo.niceName
 
             if sciNameMatch and sciNameMatch[1]
                 # if it matched, and there's a capture group at .[1], then
                 # the scientific name is what's in the capture group
                 console.log 'regexed spp is ' + '|' + sciNameMatch[1] + '|'
-                newInfo.mapRefName = sciNameMatch[1]
                 newInfo.speciesName = sciNameMatch[1]
 
         #
         # check if what they typed is an available map
         #
 
-
-
-
         # is it a real species or biodiv name?
-        mapValidQuery = '.' + side + '-valid-map'
-        if newInfo.speciesName in @namesList
+        if newInfo.speciesName in @namesList or newInfo.niceName in @niceIndex
             # it's real, enable the things that need valid species
             # e.g. downloads, copy to the other side, etc
-            @$(mapValidQuery).removeClass('disabled').prop 'disabled', false
+            @$(".#{side}-valid-map").removeClass('disabled').prop 'disabled', false
         else
             # it's not real, disable those things and bail out right now
-            @$(mapValidQuery).addClass('disabled').prop 'disabled', true
+            @$(".#{side}-valid-map").addClass('disabled').prop 'disabled', true
             return false
 
         currInfo = if side == 'left' then @leftInfo else @rightInfo
         # bail if nothing changed
         return false if currInfo and _.isEqual newInfo, currInfo
 
-        # also bail if they're both same species at current, a
-        # kind of special case of being "the same"
+        # also bail if they're both same species at current, 
+        # even if future-y stuff differs, coz that's kind of 
+        # a special case of being "the same"
         if (
             currInfo and
             newInfo.speciesName == currInfo.speciesName and
@@ -412,6 +405,17 @@ AppView = Backbone.View.extend {
                 }
                 sppFileName + '.tif'
             ].join '/'
+
+            # if it's the right side, use the new lookup lists
+            if side is 'right'
+                info = mapList[niceIndex[sideInfo.niceName]]
+                if info
+                    mapUrl = [
+                        @resolvePlaceholders @speciesDataUrl, { sppUrl: info.path }
+                        sppFileName + '.tif'
+                    ].join '/'
+                else
+                    console.log 'Index misalignment -- let me know what you were looking for, daniel@danielbaird.com'
 
             ## not offering zipped data for Wallace/Climas Global
             # zipUrl = [
@@ -614,7 +618,7 @@ AppView = Backbone.View.extend {
                         url: '/api/namesearch/'
                         data: { term: req.term }
                         success: (answer)=>
-                            # answer is a list of possible answers, 
+                            # answer is a list of possible completions, 
                             # indexed by "nice" name, eg:
                             # {
                             #     "Giraffe (Giraffa camelopardalis)": {
@@ -622,11 +626,7 @@ AppView = Backbone.View.extend {
                             #         "mapId": "Giraffa camelopardalis",
                             #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
                             #     },
-                            #     "Meercat (Suricata suricatta)": {
-                            #         "type": "species",
-                            #         "mapId": "Suricata suricatta",
-                            #         "path": "Animalia/Chordata/Mammalia/Carnivora/Herpestidae/Suricata/Suricata_suricatta"
-                            #     }
+                            #     ...
                             # }
                             selectable = []
 
