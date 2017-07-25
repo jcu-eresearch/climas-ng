@@ -44,7 +44,7 @@ class ApiView(object):
                     "type": "climate",
                     "mapId": "Climate precipitation average",
                     "path": "precipitation/average"
-                },
+                }
             })
             return Response(body=json_content, content_type='application/json')
 
