@@ -84,6 +84,7 @@ AppView = Backbone.View.extend {
         @speciesInfoFetchProcess = @fetchSpeciesInfo()
 
         @biodivList = []
+        @biodivLookupList = []
         # @biodivInfoFetchProcess = @fetchBiodivInfo()
 
         # new lists
