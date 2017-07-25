@@ -277,7 +277,7 @@
           }), sppFileName + '.tif'
         ].join('/');
         if (side === 'right') {
-          info = mapList[niceIndex[sideInfo.niceName]];
+          info = this.mapList[this.niceIndex[sideInfo.niceName]];
           if (info) {
             mapUrl = [
               this.resolvePlaceholders(this.speciesDataUrl, {

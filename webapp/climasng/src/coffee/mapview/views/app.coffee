@@ -408,7 +408,7 @@ AppView = Backbone.View.extend {
 
             # if it's the right side, use the new lookup lists
             if side is 'right'
-                info = mapList[niceIndex[sideInfo.niceName]]
+                info = @mapList[@niceIndex[sideInfo.niceName]]
                 if info
                     mapUrl = [
                         @resolvePlaceholders @speciesDataUrl, { sppUrl: info.path }
