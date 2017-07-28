@@ -20,9 +20,9 @@ indexdir = '/var/wallacewebapp/climasng/data/searchindex'
 # define schema for indexed info
 schema = Schema(
 	nice_name = NGRAMWORDS(2, 8, at='start', stored=True),
-	item_id =   ID,
+	item_id =   ID(stored=True),
 	item_path = STORED,
-	item_type = KEYWORD
+	item_type = KEYWORD(stored=True)
 )
 
 # make an "index" that'll hold the data
