@@ -6,6 +6,8 @@ graphline() { echo "c = sqrt($1); while (c > 0) { \"|\"; c -= 1 }" | bc; }
 PROCESS=$1
 
 # get the (list of) process IDs that match that process name
+# on some servers you need to spell out the path to pidof;
+# on CentOS / RHEL it's probably /sbin/pidof
 PROCPIDS=`pidof "$PROCESS"`
 
 if [ -n "$PROCPIDS" ]; then
@@ -18,10 +20,9 @@ if [ -n "$PROCPIDS" ]; then
 
 	# use lsof and wc to count the number of open files
 	FHCOUNT=`lsof -p $PROCPID | wc -l`
-
 	# output some info and the open file handle number plus a nifty graph
-	printf '%s %10s pid:%6s files:%6s %s\n' "`date +'%y-%0m-%0d %T'`" "$PROCESS" "$PROCPID" "$FHCOUNT" `graphline $FHCOUNT`
-
+	printf '%s %10s pid:%6s files:%6s %s\n' "`date +'%y-%0m-%0d %T'`" "$PROCESS" "$PROCPID" "$FHCOUNT" "`graphline $FHCOUNT`"
+	"
 else
 
 	# output some info
