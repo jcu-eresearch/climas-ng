@@ -12,7 +12,8 @@ from whoosh.query import Or, And, Term
 # ---------------------------------------------------------
 
 jsonfile = 'species-2017-07-24.json'
-indexdir = '../webapp/climasng/data/searchindex'
+# indexdir = '../webapp/climasng/data/searchindex'
+indexdir = '/var/wallacewebapp/climasng/data/searchindex'
 
 # ---------------------------------------------------------
 
@@ -40,18 +41,18 @@ with open(jsonfile) as f:
 	    	# if there's common names, make an entry for every common name
     		for cn in info['commonNames']:
 	    		writer.add_document(
-					nice_name = cn + ' (' + spp + ')',
+					nice_name = cn + u' (' + spp + u')',
 					item_id = spp,
 					item_path = info['path'],
-					item_type = 'species'
+					item_type = u'species'
 	    		)
     	else:
     		# if there were no common names, just make a sciname entry
     		writer.add_document(
-				nice_name = '(' + spp + ')',
+				nice_name = u'(' + spp + u')',
 				item_id = spp,
 				item_path = info['path'],
-				item_type = 'species'
+				item_type = u'species'
     		)
 
 # writer.add_document(

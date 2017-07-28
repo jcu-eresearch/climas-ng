@@ -59,7 +59,7 @@ class ApiView(object):
 
             with search_index.searcher() as searcher:
 
-                query = qp.parse(params['term'])
+                query = query_parser.parse(params['term'])
 
                 # allowable = Or([Term(u'item_type', 'species'), Term(u'item_type', 'climate')])
                 allowable = Or([Term(u'item_type', 'species')])
