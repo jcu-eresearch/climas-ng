@@ -54,7 +54,7 @@ class ApiView(object):
                 }
             })
 
-            search_index = index.open_dir('../data/searchindex')
+            search_index = index.open_dir('/var/wallacewebapp/climasng/data/searchindex')
             query_parser = QueryParser("nice_name", schema=search_index.schema)
 
             with search_index.searcher() as searcher:
