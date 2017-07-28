@@ -15,6 +15,11 @@ from climasng.models import *
 from climasng.docassembly.sectiondata import SectionData
 from climasng.data import datafinder
 
+from whoosh.fields import Schema, TEXT, NGRAM, NGRAMWORDS, ID, STORED, KEYWORD
+from whoosh import index
+from whoosh.qparser import QueryParser
+from whoosh.query import Or, And, Term
+
 # -------------------------------------------------------------------
 
 class ApiView(object):
@@ -26,8 +31,10 @@ class ApiView(object):
     def __call__(self):
 
         command = self.request.matchdict['command']
+        params = self.request.params
 
         if command == 'namesearch':
+
             # initially, serve this static data
             json_content = json.dumps({
                 "Giraffe (Giraffa camelopardalis)": {
@@ -46,6 +53,29 @@ class ApiView(object):
                     "path": "precipitation/average"
                 }
             })
+
+            search_index = index.open_dir('../data/searchindex')
+            query_parser = QueryParser("nice_name", schema=search_index.schema)
+
+            with search_index.searcher() as searcher:
+
+                query = qp.parse(params['term'])
+
+                # allowable = Or([Term(u'item_type', 'species'), Term(u'item_type', 'climate')])
+                allowable = Or([Term(u'item_type', 'species')])
+
+                results = searcher.search(query, filter=allowable)
+
+                matches = {}
+
+                for result in results:
+                    matches[result['nice_name']] = {
+                        "type": result['item_type'],
+                        "path": result['item_path'],
+                        "mapId": result['item_id']
+                    }
+
+            json_content = json.dumps(matches)
             return Response(body=json_content, content_type='application/json')
 
     # ---------------------------------------------------------------
