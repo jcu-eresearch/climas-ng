@@ -1,6 +1,5 @@
 (function() {
-  var AppView, MapLayer, debug,
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  var AppView, MapLayer, debug;
 
   MapLayer = require('../models/maplayer');
 
@@ -62,12 +61,7 @@
     initialize: function() {
       debug('AppView.initialize');
       _.bindAll.apply(_, [this].concat(_.functions(this)));
-      this.namesList = [];
-      this.speciesSciNameList = [];
-      this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
-      this.biodivList = [];
-      this.biodivLookupList = [];
-      this.niceIndex = {};
+      this.nameIndex = {};
       return this.mapList = {};
     },
     render: function() {
@@ -128,7 +122,7 @@
       if (!this.leftInfo) {
         return;
       }
-      this.$('#rightmapspp').val(this.leftInfo.speciesName);
+      this.$('#rightmapspp').val(this.leftInfo.mapName);
       this.$('#rightmapyear').val(this.leftInfo.year);
       this.$('input[name=rightmapscenario]').each((function(_this) {
         return function(index, item) {
@@ -143,7 +137,7 @@
       if (!this.rightInfo) {
         return;
       }
-      this.$('#leftmapspp').val(this.rightInfo.speciesName);
+      this.$('#leftmapspp').val(this.rightInfo.mapName);
       this.$('#leftmapyear').val(this.rightInfo.year);
       this.$('input[name=leftmapscenario]').each((function(_this) {
         return function(index, item) {
@@ -154,11 +148,10 @@
       return this.leftSideUpdate();
     },
     sideUpdate: function(side) {
-      var atCurrent, currInfo, newInfo, sciNameMatch, sciNameMatcher, _ref;
+      var atCurrent, currInfo, newInfo;
       debug('AppView.sideUpdate (' + side + ')');
       newInfo = {
-        speciesName: this.$('#' + side + 'mapspp').val(),
-        niceName: this.$('#' + side + 'mapspp').val(),
+        mapName: this.$('#' + side + 'mapspp').val(),
         degs: this.$('#' + side + 'mapdegs').val(),
         range: this.$('input[name=' + side + 'maprange]:checked').val(),
         confidence: this.$('#' + side + 'mapconfidence').val()
@@ -167,16 +160,7 @@
       this.$("input[name=" + side + "maprange], #" + side + "mapconfidence").prop('disabled', atCurrent);
       this.$("." + side + ".side.form fieldset").removeClass('disabled');
       this.$("input[name^=" + side + "]:disabled, [id^=" + side + "]:disabled").closest('fieldset').addClass('disabled');
-      if (side === 'right' && newInfo.niceName) {
-        console.log('starting spp is |' + newInfo.niceName + '|');
-        sciNameMatcher = /.*\((.+)\)$/;
-        sciNameMatch = sciNameMatcher.exec(newInfo.niceName);
-        if (sciNameMatch && sciNameMatch[1]) {
-          console.log('regexed spp is ' + '|' + sciNameMatch[1] + '|');
-          newInfo.speciesName = sciNameMatch[1];
-        }
-      }
-      if ((_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) || newInfo.niceName in this.niceIndex) {
+      if (newInfo.mapName in this.nameIndex) {
         this.$("." + side + "-valid-map").removeClass('disabled').prop('disabled', false);
       } else {
         this.$("." + side + "-valid-map").addClass('disabled').prop('disabled', true);
@@ -186,7 +170,7 @@
       if (currInfo && _.isEqual(newInfo, currInfo)) {
         return false;
       }
-      if (currInfo && newInfo.speciesName === currInfo.speciesName && newInfo.degs === currInfo.degs && newInfo.degs === 'current') {
+      if (currInfo && newInfo.mapName === currInfo.mapName && newInfo.degs === currInfo.degs && newInfo.degs === 'current') {
         return false;
       }
       if (side === 'left') {
@@ -220,7 +204,7 @@
       if (side === 'right') {
         info = this.rightInfo;
       }
-      tag = "<b><i>" + info.speciesName + "</i></b>";
+      tag = "<b><i>" + info.mapName + "</i></b>";
       dispLookup = {
         '0disp': 'no range adaptation',
         '50disp': '50 years of range adaptation',
@@ -239,7 +223,7 @@
       }
     },
     addMapLayer: function(side) {
-      var ext, futureModelPoint, info, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, url, val, zipUrl, _ref;
+      var ext, futureModelPoint, layer, loadClass, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -247,60 +231,30 @@
       if (side === 'right') {
         sideInfo = this.rightInfo;
       }
-      isBiodiversity = (_ref = sideInfo.speciesName, __indexOf.call(this.biodivList, _ref) >= 0);
       futureModelPoint = '';
       mapUrl = '';
       zipUrl = '';
-      if (isBiodiversity) {
-        futureModelPoint = ['biodiversity/deciles/biodiversity', sideInfo.scenario, sideInfo.year, sideInfo.gcm].join('_');
-        if (sideInfo.year === 'baseline') {
-          futureModelPoint = 'biodiversity/biodiversity_current';
-        }
-        mapUrl = [
-          this.resolvePlaceholders(this.biodivDataUrl, {
-            sppGroup: sideInfo.speciesName
-          }), futureModelPoint + '.tif'
-        ].join('/');
-        zipUrl = [
-          this.resolvePlaceholders(this.biodivDataUrl, {
-            sppGroup: sideInfo.speciesName
-          }), 'biodiversity', sideInfo.speciesName + '.zip'
-        ].join('/');
-        this.$('#' + side + 'mapdl').attr('href', mapUrl);
-      } else {
-        sppFileName = ['TEMP', sideInfo.degs, sideInfo.confidence + '.' + sideInfo.range].join('_');
-        if (sideInfo.degs === 'current') {
-          sppFileName = 'current';
-        }
-        mapUrl = [
-          this.resolvePlaceholders(this.speciesDataUrl, {
-            path: this.speciesUrls[sideInfo.speciesName]
-          }), sppFileName + '.tif'
-        ].join('/');
-        if (side === 'right') {
-          console.log('getting right side map.');
-          console.log('side info is ', sideInfo);
-          console.log('@niceIndex[sideInfo.niceName] is ', this.niceIndex[sideInfo.niceName]);
-          info = this.mapList[this.niceIndex[sideInfo.niceName]];
-          console.log('info is ', info);
-          if (info) {
-            url = this.speciesDataUrl;
-            ext = '.tif';
-            if (info.type === 'climate') {
-              url = this.climateDataUrl;
-              ext = '.asc';
-            }
-            mapUrl = [
-              this.resolvePlaceholders(url, {
-                path: info.path
-              }), sppFileName + ext
-            ].join('/');
-          } else {
-            console.log('Index misalignment -- let me know what you were looking for, daniel@danielbaird.com');
-          }
-        }
-        this.$('#' + side + 'mapdl').attr('href', mapUrl);
+      projectionName = "TEMP_" + sideInfo.degs + "_" + sideInfo.confidence + "." + sideInfo.range;
+      if (sideInfo.degs === 'current') {
+        projectionName = 'current';
       }
+      mapInfo = this.mapList[this.nameIndex[sideInfo.mapName]];
+      if (mapInfo) {
+        url = this.speciesDataUrl;
+        ext = '.tif';
+        if (mapInfo.type === 'climate') {
+          url = this.climateDataUrl;
+          ext = '.asc';
+        }
+        mapUrl = [
+          this.resolvePlaceholders(url, {
+            path: mapInfo.path
+          }), projectionName + ext
+        ].join('/');
+      } else {
+        console.log("Can't map that -- no '" + sideInfo.mapName + "' in index");
+      }
+      this.$('#' + side + 'mapdl').attr('href', mapUrl);
       layer = L.tileLayer.wms(this.resolvePlaceholders(this.rasterApiUrl), {
         DATA_URL: mapUrl,
         layers: 'DEFAULT',
@@ -333,26 +287,7 @@
       layer.addTo(this.map);
       this.resizeThings();
       if (window.location.hostname === 'localhost') {
-        console.log('map URL is: ', mapUrl);
-      }
-      if (ga && typeof ga === 'function') {
-        if (sideInfo.year === 'baseline') {
-          val = 1990;
-        } else {
-          val = parseInt(sideInfo.year, 10);
-        }
-        val = val + {
-          'tenth': 0.1,
-          'fiftieth': 0.5,
-          'ninetieth': 0.9
-        }[sideInfo.gcm];
-        return ga('send', {
-          'hitType': 'event',
-          'eventCategory': 'mapshow',
-          'eventAction': sideInfo.speciesName,
-          'eventLabel': sideInfo.scenario,
-          'eventValue': val
-        });
+        return console.log('map URL is: ', mapUrl);
       }
     },
     centreMap: function(repeatedlyFor) {
@@ -398,121 +333,80 @@
       }
     },
     fetchSpeciesInfo: function() {
-      debug('AppView.fetchSpeciesInfo');
-      return $.ajax({
-        url: '/data/species',
-        dataType: 'json'
-      }).done((function(_this) {
-        return function(data) {
-          var commonNameWriter, speciesLookupList, speciesSciNameList, speciesUrls;
-          speciesLookupList = [];
-          speciesSciNameList = [];
-          speciesUrls = {};
-          commonNameWriter = function(sciName) {
-            var sciNamePostfix;
-            sciNamePostfix = " (" + sciName + ")";
-            return function(cnIndex, cn) {
-              return speciesLookupList.push({
-                label: cn + sciNamePostfix,
-                value: sciName
-              });
-            };
-          };
-          $.each(data, function(sciName, sppInfo) {
-            speciesSciNameList.push(sciName);
-            speciesUrls[sciName] = sppInfo.path;
-            if (sppInfo.commonNames) {
-              return $.each(sppInfo.commonNames, commonNameWriter(sciName));
-            } else {
-              return speciesLookupList.push({
-                label: sciName,
-                value: sciName
-              });
-            }
-          });
-          _this.speciesLookupList = speciesLookupList;
-          _this.speciesSciNameList = speciesSciNameList;
-          return _this.speciesUrls = speciesUrls;
-        };
-      })(this));
+      return debug('AppView.fetchSpeciesInfo');
     },
     fetchBiodivInfo: function() {
-      debug('AppView.fetchBiodivInfo');
-      return $.ajax({
-        url: '/data/biodiversity',
-        dataType: 'json'
-      }).done((function(_this) {
-        return function(data) {
-          var biodivList, biodivLookupList;
-          biodivList = [];
-          biodivLookupList = [];
-          $.each(data, function(biodivName, biodivInfo) {
-            var biodivCapName;
-            biodivCapName = biodivName.replace(/^./, function(c) {
-              return c.toUpperCase();
-            });
-            biodivList.push(biodivName);
-            return biodivLookupList.push({
-              label: "Biodiversity of " + biodivCapName,
-              value: biodivName
-            });
-          });
-          _this.biodivList = biodivList;
-          return _this.biodivLookupList = biodivLookupList;
-        };
-      })(this));
+      return debug('AppView.fetchBiodivInfo');
     },
     buildLeftForm: function() {
+      var $leftmapspp;
       debug('AppView.buildLeftForm');
-      return $.when(this.speciesInfoFetchProcess, this.biodivInfoFetchProcess).done((function(_this) {
-        return function() {
-          var $leftmapspp;
-          $leftmapspp = _this.$('#leftmapspp');
-          _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
-          return $leftmapspp.autocomplete({
-            source: _this.biodivLookupList.concat(_this.speciesLookupList),
-            close: function() {
-              return _this.$el.trigger('leftmapupdate');
-            }
-          });
-        };
-      })(this));
+      $leftmapspp = this.$('#leftmapspp');
+      return $leftmapspp.autocomplete({
+        close: (function(_this) {
+          return function() {
+            return _this.$el.trigger('rightmapupdate');
+          };
+        })(this),
+        source: (function(_this) {
+          return function(req, response) {
+            return $.ajax({
+              url: '/api/namesearch/',
+              data: {
+                term: req.term
+              },
+              success: function(answer) {
+                var info, nice, selectable;
+                selectable = [];
+                for (nice in answer) {
+                  info = answer[nice];
+                  selectable.push(nice);
+                  _this.mapList[info.mapId] = info;
+                  _this.nameIndex[nice] = info.mapId;
+                }
+                console.log(answer);
+                console.log(selectable);
+                return response(selectable);
+              }
+            });
+          };
+        })(this)
+      });
     },
     buildRightForm: function() {
+      var $rightmapspp;
       debug('AppView.buildRightForm');
-      return $.when(this.speciesInfoFetchProcess, this.biodivInfoFetchProcess).done((function(_this) {
-        return function() {
-          var $rightmapspp;
-          $rightmapspp = _this.$('#rightmapspp');
-          _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
-          return $rightmapspp.autocomplete({
-            close: function() {
-              return _this.$el.trigger('rightmapupdate');
-            },
-            source: function(req, response) {
-              return $.ajax({
-                url: '/api/namesearch/',
-                data: {
-                  term: req.term
-                },
-                success: function(answer) {
-                  var info, nice, selectable;
-                  selectable = [];
-                  for (nice in answer) {
-                    info = answer[nice];
-                    selectable.push(nice);
-                    _this.mapList[info.mapId] = info;
-                    _this.niceIndex[nice] = info.mapId;
-                  }
-                  console.log(answer);
-                  console.log(selectable);
-                  return response(selectable);
+      $rightmapspp = this.$('#rightmapspp');
+      return $rightmapspp.autocomplete({
+        close: (function(_this) {
+          return function() {
+            return _this.$el.trigger('rightmapupdate');
+          };
+        })(this),
+        source: (function(_this) {
+          return function(req, response) {
+            return $.ajax({
+              url: '/api/namesearch/',
+              data: {
+                term: req.term
+              },
+              success: function(answer) {
+                var info, nice, selectable;
+                selectable = [];
+                for (nice in answer) {
+                  info = answer[nice];
+                  selectable.push(nice);
+                  _this.mapList[info.mapId] = info;
+                  _this.nameIndex[nice] = info.mapId;
                 }
-              });
-            }
-          });
-        };
-      })(this));
+                console.log(answer);
+                console.log(selectable);
+                return response(selectable);
+              }
+            });
+          };
+        })(this)
+      });
     },
     startSplitterTracking: function() {
       debug('AppView.startSplitterTracking');

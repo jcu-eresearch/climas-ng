@@ -80,18 +80,18 @@ AppView = Backbone.View.extend {
         _.bindAll.apply _, [this].concat _.functions(this)
 
         # kick off the fetching of the species and biodiversity lists
-        @namesList = []
+        # @namesList = []
 
-        @speciesSciNameList = []
-        @speciesInfoFetchProcess = @fetchSpeciesInfo()
+        # @speciesSciNameList = []
+        # @speciesInfoFetchProcess = @fetchSpeciesInfo()
 
-        @biodivList = []
-        @biodivLookupList = []
+        # @biodivList = []
+        # @biodivLookupList = []
         # @biodivInfoFetchProcess = @fetchBiodivInfo()
 
         # new lists
-        @niceIndex = {}
-        @mapList = {}
+        @nameIndex = {} # nice name -> map "id name"
+        @mapList = {}   # map "id name" -> url and other info about the map
 
         # @sideUpdate('left')
 
@@ -179,7 +179,7 @@ AppView = Backbone.View.extend {
 
         return unless @leftInfo
 
-        @$('#rightmapspp').val @leftInfo.speciesName
+        @$('#rightmapspp').val @leftInfo.mapName
         @$('#rightmapyear').val @leftInfo.year
         @$('input[name=rightmapscenario]').each (index, item)=>
             $(item).prop 'checked', ($(item).val() == @leftInfo.scenario)
@@ -192,7 +192,7 @@ AppView = Backbone.View.extend {
 
         return unless @rightInfo
 
-        @$('#leftmapspp').val @rightInfo.speciesName
+        @$('#leftmapspp').val @rightInfo.mapName
         @$('#leftmapyear').val @rightInfo.year
         @$('input[name=leftmapscenario]').each (index, item)=>
             $(item).prop 'checked', ($(item).val() == @rightInfo.scenario)
@@ -208,9 +208,7 @@ AppView = Backbone.View.extend {
         #
 
         newInfo = {
-            speciesName: @$('#' + side + 'mapspp').val()
-            niceName: @$('#' + side + 'mapspp').val()
-
+            mapName: @$('#' + side + 'mapspp').val()
             degs: @$('#' + side + 'mapdegs').val()
             range: @$('input[name=' + side + 'maprange]:checked').val()
             confidence: @$('#' + side + 'mapconfidence').val()
@@ -232,44 +230,16 @@ AppView = Backbone.View.extend {
             "input[name^=#{side}]:disabled, [id^=#{side}]:disabled"
         ).closest('fieldset').addClass 'disabled'
 
-
-
-        #
-        # for the time being, maintain a valid "terse" name while
-        # I update to the new remote name search scheme
-        #
-        if side is 'right' and newInfo.niceName
-
-            console.log 'starting spp is |' + newInfo.niceName + '|'
-
-            # the speciesName we want is the bracketed bit at the end
-            sciNameMatcher = ///
-                .*      # maybe there's a common name, maybe not
-                \(      # a literal open paren
-                (.+)    # the sci name (the parens means capture it)
-                \)      # a literal closing paren
-                $       # then the end of the string
-            ///
-
-            sciNameMatch = sciNameMatcher.exec newInfo.niceName
-
-            if sciNameMatch and sciNameMatch[1]
-                # if it matched, and there's a capture group at .[1], then
-                # the scientific name is what's in the capture group
-                console.log 'regexed spp is ' + '|' + sciNameMatch[1] + '|'
-                newInfo.speciesName = sciNameMatch[1]
-
         #
         # check if what they typed is an available map
         #
 
-        # is it a real species or biodiv name?
-        if newInfo.speciesName in @namesList or newInfo.niceName of @niceIndex
-            # it's real, enable the things that need valid species
+        if newInfo.mapName of @nameIndex
+            # it's real, so enable the things that need valid maps
             # e.g. downloads, copy to the other side, etc
             @$(".#{side}-valid-map").removeClass('disabled').prop 'disabled', false
         else
-            # it's not real, disable those things and bail out right now
+            # it's NOT real, disable those things and bail out right now
             @$(".#{side}-valid-map").addClass('disabled').prop 'disabled', true
             return false
 
@@ -277,12 +247,12 @@ AppView = Backbone.View.extend {
         # bail if nothing changed
         return false if currInfo and _.isEqual newInfo, currInfo
 
-        # also bail if they're both same species at current, 
-        # even if future-y stuff differs, coz that's kind of 
-        # a special case of being "the same"
+        # also bail if they're both same species at current, even
+        # if future-projection stuff differs, coz that's a special 
+        # case of being "the same"
         if (
             currInfo and
-            newInfo.speciesName == currInfo.speciesName and
+            newInfo.mapName == currInfo.mapName and
             newInfo.degs == currInfo.degs and
             newInfo.degs == 'current'
         )
@@ -323,7 +293,7 @@ AppView = Backbone.View.extend {
         info = @leftInfo if side == 'left'
         info = @rightInfo if side == 'right'
 
-        tag = "<b><i>#{info.speciesName}</i></b>"
+        tag = "<b><i>#{info.mapName}</i></b>"
         dispLookup = {
             '0disp': 'no range adaptation'
             '50disp': '50 years of range adaptation'
@@ -347,99 +317,81 @@ AppView = Backbone.View.extend {
         sideInfo = @leftInfo if side == 'left'
         sideInfo = @rightInfo if side == 'right'
 
-        # is it a biodiversity map?
-        isBiodiversity = sideInfo.speciesName in @biodivList
-
         futureModelPoint = ''
         mapUrl = ''
         zipUrl = ''
 
-        if isBiodiversity
-            # they're looking for a biodiversity map.
-            futureModelPoint = [
-                'biodiversity/deciles/biodiversity'
-                sideInfo.scenario
-                sideInfo.year
-                sideInfo.gcm
-            ].join '_'
+        # # is it a biodiversity map?
+        # isBiodiversity = sideInfo.mapName in @biodivList
 
-            # if they want current, just get the current biodiv
-            futureModelPoint = 'biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
+        # if isBiodiversity
+        #     # they're looking for a biodiversity map.
+        #     futureModelPoint = [
+        #         'biodiversity/deciles/biodiversity'
+        #         sideInfo.scenario
+        #         sideInfo.year
+        #         sideInfo.gcm
+        #     ].join '_'
 
-            # now make that into a URL
-            mapUrl = [
-                @resolvePlaceholders @biodivDataUrl, {
-                    sppGroup: sideInfo.speciesName
-                }
-                futureModelPoint + '.tif'
-            ].join '/'
+        #     # if they want current, just get the current biodiv
+        #     futureModelPoint = 'biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
 
-            zipUrl = [
-                @resolvePlaceholders @biodivDataUrl, {
-                    sppGroup: sideInfo.speciesName
-                }
-                'biodiversity'
-                sideInfo.speciesName + '.zip'
-            ].join '/'
+        #     # now make that into a URL
+        #     mapUrl = [
+        #         @resolvePlaceholders @biodivDataUrl, {
+        #             sppGroup: sideInfo.mapName
+        #         }
+        #         futureModelPoint + '.tif'
+        #     ].join '/'
 
-            # update the download links
-            @$('#' + side + 'mapdl').attr 'href', mapUrl
-            # @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
-            # @$('#' + side + 'archivedl').attr 'href', zipUrl
+        #     zipUrl = [
+        #         @resolvePlaceholders @biodivDataUrl, {
+        #             sppGroup: sideInfo.mapName
+        #         }
+        #         'biodiversity'
+        #         sideInfo.mapName + '.zip'
+        #     ].join '/'
 
-        else
+        #     # update the download links
+        #     @$('#' + side + 'mapdl').attr 'href', mapUrl
+        #     # @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
+        #     # @$('#' + side + 'archivedl').attr 'href', zipUrl
+
+        # else
+
             # it's a plain old species map they're after.
 
-            # work out the string that gets to the projection point they want
-            sppFileName = [
-                'TEMP',
-                sideInfo.degs,
-                sideInfo.confidence + '.' + sideInfo.range
-            ].join '_'
+        # work out the string that gets to the projection point they want
+        projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
+        # if they want current, just get the current projection
+        projectionName = 'current' if sideInfo.degs == 'current'
 
-            # if they want current, just get the current projection
-            sppFileName = 'current' if sideInfo.degs == 'current'
+        mapInfo = @mapList[@nameIndex[sideInfo.mapName]]
 
-            # now make that into a URL
+        if mapInfo
+
+            # set up for the type we're looking at
+
+            # start by assuming species
+            url = @speciesDataUrl
+            ext = '.tif'
+
+            # override for climate
+            if mapInfo.type is 'climate'
+                url = @climateDataUrl
+                ext = '.asc'
+
+            # now set the URL for this type of map
             mapUrl = [
-                @resolvePlaceholders @speciesDataUrl, {
-                    path: @speciesUrls[sideInfo.speciesName]
-                }
-                sppFileName + '.tif'
+                @resolvePlaceholders url, { path: mapInfo.path }
+                projectionName + ext
             ].join '/'
-
-            # if it's the right side, use the new lookup lists
-            if side is 'right'
-                console.log 'getting right side map.'
-                console.log 'side info is ', sideInfo
-                console.log '@niceIndex[sideInfo.niceName] is ', @niceIndex[sideInfo.niceName]
-                info = @mapList[@niceIndex[sideInfo.niceName]]
-                console.log 'info is ', info
-
-                if info
-
-                    # set up for the type we're looking at
-
-                    # start by assuming species
-                    url = @speciesDataUrl
-                    ext = '.tif'
-
-                    # override for climate
-                    if info.type is 'climate'
-                        url = @climateDataUrl
-                        ext = '.asc'
-
-                    # now set the URL for this type of map
-                    mapUrl = [
-                        @resolvePlaceholders url, { path: info.path }
-                        sppFileName + ext
-                    ].join '/'
-                else
-                    console.log 'Index misalignment -- let me know what you were looking for, daniel@danielbaird.com'
+        else
+            console.log "Can't map that -- no '#{sideInfo.mapName}' in index"
 
 
-            # update the download links
-            @$('#' + side + 'mapdl').attr 'href', mapUrl
+        # update the download links
+        @$('#' + side + 'mapdl').attr 'href', mapUrl
 
 
         # we've made a url, start the map layer loading
@@ -471,24 +423,24 @@ AppView = Backbone.View.extend {
         if window.location.hostname == 'localhost'
             console.log 'map URL is: ', mapUrl
 
-        # log this as an action in Google Analytics
-        if ga and typeof(ga) == 'function'
-            # we have a ga thing which is probaby a google analytics thing.
-            # "value" is year.percentile, eg. for 90th percentile in 2055,
-            # we will send 2055.9 as the value.
-            if sideInfo.year == 'baseline'
-                val = 1990
-            else
-                val = parseInt(sideInfo.year, 10)
-            val = val + { 'tenth': 0.1, 'fiftieth': 0.5, 'ninetieth': 0.9 }[sideInfo.gcm]
+        # # log this as an action in Google Analytics
+        # if ga and typeof(ga) == 'function'
+        #     # we have a ga thing which is probaby a google analytics thing.
+        #     # "value" is year.percentile, eg. for 90th percentile in 2055,
+        #     # we will send 2055.9 as the value.
+        #     if sideInfo.year == 'baseline'
+        #         val = 1990
+        #     else
+        #         val = parseInt(sideInfo.year, 10)
+        #     val = val + { 'tenth': 0.1, 'fiftieth': 0.5, 'ninetieth': 0.9 }[sideInfo.gcm]
 
-            ga('send', {
-                'hitType': 'event',
-                'eventCategory': 'mapshow',
-                'eventAction': sideInfo.speciesName,
-                'eventLabel': sideInfo.scenario,
-                'eventValue': val
-            })
+        #     ga('send', {
+        #         'hitType': 'event',
+        #         'eventCategory': 'mapshow',
+        #         'eventAction': sideInfo.mapName,
+        #         'eventLabel': sideInfo.scenario,
+        #         'eventValue': val
+        #     })
 
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
@@ -538,60 +490,60 @@ AppView = Backbone.View.extend {
     fetchSpeciesInfo: ()->
         debug 'AppView.fetchSpeciesInfo'
 
-        return $.ajax({
-            url: '/data/species',
-            dataType: 'json'
-        }).done (data)=>
-            speciesLookupList = []
-            speciesSciNameList = []
-            speciesUrls = {}
+        # return $.ajax({
+        #     url: '/data/species',
+        #     dataType: 'json'
+        # }).done (data)=>
+        #     speciesLookupList = []
+        #     speciesSciNameList = []
+        #     speciesUrls = {}
 
-            # in order to avoid making a function in the inner loop,
-            # here's a function returning a function that writes a
-            # common name into the given sciName.  This is partial
-            # function application, which is a bit like currying.
-            commonNameWriter = (sciName)=>
-                sciNamePostfix = " (#{sciName})"
-                return (cnIndex, cn)=>
-                    speciesLookupList.push {
-                        label: cn + sciNamePostfix
-                        value: sciName
-                    }
-            # that's it.. this'll be used in the loop below.
+        #     # in order to avoid making a function in the inner loop,
+        #     # here's a function returning a function that writes a
+        #     # common name into the given sciName.  This is partial
+        #     # function application, which is a bit like currying.
+        #     commonNameWriter = (sciName)=>
+        #         sciNamePostfix = " (#{sciName})"
+        #         return (cnIndex, cn)=>
+        #             speciesLookupList.push {
+        #                 label: cn + sciNamePostfix
+        #                 value: sciName
+        #             }
+        #     # that's it.. this'll be used in the loop below.
 
-            $.each data, (sciName, sppInfo)=>
-                speciesSciNameList.push sciName
-                speciesUrls[sciName] = sppInfo.path
-                if sppInfo.commonNames
-                    $.each sppInfo.commonNames, commonNameWriter sciName
-                else
-                    speciesLookupList.push
-                        label: sciName
-                        value: sciName
+        #     $.each data, (sciName, sppInfo)=>
+        #         speciesSciNameList.push sciName
+        #         speciesUrls[sciName] = sppInfo.path
+        #         if sppInfo.commonNames
+        #             $.each sppInfo.commonNames, commonNameWriter sciName
+        #         else
+        #             speciesLookupList.push
+        #                 label: sciName
+        #                 value: sciName
 
-            @speciesLookupList = speciesLookupList
-            @speciesSciNameList = speciesSciNameList
-            @speciesUrls = speciesUrls
+        #     @speciesLookupList = speciesLookupList
+        #     @speciesSciNameList = speciesSciNameList
+        #     @speciesUrls = speciesUrls
     # ---------------------------------------------------------------
     fetchBiodivInfo: ()->
         debug 'AppView.fetchBiodivInfo'
 
-        return $.ajax({
-            url: '/data/biodiversity',
-            dataType: 'json'
-        }).done (data)=>
-            biodivList = []
-            biodivLookupList = []
+        # return $.ajax({
+        #     url: '/data/biodiversity',
+        #     dataType: 'json'
+        # }).done (data)=>
+        #     biodivList = []
+        #     biodivLookupList = []
 
-            $.each data, (biodivName, biodivInfo)=>
-                biodivCapName = biodivName.replace /^./, (c)-> c.toUpperCase()
-                biodivList.push biodivName
-                biodivLookupList.push
-                    label: "Biodiversity of " + biodivCapName
-                    value: biodivName
+        #     $.each data, (biodivName, biodivInfo)=>
+        #         biodivCapName = biodivName.replace /^./, (c)-> c.toUpperCase()
+        #         biodivList.push biodivName
+        #         biodivLookupList.push
+        #             label: "Biodiversity of " + biodivCapName
+        #             value: biodivName
 
-            @biodivList = biodivList
-            @biodivLookupList = biodivLookupList
+        #     @biodivList = biodivList
+        #     @biodivLookupList = biodivLookupList
 
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
@@ -600,59 +552,82 @@ AppView = Backbone.View.extend {
     buildLeftForm: ()->
         debug 'AppView.buildLeftForm'
 
-        $.when(@speciesInfoFetchProcess, @biodivInfoFetchProcess).done =>
-            $leftmapspp = @$ '#leftmapspp'
+        $leftmapspp = @$ '#leftmapspp'
 
-            # while we're here, make a big single list of acceptable names
-            @namesList = @biodivList.concat @speciesSciNameList
+        $leftmapspp.autocomplete {
+            close: => @$el.trigger 'rightmapupdate'
+            # source: '/api/namesearch'
+            source: (req, response)=>
+                $.ajax { 
+                    url: '/api/namesearch/'
+                    data: { term: req.term }
+                    success: (answer)=>
+                        # answer is a list of possible completions, 
+                        # indexed by "nice" name, eg:
+                        # {
+                        #     "Giraffe (Giraffa camelopardalis)": {
+                        #         "type": "species",
+                        #         "mapId": "Giraffa camelopardalis",
+                        #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
+                        #     },
+                        #     ...
+                        # }
+                        selectable = []
 
-            $leftmapspp.autocomplete
-                source: @biodivLookupList.concat @speciesLookupList
-                close: => @$el.trigger 'leftmapupdate'
+                        for nice, info of answer
+                            # add each nice name to the completion list
+                            selectable.push nice
+                            # put the data into our local caches
+                            @mapList[info.mapId] = info
+                            @nameIndex[nice] = info.mapId
+
+                        console.log answer
+                        console.log selectable
+
+                        # finally, give the nice names to the autocomplete
+                        response selectable
+                }
+        }
     # ---------------------------------------------------------------
     buildRightForm: ()->
         debug 'AppView.buildRightForm'
 
-        $.when(@speciesInfoFetchProcess, @biodivInfoFetchProcess).done =>
-            $rightmapspp = @$ '#rightmapspp'
+        $rightmapspp = @$ '#rightmapspp'
 
-            # while we're here, make a big single list of acceptable names
-            @namesList = @biodivList.concat @speciesSciNameList
+        $rightmapspp.autocomplete {
+            close: => @$el.trigger 'rightmapupdate'
+            # source: '/api/namesearch'
+            source: (req, response)=>
+                $.ajax { 
+                    url: '/api/namesearch/'
+                    data: { term: req.term }
+                    success: (answer)=>
+                        # answer is a list of possible completions, 
+                        # indexed by "nice" name, eg:
+                        # {
+                        #     "Giraffe (Giraffa camelopardalis)": {
+                        #         "type": "species",
+                        #         "mapId": "Giraffa camelopardalis",
+                        #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
+                        #     },
+                        #     ...
+                        # }
+                        selectable = []
 
-            $rightmapspp.autocomplete {
-                close: => @$el.trigger 'rightmapupdate'
-                # source: '/api/namesearch'
-                source: (req, response)=>
-                    $.ajax { 
-                        url: '/api/namesearch/'
-                        data: { term: req.term }
-                        success: (answer)=>
-                            # answer is a list of possible completions, 
-                            # indexed by "nice" name, eg:
-                            # {
-                            #     "Giraffe (Giraffa camelopardalis)": {
-                            #         "type": "species",
-                            #         "mapId": "Giraffa camelopardalis",
-                            #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
-                            #     },
-                            #     ...
-                            # }
-                            selectable = []
+                        for nice, info of answer
+                            # add each nice name to the completion list
+                            selectable.push nice
+                            # put the data into our local caches
+                            @mapList[info.mapId] = info
+                            @nameIndex[nice] = info.mapId
 
-                            for nice, info of answer
-                                # add each nice name to the completion list
-                                selectable.push nice
-                                # put the data into our local caches
-                                @mapList[info.mapId] = info
-                                @niceIndex[nice] = info.mapId
+                        console.log answer
+                        console.log selectable
 
-                            console.log answer
-                            console.log selectable
-
-                            # finally, give the nice names to the autocomplete
-                            response selectable
-                    }
-            }
+                        # finally, give the nice names to the autocomplete
+                        response selectable
+                }
+        }
 
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
