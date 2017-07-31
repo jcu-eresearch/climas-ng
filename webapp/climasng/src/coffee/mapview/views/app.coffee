@@ -216,13 +216,13 @@ AppView = Backbone.View.extend {
 
         #
         # enable and disable the form parts that don't
-        # apply, eg. if you're looking at current,
+        # apply, eg. if you're looking at baseline,
         # disable the future-y things
         #
 
         # set disabled for range-adaptation and model-summary-confidence
-        atCurrent = (newInfo.degs == 'current')
-        @$("input[name=#{side}maprange], ##{side}mapconfidence").prop 'disabled', atCurrent
+        atBaseline = (newInfo.degs == 'baseline')
+        @$("input[name=#{side}maprange], ##{side}mapconfidence").prop 'disabled', atBaseline
 
         # now, add a disabled style to the fieldsets holding disabled items
         @$(".#{side}.side.form fieldset").removeClass 'disabled'
@@ -247,14 +247,14 @@ AppView = Backbone.View.extend {
         # bail if nothing changed
         return false if currInfo and _.isEqual newInfo, currInfo
 
-        # also bail if they're both same species at current, even
+        # also bail if they're both same species at baseline, even
         # if future-projection stuff differs, coz that's a special 
         # case of being "the same"
         if (
             currInfo and
             newInfo.mapName == currInfo.mapName and
             newInfo.degs == currInfo.degs and
-            newInfo.degs == 'current'
+            newInfo.degs == 'baseline'
         )
             return false
 
@@ -300,8 +300,8 @@ AppView = Backbone.View.extend {
             '100disp': '100 years of range adaptation'
         }
 
-        if info.degs is 'current'
-            tag = "current #{tag} distribution"
+        if info.degs is 'baseline'
+            tag = "baseline #{tag} distribution"
         else
             tag = "<b>#{info.confidence}</b> percentile projections for #{tag} at <b>+#{info.degs}&deg;C</b> with <b>#{dispLookup[info.range]}</b>"
 
@@ -333,8 +333,8 @@ AppView = Backbone.View.extend {
         #         sideInfo.gcm
         #     ].join '_'
 
-        #     # if they want current, just get the current biodiv
-        #     futureModelPoint = 'biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
+        #     # if they want baseline, just get the baseline biodiv
+        #     futureModelPoint = 'biodiversity/biodiversity_baseline' if sideInfo.year == 'baseline'
 
         #     # now make that into a URL
         #     mapUrl = [
@@ -363,8 +363,8 @@ AppView = Backbone.View.extend {
 
         # work out the string that gets to the projection point they want
         projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
-        # if they want current, just get the current projection
-        projectionName = 'current' if sideInfo.degs == 'current'
+        # if they want baseline, just get the baseline projection
+        projectionName = 'current' if sideInfo.degs == 'baseline'
 
         mapInfo = @mapList[@nameIndex[sideInfo.mapName]]
 
@@ -781,7 +781,7 @@ AppView = Backbone.View.extend {
         <fieldset>
             <legend>temperature change</legend>
             <select class="left" id="leftmapdegs">
-                <option value="current">current</option>
+                <option value="baseline">baseline</option>
                 <option value="1.5">1.5 &deg;C</option>
                 <option value="2">2.0 &deg;C</option>
                 <option value="2.7">2.7 &deg;C</option>
@@ -820,7 +820,7 @@ AppView = Backbone.View.extend {
         <fieldset>
             <legend>temperature change</legend>
             <select class="right" id="rightmapdegs">
-                <option value="current">current</option>
+                <option value="baseline">baseline</option>
                 <option value="1.5">1.5 &deg;C</option>
                 <option value="2">2.0 &deg;C</option>
                 <option value="2.7">2.7 &deg;C</option>
