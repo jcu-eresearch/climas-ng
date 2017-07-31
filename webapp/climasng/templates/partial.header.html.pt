@@ -81,12 +81,14 @@
 			</li>
 
 			<!-- reports  - - - - - - - - - - - - - - - - - - - - -->
+			<!--
 			<li tal:condition="request.matched_route.name == 'reports'" class="current">
 				<a>Create Reports</a>
 			</li>
 			<li tal:condition="not:request.matched_route.name == 'reports'">
 				<a href="${request.route_path('reports')}">Create Reports</a>
 			</li>
+			-->
 
 		</ul>
 	</nav>
