@@ -156,7 +156,7 @@ AppView = Backbone.View.extend {
         @buildLeftForm()
 
         @rightForm = @$ '.right.form'
-        @buildRightForm()
+        @buildForm 'right'
 
         @leftTag = @$ '.left.tag'
         @rightTag = @$ '.right.tag'
@@ -559,6 +559,8 @@ AppView = Backbone.View.extend {
     # ---------------------------------------------------------------
     # form creation
     # ---------------------------------------------------------------
+
+    ## TODO: remove this func and replace with a call to buildForm 'left'
     buildLeftForm: ()->
         debug 'AppView.buildLeftForm'
 
@@ -599,29 +601,24 @@ AppView = Backbone.View.extend {
                 }
         }
     # ---------------------------------------------------------------
-    buildRightForm: ()->
-        debug 'AppView.buildRightForm'
+    buildForm: (side)->
+        debug 'AppView.buildForm'
 
-        $rightmapspp = @$ '#rightmapspp'
+        $mapspp = @$ "##{side}mapspp"
 
-        $rightmapspp.autocomplete {
-            close: => @$el.trigger 'rightmapupdate'
-            # source: '/api/namesearch'
+        $mapspp.autocomplete {
+            close: => @$el.trigger "#{side}mapupdate"
             source: (req, response)=>
                 $.ajax { 
                     url: '/api/namesearch/'
                     data: { term: req.term }
                     success: (answer)=>
-                        # answer is a list of possible completions, 
-                        # indexed by "nice" name, eg:
-                        # {
-                        #     "Giraffe (Giraffa camelopardalis)": {
-                        #         "type": "species",
+                        # answer is a list of completions, eg:
+                        # { "Giraffe (Giraffa camelopardalis)": {
+                        #         "type": "species", 
                         #         "mapId": "Giraffa camelopardalis",
-                        #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
-                        #     },
-                        #     ...
-                        # }
+                        #         "path": "..."
+                        # }, ... }
                         selectable = []
 
                         for nice, info of answer

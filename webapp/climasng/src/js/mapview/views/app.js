@@ -86,7 +86,7 @@
       this.leftForm = this.$('.left.form');
       this.buildLeftForm();
       this.rightForm = this.$('.right.form');
-      this.buildRightForm();
+      this.buildForm('right');
       this.leftTag = this.$('.left.tag');
       this.rightTag = this.$('.right.tag');
       this.splitLine = this.$('.splitline');
@@ -364,14 +364,14 @@
         })(this)
       });
     },
-    buildRightForm: function() {
-      var $rightmapspp;
-      debug('AppView.buildRightForm');
-      $rightmapspp = this.$('#rightmapspp');
-      return $rightmapspp.autocomplete({
+    buildForm: function(side) {
+      var $mapspp;
+      debug('AppView.buildForm');
+      $mapspp = this.$("#" + side + "mapspp");
+      return $mapspp.autocomplete({
         close: (function(_this) {
           return function() {
-            return _this.$el.trigger('rightmapupdate');
+            return _this.$el.trigger("" + side + "mapupdate");
           };
         })(this),
         source: (function(_this) {
