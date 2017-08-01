@@ -565,7 +565,7 @@ AppView = Backbone.View.extend {
         $leftmapspp = @$ '#leftmapspp'
 
         $leftmapspp.autocomplete {
-            close: => @$el.trigger 'rightmapupdate'
+            close: => @$el.trigger 'leftmapupdate'
             # source: '/api/namesearch'
             source: (req, response)=>
                 $.ajax { 

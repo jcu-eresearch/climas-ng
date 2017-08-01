@@ -336,7 +336,7 @@
       return $leftmapspp.autocomplete({
         close: (function(_this) {
           return function() {
-            return _this.$el.trigger('rightmapupdate');
+            return _this.$el.trigger('leftmapupdate');
           };
         })(this),
         source: (function(_this) {
