@@ -115,6 +115,9 @@ AppView = Backbone.View.extend {
         }
         @map.on 'move', @resizeThings
 
+        # add a distance scale bar
+        L.control.scale().addTo @map
+
         ## removed MapQuest base layer 2016-07-20 due to licencing changes
         # L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
         #     subdomains: '1234'
