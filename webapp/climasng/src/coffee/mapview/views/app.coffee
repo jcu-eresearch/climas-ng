@@ -144,7 +144,7 @@ AppView = Backbone.View.extend {
         # }).addTo @map
         ## switching to ESRI baselayer
 
-        L.tileLayer('/var/wallacewebapp/climasng/data/searchindex//server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
+        L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri'
             variant: 'World_Topo_Map'
         }).addTo @map
