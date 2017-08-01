@@ -3,13 +3,10 @@ import os
 import re
 import json
 
+# ===================================================================
+
 def createSpeciesJson(source_path, output_file):
     # create the species.json file using data from the specified path
-
-    # traverse directories looking for dirs named "1km".  If it's
-    # path matches this pattern:
-    # .../<taxon-name>/models/<species-name>/1km
-    # then record that as a species / taxon record.
 
     # here's a regex to test for species dirs:
 
@@ -25,7 +22,9 @@ def createSpeciesJson(source_path, output_file):
     #                                     V     V     V     V     V     V     V  V  V
     sppdir_regex = re.compile(r'species/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)_(\w+)/summaries_temperature$')
 
-    # for example:
+    # Any dir that matches the regex (starting from source_path) is a dir
+    # that contains species level data. For example:
+    #
     #  Species -----------------------------------------------------------.
     #  Genus ----------------------------------------------------.        |
     #  Genus, again --------------------------------------.      |        |
@@ -37,6 +36,8 @@ def createSpeciesJson(source_path, output_file):
     #            V        V        V       V       V      V      V        V
     # species/Animalia/Chordata/Amphibia/Anura/Alytidae/Alytes/Alytes_cisternasii/summaries_temperature/
 
+
+    # ---- get common names -----------------------------------------
 
     # we'll get the species common name from here:
     common_names = {}
@@ -51,9 +52,9 @@ def createSpeciesJson(source_path, output_file):
         common_names = {}
 
 
-    #
-    # okay, ready to check for modelled species
-    #
+    # ---- species --------------------------------------------------
+
+    # ready to check for modelled species
     species_list = {}
 
     last_group = ''
@@ -90,6 +91,80 @@ def createSpeciesJson(source_path, output_file):
     with open(output_file, 'w') as json_file:
         json.dump(species_list, json_file, sort_keys = True, indent = 4)
 
+
+# ===================================================================
+
+def createSummaryJson(source_path, output_file):
+    # create the summaries.json file using data from the specified path
+
+    # a list of places to look for summaries..
+    summary_roots = ['class', 'family', 'kingdom', 'order', 'phylum']
+
+    # here's a regex to test for summary dirs:
+    #
+    #            group(6) - Genus ---------------------------------------------------------. 
+    #            group(5) - Family ---------------------------------------------.          | 
+    #            group(4) - Order -----------------------------------.          |          | 
+    #            group(3) - Class ------------------------.          |          |          | 
+    #            group(2) - Phylum ------------.          |          |          |          | 
+    #            group(1) - Kingdom --.        |          |          |          |          | 
+    #                                 V        V          V          V          V          V 
+    summarydir_regex = re.compile(r'(\w+)(?:/(\w+))?(?:/(\w+))?(?:/(\w+))?(?:/(\w+))?(?:/(\w+))?/current\.richness\.tif$')
+    #
+    # note that:
+    #       \w         is a "word" character (as in, not whitespace or punctuation)
+    #       \w+        is one or more word chars -- i.e. a word
+    #      (\w+)       is a word that we want to remember
+    #     /(\w+)       is a word with a literal slash in front of it
+    #    (/(\w+))?     optionally, a word with slash, and remember the whole thing as well as just the word
+    #  (?:/(\w+))?     optionally, a word with slash, and remember just the word
+
+    # for example:
+    #  Genus ---------------------------------------------. 
+    #  Family -------------------------------------.      | 
+    #  Order ------------------------------.       |      | 
+    #  Class ----------------------.       |       |      | 
+    #  Phylum ------------.        |       |       |      | 
+    #  Kingdom --.        |        |       |       |      | 
+    #            V        V        V       V       V      V 
+    #        Animalia/Chordata/Amphibia/Anura/Alytidae/Alytes/current.richness.tif
+
+    summary_list = {}
+
+    for root in summary_roots:
+        print('==== Now checking in ' + root + ' ====')
+
+        last_group = root
+
+        root_dir = os.join(source_path, root)
+        for dir, subdirs, files in os.walk(root_dir):
+
+            match = summarydir_regex.search(files)
+
+            if match:
+                path = '/' + match[0].replace('/current.richness.tif', '')
+                short_name = match.groups()[-1]
+                summary_list[short_name] = {
+                    "commonNames": common_names.get(short_name, [""]),
+                    "path": path
+                }
+
+                # maybe this is a new group?
+                this_group = match[1] + '::' + short_name
+                if this_group != last_group:
+                    print('starting ' + this_group)
+                    last_group = this_group
+
+                # if we found a summary dir, we don't need to keep
+                # os.walk()ing into its descendent dirs
+                subdirs[:] = []
+
+    # now save our summaries list
+    with open(output_file, 'w') as json_file:
+        json.dump(summary_list, json_file, sort_keys = True, indent = 4)
+
+
+# ===================================================================
 
 def createBiodiversityJson(source_path):
     # create the biodiversity.json file using data from the specified path
