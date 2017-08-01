@@ -129,6 +129,8 @@ def createSummaryJson(source_path, output_file):
     #            V        V        V       V       V      V 
     #        Animalia/Chordata/Amphibia/Anura/Alytidae/Alytes/current.richness.tif
 
+    common_names = {}
+
     summary_list = {}
 
     for root in summary_roots:
@@ -136,28 +138,30 @@ def createSummaryJson(source_path, output_file):
 
         last_group = root
 
-        root_dir = os.join(source_path, root)
+        root_dir = os.path.join(source_path, root)
         for dir, subdirs, files in os.walk(root_dir):
 
-            match = summarydir_regex.search(files)
+            for file in files:
+                matchable_path = (dir + '/' + file)[len(root_dir)+1:] # the path from root_dir in
+                match = summarydir_regex.search(matchable_path)
 
-            if match:
-                path = '/' + match[0].replace('/current.richness.tif', '')
-                short_name = match.groups()[-1]
-                summary_list[short_name] = {
-                    "commonNames": common_names.get(short_name, [""]),
-                    "path": path
-                }
+                if match:
+                    path = '/' + match.group(0).replace('/current.richness.tif', '')
+                    # use the last name for the "short" name; the list comprehension is
+                    # used to filter out all the trailing Nones.
+                    short_name = [n for n in match.groups() if n is not None][-1]
+                    summary_list[short_name] = {
+                        "commonNames": common_names.get(short_name, [""]),
+                        "path": path
+                    }
 
-                # maybe this is a new group?
-                this_group = match[1] + '::' + short_name
-                if this_group != last_group:
-                    print('starting ' + this_group)
-                    last_group = this_group
+                    # maybe this is a new group?
+                    this_group = match.group(1) + '::' + short_name
+                    if this_group != last_group:
+                        print('starting ' + this_group)
+                        last_group = this_group
 
-                # if we found a summary dir, we don't need to keep
-                # os.walk()ing into its descendent dirs
-                subdirs[:] = []
+                    break # leave file loop once we've matched here
 
     # now save our summaries list
     with open(output_file, 'w') as json_file:
