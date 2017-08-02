@@ -152,7 +152,7 @@ def createSummaryJson(source_path, output_file):
                     # use the last name for the "short" name
                     short_name = tree_path[-1]
                     # which level is the summary at
-                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family'][len(tree_path)]
+                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family'][len(tree_path) - 1]
                     summary_list[short_name] = {
                         "commonNames": common_names.get(short_name, [""]),
                         "level": tree_level,

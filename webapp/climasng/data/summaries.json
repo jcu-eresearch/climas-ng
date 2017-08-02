@@ -3,4482 +3,5229 @@
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Abrocomidae"
     }, 
     "Acanthisittidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Acanthisittidae"
     }, 
     "Accipitridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Accipitriformes/Accipitridae"
     }, 
     "Accipitriformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Accipitriformes"
     }, 
     "Achnanthaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Acnanthales/Achnanthaceae"
     }, 
     "Achnanthidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Acnanthales/Achnanthidiaceae"
     }, 
     "Acoraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Acorales/Acoraceae"
     }, 
     "Acrobatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Acrobatidae"
     }, 
     "Acrocephalidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Acrocephalidae"
     }, 
     "Acrosiphoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Codiolales/Acrosiphoniaceae"
     }, 
     "Aegithalidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Aegithalidae"
     }, 
     "Aegithinidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Aegithinidae"
     }, 
     "Aegothelidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Aegothelidae"
     }, 
     "Afrosoricida": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Afrosoricida"
     }, 
     "Agamidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Agamidae"
     }, 
     "Agoutidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Agoutidae"
     }, 
     "Alaudidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Alaudidae"
     }, 
     "Alcedinidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Alcedinidae"
     }, 
     "Alcidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Alcidae"
     }, 
     "Alismataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Alismataceae"
     }, 
     "Alseuosmiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Alseuosmiaceae"
     }, 
     "Alstroemeriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Alstroemeriaceae"
     }, 
     "Alytidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Alytidae"
     }, 
     "Amaryllidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Amaryllidaceae"
     }, 
     "Amblystegiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Amblystegiaceae"
     }, 
     "Ambystomatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Ambystomatidae"
     }, 
     "Amphibia": {
         "commonNames": [
             ""
         ], 
+        "level": "class", 
         "path": "/Animalia/Chordata/Amphibia"
     }, 
     "Amphipleuraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Amphipleuraceae"
     }, 
     "Amphisbaenia": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Amphisbaenia"
     }, 
     "Amphisbaenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Amphisbaenidae"
     }, 
     "Amphiumidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Amphiumidae"
     }, 
     "Anadyomenaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Cladophorales/Anadyomenaceae"
     }, 
     "Anarthriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Anarthriaceae"
     }, 
     "Anatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Anseriformes/Anatidae"
     }, 
     "Andreaeaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Andreaeopsida/Andreaeales/Andreaeaceae"
     }, 
     "Andreaeobryaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Andreaeopsida/Andreaeobryales/Andreaeobryaceae"
     }, 
     "Anguidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Anguidae"
     }, 
     "Anhimidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Anseriformes/Anhimidae"
     }, 
     "Anhingidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Suliformes/Anhingidae"
     }, 
     "Aniliidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Aniliidae"
     }, 
     "Animalia": {
         "commonNames": [
             ""
         ], 
+        "level": "kingdom", 
         "path": "/Animalia"
     }, 
     "Anniellidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Anniellidae"
     }, 
     "Anomalepidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Anomalepidae"
     }, 
     "Anomaluridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Anomaluridae"
     }, 
     "Anseranatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Anseriformes/Anseranatidae"
     }, 
     "Anseriformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Anseriformes"
     }, 
     "Anthocerotaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Anthocerotophyta/Anthocerotopsida/Anthocerotales/Anthocerotaceae"
     }, 
     "Antilocapridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Antilocapridae"
     }, 
     "Anura": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Amphibia/Anura"
     }, 
     "Apiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Apiales/Apiaceae"
     }, 
     "Aplodontiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Aplodontiidae"
     }, 
     "Apodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Apodiformes/Apodidae"
     }, 
     "Apodiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Apodiformes"
     }, 
     "Aponogetonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Aponogetonaceae"
     }, 
     "Apterygidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Struthioniformes/Apterygidae"
     }, 
     "Aquifoliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Aquifoliales/Aquifoliaceae"
     }, 
     "Araceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Araceae"
     }, 
     "Araliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Apiales/Araliaceae"
     }, 
     "Aramidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Aramidae"
     }, 
     "Archidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Archidiales/Archidiaceae"
     }, 
     "Ardeidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Pelecaniformes/Ardeidae"
     }, 
     "Arecaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Arecales/Arecaceae"
     }, 
     "Aromobatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Aromobatidae"
     }, 
     "Artamidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Artamidae"
     }, 
     "Arthroleptidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Arthroleptidae"
     }, 
     "Artiodactyla": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla"
     }, 
     "Asparagaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Asparagaceae"
     }, 
     "Asteliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Asteliaceae"
     }, 
     "Asteraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Asteraceae"
     }, 
     "Atractaspididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Atractaspididae"
     }, 
     "Atrichornithidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Atrichornithidae"
     }, 
     "Aulacomniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Aulacomniaceae"
     }, 
     "Aves": {
         "commonNames": [
             ""
         ], 
+        "level": "class", 
         "path": "/Animalia/Chordata/Aves"
     }, 
     "Bacillariaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Bacillariales/Bacillariaceae"
     }, 
     "Balaenicipitidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Pelecaniformes/Balaenicipitidae"
     }, 
     "Bartramiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Bartramiaceae"
     }, 
     "Bathyergidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Bathyergidae"
     }, 
     "Berkeleyaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Berkeleyaceae"
     }, 
     "Bernieridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Bernieridae"
     }, 
     "Blandfordiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Blandfordiaceae"
     }, 
     "Boidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Boidae"
     }, 
     "Bombinatoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Bombinatoridae"
     }, 
     "Bombycillidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Bombycillidae"
     }, 
     "Boraginaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Boraginales/Boraginaceae"
     }, 
     "Boryaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Boryaceae"
     }, 
     "Bovidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Bovidae"
     }, 
     "Brachycephalidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Brachycephalidae"
     }, 
     "Brachypteraciidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Brachypteraciidae"
     }, 
     "Brachysiraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Brachysiraceae"
     }, 
     "Brachytheciaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Brachytheciaceae"
     }, 
     "Bradypodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Pilosa/Bradypodidae"
     }, 
     "Brevicipitidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Brevicipitidae"
     }, 
     "Bromeliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Bromeliaceae"
     }, 
     "Bruchiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Bruchiaceae"
     }, 
     "Bryaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Bryaceae"
     }, 
     "Bryobartramiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Pottiales/Bryobartramiaceae"
     }, 
     "Bryopsidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Bryopsidaceae"
     }, 
     "Bryoxiphiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Bryoxiphiaceae"
     }, 
     "Bucconidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Galbuliformes/Bucconidae"
     }, 
     "Bucerotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Bucerotiformes/Bucerotidae"
     }, 
     "Bucerotiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Bucerotiformes"
     }, 
     "Bucorvidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Bucerotiformes/Bucorvidae"
     }, 
     "Bufonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Bufonidae"
     }, 
     "Burhinidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Burhinidae"
     }, 
     "Burmanniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Dioscoreales/Burmanniaceae"
     }, 
     "Burramyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Burramyidae"
     }, 
     "Butomaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Butomaceae"
     }, 
     "Buxbaumiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Buxbaumiales/Buxbaumiaceae"
     }, 
     "Cacatuidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Psittaciformes/Cacatuidae"
     }, 
     "Caeciliidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Gymnophiona/Caeciliidae"
     }, 
     "Caenolestidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Paucituberculata/Caenolestidae"
     }, 
     "Calcariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Calcariidae"
     }, 
     "Callaeatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Callaeatidae"
     }, 
     "Callitrichidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Callitrichidae"
     }, 
     "Calomniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Tetraphidae/Calomniaceae"
     }, 
     "Calyceraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Calyceraceae"
     }, 
     "Calymperaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Pottiales/Calymperaceae"
     }, 
     "Camelidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Camelidae"
     }, 
     "Campanulaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Campanulaceae"
     }, 
     "Campephagidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Campephagidae"
     }, 
     "Campynemataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Campynemataceae"
     }, 
     "Canidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Canidae"
     }, 
     "Cannaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Cannaceae"
     }, 
     "Caprimulgidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Caprimulgidae"
     }, 
     "Capsosiphonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Ulvales/Capsosiphonaceae"
     }, 
     "Cardinalidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cardinalidae"
     }, 
     "Cardiopteridaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Aquifoliales/Cardiopteridaceae"
     }, 
     "Cariamidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Cariamidae"
     }, 
     "Carnivora": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora"
     }, 
     "Castoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Castoridae"
     }, 
     "Casuariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Struthioniformes/Casuariidae"
     }, 
     "Catenulaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Thalassiophysales/Catenulaceae"
     }, 
     "Cathartidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Accipitriformes/Cathartidae"
     }, 
     "Catoscopiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Catoscopiaceae"
     }, 
     "Caudata": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Amphibia/Caudata"
     }, 
     "Caulerpaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Caulerpaceae"
     }, 
     "Caviidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Caviidae"
     }, 
     "Cebidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Cebidae"
     }, 
     "Centrolenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Centrolenidae"
     }, 
     "Centrolepidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Centrolepidaceae"
     }, 
     "Ceratobatrachidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Ceratobatrachidae"
     }, 
     "Ceratophryidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Ceratophryidae"
     }, 
     "Cercopithecidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Cercopithecidae"
     }, 
     "Certhiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Certhiidae"
     }, 
     "Cervidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Cervidae"
     }, 
     "Cettiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cettiidae"
     }, 
     "Chaetophoraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chaetophorales/Chaetophoraceae"
     }, 
     "Chaetosiphonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Chaetosiphonaceae"
     }, 
     "Chamaeleonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Chamaeleonidae"
     }, 
     "Characeae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Charophyceae/Charales/Characeae"
     }, 
     "Charadriidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Charadriidae"
     }, 
     "Charadriiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes"
     }, 
     "Chelidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Chelidae"
     }, 
     "Cheloniidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Cheloniidae"
     }, 
     "Chelydridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Chelydridae"
     }, 
     "Chinchillidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Chinchillidae"
     }, 
     "Chionidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Chionidae"
     }, 
     "Chiroptera": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera"
     }, 
     "Chlamydomonadaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Volvocales/Chlamydomonadaceae"
     }, 
     "Chlorellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Trebouxiophyceae/Chlorellales/Chlorellaceae"
     }, 
     "Chlorococcaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Chlorococcaceae"
     }, 
     "Chlorocystidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorocystidales/Chlorocystidaceae"
     }, 
     "Chordata": {
         "commonNames": [
             ""
         ], 
+        "level": "phylum", 
         "path": "/Animalia/Chordata"
     }, 
     "Chrysochloridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Afrosoricida/Chrysochloridae"
     }, 
     "Ciconiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Ciconiiformes/Ciconiidae"
     }, 
     "Ciconiiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Ciconiiformes"
     }, 
     "Cinclidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cinclidae"
     }, 
     "Cingulata": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Cingulata"
     }, 
     "Cisticolidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cisticolidae"
     }, 
     "Cladophoraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Cladophorales/Cladophoraceae"
     }, 
     "Climaciaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Climaciaceae"
     }, 
     "Climacteridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Climacteridae"
     }, 
     "Closteriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Zygnematophyceae/Zygnematales/Closteriaceae"
     }, 
     "Cnemophilidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cnemophilidae"
     }, 
     "Cocconeidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Acnanthales/Cocconeidaceae"
     }, 
     "Codiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Codiaceae"
     }, 
     "Coelastraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Coelastraceae"
     }, 
     "Coerebidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Coerebidae"
     }, 
     "Colchicaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Colchicaceae"
     }, 
     "Coliidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coliiformes/Coliidae"
     }, 
     "Coliiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Coliiformes"
     }, 
     "Colubridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Colubridae"
     }, 
     "Columbidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Columbiformes/Columbidae"
     }, 
     "Columbiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Columbiformes"
     }, 
     "Commelinaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Commelinales/Commelinaceae"
     }, 
     "Conopophagidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Conopophagidae"
     }, 
     "Coraciidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Coraciidae"
     }, 
     "Coraciiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes"
     }, 
     "Corcoracidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Corcoracidae"
     }, 
     "Cordylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Cordylidae"
     }, 
     "Corvidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Corvidae"
     }, 
     "Corytophanidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Corytophanidae"
     }, 
     "Costaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Costaceae"
     }, 
     "Cotingidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cotingidae"
     }, 
     "Cracidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Craciformes/Cracidae"
     }, 
     "Craciformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Craciformes"
     }, 
     "Cracticidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Cracticidae"
     }, 
     "Craugastoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Craugastoridae"
     }, 
     "Cricetidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Cricetidae"
     }, 
     "Crocodylia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Reptilia/Crocodylia"
     }, 
     "Crocodylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Crocodylia/Crocodylidae"
     }, 
     "Crotaphytidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Crotaphytidae"
     }, 
     "Cryphaeaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Cryphaeaceae"
     }, 
     "Cryptobranchidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Cryptobranchidae"
     }, 
     "Ctenodactylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Ctenodactylidae"
     }, 
     "Cuculidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Cuculiformes/Cuculidae"
     }, 
     "Cuculiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Cuculiformes"
     }, 
     "Cuniculidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Cuniculidae"
     }, 
     "Cycadaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Cycadophyta/Cycadopsida/Cycadales/Cycadaceae"
     }, 
     "Cyclanthaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Pandanales/Cyclanthaceae"
     }, 
     "Cyclopedidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Pilosa/Cyclopedidae"
     }, 
     "Cycloramphidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Cycloramphidae"
     }, 
     "Cylindrophiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Cylindrophiidae"
     }, 
     "Cymbellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Cymbellales/Cymbellaceae"
     }, 
     "Cymodoceaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Cymodoceaceae"
     }, 
     "Cyperaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Cyperaceae"
     }, 
     "Cyrtopodaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Cyrtopodaceae"
     }, 
     "Daltoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hookeriales/Daltoniaceae"
     }, 
     "Dasycladaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Dasycladales/Dasycladaceae"
     }, 
     "Dasypodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Cingulata/Dasypodidae"
     }, 
     "Dasypogonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Dasypogonales/Dasypogonaceae"
     }, 
     "Dasyuridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Dasyuromorphia/Dasyuridae"
     }, 
     "Dasyuromorphia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Dasyuromorphia"
     }, 
     "Dendrobatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Dendrobatidae"
     }, 
     "Dendrocerotaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Anthocerotophyta/Anthocerotopsida/Dendrocerotales/Dendrocerotaceae"
     }, 
     "Derbesiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Derbesiaceae"
     }, 
     "Dermatemydidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Dermatemydidae"
     }, 
     "Dermochelyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Dermochelyidae"
     }, 
     "Desmidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Zygnematophyceae/Zygnematales/Desmidiaceae"
     }, 
     "Diadesmidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Diadesmidaceae"
     }, 
     "Dicnemonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Dicnemonaceae"
     }, 
     "Dicranaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Dicranaceae"
     }, 
     "Dicroglossidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Dicroglossidae"
     }, 
     "Dicruridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Dicruridae"
     }, 
     "Dictyosphaeriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Dictyosphaeriaceae"
     }, 
     "Didelphidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Didelphimorphia/Didelphidae"
     }, 
     "Didelphimorphia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Didelphimorphia"
     }, 
     "Diomedeidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Procellariiformes/Diomedeidae"
     }, 
     "Dioscoreaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Dioscoreales/Dioscoreaceae"
     }, 
     "Diplodactylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Diplodactylidae"
     }, 
     "Diploneidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Diploneidaceae"
     }, 
     "Dipodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Dipodidae"
     }, 
     "Diprotodontia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia"
     }, 
     "Disceliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Disceliaceae"
     }, 
     "Ditrichaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Ditrichaceae"
     }, 
     "Doryanthaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Doryanthaceae"
     }, 
     "Dromadidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Dromadidae"
     }, 
     "Dromaiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Struthioniformes/Dromaiidae"
     }, 
     "Dulidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Dulidae"
     }, 
     "Ecdeiocoleaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Ecdeiocoleaceae"
     }, 
     "Echimyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Echimyidae"
     }, 
     "Echinodiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnobryales/Echinodiaceae"
     }, 
     "Elapidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Elapidae"
     }, 
     "Elephantidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Proboscidea/Elephantidae"
     }, 
     "Eleutherodactylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Eleutherodactylidae"
     }, 
     "Emballonuridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Emballonuridae"
     }, 
     "Emberizidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Emberizidae"
     }, 
     "Emydidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Emydidae"
     }, 
     "Encalyptaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Pottiales/Encalyptaceae"
     }, 
     "Endosphaeraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Endosphaeraceae"
     }, 
     "Entodontaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Entodontaceae"
     }, 
     "Entomoneidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Surirellales/Entomoneidaceae"
     }, 
     "Ephedraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Gnetophyta/Gnetopsida/Ephedrales/Ephedraceae"
     }, 
     "Ephemeraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Ephemeraceae"
     }, 
     "Equidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Perissodactyla/Equidae"
     }, 
     "Equisetaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Equisetophyta/Equisetopsida/Equisetales/Equisetaceae"
     }, 
     "Erethizontidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Erethizontidae"
     }, 
     "Erinaceidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Erinaceomorpha/Erinaceidae"
     }, 
     "Erinaceomorpha": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Erinaceomorpha"
     }, 
     "Eriocaulaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Eriocaulaceae"
     }, 
     "Erpodiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Orthotrichales/Erpodiaceae"
     }, 
     "Estrildidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Estrildidae"
     }, 
     "Eunotiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Eunotiales/Eunotiaceae"
     }, 
     "Eupetidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Eupetidae"
     }, 
     "Eurylaimidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Eurylaimidae"
     }, 
     "Eurypygidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Eurypygidae"
     }, 
     "Fabaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Fabales/Fabaceae"
     }, 
     "Fabroniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Fabroniaceae"
     }, 
     "Falconiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Falconiformes"
     }, 
     "Felidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Felidae"
     }, 
     "Fissidentaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Fissidentales/Fissidentaceae"
     }, 
     "Flagellariaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Flagellariaceae"
     }, 
     "Fontinalaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Fontinalaceae"
     }, 
     "Formicariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Formicariidae"
     }, 
     "Fregatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Suliformes/Fregatidae"
     }, 
     "Fringillidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Fringillidae"
     }, 
     "Funariaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Funariaceae"
     }, 
     "Furipteridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Furipteridae"
     }, 
     "Furnariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Furnariidae"
     }, 
     "Galagonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Galagonidae"
     }, 
     "Galbulidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Galbuliformes/Galbulidae"
     }, 
     "Galbuliformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Galbuliformes"
     }, 
     "Galliformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Galliformes"
     }, 
     "Gaviidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gaviiformes/Gaviidae"
     }, 
     "Gaviiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Gaviiformes"
     }, 
     "Gayraliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Ulvales/Gayraliaceae"
     }, 
     "Gekkonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Gekkonidae"
     }, 
     "Geoemydidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Geoemydidae"
     }, 
     "Geomyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Geomyidae"
     }, 
     "Gerrhosauridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Gerrhosauridae"
     }, 
     "Gigaspermaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Gigaspermaceae"
     }, 
     "Ginkgoaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Ginkgophyta/Ginkgoopsida/Ginkgoales/Ginkgoaceae"
     }, 
     "Giraffidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae"
     }, 
     "Glareolidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Glareolidae"
     }, 
     "Gliridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Gliridae"
     }, 
     "Gloeocystaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Tetrasporales/Gloeocystaceae"
     }, 
     "Gnetaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Gnetophyta/Gnetopsida/Gnetales/Gnetaceae"
     }, 
     "Gomophonemataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Cymbellales/Gomophonemataceae"
     }, 
     "Goniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Volvocales/Goniaceae"
     }, 
     "Goodeniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Goodeniaceae"
     }, 
     "Grimmiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Grimmiales/Grimmiaceae"
     }, 
     "Griseliniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Apiales/Griseliniaceae"
     }, 
     "Gruidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Gruidae"
     }, 
     "Gruiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Gruiformes"
     }, 
     "Gymnophiona": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Amphibia/Gymnophiona"
     }, 
     "Gymnophthalmidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Gymnophthalmidae"
     }, 
     "Haematopodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Haematopodidae"
     }, 
     "Haemodoraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Commelinales/Haemodoraceae"
     }, 
     "Halimedaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Halimedaceae"
     }, 
     "Hanguanaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Commelinales/Hanguanaceae"
     }, 
     "Hedwigiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Hedwigiaceae"
     }, 
     "Heleophrynidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Heleophrynidae"
     }, 
     "Heliconiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Heliconiaceae"
     }, 
     "Helicophyllaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Orthotrichales/Helicophyllaceae"
     }, 
     "Heliornithidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Heliornithidae"
     }, 
     "Helodermatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Helodermatidae"
     }, 
     "Helwingiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Aquifoliales/Helwingiaceae"
     }, 
     "Hemiphractidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Hemiphractidae"
     }, 
     "Hemiprocnidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Apodiformes/Hemiprocnidae"
     }, 
     "Hemisotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Hemisotidae"
     }, 
     "Herpestidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Herpestidae"
     }, 
     "Heteromyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Heteromyidae"
     }, 
     "Hippopotamidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Hippopotamidae"
     }, 
     "Hirundinidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Hirundinidae"
     }, 
     "Hominidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Hominidae"
     }, 
     "Hookeriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hookeriales/Hookeriaceae"
     }, 
     "Hoplocercidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Hoplocercidae"
     }, 
     "Hyaenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Hyaenidae"
     }, 
     "Hydrobatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Procellariiformes/Hydrobatidae"
     }, 
     "Hydrochaeridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Hydrochaeridae"
     }, 
     "Hydrocharitaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Hydrocharitaceae"
     }, 
     "Hydrodictyaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Hydrodictyaceae"
     }, 
     "Hydropogonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Hydropogonaceae"
     }, 
     "Hylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Hylidae"
     }, 
     "Hylobatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Hylobatidae"
     }, 
     "Hylocomiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Hylocomiaceae"
     }, 
     "Hynobiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Hynobiidae"
     }, 
     "Hyperoliidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Hyperoliidae"
     }, 
     "Hypnaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Hypnaceae"
     }, 
     "Hypnodendraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Hypnodendraceae"
     }, 
     "Hypnomonadaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Hypnomonadaceae"
     }, 
     "Hypocolidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Hypocolidae"
     }, 
     "Hypoxidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Hypoxidaceae"
     }, 
     "Hypsiprymnodontidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Hypsiprymnodontidae"
     }, 
     "Hyracoidea": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Hyracoidea"
     }, 
     "Hystricidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Hystricidae"
     }, 
     "Ibidorhynchidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Ibidorhynchidae"
     }, 
     "Icteridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Icteridae"
     }, 
     "Iguanidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Iguanidae"
     }, 
     "Indicatoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Piciformes/Indicatoridae"
     }, 
     "Irenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Irenidae"
     }, 
     "Iridaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Iridaceae"
     }, 
     "Isoetaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Lycopodiophyta/Lycopodiopsida/Isoetales/Isoetaceae"
     }, 
     "Ixioliriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Ixioliriaceae"
     }, 
     "Jacanidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Jacanidae"
     }, 
     "Joinvilleaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Joinvilleaceae"
     }, 
     "Juncaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Juncaceae"
     }, 
     "Juncaginaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Juncaginaceae"
     }, 
     "Kinosternidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Kinosternidae"
     }, 
     "Klebsormidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Klebsormidiophyceae/Klebsormidiales/Klebsormidiaceae"
     }, 
     "Kornmanniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Ulvales/Kornmanniaceae"
     }, 
     "Lacertidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Lacertidae"
     }, 
     "Lagomorpha": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Lagomorpha"
     }, 
     "Lamiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Lamiales/Lamiaceae"
     }, 
     "Lanariaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Lanariaceae"
     }, 
     "Laniidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Laniidae"
     }, 
     "Laridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Laridae"
     }, 
     "Leiopelmatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Leiopelmatidae"
     }, 
     "Leiothrichidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Leiothrichidae"
     }, 
     "Leiuperidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Leiuperidae"
     }, 
     "Lembophyllaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Lembophyllaceae"
     }, 
     "Lemuridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Lemuridae"
     }, 
     "Leporidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Lagomorpha/Leporidae"
     }, 
     "Leptodactylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Leptodactylidae"
     }, 
     "Leptodontaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Leptodontaceae"
     }, 
     "Leptosomidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Leptosomidae"
     }, 
     "Leptotyphlopidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Leptotyphlopidae"
     }, 
     "Lepyrodontaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Lepyrodontaceae"
     }, 
     "Leskeaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Leskeaceae"
     }, 
     "Leucodontaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Leucodontaceae"
     }, 
     "Liliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Liliaceae"
     }, 
     "Limnodynastidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Limnodynastidae"
     }, 
     "Loridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Loridae"
     }, 
     "Loxocemidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Loxocemidae"
     }, 
     "Lycopodiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Lycopodiophyta/Lycopodiopsida/Lycopodiales/Lycopodiaceae"
     }, 
     "Macropodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Macropodidae"
     }, 
     "Macroscelidea": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Macroscelidea"
     }, 
     "Macroscelididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Macroscelidea/Macroscelididae"
     }, 
     "Macrosphenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Macrosphenidae"
     }, 
     "Malaconotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Malaconotidae"
     }, 
     "Maluridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Maluridae"
     }, 
     "Malvaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Malvales/Malvaceae"
     }, 
     "Mammalia": {
         "commonNames": [
             ""
         ], 
+        "level": "class", 
         "path": "/Animalia/Chordata/Mammalia"
     }, 
     "Mantellidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Mantellidae"
     }, 
     "Marantaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Marantaceae"
     }, 
     "Mastogloiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Mastogloiales/Mastogloiaceae"
     }, 
     "Mayacaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Mayacaceae"
     }, 
     "Meesiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Meesiaceae"
     }, 
     "Megadermatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Megadermatidae"
     }, 
     "Megalonychidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Pilosa/Megalonychidae"
     }, 
     "Megapodiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Craciformes/Megapodiidae"
     }, 
     "Megophryidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Megophryidae"
     }, 
     "Melanocharitidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Melanocharitidae"
     }, 
     "Melanthiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Melanthiaceae"
     }, 
     "Meliphagidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Meliphagidae"
     }, 
     "Menuridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Menuridae"
     }, 
     "Menyanthaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Menyanthaceae"
     }, 
     "Mephitidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Mephitidae"
     }, 
     "Meropidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Meropidae"
     }, 
     "Mesitornithidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Mesitornithidae"
     }, 
     "Mesostigmataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Mesostigmatophyceae/Mesostigmatales/Mesostigmataceae"
     }, 
     "Mesotaeniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Zygnematophyceae/Zygnematales/Mesotaeniaceae"
     }, 
     "Meteoriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Meteoriaceae"
     }, 
     "Micractiniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Micractiniaceae"
     }, 
     "Microbiotheria": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Microbiotheria"
     }, 
     "Microbiotheriidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Microbiotheria/Microbiotheriidae"
     }, 
     "Microhylidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Microhylidae"
     }, 
     "Microsporaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Microsporales/Microsporaceae"
     }, 
     "Mimidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Mimidae"
     }, 
     "Mitteniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Mitteniaceae"
     }, 
     "Mniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Mniaceae"
     }, 
     "Molossidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Molossidae"
     }, 
     "Momotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Momotidae"
     }, 
     "Monarchidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Monarchidae"
     }, 
     "Monostromataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Codiolales/Monostromataceae"
     }, 
     "Monotremata": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Monotremata"
     }, 
     "Moraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Rosales/Moraceae"
     }, 
     "Mormoopidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Mormoopidae"
     }, 
     "Motacillidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Motacillidae"
     }, 
     "Muridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Muridae"
     }, 
     "Musaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Musaceae"
     }, 
     "Muscicapidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Muscicapidae"
     }, 
     "Musophagidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Musophagiformes/Musophagidae"
     }, 
     "Musophagiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Musophagiformes"
     }, 
     "Mustelidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Mustelidae"
     }, 
     "Myobatrachidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Myobatrachidae"
     }, 
     "Myoxidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Myoxidae"
     }, 
     "Myrmecophagidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Pilosa/Myrmecophagidae"
     }, 
     "Nandiniidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Nandiniidae"
     }, 
     "Nartheciaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Dioscoreales/Nartheciaceae"
     }, 
     "Natalidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Natalidae"
     }, 
     "Naviculaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Naviculaceae"
     }, 
     "Neckeraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Neckeraceae"
     }, 
     "Nectariniidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Nectariniidae"
     }, 
     "Neidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Neidiaceae"
     }, 
     "Neosittidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Neosittidae"
     }, 
     "Noctilionidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Noctilionidae"
     }, 
     "Notoryctemorphia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Notoryctemorphia"
     }, 
     "Notoryctidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Notoryctemorphia/Notoryctidae"
     }, 
     "Notothyladaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Anthocerotophyta/Anthocerotopsida/Notothyladales/Notothyladaceae"
     }, 
     "Numididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Galliformes/Numididae"
     }, 
     "Nyctaginaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Caryophyllales/Nyctaginaceae"
     }, 
     "Nycteridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Nycteridae"
     }, 
     "Nyctibiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Nyctibiidae"
     }, 
     "Ochotonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Lagomorpha/Ochotonidae"
     }, 
     "Octodontidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Octodontidae"
     }, 
     "Odontophoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Galliformes/Odontophoridae"
     }, 
     "Oedipodiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Oedipodiaceae"
     }, 
     "Oedogoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Oedogoniales/Oedogoniaceae"
     }, 
     "Oocystaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Oocystaceae"
     }, 
     "Opluridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Opluridae"
     }, 
     "Orchidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Orchidaceae"
     }, 
     "Oriolidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Oriolidae"
     }, 
     "Ornithorhynchidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Monotremata/Ornithorhynchidae"
     }, 
     "Orthonychidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Orthonychidae"
     }, 
     "Orthotrichaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Orthotrichales/Orthotrichaceae"
     }, 
     "Ostreobiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Ostreobiaceae"
     }, 
     "Otididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Otididae"
     }, 
     "Palmellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Tetrasporales/Palmellaceae"
     }, 
     "Pandanaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Pandanales/Pandanaceae"
     }, 
     "Pandionidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Accipitriformes/Pandionidae"
     }, 
     "Paradisaeidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Paradisaeidae"
     }, 
     "Paramythiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Paramythiidae"
     }, 
     "Pardalotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Pardalotidae"
     }, 
     "Paridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Paridae"
     }, 
     "Parulidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Parulidae"
     }, 
     "Passeridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Passeridae"
     }, 
     "Passeriformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Passeriformes"
     }, 
     "Paucituberculata": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Paucituberculata"
     }, 
     "Pedetidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Pedetidae"
     }, 
     "Pedionomidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Pedionomidae"
     }, 
     "Pelecanidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Pelecaniformes/Pelecanidae"
     }, 
     "Pelecaniformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Pelecaniformes"
     }, 
     "Pelecanoididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Procellariiformes/Pelecanoididae"
     }, 
     "Pelobatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Pelobatidae"
     }, 
     "Pelomedusidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Pelomedusidae"
     }, 
     "Peniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Zygnematophyceae/Zygnematales/Peniaceae"
     }, 
     "Peramelemorphia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Peramelemorphia"
     }, 
     "Peramelidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Peramelemorphia/Peramelidae"
     }, 
     "Perissodactyla": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Perissodactyla"
     }, 
     "Peroniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Eunotiales/Peroniaceae"
     }, 
     "Petauridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Petauridae"
     }, 
     "Petermanniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Petermanniaceae"
     }, 
     "Petroicidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Petroicidae"
     }, 
     "Petromuridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Petromuridae"
     }, 
     "Petropedetidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Petropedetidae"
     }, 
     "Peucedramidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Peucedramidae"
     }, 
     "Phacotaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Volvocales/Phacotaceae"
     }, 
     "Phaeophilaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Phaeophilales/Phaeophilaceae"
     }, 
     "Phaethontidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Phaethontiformes/Phaethontidae"
     }, 
     "Phaethontiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Phaethontiformes"
     }, 
     "Phalacrocoracidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Suliformes/Phalacrocoracidae"
     }, 
     "Phalangeridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Phalangeridae"
     }, 
     "Phascolarctidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Phascolarctidae"
     }, 
     "Phasianidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Galliformes/Phasianidae"
     }, 
     "Philepittidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Philepittidae"
     }, 
     "Philesiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Philesiaceae"
     }, 
     "Philydraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Commelinales/Philydraceae"
     }, 
     "Phoenicopteridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Phoenicopteriformes/Phoenicopteridae"
     }, 
     "Phoenicopteriformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Phoenicopteriformes"
     }, 
     "Phoeniculidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Upupiformes/Phoeniculidae"
     }, 
     "Phrynobatrachidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Phrynobatrachidae"
     }, 
     "Phrynosomatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Phrynosomatidae"
     }, 
     "Phyllodrepaniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Phyllodrepaniaceae"
     }, 
     "Phyllogoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Phyllogoniaceae"
     }, 
     "Phyllostomidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Phyllostomidae"
     }, 
     "Picathartidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Picathartidae"
     }, 
     "Picidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Piciformes/Picidae"
     }, 
     "Piciformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Piciformes"
     }, 
     "Pilosa": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Pilosa"
     }, 
     "Pinnulariaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Pinnulariaceae"
     }, 
     "Pipidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Pipidae"
     }, 
     "Pipridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Pipridae"
     }, 
     "Pitheciidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Primates/Pitheciidae"
     }, 
     "Pittidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Pittidae"
     }, 
     "Pittosporaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Apiales/Pittosporaceae"
     }, 
     "Plagiotheciaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Plagiotheciaceae"
     }, 
     "Platysteiridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Platysteiridae"
     }, 
     "Plethodontidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Plethodontidae"
     }, 
     "Pleurophascaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Pleurophascaceae"
     }, 
     "Pleurosigmataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Pleurosigmataceae"
     }, 
     "Pleuroziopsaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnobryales/Pleuroziopsaceae"
     }, 
     "Ploceidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Ploceidae"
     }, 
     "Pluvianellidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Pluvianellidae"
     }, 
     "Pluvianidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Pluvianidae"
     }, 
     "Poaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Poaceae"
     }, 
     "Podargidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Podargidae"
     }, 
     "Podicipedidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Podicipediformes/Podicipedidae"
     }, 
     "Podicipediformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Podicipediformes"
     }, 
     "Podocnemididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Podocnemididae"
     }, 
     "Polychrotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Polychrotidae"
     }, 
     "Polyphysaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Dasycladales/Polyphysaceae"
     }, 
     "Polytrichaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Polytrichales/Polytrichaceae"
     }, 
     "Pomatostomidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Pomatostomidae"
     }, 
     "Pontederiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Commelinales/Pontederiaceae"
     }, 
     "Posidoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Posidoniaceae"
     }, 
     "Potamogetonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Potamogetonaceae"
     }, 
     "Potoroidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Potoroidae"
     }, 
     "Pottiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Pottiales/Pottiaceae"
     }, 
     "Prasiolaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Prasiolales/Prasiolaceae"
     }, 
     "Primates": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Primates"
     }, 
     "Prionodontaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Prionodontaceae"
     }, 
     "Proboscidea": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Proboscidea"
     }, 
     "Procaviidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Hyracoidea/Procaviidae"
     }, 
     "Procellariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Procellariiformes/Procellariidae"
     }, 
     "Procellariiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Procellariiformes"
     }, 
     "Procyonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Procyonidae"
     }, 
     "Proteidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Proteidae"
     }, 
     "Prunellidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Prunellidae"
     }, 
     "Pseudocheiridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Pseudocheiridae"
     }, 
     "Psittacidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Psittaciformes/Psittacidae"
     }, 
     "Psittaciformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Psittaciformes"
     }, 
     "Psophiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Psophiidae"
     }, 
     "Pterigynandraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Pterigynandraceae"
     }, 
     "Pterobryaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Leucodontales/Pterobryaceae"
     }, 
     "Pteroclididae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Pteroclidiformes/Pteroclididae"
     }, 
     "Pteroclidiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Pteroclidiformes"
     }, 
     "Pteropodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Pteropodidae"
     }, 
     "Ptilogonatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Ptilogonatidae"
     }, 
     "Ptilonorhynchidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Ptilonorhynchidae"
     }, 
     "Ptychadenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Ptychadenidae"
     }, 
     "Ptychomitriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Grimmiales/Ptychomitriaceae"
     }, 
     "Ptychomniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Ptychomniaceae"
     }, 
     "Pycnonotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Pycnonotidae"
     }, 
     "Pygopodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Pygopodidae"
     }, 
     "Pyxicephalidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Pyxicephalidae"
     }, 
     "Racopilaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Racopilaceae"
     }, 
     "Radiococcaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Radiococcaceae"
     }, 
     "Rallidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Gruiformes/Rallidae"
     }, 
     "Ramphastidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Piciformes/Ramphastidae"
     }, 
     "Ranidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Ranidae"
     }, 
     "Rapateaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Rapateaceae"
     }, 
     "Recurvirostridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Recurvirostridae"
     }, 
     "Regmatodontaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Regmatodontaceae"
     }, 
     "Regulidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Regulidae"
     }, 
     "Remizidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Remizidae"
     }, 
     "Reptilia": {
         "commonNames": [
             ""
         ], 
+        "level": "class", 
         "path": "/Animalia/Chordata/Reptilia"
     }, 
     "Restionaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Restionaceae"
     }, 
     "Rhabdoweisiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Dicranales/Rhabdoweisiaceae"
     }, 
     "Rhachitheciaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Orthotrichales/Rhachitheciaceae"
     }, 
     "Rhacophoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Rhacophoridae"
     }, 
     "Rhaphoneidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Rhaponeidales/Rhaphoneidaceae"
     }, 
     "Rheidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Struthioniformes/Rheidae"
     }, 
     "Rhinocerotidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Perissodactyla/Rhinocerotidae"
     }, 
     "Rhinocryptidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Rhinocryptidae"
     }, 
     "Rhinolophidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Rhinolophidae"
     }, 
     "Rhinophrynidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Rhinophrynidae"
     }, 
     "Rhinopomatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Rhinopomatidae"
     }, 
     "Rhipiduridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Rhipiduridae"
     }, 
     "Rhipogonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Rhipogonaceae"
     }, 
     "Rhizogoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Rhizogoniaceae"
     }, 
     "Rhoicospheniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Cymbellales/Rhoicospheniaceae"
     }, 
     "Rhopalodiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Rhopalodiales/Rhopalodiaceae"
     }, 
     "Rhyacotritonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Rhyacotritonidae"
     }, 
     "Rodentia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia"
     }, 
     "Rosaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Rosales/Rosaceae"
     }, 
     "Rostratulidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Rostratulidae"
     }, 
     "Ruppiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Ruppiaceae"
     }, 
     "Sagittariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Accipitriformes/Sagittariidae"
     }, 
     "Salamandridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Salamandridae"
     }, 
     "Sapayoaidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Sapayoaidae"
     }, 
     "Sapindaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Sapindales/Sapindaceae"
     }, 
     "Scandentia": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Scandentia"
     }, 
     "Scaphiopodidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Scaphiopodidae"
     }, 
     "Scenedesmaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Scenedesmaceae"
     }, 
     "Scheuchzeriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Scheuchzeriaceae"
     }, 
     "Schisandraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Austrobaileyales/Schisandraceae"
     }, 
     "Schistostegaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Schistostegiales/Schistostegaceae"
     }, 
     "Scincidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Scincidae"
     }, 
     "Sciuridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Sciuridae"
     }, 
     "Scolopacidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Scolopacidae"
     }, 
     "Scopidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Pelecaniformes/Scopidae"
     }, 
     "Selaginellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Lycopodiophyta/Lycopodiopsida/Selaginellales/Selaginellaceae"
     }, 
     "Seligeriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Seligerales/Seligeriaceae"
     }, 
     "Sellaphoraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Sellaphoraceae"
     }, 
     "Sematophyllaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Sematophyllaceae"
     }, 
     "Siphonocladaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Siphonocladales/Siphonocladaceae"
     }, 
     "Sirenidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Caudata/Sirenidae"
     }, 
     "Sittidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Sittidae"
     }, 
     "Smilacaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Liliales/Smilacaceae"
     }, 
     "Soricidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Soricomorpha/Soricidae"
     }, 
     "Soricomorpha": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Mammalia/Soricomorpha"
     }, 
     "Sphaeropleaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Chlorococcales/Sphaeropleaceae"
     }, 
     "Sphagnaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Sphagnopsida/Sphagnales/Sphagnaceae"
     }, 
     "Spheniscidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Sphenisciformes/Spheniscidae"
     }, 
     "Sphenisciformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Sphenisciformes"
     }, 
     "Spiridentaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Spiridentaceae"
     }, 
     "Splachnaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Splachnaceae"
     }, 
     "Splachnobryaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Funariales/Splachnobryaceae"
     }, 
     "Squamata": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Reptilia/Squamata"
     }, 
     "Stangeriaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Cycadophyta/Cycadopsida/Cycadales/Stangeriaceae"
     }, 
     "Stauroneidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Naviculales/Stauroneidaceae"
     }, 
     "Steatornithidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Steatornithidae"
     }, 
     "Stemonaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Pandanales/Stemonaceae"
     }, 
     "Stemonuraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Aquifoliales/Stemonuraceae"
     }, 
     "Stercorariidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Stercorariidae"
     }, 
     "Stereophyllaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Stereophyllaceae"
     }, 
     "Strabomantidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Amphibia/Anura/Strabomantidae"
     }, 
     "Strelitziaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Strelitziaceae"
     }, 
     "Striatellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Striatellales/Striatellaceae"
     }, 
     "Strigidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Strigidae"
     }, 
     "Strigiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Strigiformes"
     }, 
     "Struthionidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Struthioniformes/Struthionidae"
     }, 
     "Struthioniformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Struthioniformes"
     }, 
     "Sturnidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Sturnidae"
     }, 
     "Stylidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Asterales/Stylidiaceae"
     }, 
     "Suidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Suidae"
     }, 
     "Sulidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Suliformes/Sulidae"
     }, 
     "Suliformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Suliformes"
     }, 
     "Surirellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Surirellales/Surirellaceae"
     }, 
     "Sylviidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Sylviidae"
     }, 
     "Tachyglossidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Monotremata/Tachyglossidae"
     }, 
     "Talpidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Soricomorpha/Talpidae"
     }, 
     "Tapiridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Perissodactyla/Tapiridae"
     }, 
     "Tayassuidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Artiodactyla/Tayassuidae"
     }, 
     "Tecophilaeaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Tecophilaeaceae"
     }, 
     "Teiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Teiidae"
     }, 
     "Tenrecidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Afrosoricida/Tenrecidae"
     }, 
     "Testudines": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Reptilia/Testudines"
     }, 
     "Testudinidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Testudinidae"
     }, 
     "Tetrabaenaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Volvocales/Tetrabaenaceae"
     }, 
     "Tetraphidaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Tetraphidales/Tetraphidaceae"
     }, 
     "Thalassionemataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bacillariophyta/Bacillariophyceae/Thalassionematales/Thalassionemataceae"
     }, 
     "Thamnobryaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Thamnobryaceae"
     }, 
     "Thamnophilidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Thamnophilidae"
     }, 
     "Theliaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Theliaceae"
     }, 
     "Thinocoridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Thinocoridae"
     }, 
     "Thraupidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Thraupidae"
     }, 
     "Threskiornithidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Pelecaniformes/Threskiornithidae"
     }, 
     "Thryonomyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Rodentia/Thryonomyidae"
     }, 
     "Thuidiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Hypnales/Thuidiaceae"
     }, 
     "Thurniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Thurniaceae"
     }, 
     "Thylacomyidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Peramelemorphia/Thylacomyidae"
     }, 
     "Thyropteridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Thyropteridae"
     }, 
     "Timaliidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Timaliidae"
     }, 
     "Timmiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Bryales/Timmiaceae"
     }, 
     "Tinamidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Tinamiformes/Tinamidae"
     }, 
     "Tinamiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Tinamiformes"
     }, 
     "Todidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Coraciiformes/Todidae"
     }, 
     "Tofieldiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Tofieldiaceae"
     }, 
     "Trachypodaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Trachypodaceae"
     }, 
     "Trentepholiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Trentepohliales/Trentepholiaceae"
     }, 
     "Trimeniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Magnoliopsida/Austrobaileyales/Trimeniaceae"
     }, 
     "Trionychidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Testudines/Trionychidae"
     }, 
     "Triuridaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Pandanales/Triuridaceae"
     }, 
     "Trochilidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Apodiformes/Trochilidae"
     }, 
     "Troglodytidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Troglodytidae"
     }, 
     "Trogonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Trogoniformes/Trogonidae"
     }, 
     "Trogoniformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Trogoniformes"
     }, 
     "Tropidophiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Tropidophiidae"
     }, 
     "Tropiduridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Tropiduridae"
     }, 
     "Tupaiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Scandentia/Tupaiidae"
     }, 
     "Turdidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Turdidae"
     }, 
     "Turnicidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Charadriiformes/Turnicidae"
     }, 
     "Typhaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Typhaceae"
     }, 
     "Typhlopidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Typhlopidae"
     }, 
     "Tyrannidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Tyrannidae"
     }, 
     "Tytonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Strigiformes/Tytonidae"
     }, 
     "Udoteaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Bryopsidophyceae/Bryopsidales/Udoteaceae"
     }, 
     "Ulotrichaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Ulotrichales/Ulotrichaceae"
     }, 
     "Ulvaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Ulvales/Ulvaceae"
     }, 
     "Ulvellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Ulvales/Ulvellaceae"
     }, 
     "Upupidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Upupiformes/Upupidae"
     }, 
     "Upupiformes": {
         "commonNames": [
             ""
         ], 
+        "level": "order", 
         "path": "/Animalia/Chordata/Aves/Upupiformes"
     }, 
     "Ursidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Ursidae"
     }, 
     "Valoniaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Siphonocladales/Valoniaceae"
     }, 
     "Vangidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Vangidae"
     }, 
     "Varanidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Varanidae"
     }, 
     "Velloziaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Pandanales/Velloziaceae"
     }, 
     "Vespertilionidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Chiroptera/Vespertilionidae"
     }, 
     "Viduidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Viduidae"
     }, 
     "Viperidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Viperidae"
     }, 
     "Vireonidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Vireonidae"
     }, 
     "Viverridae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Carnivora/Viverridae"
     }, 
     "Volvocaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Chlorophyceae/Volvocales/Volvocaceae"
     }, 
     "Vombatidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Mammalia/Diprotodontia/Vombatidae"
     }, 
     "Wardiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Bryophyta/Bryopsida/Isobryales/Wardiaceae"
     }, 
     "Welwitschiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Gnetophyta/Gnetopsida/Welwitschiales/Welwitschiaceae"
     }, 
     "Witrockiellaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Ulvophyceae/Cladophorales/Witrockiellaceae"
     }, 
     "Xanthorrhoeaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Asparagales/Xanthorrhoeaceae"
     }, 
     "Xantusiidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Reptilia/Squamata/Xantusiidae"
     }, 
     "Xyridaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Poales/Xyridaceae"
     }, 
     "Zamiaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Cycadophyta/Cycadopsida/Cycadales/Zamiaceae"
     }, 
     "Zingiberaceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Zingiberales/Zingiberaceae"
     }, 
     "Zosteraceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Magnoliophyta/Liliopsida/Alismatales/Zosteraceae"
     }, 
     "Zosteropidae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Animalia/Chordata/Aves/Passeriformes/Zosteropidae"
     }, 
     "Zygnemataceae": {
         "commonNames": [
             ""
         ], 
+        "level": "family", 
         "path": "/Plantae/Chlorophyta/Zygnematophyceae/Zygnematales/Zygnemataceae"
     }
 }

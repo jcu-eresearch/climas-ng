@@ -43,47 +43,66 @@ writer = write_spp_index.writer()
 # -------------------------------------------------------------------
 # species
 #
-# with open(species_json_file) as f:
-#     spps = json.load(f)
+with open(os.path.join(json_data_dir, species_json_file)) as f:
+	spps = json.load(f)
 
-#     for spp in spps:
-#     	info = spps[spp]
+	for spp in spps:
+		info = spps[spp]
 
-#     	if len(info['commonNames']) > 0 and len(info['commonNames'][0]) > 0:
-# 	    	# if there's common names, make an entry for every common name
-#     		for cn in info['commonNames']:
-# 	    		writer.add_document(
-# 					nice_name = cn + u' (' + spp + u')',
-# 					item_id = spp,
-# 					item_path = info['path'],
-# 					item_type = u'species'
-# 	    		)
-#     	else:
-#     		# if there were no common names, just make a sciname entry
-#     		writer.add_document(
-# 				nice_name = u'(' + spp + u')',
-# 				item_id = spp,
-# 				item_path = info['path'],
-# 				item_type = u'species'
-#     		)
+		if len(info['commonNames']) > 0 and len(info['commonNames'][0]) > 0:
+			# if there's common names, make an entry for every common name
+			for cn in info['commonNames']:
+				writer.add_document(
+					nice_name = cn + u' (' + spp + u')',
+					item_id = spp,
+					item_path = info['path'],
+					item_type = u'species'
+				)
+		else:
+			# if there were no common names, just make a sciname entry
+			writer.add_document(
+				nice_name = u'(' + spp + u')',
+				item_id = spp,
+				item_path = info['path'],
+				item_type = u'species'
+			)
 
-# writer.commit()
+writer.commit()
 
 # -------------------------------------------------------------------
 # summaries
 #
-with open(summaries_json_file) as f:
+with open(os.path.join(json_data_dir, summaries_json_file)) as f:
 	summaries = json.load(f)
 
 	for summary in summaries:
 		info = summaries[summary]
 
+		print(info)
+		print(u'Richness - ' + info['level'] + u': ' + summary)
+
 		# add richness summary
 		writer.add_document(
-			nice_name = u'Richness - ' + info['level'] + u': (' + summary + u')',
+			nice_name = u'Richness - ' + info['level'] + u': ' + summary,
 			item_id = summary,
 			item_path = info['path'],
 			item_type = u'richness'
+		)
+
+		# add refugia summary
+		writer.add_document(
+			nice_name = u'Refugia - ' + info['level'] + u': ' + summary,
+			item_id = summary,
+			item_path = info['path'],
+			item_type = u'refugia'
+		)
+
+		# add area-of-concern summary
+		writer.add_document(
+			nice_name = u'Concern - ' + info['level'] + u': ' + summary,
+			item_id = summary,
+			item_path = info['path'],
+			item_type = u'aoc'
 		)
 
 writer.commit()
