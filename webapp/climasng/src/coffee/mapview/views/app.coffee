@@ -294,9 +294,8 @@ AppView = Backbone.View.extend {
 
         tag = "<b><i>#{info.mapName}</i></b>"
         dispLookup = {
-            '0disp': 'no range adaptation'
-            '50disp': '50 years of range adaptation'
-            '100disp': '100 years of range adaptation'
+            'no.disp': 'no range adaptation'
+            'real.disp': 'range adaptation'
         }
 
         if info.degs is 'baseline'
