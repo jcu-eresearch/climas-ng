@@ -62,7 +62,11 @@ class ApiView(object):
                 query = query_parser.parse(params['term'])
 
                 # allowable = Or([Term(u'item_type', u'species'), Term(u'item_type', u'climate')])
-                allowable = Or([Term(u'item_type', u'species')])
+                # allowable = Or([Term(u'item_type', u'species')])
+                allowable = Or([
+                    Term(u'item_type', u'species'), 
+                    Term(u'item_type', u'richness')
+                ])
 
                 results = searcher.search(query, filter=allowable)
 

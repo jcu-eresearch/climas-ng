@@ -73,7 +73,7 @@ def createSpeciesJson(source_path, output_file):
             sci_name = match.group(7) + ' ' + match.group(8)
             sci_name_underscore = match.group(7) + '_' + match.group(8)
             species_list[sci_name] = {
-                "commonNames": common_names.get(sci_name_underscore, [""]),
+                "commonNames": common_names.get(sci_name_underscore, []),
                 "path": spp_path
             }
 
@@ -154,9 +154,9 @@ def createSummaryJson(source_path, output_file):
                     # which level is the summary at
                     tree_level = ['kingdom', 'phylum', 'class', 'order', 'family'][len(tree_path) - 1]
                     summary_list[short_name] = {
-                        "commonNames": common_names.get(short_name, [""]),
+                        "commonNames": common_names.get(short_name, []),
                         "level": tree_level,
-                        "path": root + '/' + path
+                        "path": root + path
                     }
 
                     # maybe this is a new group?

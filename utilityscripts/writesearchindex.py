@@ -49,7 +49,7 @@ with open(os.path.join(json_data_dir, species_json_file)) as f:
 	for spp in spps:
 		info = spps[spp]
 
-		if len(info['commonNames']) > 0 and len(info['commonNames'][0]) > 0:
+		if len(info['commonNames']) > 0:
 			# if there's common names, make an entry for every common name
 			for cn in info['commonNames']:
 				writer.add_document(
@@ -67,7 +67,6 @@ with open(os.path.join(json_data_dir, species_json_file)) as f:
 				item_type = u'species'
 			)
 
-writer.commit()
 
 # -------------------------------------------------------------------
 # summaries
@@ -77,9 +76,6 @@ with open(os.path.join(json_data_dir, summaries_json_file)) as f:
 
 	for summary in summaries:
 		info = summaries[summary]
-
-		print(info)
-		print(u'Richness - ' + info['level'] + u': ' + summary)
 
 		# add richness summary
 		writer.add_document(
@@ -104,6 +100,9 @@ with open(os.path.join(json_data_dir, summaries_json_file)) as f:
 			item_path = info['path'],
 			item_type = u'aoc'
 		)
+
+
+# -------------------------------------------------------------------
 
 writer.commit()
 
