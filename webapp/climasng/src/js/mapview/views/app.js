@@ -33,6 +33,7 @@
     id: 'splitmap',
     speciesDataUrl: window.mapConfig.speciesDataUrl,
     climateDataUrl: window.mapConfig.climateDataUrl,
+    summariesDataUrl: window.mapConfig.summariesDataUrl,
     biodivDataUrl: window.mapConfig.biodivDataUrl,
     rasterApiUrl: window.mapConfig.rasterApiUrl,
     trackSplitter: false,
@@ -213,7 +214,7 @@
       }
     },
     addMapLayer: function(side) {
-      var ext, futureModelPoint, layer, loadClass, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
+      var ext, futureModelPoint, isRichness, layer, loadClass, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -224,9 +225,17 @@
       futureModelPoint = '';
       mapUrl = '';
       zipUrl = '';
-      projectionName = "TEMP_" + sideInfo.degs + "_" + sideInfo.confidence + "." + sideInfo.range;
-      if (sideInfo.degs === 'baseline') {
-        projectionName = 'current';
+      isRichness = sideInfo.mapName.startsWith('Richness -');
+      if (isRichness) {
+        projectionName = "prop.richness_" + sideInfo.degs + "_" + sideInfo.range + "_" + sideInfo.confidence;
+        if (sideInfo.degs === 'baseline') {
+          projectionName = 'current.richness';
+        }
+      } else {
+        projectionName = "TEMP_" + sideInfo.degs + "_" + sideInfo.confidence + "." + sideInfo.range;
+        if (sideInfo.degs === 'baseline') {
+          projectionName = 'current';
+        }
       }
       mapInfo = this.mapList[this.nameIndex[sideInfo.mapName]];
       if (mapInfo) {
@@ -235,6 +244,8 @@
         if (mapInfo.type === 'climate') {
           url = this.climateDataUrl;
           ext = '.asc';
+        } else if (mapInfo.type === 'richness') {
+          url = this.summariesDataUrl;
         }
         mapUrl = [
           this.resolvePlaceholders(url, {

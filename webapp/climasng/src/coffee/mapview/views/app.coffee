@@ -43,6 +43,7 @@ AppView = Backbone.View.extend {
     # some settings
     speciesDataUrl: window.mapConfig.speciesDataUrl
     climateDataUrl: window.mapConfig.climateDataUrl
+    summariesDataUrl: window.mapConfig.summariesDataUrl
     biodivDataUrl: window.mapConfig.biodivDataUrl
     rasterApiUrl: window.mapConfig.rasterApiUrl
     # ---------------------------------------------------------------
@@ -319,65 +320,39 @@ AppView = Backbone.View.extend {
         mapUrl = ''
         zipUrl = ''
 
-        # # is it a biodiversity map?
-        # isBiodiversity = sideInfo.mapName in @biodivList
+        isRichness = sideInfo.mapName.startsWith 'Richness -'
 
-        # if isBiodiversity
-        #     # they're looking for a biodiversity map.
-        #     futureModelPoint = [
-        #         'biodiversity/deciles/biodiversity'
-        #         sideInfo.scenario
-        #         sideInfo.year
-        #         sideInfo.gcm
-        #     ].join '_'
+        if isRichness
+            # ...then they've selected a richness map.
+            # work out the string that gets to the projection point they want
+            projectionName = "prop.richness_#{sideInfo.degs}_#{sideInfo.range}_#{sideInfo.confidence}"
+            # if they want baseline, just get the baseline projection
+            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
 
-        #     # if they want baseline, just get the baseline biodiv
-        #     futureModelPoint = 'biodiversity/biodiversity_baseline' if sideInfo.year == 'baseline'
+        else
+            # ...it's a plain old species map they're after.
+            # work out the string that gets to the projection point they want
+            projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
+            # if they want baseline, just get the baseline projection
+            projectionName = 'current' if sideInfo.degs == 'baseline'
 
-        #     # now make that into a URL
-        #     mapUrl = [
-        #         @resolvePlaceholders @biodivDataUrl, {
-        #             sppGroup: sideInfo.mapName
-        #         }
-        #         futureModelPoint + '.tif'
-        #     ].join '/'
 
-        #     zipUrl = [
-        #         @resolvePlaceholders @biodivDataUrl, {
-        #             sppGroup: sideInfo.mapName
-        #         }
-        #         'biodiversity'
-        #         sideInfo.mapName + '.zip'
-        #     ].join '/'
-
-        #     # update the download links
-        #     @$('#' + side + 'mapdl').attr 'href', mapUrl
-        #     # @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
-        #     # @$('#' + side + 'archivedl').attr 'href', zipUrl
-
-        # else
-
-            # it's a plain old species map they're after.
-
-        # work out the string that gets to the projection point they want
-        projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
-        # if they want baseline, just get the baseline projection
-        projectionName = 'current' if sideInfo.degs == 'baseline'
 
         mapInfo = @mapList[@nameIndex[sideInfo.mapName]]
 
         if mapInfo
 
-            # set up for the type we're looking at
-
-            # start by assuming species
+            # set up for the type we're looking at: start by assuming species and tif
             url = @speciesDataUrl
             ext = '.tif'
 
-            # override for climate
+            # then override as required
             if mapInfo.type is 'climate'
                 url = @climateDataUrl
                 ext = '.asc'
+            else if mapInfo.type is 'richness'
+                url = @summariesDataUrl
+
 
             # now set the URL for this type of map
             mapUrl = [
@@ -386,7 +361,6 @@ AppView = Backbone.View.extend {
             ].join '/'
         else
             console.log "Can't map that -- no '#{sideInfo.mapName}' in index"
-
 
         # update the download links
         @$('#' + side + 'mapdl').attr 'href', mapUrl

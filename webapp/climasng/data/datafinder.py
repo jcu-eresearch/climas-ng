@@ -156,7 +156,7 @@ def createSummaryJson(source_path, output_file):
                     summary_list[short_name] = {
                         "commonNames": common_names.get(short_name, [""]),
                         "level": tree_level,
-                        "path": path
+                        "path": root + '/' + path
                     }
 
                     # maybe this is a new group?

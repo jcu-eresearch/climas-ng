@@ -81,5 +81,9 @@ webapp/climasng/db/*.sqlite
 webapp/node_modules
 webapp/old-nm
 
-# random tester
+# random testers
 utilityscripts/test.html
+utilityscripts/whooshindex
+
+# data index
+searchindex

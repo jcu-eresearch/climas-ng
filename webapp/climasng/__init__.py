@@ -55,6 +55,7 @@ def main(global_config, **settings):
 
     config.add_route('speciesdata', '/speciesdata/{data_name:.*}')
     config.add_route('climatedata', '/climatedata/{data_name:.*}')
+    config.add_route('summariesdata', '/summariesdata/{data_name:.*}')
 
     config.add_route('regiondata', '/regiondata/{regiontype}/{regionid}')
 
