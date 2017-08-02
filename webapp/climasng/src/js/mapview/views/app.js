@@ -84,7 +84,7 @@
         variant: 'World_Topo_Map'
       }).addTo(this.map);
       this.leftForm = this.$('.left.form');
-      this.buildLeftForm();
+      this.buildForm('left');
       this.rightForm = this.$('.right.form');
       this.buildForm('right');
       this.leftTag = this.$('.left.tag');
@@ -322,47 +322,6 @@
       } else {
         return this.$('.rightmapspp').prop('disabled', false);
       }
-    },
-    fetchSpeciesInfo: function() {
-      return debug('AppView.fetchSpeciesInfo');
-    },
-    fetchBiodivInfo: function() {
-      return debug('AppView.fetchBiodivInfo');
-    },
-    buildLeftForm: function() {
-      var $leftmapspp;
-      debug('AppView.buildLeftForm');
-      $leftmapspp = this.$('#leftmapspp');
-      return $leftmapspp.autocomplete({
-        close: (function(_this) {
-          return function() {
-            return _this.$el.trigger('leftmapupdate');
-          };
-        })(this),
-        source: (function(_this) {
-          return function(req, response) {
-            return $.ajax({
-              url: '/api/namesearch/',
-              data: {
-                term: req.term
-              },
-              success: function(answer) {
-                var info, nice, selectable;
-                selectable = [];
-                for (nice in answer) {
-                  info = answer[nice];
-                  selectable.push(nice);
-                  _this.mapList[info.mapId] = info;
-                  _this.nameIndex[nice] = info.mapId;
-                }
-                console.log(answer);
-                console.log(selectable);
-                return response(selectable);
-              }
-            });
-          };
-        })(this)
-      });
     },
     buildForm: function(side) {
       var $mapspp;

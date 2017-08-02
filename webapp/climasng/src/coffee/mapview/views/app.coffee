@@ -79,19 +79,8 @@ AppView = Backbone.View.extend {
         # more annoying version of bindAll requires this concat stuff
         _.bindAll.apply _, [this].concat _.functions(this)
 
-        # kick off the fetching of the species and biodiversity lists
-        # @namesList = []
-
-        # @speciesSciNameList = []
-        # @speciesInfoFetchProcess = @fetchSpeciesInfo()
-
-        # @biodivList = []
-        # @biodivLookupList = []
-        # @biodivInfoFetchProcess = @fetchBiodivInfo()
-
-        # new lists
-        @nameIndex = {} # nice name -> map "id name"
-        @mapList = {}   # map "id name" -> url and other info about the map
+        @nameIndex = {} # map of nice name -to-> "id name"
+        @mapList = {}   # map of "id name" -to-> url, type etc
 
         # @sideUpdate('left')
 
@@ -153,7 +142,7 @@ AppView = Backbone.View.extend {
         }).addTo @map
 
         @leftForm = @$ '.left.form'
-        @buildLeftForm()
+        @buildForm 'left'
 
         @rightForm = @$ '.right.form'
         @buildForm 'right'
@@ -495,111 +484,7 @@ AppView = Backbone.View.extend {
             @$('.rightmapspp').prop 'disabled', false
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
-    # ajaxy stuff
-    # ---------------------------------------------------------------
-    fetchSpeciesInfo: ()->
-        debug 'AppView.fetchSpeciesInfo'
-
-        # return $.ajax({
-        #     url: '/data/species',
-        #     dataType: 'json'
-        # }).done (data)=>
-        #     speciesLookupList = []
-        #     speciesSciNameList = []
-        #     speciesUrls = {}
-
-        #     # in order to avoid making a function in the inner loop,
-        #     # here's a function returning a function that writes a
-        #     # common name into the given sciName.  This is partial
-        #     # function application, which is a bit like currying.
-        #     commonNameWriter = (sciName)=>
-        #         sciNamePostfix = " (#{sciName})"
-        #         return (cnIndex, cn)=>
-        #             speciesLookupList.push {
-        #                 label: cn + sciNamePostfix
-        #                 value: sciName
-        #             }
-        #     # that's it.. this'll be used in the loop below.
-
-        #     $.each data, (sciName, sppInfo)=>
-        #         speciesSciNameList.push sciName
-        #         speciesUrls[sciName] = sppInfo.path
-        #         if sppInfo.commonNames
-        #             $.each sppInfo.commonNames, commonNameWriter sciName
-        #         else
-        #             speciesLookupList.push
-        #                 label: sciName
-        #                 value: sciName
-
-        #     @speciesLookupList = speciesLookupList
-        #     @speciesSciNameList = speciesSciNameList
-        #     @speciesUrls = speciesUrls
-    # ---------------------------------------------------------------
-    fetchBiodivInfo: ()->
-        debug 'AppView.fetchBiodivInfo'
-
-        # return $.ajax({
-        #     url: '/data/biodiversity',
-        #     dataType: 'json'
-        # }).done (data)=>
-        #     biodivList = []
-        #     biodivLookupList = []
-
-        #     $.each data, (biodivName, biodivInfo)=>
-        #         biodivCapName = biodivName.replace /^./, (c)-> c.toUpperCase()
-        #         biodivList.push biodivName
-        #         biodivLookupList.push
-        #             label: "Biodiversity of " + biodivCapName
-        #             value: biodivName
-
-        #     @biodivList = biodivList
-        #     @biodivLookupList = biodivLookupList
-
-    # ---------------------------------------------------------------
-    # ---------------------------------------------------------------
     # form creation
-    # ---------------------------------------------------------------
-
-    ## TODO: remove this func and replace with a call to buildForm 'left'
-    buildLeftForm: ()->
-        debug 'AppView.buildLeftForm'
-
-        $leftmapspp = @$ '#leftmapspp'
-
-        $leftmapspp.autocomplete {
-            close: => @$el.trigger 'leftmapupdate'
-            # source: '/api/namesearch'
-            source: (req, response)=>
-                $.ajax { 
-                    url: '/api/namesearch/'
-                    data: { term: req.term }
-                    success: (answer)=>
-                        # answer is a list of possible completions, 
-                        # indexed by "nice" name, eg:
-                        # {
-                        #     "Giraffe (Giraffa camelopardalis)": {
-                        #         "type": "species",
-                        #         "mapId": "Giraffa camelopardalis",
-                        #         "path": "Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis"
-                        #     },
-                        #     ...
-                        # }
-                        selectable = []
-
-                        for nice, info of answer
-                            # add each nice name to the completion list
-                            selectable.push nice
-                            # put the data into our local caches
-                            @mapList[info.mapId] = info
-                            @nameIndex[nice] = info.mapId
-
-                        console.log answer
-                        console.log selectable
-
-                        # finally, give the nice names to the autocomplete
-                        response selectable
-                }
-        }
     # ---------------------------------------------------------------
     buildForm: (side)->
         debug 'AppView.buildForm'
