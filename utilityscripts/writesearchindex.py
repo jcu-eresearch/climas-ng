@@ -11,49 +11,84 @@ from whoosh.query import Or, And, Term
 
 # ---------------------------------------------------------
 
-jsonfile = 'species-2017-07-24.json'
-# indexdir = '../webapp/climasng/data/searchindex'
-indexdir = '/var/wallacewebapp/climasng/data/searchindex'
+json_data_dir = '/var/wallacewebapp/climasng/data'
+species_json_file = 'species.json'
+summaries_json_file = 'summaries.json'
+
+search_index_dir = os.path.join(json_data_dir, 'searchindex')
+
+if os.path.isdir('/Users/pvrdwb'):
+
+	# ..overwrite with local dev paths
+	json_data_dir = '/Users/pvrdwb/projects/climas-global/webapp/climasng/data'
+	search_index_dir = os.path.join(json_data_dir, 'searchindex')
 
 # ---------------------------------------------------------
 
 # define schema for indexed info
 schema = Schema(
-	nice_name = NGRAMWORDS(2, 8, at='start', stored=True),
+	nice_name = NGRAMWORDS(2, 8, at='start', sortable=True, stored=True),
 	item_id =   ID(stored=True),
 	item_path = STORED,
 	item_type = KEYWORD(stored=True)
 )
 
-# make an "index" that'll hold the data
-write_spp_index = index.create_in(indexdir, schema)
+# make an index that'll hold the data
+write_spp_index = index.create_in(search_index_dir, schema)
 
-# put data in there
+# get a writer that can put data in the index
 writer = write_spp_index.writer()
 
-with open(jsonfile) as f:
-    spps = json.load(f)
 
-    for spp in spps:
-    	info = spps[spp]
+# -------------------------------------------------------------------
+# species
+#
+# with open(species_json_file) as f:
+#     spps = json.load(f)
 
-    	if len(info['commonNames']) > 0 and len(info['commonNames'][0]) > 0:
-	    	# if there's common names, make an entry for every common name
-    		for cn in info['commonNames']:
-	    		writer.add_document(
-					nice_name = cn + u' (' + spp + u')',
-					item_id = spp,
-					item_path = info['path'],
-					item_type = u'species'
-	    		)
-    	else:
-    		# if there were no common names, just make a sciname entry
-    		writer.add_document(
-				nice_name = u'(' + spp + u')',
-				item_id = spp,
-				item_path = info['path'],
-				item_type = u'species'
-    		)
+#     for spp in spps:
+#     	info = spps[spp]
+
+#     	if len(info['commonNames']) > 0 and len(info['commonNames'][0]) > 0:
+# 	    	# if there's common names, make an entry for every common name
+#     		for cn in info['commonNames']:
+# 	    		writer.add_document(
+# 					nice_name = cn + u' (' + spp + u')',
+# 					item_id = spp,
+# 					item_path = info['path'],
+# 					item_type = u'species'
+# 	    		)
+#     	else:
+#     		# if there were no common names, just make a sciname entry
+#     		writer.add_document(
+# 				nice_name = u'(' + spp + u')',
+# 				item_id = spp,
+# 				item_path = info['path'],
+# 				item_type = u'species'
+#     		)
+
+# writer.commit()
+
+# -------------------------------------------------------------------
+# summaries
+#
+with open(summaries_json_file) as f:
+	summaries = json.load(f)
+
+	for summary in summaries:
+		info = summaries[summary]
+
+		# add richness summary
+		writer.add_document(
+			nice_name = u'Richness - ' + info['level'] + u': (' + summary + u')',
+			item_id = summary,
+			item_path = info['path'],
+			item_type = u'richness'
+		)
+
+writer.commit()
+
+
 
 # writer.add_document(
 # 	nice_name = u'Giraffe (Giraffa camelopardalis)',
@@ -76,5 +111,4 @@ with open(jsonfile) as f:
 # 	item_type = u'climate'
 # )
 
-writer.commit()
 

@@ -147,11 +147,15 @@ def createSummaryJson(source_path, output_file):
 
                 if match:
                     path = '/' + match.group(0).replace('/current.richness.tif', '')
-                    # use the last name for the "short" name; the list comprehension is
-                    # used to filter out all the trailing Nones.
-                    short_name = [n for n in match.groups() if n is not None][-1]
+                    # remove the Nones from the match group list to get a path kingdom -> phylum -> class etc
+                    tree_path = [n for n in match.groups() if n is not None]
+                    # use the last name for the "short" name
+                    short_name = tree_path[-1]
+                    # which level is the summary at
+                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family'][len(tree_path)]
                     summary_list[short_name] = {
                         "commonNames": common_names.get(short_name, [""]),
+                        "level": tree_level,
                         "path": path
                     }
 
