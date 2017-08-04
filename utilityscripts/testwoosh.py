@@ -11,94 +11,66 @@ from whoosh.query import Or, And, Term
 
 # ---------------------------------------------------------
 
-jsonfile = 'species-2017-07-24.json'
-
-# ---------------------------------------------------------
-
-# # define schema for indexed info
-# schema = Schema(
-# 	nice_name = NGRAMWORDS(2, 8, at='start', stored=True),
-# 	item_id =   ID,
-# 	item_path = STORED,
-# 	item_type = KEYWORD
-# )
-
-# # make an "index" that'll hold the data
-# write_spp_index = index.create_in('./whooshindex', schema)
-
-# # put data in there
-# writer = write_spp_index.writer()
-
-# with open(jsonfile) as f:
-#     spps = json.load(f)
-
-#     for spp in spps:
-#     	info = spps[spp]
-
-#     	if len(info['commonNames']) > 0 and len(info['commonNames'][0]) > 0:
-#     		for cn in info['commonNames']:
-# 	    		writer.add_document(
-# 					nice_name = cn + ' (' + spp + ')',
-# 					item_id = spp,
-# 					item_path = info['path'],
-# 					item_type = 'species'
-# 	    		)
-#     	else:
-#     		writer.add_document(
-# 				nice_name = '(' + spp + ')',
-# 				item_id = spp,
-# 				item_path = info['path'],
-# 				item_type = 'species'
-#     		)
-
-# # writer.add_document(
-# # 	nice_name = u'Giraffe (Giraffa camelopardalis)',
-# # 	item_id = u'Giraffa camelopardalis',
-# # 	item_path = u'Animalia/Chordata/Mammalia/Artiodactyla/Giraffidae/Giraffa/Giraffa_camelopardalis',
-# # 	item_type = u'species'
-# # )
-# # writer.add_document(
-# # 	nice_name = u'Meercat (Suricata suricatta)',
-# # 	item_id = u'Suricata suricatta',
-# # 	item_path = u'Animalia/Chordata/Mammalia/Carnivora/Herpestidae/Suricata/Suricata_suricatta',
-# # 	item_type = u'species'
-# # )
-# # writer.add_document(
-# # 	nice_name = u'Climate: precipitation, annual average',
-# # 	item_id = u'Climate precipitation average',
-# # 	item_path = u'precipitation/average',
-# # 	item_type = u'climate'
-# # )
-# writer.commit()
-
-
 # open index
-read_spp_index = index.open_dir('./whooshindex')
+read_spp_index = index.open_dir('../webapp/climasng/data/serversearchindex')
 
 
 # try a search
 with read_spp_index.searcher() as searcher:
-	qp = QueryParser("nice_name", schema=read_spp_index.schema)
+    qp = QueryParser("nice_name", schema=read_spp_index.schema)
 
-	for searchstr in [u'Giraffe', u'gir', u'aff', u'precip', 'camel']:
+    # for searchstr in ['richness', u'Giraffe', u'gir', u'aff', u'precip', 'camel']:
+    for searchstr in ['richness']:
 
-		query = qp.parse(searchstr)
+        query = qp.parse(searchstr)
 
-		allowable = Or([Term(u'item_type', 'species'), Term(u'item_type', 'climate')])
-		allowable = Or([Term(u'item_type', 'species')])
+        allowable = Or([Term(u'item_type', 'species'), Term(u'item_type', 'climate')])
+        allowable = Or([Term(u'item_type', 'species')])
+        allowable = Or([
+            Term(u'item_type', u'species'), 
+            Term(u'item_type', u'richness')
+        ])
 
-		results = searcher.search(query, filter=allowable)
-		if len(results) == 1:
-			print(searchstr.ljust(20), len(results), results[0]['nice_name'])
-		elif len(results) == 2:
-			print(searchstr.ljust(20), len(results), results[0]['nice_name'], results[1]['nice_name'])
-		elif len(results) > 2:
-			print(searchstr.ljust(20), len(results), results[0]['nice_name'], results[1]['nice_name'], results[2]['nice_name'])
-		else:
-			print(searchstr.ljust(20), "<< no results >>")
+        results = searcher.search(query, filter=allowable)
+        if len(results) == 1:
+            print(searchstr.ljust(20), len(results), results[0]['nice_name'])
+        elif len(results) == 2:
+            print(searchstr.ljust(20), len(results), results[0]['nice_name'], results[1]['nice_name'])
+        elif len(results) > 2:
+            print(searchstr.ljust(20), len(results), results[0]['nice_name'], results[1]['nice_name'], results[2]['nice_name'])
+        else:
+            print(searchstr.ljust(20), "<< no results >>")
 
 
 # ---------------------------------------------------------
+
+with read_spp_index.searcher() as searcher:
+    qp = QueryParser("nice_name", schema=read_spp_index.schema)
+
+    query = qp.parse("richness")
+
+    allowable = Or([
+        Term(u'item_type', u'species'), 
+        Term(u'item_type', u'richness')
+    ])
+
+    results = searcher.search(query, filter=allowable)
+
+    matches = {}
+
+    for result in results[:1]:
+
+        matches[result['nice_name']] = {
+            "type": result['item_type'],
+            "path": result['item_path'],
+            "mapId": result['item_id']
+        }
+
+print('---')
+print(matches)
+print('---')
+json_content = json.dumps(matches)
+print(json_content)
 # ---------------------------------------------------------
 # ---------------------------------------------------------
 
