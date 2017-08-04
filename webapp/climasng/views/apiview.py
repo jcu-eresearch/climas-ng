@@ -46,6 +46,8 @@ class ApiView(object):
                 # allowable = Or([Term(u'item_type', u'species')])
                 allowable = Or([
                     Term(u'item_type', u'species'), 
+                    Term(u'item_type', u'refugia'), 
+                    Term(u'item_type', u'aoc'),
                     Term(u'item_type', u'richness')
                 ])
 
