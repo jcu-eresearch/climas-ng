@@ -27,5 +27,4 @@ sys.path.append(appdir + '/climasng/data')
 import datafinder
 
 datafinder.createSpeciesJson(datadir, os.path.join(jsondir, 'species.json'))
-
 datafinder.createSummaryJson(datadir, os.path.join(jsondir, 'summaries.json'))
