@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 
 
+#
+# you can monitor the availability of the index with something like this:
+#     watch "echo \"\`date +'%Y-%m-%d %H:%M:%S '\` \`curl -s http://wallace.jcu.io/api/namesearch/?term=lion | wc -w\`\" >> resultcount.log"
+#
+
 import os
 import json
 
@@ -163,8 +168,15 @@ def add(the_index):
 	msg('adding species to index')
 	insert_species(writer)
 
+	msg('adding summaries to index')
+	insert_summaries(writer)
+
 	msg('writing and optimising index')
 	writer.commit(optimize=True)
+# -------------------------------------------------------------------
+# -------------------------------------------------------------------
+# -------------------------------------------------------------------
+# commands
 # -------------------------------------------------------------------
 def addnew():
 	msg('locating existing index')
@@ -176,11 +188,25 @@ def rebuild():
 	the_index = obtain_index(create=True)
 	add(the_index)
 # -------------------------------------------------------------------
+def optimise():
+	msg('locating existing index')
+	the_index = obtain_index()
+
+	msg('preparing index writer')
+	writer = create_writer(the_index)
+
+	msg('optimising index')
+	writer.commit(optimize=True)
+# -------------------------------------------------------------------
+# -------------------------------------------------------------------
+# -------------------------------------------------------------------
 def perform(command):
 	if command == 'addnew':
 		addnew()
 	elif command == 'rebuild':
 		rebuild()
+	elif command in ['optimise', 'optimize']:
+		optimise()
 	else:
 		msg('"' + command + '"' + ' is not implemented yet', 5)
 # -------------------------------------------------------------------
@@ -191,7 +217,7 @@ def accept_command():
 	)
 	parser.add_argument('command', metavar='command', default='help', nargs='?', 
 			help='action to take: help (the default), addnew, empty, rebuild',
-			choices=['help', 'addnew', 'empty', 'rebuild']
+			choices=['help', 'addnew', 'empty', 'rebuild', 'optimise', 'optimize']
 	)
 	args = parser.parse_args()
 
