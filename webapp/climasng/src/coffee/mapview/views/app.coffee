@@ -321,12 +321,22 @@ AppView = Backbone.View.extend {
         zipUrl = ''
 
         isRichness = sideInfo.mapName.startsWith 'Richness -'
+        isRefugia = sideInfo.mapName.startsWith 'Refugia -'
+        isConcern = sideInfo.mapName.startsWith 'Concern -'
 
         if isRichness
             # ...then they've selected a richness map.
-            # work out the string that gets to the projection point they want
             projectionName = "prop.richness_#{sideInfo.degs}_#{sideInfo.range}_#{sideInfo.confidence}"
-            # if they want baseline, just get the baseline projection
+            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+
+        else if isRefugia
+            # ...then they've selected a refugia map.
+            projectionName = "refuge.certainty_#{sideInfo.degs}_#{sideInfo.range}"
+            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+
+        else if isConcern
+            # ...then they've selected an area-of-concern map.
+            projectionName = "AreaOfConcern.certainty_#{sideInfo.degs}_#{sideInfo.range}"
             projectionName = 'current.richness' if sideInfo.degs == 'baseline'
 
         else

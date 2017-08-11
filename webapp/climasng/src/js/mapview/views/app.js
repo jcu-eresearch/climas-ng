@@ -214,7 +214,7 @@
       }
     },
     addMapLayer: function(side) {
-      var ext, futureModelPoint, isRichness, layer, loadClass, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
+      var ext, futureModelPoint, isConcern, isRefugia, isRichness, layer, loadClass, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -226,8 +226,20 @@
       mapUrl = '';
       zipUrl = '';
       isRichness = sideInfo.mapName.startsWith('Richness -');
+      isRefugia = sideInfo.mapName.startsWith('Refugia -');
+      isConcern = sideInfo.mapName.startsWith('Concern -');
       if (isRichness) {
         projectionName = "prop.richness_" + sideInfo.degs + "_" + sideInfo.range + "_" + sideInfo.confidence;
+        if (sideInfo.degs === 'baseline') {
+          projectionName = 'current.richness';
+        }
+      } else if (isRefugia) {
+        projectionName = "refuge.certainty_" + sideInfo.degs + "_" + sideInfo.range;
+        if (sideInfo.degs === 'baseline') {
+          projectionName = 'current.richness';
+        }
+      } else if (isConcern) {
+        projectionName = "AreaOfConcern.certainty_" + sideInfo.degs + "_" + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
         }
