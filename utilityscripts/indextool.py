@@ -3,7 +3,12 @@
 
 #
 # you can monitor the availability of the index with something like this:
+#
 #     watch "echo \"\`date +'%Y-%m-%d %H:%M:%S '\` \`curl -s http://wallace.jcu.io/api/namesearch/?term=lion | wc -w\`\" >> resultcount.log"
+#
+# ...which will log the number of words in the search response every two 
+# seconds. So far, optimising the index appears not to affect availability
+# of the search responses.
 #
 
 import os
