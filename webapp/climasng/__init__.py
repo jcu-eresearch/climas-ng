@@ -37,7 +37,7 @@ def main(global_config, **settings):
 
     # pre-cook the whoosh interface for the search api
     config.registry.settings['whoosh_index'] = index.open_dir('/var/wallacewebapp/climasng/data/searchindex')
-    config.registry.settings['query_parser'] = QueryParser("nice_name", schema=config.registry.settings['whoosh_index'].search_index.schema)
+    config.registry.settings['query_parser'] = QueryParser("nice_name", schema=config.registry.settings['whoosh_index'].schema)
     config.add_route('api', '/api/{command}/')
 
     config.add_static_view('static', 'climasng:static/', cache_max_age=3600)
