@@ -22,8 +22,9 @@ from whoosh.query import Or, And, Term
 
 # -------------------------------------------------------------------
 
+# -------------------------------------------------------------------
 class ApiView(object):
-
+    # ---------------------------------------------------------------
     def __init__(self, request):
         self.request = request
     # ---------------------------------------------------------------
@@ -35,8 +36,8 @@ class ApiView(object):
 
         if command == 'namesearch':
 
-            search_index = index.open_dir('/var/wallacewebapp/climasng/data/searchindex')
-            query_parser = QueryParser("nice_name", schema=search_index.schema)
+            search_index = self.request.registry.settings['whoosh_index']
+            query_parser = self.request.registry.settings['query_parser']
 
             with search_index.searcher() as searcher:
 
