@@ -10,17 +10,17 @@ def createSpeciesJson(source_path, output_file):
 
     # here's a regex to test for species dirs:
 
-    #                group(8) - Species --------------------------------------------.
-    #                           (a literal underscore) --------------------------.  |
-    #                group(7) - Genus ----------------------------------------.  |  |
-    #                group(6) - Genus, again ---------------------------.     |  |  |
-    #                group(5) - Family ---------------------------.     |     |  |  |
-    #                group(4) - Order ----------------------.     |     |     |  |  |
-    #                group(3) - Class ----------------.     |     |     |     |  |  |
-    #                group(2) - Phylum ---------.     |     |     |     |     |  |  |
-    #                group(1) - Kingdom --.     |     |     |     |     |     |  |  |
-    #                                     V     V     V     V     V     V     V  V  V
-    sppdir_regex = re.compile(r'species/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)_(\w+)/summaries_temperature$')
+    #                group(8) - Species ---------------------------------------------.
+    #                           (a literal underscore) --------------------------.   |
+    #                group(7) - Genus ----------------------------------------.  |   |
+    #                group(6) - Genus, again ---------------------------.     |  |   |
+    #                group(5) - Family ---------------------------.     |     |  |   |
+    #                group(4) - Order ----------------------.     |     |     |  |   |
+    #                group(3) - Class ----------------.     |     |     |     |  |   |
+    #                group(2) - Phylum ---------.     |     |     |     |     |  |   |
+    #                group(1) - Kingdom --.     |     |     |     |     |     |  |   |
+    #                                     V     V     V     V     V     V     V  V   V
+    sppdir_regex = re.compile(r'species/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)_([-\w]+)/summaries_temperature$')
 
     # Any dir that matches the regex (starting from source_path) is a dir
     # that contains species level data. For example:
