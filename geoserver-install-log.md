@@ -34,8 +34,15 @@ Fiddle HTTP and HTTPS into the firewall rules:
 	vi /etc/sysconfig/iptables
 	# add in -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 
-Insert wallace map styles:
+Get geoserver set up with workspaces, map styles etc:
 
-	# cd into wallace's `./utilityscripts/geoserver` dir
-	# update the hostname inside the `add-styles.sh` script
+	# these scripts are in the `./utilityscripts/geoserver` dir, `cd` into there
+	# update the hostname etc inside all these scripts
 	./add-styles.sh
+	./add-workspace.sh
+
+
+
+
+
+

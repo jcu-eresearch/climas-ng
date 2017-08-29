@@ -20,6 +20,8 @@ from whoosh import index
 from whoosh.qparser import QueryParser
 from whoosh.query import Or, And, Term
 
+import requests
+
 # -------------------------------------------------------------------
 
 # -------------------------------------------------------------------
@@ -34,6 +36,7 @@ class ApiView(object):
         command = self.request.matchdict['command']
         params = self.request.params
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         if command == 'namesearch':
 
             search_index = self.request.registry.settings['whoosh_index']
@@ -65,6 +68,49 @@ class ApiView(object):
 
             json_content = json.dumps(matches)
             return Response(body=json_content, content_type='application/json')
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        elif command == 'preplayer':
+
+            # ==== what's the map they want?
+
+            # for now assume it's lions
+            map_path = "Animalia/Chordata/Mammalia/Carnivora/Felidae/Panthera/Panthera_leo"
+            map_type = "species"
+            map_id = "Panthera leo"
+            map_projection = "TEMP_2_10.no.disp"
+
+            # now we have that we can work out some stuff
+            path_to_map_tif = ''.join([
+                "file:///rdsi/wallace2/W2_website/species/",
+                map_path,
+                "/summaries_temperature/",
+                map_projection,
+                ".tif"
+            ])
+            coverage_name = ':'.join([map_type, map_projection])
+
+            # ==== insert that map into geoserver
+
+            # todo: put this into a timeout somehow
+            poke = requests.put(
+                "http://wallace-maps.hpc.jcu.edu.au/geoserver/rest/workspaces/wallace/coveragestores/" + coverage_name + "/external.geotiff",
+                data=path_to_map_tif,
+                auth=('admin', 'geoserver')
+            )
+
+            # ==== return the WMS url for that layer
+                
+            if poke.status_code == 201:
+                result = {
+                    mapUrl: "http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
+                    layerName: "wallace:" + coverage_name
+                }
+
+                return Response(body=result, content_type='application/json')
+
+            # if we haven't returned uyet, our layer poke didn't work
+            return Response(body=poke, content_type='application/json')
+
 
     # ---------------------------------------------------------------
 
