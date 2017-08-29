@@ -19,7 +19,8 @@ install_reqs = [
     'coverage',
     'simplejson',
     'pypandoc==0.8.3',
-    'whoosh'
+    'whoosh',
+    'requests'
 ]
 
 setup_reqs = [
