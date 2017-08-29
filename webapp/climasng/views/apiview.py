@@ -102,8 +102,8 @@ class ApiView(object):
                 
             if poke.status_code == 201:
                 result = {
-                    mapUrl: "http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
-                    layerName: "wallace:" + coverage_name
+                    "mapUrl": "http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
+                    "layerName": "wallace:" + coverage_name
                 }
 
                 return Response(body=result, content_type='application/json')
