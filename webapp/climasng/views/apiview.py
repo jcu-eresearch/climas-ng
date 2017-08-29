@@ -102,11 +102,12 @@ class ApiView(object):
                 
             if poke.status_code == 201:
                 result = {
-                    "mapUrl": "http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
-                    "layerName": "wallace:" + coverage_name
+                    "mapUrl": u"http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
+                    "layerName": u"wallace:" + coverage_name
                 }
 
-                return Response(body=result, content_type='application/json')
+                json_content = json.dumps(result)
+                return Response(body=json_content, content_type='application/json')
 
             # if we haven't returned uyet, our layer poke didn't work
             return Response(body=poke, content_type='application/json')
