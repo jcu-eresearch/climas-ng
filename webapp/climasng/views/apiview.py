@@ -109,8 +109,8 @@ class ApiView(object):
                 json_content = json.dumps(result)
                 return Response(body=json_content, content_type='application/json')
 
-            # if we haven't returned uyet, our layer poke didn't work
-            return Response(body=poke, content_type='application/json')
+            # if we haven't returned yet, our layer poke didn't work
+            return Response(body=poke.json(), content_type='application/json')
 
 
     # ---------------------------------------------------------------
