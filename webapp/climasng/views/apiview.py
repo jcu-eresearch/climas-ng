@@ -100,7 +100,7 @@ class ApiView(object):
 
             # ==== return the WMS url for that layer
                 
-            if poke.status_code == 201:
+            if poke.ok:
                 result = {
                     "mapUrl": u"http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
                     "layerName": u"wallace:" + coverage_name
@@ -110,7 +110,7 @@ class ApiView(object):
                 return Response(body=json_content, content_type='application/json')
 
             # if we haven't returned yet, our layer poke didn't work
-            return Response(body=poke.json(), content_type='application/json')
+            return Response(body='' + poke.status_code + ' ' + poke.reason + '\n' + poke.text, content_type='application/json')
 
 
     # ---------------------------------------------------------------
