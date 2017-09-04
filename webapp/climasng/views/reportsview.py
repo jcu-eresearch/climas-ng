@@ -11,7 +11,7 @@ class ReportsView(object):
     def __init__(self, request):
         self.request = request
 
-    @view_config(route_name='reports', renderer='../templates/reports.html.pt')
+    # @view_config(route_name='reports', renderer='../templates/reports.html.pt')
     def __call__(self):
         return {}
 
