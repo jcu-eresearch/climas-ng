@@ -95,6 +95,7 @@ class ApiView(object):
             poke = requests.put(
                 "http://wallace-maps.hpc.jcu.edu.au/geoserver/rest/workspaces/wallace/coveragestores/" + coverage_name + "/external.geotiff",
                 data=path_to_map_tif,
+                filename=coverage_name,
                 auth=('admin', 'geoserver')
             )
 
