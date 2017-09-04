@@ -1,5 +1,11 @@
 @font-face {
   font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v13/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
   src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v13/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
@@ -15,12 +21,6 @@
   font-style: normal;
   font-weight: 900;
   src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v13/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v13/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
 }
 body {
   padding: 0;

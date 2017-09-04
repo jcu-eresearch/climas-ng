@@ -347,7 +347,6 @@ AppView = Backbone.View.extend {
             projectionName = 'current' if sideInfo.degs == 'baseline'
 
 
-
         mapInfo = @mapList[@nameIndex[sideInfo.mapName]]
 
         if mapInfo
@@ -372,38 +371,95 @@ AppView = Backbone.View.extend {
         else
             console.log "Can't map that -- no '#{sideInfo.mapName}' in index"
 
-        # update the download links
-        @$('#' + side + 'mapdl').attr 'href', mapUrl
+        # at this point we've worked out everything we can about the map
+        # the user is asking for.
 
+        # now we have to ask for a URL to the geoserver with that map, 
+        # and the layerName to use when loading it.
 
-        # we've made a url, start the map layer loading
-        layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
-            DATA_URL: mapUrl
-            layers: 'DEFAULT'
-            format: 'image/png'
-            transparent: true
+        # TODO: use a pair of globals (leftfetch and rightfetch) to ensure
+        # early ajaxes are abandoned before starting a new one.
+
+        $.ajax({
+            url: '/api/preplayer/'
+            data: { mapInfo }
+        }).done( (data)=>
+
+            # when the layer prep is complete..
+
+            console.log ['layer prepped, answer is ', data]
+            wmsUrl = data.mapUrl
+            wmsLayer = data.layerName
+
+            # update the download links
+            # TODO: we don't have the url of the map anymore..
+            # @$('#' + side + 'mapdl').attr 'href', mapUrl
+
+            # start the map layer loading
+            layer = L.tileLayer.wms wmsUrl, {
+                layers: wmsLayer
+                format: 'image/png'
+                transparent: true
             }
 
-        # add a class to our element when there's tiles loading
-        loadClass = '' + side + 'loading'
-        layer.on 'loading', ()=> @$el.addClass loadClass
-        layer.on 'load', ()=> @$el.removeClass loadClass
+            # add a class to our element when there's tiles loading
+            loadClass = '' + side + 'loading'
+            layer.on 'loading', ()=> @$el.addClass loadClass
+            layer.on 'load', ()=> @$el.removeClass loadClass
 
-        if side == 'left'
-            @map.removeLayer @leftLayer if @leftLayer
-            @leftLayer = layer
+            if side == 'left'
+                @map.removeLayer @leftLayer if @leftLayer
+                @leftLayer = layer
 
-        if side == 'right'
-            @map.removeLayer @rightLayer if @rightLayer
-            @rightLayer = layer
+            if side == 'right'
+                @map.removeLayer @rightLayer if @rightLayer
+                @rightLayer = layer
 
-        layer.addTo @map
+            layer.addTo @map
 
-        @resizeThings() # re-establish the splitter
+            @resizeThings() # re-establish the splitter
 
-        # if we're local, log the map URL to the console
-        if window.location.hostname == 'localhost'
-            console.log 'map URL is: ', mapUrl
+        ).fail( (jqx, status)=>
+            # when the layer prep has failed..
+            debug status, 'warning'
+        )
+
+
+
+
+
+        # # update the download links
+        # @$('#' + side + 'mapdl').attr 'href', mapUrl
+
+
+        # # we've made a url, start the map layer loading
+        # layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
+        #     DATA_URL: mapUrl
+        #     layers: 'DEFAULT'
+        #     format: 'image/png'
+        #     transparent: true
+        #     }
+
+        # # add a class to our element when there's tiles loading
+        # loadClass = '' + side + 'loading'
+        # layer.on 'loading', ()=> @$el.addClass loadClass
+        # layer.on 'load', ()=> @$el.removeClass loadClass
+
+        # if side == 'left'
+        #     @map.removeLayer @leftLayer if @leftLayer
+        #     @leftLayer = layer
+
+        # if side == 'right'
+        #     @map.removeLayer @rightLayer if @rightLayer
+        #     @rightLayer = layer
+
+        # layer.addTo @map
+
+        # @resizeThings() # re-establish the splitter
+
+        # # if we're local, log the map URL to the console
+        # if window.location.hostname == 'localhost'
+        #     console.log 'map URL is: ', mapUrl
 
         # # log this as an action in Google Analytics
         # if ga and typeof(ga) == 'function'
