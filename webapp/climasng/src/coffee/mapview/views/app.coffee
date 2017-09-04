@@ -382,6 +382,7 @@ AppView = Backbone.View.extend {
 
         $.ajax({
             url: '/api/preplayer/'
+            method: 'POST'
             data: { mapInfo }
         }).done( (data)=>
 

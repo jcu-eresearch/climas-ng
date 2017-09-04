@@ -269,6 +269,7 @@
       }
       return $.ajax({
         url: '/api/preplayer/',
+        method: 'POST',
         data: {
           mapInfo: mapInfo
         }
