@@ -383,7 +383,7 @@ AppView = Backbone.View.extend {
         $.ajax({
             url: '/api/preplayer/'
             method: 'POST'
-            data: { mapInfo }
+            data: { 'info': mapInfo, 'proj': projectionName }
         }).done( (data)=>
 
             # when the layer prep is complete..

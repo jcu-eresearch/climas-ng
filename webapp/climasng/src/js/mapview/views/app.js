@@ -271,7 +271,8 @@
         url: '/api/preplayer/',
         method: 'POST',
         data: {
-          mapInfo: mapInfo
+          'info': mapInfo,
+          'proj': projectionName
         }
       }).done((function(_this) {
         return function(data) {
