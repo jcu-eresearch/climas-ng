@@ -83,9 +83,9 @@ class ApiView(object):
 
             print(pprint.pformat(self.request.params, indent=4))
 
-            map_type = params['info']['type']
-            map_path = params['info']['path']
-            map_id   = params['info']['mapId']
+            map_type = params['info[type]']
+            map_path = params['info[path]']
+            map_id   = params['info[mapId]']
             map_projection = params['proj']
 
             if map_type == 'species':
