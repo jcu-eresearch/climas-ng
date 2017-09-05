@@ -22,6 +22,8 @@ from whoosh.query import Or, And, Term
 
 import requests
 
+import pprint
+
 # -------------------------------------------------------------------
 
 # -------------------------------------------------------------------
@@ -79,7 +81,11 @@ class ApiView(object):
             map_id = "Panthera leo"
             map_projection = "TEMP_2_10.no.disp"
 
-            print(json.dumps(self.request.params, indent=4))
+            print(pprint.pformat(self.request.params, indent=4))
+
+# ('mapInfo[path]', u'Animalia/Chordata/Mammalia/Chiroptera/Phyllostomidae/Lionycteris/Lionycteris_spurrelli'), 
+# ('mapInfo[type]', u'species'), 
+# ('mapInfo[mapId]', u'Lionycteris spurrelli')
 
             # now we have that we can work out some stuff
             path_to_map_tif = ''.join([
