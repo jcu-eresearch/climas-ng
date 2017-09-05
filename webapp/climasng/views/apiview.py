@@ -79,6 +79,8 @@ class ApiView(object):
             map_id = "Panthera leo"
             map_projection = "TEMP_2_10.no.disp"
 
+            print(json.dumps(self.request.params, indent=4))
+
             # now we have that we can work out some stuff
             path_to_map_tif = ''.join([
                 "file:///rdsi/wallace2/W2_website/species/",
