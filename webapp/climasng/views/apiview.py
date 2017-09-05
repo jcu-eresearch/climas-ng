@@ -83,19 +83,21 @@ class ApiView(object):
 
             print(pprint.pformat(self.request.params, indent=4))
 
-# ('mapInfo[path]', u'Animalia/Chordata/Mammalia/Chiroptera/Phyllostomidae/Lionycteris/Lionycteris_spurrelli'), 
-# ('mapInfo[type]', u'species'), 
-# ('mapInfo[mapId]', u'Lionycteris spurrelli')
+            map_type = params['info']['type']
+            map_path = params['info']['path']
+            map_id   = params['info']['mapId']
+            map_projection = params['proj']
 
-            # now we have that we can work out some stuff
-            path_to_map_tif = ''.join([
-                "file:///rdsi/wallace2/W2_website/species/",
-                map_path,
-                "/summaries_temperature/",
-                map_projection,
-                ".tif"
-            ])
-            coverage_name = '__'.join([map_type, map_id.replace(' ', '_'), map_projection])
+            if map_type == 'species':
+                path_to_map_tif = ''.join([
+                    "file:///rdsi/wallace2/W2_website/species/",
+                    map_path,
+                    "/summaries_temperature/",
+                    map_projection,
+                    ".tif"
+                ])
+                coverage_name = '__'.join([map_type, map_id.replace(' ', '_'), map_projection])
+
 
             # ==== insert that map into geoserver
 
