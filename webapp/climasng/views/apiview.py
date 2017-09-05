@@ -97,6 +97,12 @@ class ApiView(object):
                 data=path_to_map_tif,
                 auth=('admin', 'geoserver')
             )
+            poke = requests.post(
+                "http://wallace-maps.hpc.jcu.edu.au/geoserver/rest/workspaces/wallace/coveragestores/" + coverage_name + "/coverages",
+                data="<coverage><name>" + coverage_name + "</name><nativeName>" + map_projection + "</nativeName></coverage>",
+                auth=('admin', 'geoserver'),
+                headers={'Content-type': 'text/xml'}
+            )
 
             # ==== return the WMS url for that layer
                 
