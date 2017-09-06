@@ -320,6 +320,7 @@ AppView = Backbone.View.extend {
         mapUrl = ''
         zipUrl = ''
 
+        # TODO: use mapInfo.type instead of these booleans
         isRichness = sideInfo.mapName.startsWith 'Richness -'
         isRefugia = sideInfo.mapName.startsWith 'Refugia -'
         isConcern = sideInfo.mapName.startsWith 'Concern -'

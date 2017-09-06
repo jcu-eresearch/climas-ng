@@ -92,6 +92,14 @@ class ApiView(object):
                     ".tif"
                 ])
 
+            if map_type == 'richness':
+                path_to_map_tif = ''.join([
+                    "file:///rdsi/wallace2/W2_website/",
+                    map_path,
+                    "/",
+                    map_projection,
+                    ".tif"
+                ])
 
             coverage_name = '@'.join([map_type, map_id.replace(' ', '_'), map_projection])
 
