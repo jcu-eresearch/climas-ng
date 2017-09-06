@@ -75,12 +75,7 @@ class ApiView(object):
 
             # ==== what's the map they want?
 
-            # for now assume it's lions
-            map_path = "Animalia/Chordata/Mammalia/Carnivora/Felidae/Panthera/Panthera_leo"
-            map_type = "species"
-            map_id = "Panthera leo"
-            map_projection = "TEMP_2_10.no.disp"
-
+            # TODO: remove this output line
             print(pprint.pformat(self.request.params, indent=4))
 
             map_type = params['info[type]']
@@ -96,7 +91,9 @@ class ApiView(object):
                     map_projection,
                     ".tif"
                 ])
-                coverage_name = '__'.join([map_type, map_id.replace(' ', '_'), map_projection])
+
+
+            coverage_name = '@'.join([map_type, map_id.replace(' ', '_'), map_projection])
 
 
             # ==== insert that map into geoserver
