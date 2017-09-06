@@ -101,7 +101,7 @@ class ApiView(object):
                     ".tif"
                 ])
 
-            coverage_name = '@'.join([map_type, map_id.replace(' ', '_'), map_projection])
+            coverage_name = '~'.join([map_type, map_id.replace(' ', '_'), map_projection])
 
 
             # ==== insert that map into geoserver
