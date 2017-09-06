@@ -103,6 +103,8 @@ class ApiView(object):
 
             coverage_name = '~'.join([map_type, map_id.replace(' ', '_'), map_projection])
 
+            # TODO: remove this debug
+            print(path_to_map_tif)
 
             # ==== insert that map into geoserver
 
