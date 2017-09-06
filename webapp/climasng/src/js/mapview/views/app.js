@@ -283,6 +283,7 @@
           layer = L.tileLayer.wms(wmsUrl, {
             layers: wmsLayer,
             format: 'image/png',
+            styles: 'spp-suitability-purple',
             transparent: true
           });
           loadClass = '' + side + 'loading';

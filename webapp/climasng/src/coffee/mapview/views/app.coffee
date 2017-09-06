@@ -388,7 +388,7 @@ AppView = Backbone.View.extend {
 
             # when the layer prep is complete..
 
-            console.log ['layer prepped, answer is ', data]
+            console.log ['layer prepped, answer is ', data] 
             wmsUrl = data.mapUrl
             wmsLayer = data.layerName
 
@@ -400,6 +400,7 @@ AppView = Backbone.View.extend {
             layer = L.tileLayer.wms wmsUrl, {
                 layers: wmsLayer
                 format: 'image/png'
+                styles: 'spp-suitability-purple'
                 transparent: true
             }
 
