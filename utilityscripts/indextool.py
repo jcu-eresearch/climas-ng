@@ -24,7 +24,7 @@ from whoosh.query import Or, And, Term
 # -------------------------------------------------------------------
 # config
 
-json_data_dir = '/var/wallacewebapp/climasng/data'
+json_data_dir = '/srv/wallacewebapp/climasng/data'
 species_json_file = 'species.json'
 summaries_json_file = 'summaries.json'
 
