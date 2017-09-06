@@ -116,7 +116,7 @@ class ApiView(object):
 
             # ==== return the WMS url for that layer
                 
-            if poke.ok:
+            if (poke.ok or 'already exists' in poke.result):
                 result = {
                     "ok": True,
                     "mapUrl": u"http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms",
