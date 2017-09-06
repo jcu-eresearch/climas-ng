@@ -92,7 +92,8 @@ class ApiView(object):
                     ".tif"
                 ])
 
-            if map_type == 'richness':
+            else:
+                # all the summary maps types have the same path 
                 path_to_map_tif = ''.join([
                     "file:///rdsi/wallace2/W2_website/",
                     map_path,
