@@ -10,6 +10,24 @@
             <Opacity>0.7</Opacity>
             <ColorMap>
               <ColorMapEntry color="#ffffff" opacity="0" quantity="-1"/>
+<!-- 
+              <ColorMapEntry color="#ffffff" opacity="1" quantity="0"/>
+              <ColorMapEntry color="#9900ff" opacity="1" quantity="750"/>
+ -->
+
+              <ColorMapEntry color="#ffffff" opacity="0" quantity="0"/>
+              <ColorMapEntry color="#eeddaa" opacity="1" quantity="1"/>
+              <ColorMapEntry color="#bb7700" opacity="1" quantity="5"/>
+              <ColorMapEntry color="#99ff33" opacity="1" quantity="15"/>
+              <ColorMapEntry color="#66cc18" opacity="1" quantity="25"/>
+              <ColorMapEntry color="#339900" opacity="1" quantity="50"/>
+              <ColorMapEntry color="#116600" opacity="1" quantity="250"/>
+              <ColorMapEntry color="#001166" opacity="1" quantity="750"/>
+              <ColorMapEntry color="#660066" opacity="1" quantity="1500"/>
+              <ColorMapEntry color="#ff00ff" opacity="1" quantity="5000"/>
+
+<!--
+              <ColorMapEntry color="#ffffff" opacity="0" quantity="-1"/>
               <ColorMapEntry color="#ffffff" opacity="1" quantity="0"/>
               <ColorMapEntry color="#eeccff" opacity="1" quantity="4"/>
               <ColorMapEntry color="#dd99ff" opacity="1" quantity="16"/>
@@ -17,7 +35,9 @@
               <ColorMapEntry color="#bb55ff" opacity="1" quantity="256"/>
               <ColorMapEntry color="#aa33ff" opacity="1" quantity="1024"/>
               <ColorMapEntry color="#9900ff" opacity="1" quantity="4096"/>
-              </ColorMap>
+ -->
+
+            </ColorMap>
             </RasterSymbolizer>
           </Rule>
       </FeatureTypeStyle>
