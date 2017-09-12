@@ -7,11 +7,18 @@
       <FeatureTypeStyle>
         <Rule>
           <RasterSymbolizer>
-            <Opacity>0.7</Opacity>
+            <Opacity>0.6</Opacity>
             <ColorMap>
+
+
               <ColorMapEntry color="#ffffff" opacity="0" quantity="0"/>
-              <ColorMapEntry color="#00ff00" opacity="1" quantity="1"/>
-              <ColorMapEntry color="#ff0000" opacity="1" quantity="21"/>
+              
+              <ColorMapEntry color="#eecc99" opacity="1" quantity="1"/>
+              <ColorMapEntry color="#bb7700" opacity="1" quantity="9"/>
+              <ColorMapEntry color="#ff6666" opacity="1" quantity="11"/>
+              <ColorMapEntry color="#992222" opacity="1" quantity="17"/>
+              <ColorMapEntry color="#880000" opacity="1" quantity="21"/>
+
               </ColorMap>
             </RasterSymbolizer>
           </Rule>
