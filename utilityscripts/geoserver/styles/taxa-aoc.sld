@@ -10,7 +10,6 @@
             <Opacity>0.6</Opacity>
             <ColorMap>
 
-
               <ColorMapEntry color="#ffffff" opacity="0" quantity="0"/>
               
               <ColorMapEntry color="#eecc99" opacity="1" quantity="1"/>
