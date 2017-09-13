@@ -73,10 +73,10 @@ class ApiView(object):
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         elif command == 'preplayer':
 
-            # ==== what's the map they want?
+            gs_user = self.request.registry.settings['climnas.gs.user']
+            gs_pass = self.request.registry.settings['climas.gs.pass']
 
-            # TODO: remove this output line
-            print(pprint.pformat(self.request.params, indent=4))
+            # ==== what's the map they want?
 
             map_type = params['info[type]']
             map_path = params['info[path]']
@@ -113,12 +113,12 @@ class ApiView(object):
             poke = requests.put(
                 "http://wallace-maps.hpc.jcu.edu.au/geoserver/rest/workspaces/wallace/coveragestores/" + coverage_name + "/external.geotiff",
                 data=path_to_map_tif,
-                auth=('admin', 'geoserver')
+                auth=(gs_user, gs_pass)
             )
             poke = requests.post(
                 "http://wallace-maps.hpc.jcu.edu.au/geoserver/rest/workspaces/wallace/coveragestores/" + coverage_name + "/coverages",
                 data="<coverage><name>" + coverage_name + "</name><nativeName>" + map_projection + "</nativeName></coverage>",
-                auth=('admin', 'geoserver'),
+                auth=(gs_user, gs_pass),
                 headers={'Content-type': 'text/xml'}
             )
 
