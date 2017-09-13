@@ -3,7 +3,8 @@ HOSTNAME=wallace-maps.hpc.jcu.edu.au
 PORT=80
 
 USER=admin
-PASS=geoserver
+PASS=${GEOSERVER_PASS:-geoserver} # default to "geoserver" if GEOSERVER_PASS isn't set
+echo "set GEOSERVER_PASS environment variable for this to work."
 
 STYLESDIR=./styles
 
