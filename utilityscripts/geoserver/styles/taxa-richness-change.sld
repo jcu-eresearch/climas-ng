@@ -12,8 +12,8 @@
 
               <ColorMapEntry color="#bb0000" opacity="1" quantity="0.00"/>
               <ColorMapEntry color="#eecc99" opacity="1" quantity="0.25"/>
-              <ColorMapEntry color="#bb7700" opacity="1" quantity="0.475"/>
-              <ColorMapEntry color="#99ff33" opacity="1" quantity="0.525"/>
+              <ColorMapEntry color="#bb7700" opacity="1" quantity="0.475" label="pre-inflection" />
+              <ColorMapEntry color="#99ff33" opacity="1" quantity="0.525" label="post-inflection" />
               <ColorMapEntry color="#66cc18" opacity="1" quantity="0.75"/>
               <ColorMapEntry color="#003300" opacity="1" quantity="1.00"/>
               <ColorMapEntry color="#002299" opacity="1" quantity="10.00"/>
