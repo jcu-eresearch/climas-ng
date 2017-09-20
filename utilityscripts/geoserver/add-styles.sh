@@ -4,7 +4,9 @@ PORT=80
 
 USER=admin
 PASS=${GEOSERVER_PASS:-geoserver} # default to "geoserver" if GEOSERVER_PASS isn't set
+echo
 echo "set GEOSERVER_PASS environment variable for this to work."
+echo
 
 STYLESDIR=./styles
 
@@ -14,9 +16,10 @@ for STYLEFILE in $STYLESDIR/*.sld ; do
 	STYLENAME=${STYLENAME#$STYLESDIR/}
 
 	# post to create the new style (doesn't actually define it though)
-	echo "creating style '$STYLENAME'..."
-	curl -w " (result: %{http_code})" \
-		-u "$USER:$PASS" \
+	echo -n "Creating style '$STYLENAME'..."
+	curl --silent --write-out " (result: %{http_code})" \
+		--output /dev/null \
+		--user "$USER:$PASS" \
 		-XPOST \
 		-H "Content-type: text/xml" \
 		-d "<style><name>$STYLENAME</name><filename>$STYLENAME.sld</filename></style>" \
@@ -24,8 +27,8 @@ for STYLEFILE in $STYLESDIR/*.sld ; do
 	echo
 
 	# put the style's definiiton into the style created above
-	echo "updating style '$STYLENAME'..."
-	curl -w " (result: %{http_code})" \
+	echo -n "Updating style '$STYLENAME'..."
+	curl --silent --write-out " (result: %{http_code})" \
 		-u "$USER:$PASS" \
 		-XPUT \
 		-H "Content-type: application/vnd.ogc.sld+xml" \
@@ -34,5 +37,13 @@ for STYLEFILE in $STYLESDIR/*.sld ; do
 
 	echo
 done
+
+echo
+echo "Making legends:"
+echo
+
+./make-svg-legends.py $STYLESDIR
+cp -r ./legends/*.svg ~/projects/vagrant-maps-test/test/legends/
+
 
 

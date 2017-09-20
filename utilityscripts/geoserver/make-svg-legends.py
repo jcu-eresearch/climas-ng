@@ -3,18 +3,43 @@
 import os
 import sys
 import hashlib
+import re
+import decimal
 from xml.dom import minidom
 
 
-LEGEND_FONT_SIZE = 4.0 # lineheight: "units" between lines of text, legend is 100 units tall
+LEGEND_FONT_SIZE = 3.6 # lineheight: "units" between lines of text, legend is 100 units tall
 
+# ---------------------------------------------------------
+def qty_label(qty):
+
+	# can't do this coz big numbers go to sci notation
+	# label = "%g" % qty 
+	# instead do a stupid dance through Decimal format
+
+	ctx = decimal.Context()
+	ctx.prec = 20
+	label = format(ctx.create_decimal(repr(qty)), 'f')
+
+	# decimal zero
+	label = re.sub(r'.0$', r'', label)
+
+	# millions
+	label = re.sub(r'(\d)([1-9])00000$', r'\1.\2M', label)
+	label = re.sub(r'000000$', 'M', label)
+
+	# thousands
+	label = re.sub(r'(\d)([1-9])00$', r'\1.\2k', label)
+	label = re.sub(r'000$', 'k', label)
+
+	return label
 
 # ---------------------------------------------------------
 def make_legend(sld, legend):
 
 	print('generating legend for ' + sld)
 
-	# uniq code for this sld
+	# a "unique" code for this sld, used in SVG element ids
 	sld_code = hashlib.md5(sld.encode('utf8')).hexdigest()[:5]
 
 	dom = minidom.parse(sld)
@@ -25,58 +50,74 @@ def make_legend(sld, legend):
 	lthings = []
 	prev_color = None
 	prev_value = None
-	prev_inflection = None
+	prev_liminal = None
 	for c in colorentries:
 
 		# skip the transparent ones
 		if c.getAttribute('opacity') == "0":
 			continue
 
-##################
-##################
-##################
-##################
-##################
-##################
-##################
-##################
-##################
-##################
-##################
-################## this next bit is for detecting the inflection points...
-##################
+		# maybe this is a color transition point
+		if 'liminal' in c.getAttribute('label'):
+			if prev_liminal is None:
+				prev_liminal = {
+	        		'value': float(c.getAttribute('quantity')),
+	        		'col': c.getAttribute('color')
+				}
+				continue
 
-		# # maybe this is a post-inflection point
-		# if 'post-inflection' in c.getAttribute('label'):
-		# 	prev_inflection = {
-        #
-		# 	}
+			else:
 
-		newthing = {}
+				# gradient from previous one
+				if prev_color is not None:
+					# ..then we need a gradient section joining the last
+					# colour with this colour
+					lthings.append({
+						'col1': prev_color,
+						'col2': prev_liminal['col'],
+						'fixed': 0,
+						'variable': 3
+					})
+
+				# this is a liminal value, and we just saw a liminal value
+				lthings.append({
+					'col1': prev_liminal['col'],
+					'col2': c.getAttribute('color'),
+					'value': (prev_liminal['value'] + float(c.getAttribute('quantity')))/2,
+					'fixed': 0,
+					'variable': 1
+				})
+				prev_color = c.getAttribute('color')
+				prev_liminal = None
+				continue
+
+		else:
+			# this ISN'T marked as liminal
+			prev_liminal = None
+
 
 		# gradient from previous one
 		if prev_color is not None:
+			# .. then gradient from prev_color to us
+			lthings.append({
+				'col1': prev_color,
+				'col2': c.getAttribute('color'),
+				'fixed': 0,
+				'variable': 3
+			})
 
-			newthing['type'] = 'gradientgap'
-			newthing['col1'] = prev_color
-			newthing['col2'] = c.getAttribute('color')
-			newthing['fixed'] = 0
-			newthing['variable'] = 3
+		if 'hidden' not in c.getAttribute('label'):
+			# hidden points have leading-in gradients, but not labels
+			lthings.append({
+				'value': float(c.getAttribute('quantity')),
+				'col1': c.getAttribute('color'),
+				'col2': c.getAttribute('color'),
+				'fixed': 2,
+				'variable': 0,
+			})
 
-			lthings.append(newthing)
-
-			newthing = {}
-
-		newthing['type'] = 'labelpoint'
-		newthing['value'] = float(c.getAttribute('quantity'))
-		newthing['col1'] = c.getAttribute('color')
-		newthing['col2'] = c.getAttribute('color')
-		newthing['fixed'] = 2
-		newthing['variable'] = 0
-
-		lthings.append(newthing)
-		prev_color = newthing['col1']
-		prev_value = newthing['value']
+		prev_color = c.getAttribute('color')
+		prev_value = float(c.getAttribute('quantity'))
 
 	legend_fixed_size = 2 # fixed gap at top and bottom
 	legend_var_size = 0
@@ -87,7 +128,7 @@ def make_legend(sld, legend):
 	legend_total_size = legend_fixed_size + legend_var_size
 
 	# allocate sizes from the 100% we have available.
-	fix_alloc = 0.8 * LEGEND_FONT_SIZE # remember a label gets two of these
+	fix_alloc = 0.55 * LEGEND_FONT_SIZE # remember a label gets two of these
 	var_alloc = (100.0 - (float(fix_alloc) * float(legend_fixed_size))) / float(legend_var_size)
 
 	for t in lthings:
@@ -95,7 +136,7 @@ def make_legend(sld, legend):
 
 	with open(legend, 'w') as f:
 
-		f.write('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="400" viewBox="0 0 25 100">')
+		f.write('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="300" viewBox="0 0 12 100">')
 		f.write('<defs><linearGradient id="legend-gradient-%s" x1="0" x2="0" y1="0" y2="1">' % sld_code)
 
 		offset = fix_alloc # start with a fixed space of initial padding
@@ -105,15 +146,15 @@ def make_legend(sld, legend):
 			f.write('<stop offset="%g%%" stop-color="%s"></stop>' % (offset, t['col2']))
 
 		f.write('</linearGradient></defs>')
-		f.write('<rect x="0" y="0" width="25" height="100" fill="url(#legend-gradient-%s)"></rect>' % sld_code)
+		f.write('<rect x="0" y="0" width="12" height="100" fill="url(#legend-gradient-%s)"></rect>' % sld_code)
 
 		offset = fix_alloc # start with a fixed space of initial padding
 		for t in lthings:
 			textpos = offset + float(t['height']) / 2
 			if t.get('value') is not None:
 				th = LEGEND_FONT_SIZE
-				f.write('<rect fill="white" fill-opacity="0.8" x="7" y="%g" width="11" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
-				f.write('<text x="12.5" y="%g" dy="0.33em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%g</text>' % (textpos, LEGEND_FONT_SIZE, t['value']))
+				f.write('<rect fill="white" fill-opacity="0.5" x="1.5" y="%g" width="9" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
+				f.write('<text x="6" y="%g" dy="0.33em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % (textpos, LEGEND_FONT_SIZE, qty_label(t['value'])))
 
 			offset += t['height']
 
@@ -127,25 +168,31 @@ def make_legends(srcpath, destpath):
     	for file in files:
     		if file[-4:].lower() == '.sld':
     			src = os.path.join(srcpath, file)
-    			dest = os.path.join(destpath, file + '.svg.html')
+    			dest = os.path.join(destpath, file + '.svg')
     			make_legend(src, dest)
+
 # ---------------------------------------------------------
 def usage():
 	print('Usage:')
 	print('    make-legends.py [source dir [destination dir]]')
-	print('        source dir: where to find .sld files')
+	print('        source dir: where to find .sld files (defaults to ./styles)')
 	print('        destination dir: where to put .html files (defaults to ./legends)')
 
+# ---------------------------------------------------------
 if __name__ == "__main__":
 
 	src = 'styles'
 	dst = 'legends'
 
 	if len(sys.argv) > 1:
-		src = argv[1]
+		src = sys.argv[1]
 
 	if len(sys.argv) > 2:
-		dst = argv[2]
+		dst = sys.argv[2]
+
+	if len(sys.argv) > 3:
+		usage()
+		sys.exit()
 
 	if os.path.isdir(src) and os.path.isdir(dst):
 		make_legends(src, dst)

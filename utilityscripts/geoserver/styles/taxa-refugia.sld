@@ -14,8 +14,8 @@
               <ColorMapEntry color="#ffffff" opacity="0" quantity="0"/>
               
               <ColorMapEntry color="#eecc99" opacity="1" quantity="1"/>
-              <ColorMapEntry color="#bb7700" opacity="1" quantity="9"/>
-              <ColorMapEntry color="#99ff33" opacity="1" quantity="11"/>
+              <ColorMapEntry color="#bb7700" opacity="1" quantity="9" label="liminal" />
+              <ColorMapEntry color="#99ff33" opacity="1" quantity="11" label="liminal" />
               <ColorMapEntry color="#669900" opacity="1" quantity="17"/>
               <ColorMapEntry color="#003300" opacity="1" quantity="19"/>
               <ColorMapEntry color="#005544" opacity="1" quantity="21"/>
