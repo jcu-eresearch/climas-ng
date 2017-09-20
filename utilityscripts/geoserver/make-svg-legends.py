@@ -16,7 +16,6 @@ def qty_label(qty):
 	# can't do this coz big numbers go to sci notation
 	# label = "%g" % qty 
 	# instead do a stupid dance through Decimal format
-
 	ctx = decimal.Context()
 	ctx.prec = 20
 	label = format(ctx.create_decimal(repr(qty)), 'f')
