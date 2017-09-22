@@ -152,8 +152,12 @@ def make_legend(sld, legend):
 			textpos = offset + float(t['height']) / 2
 			if t.get('value') is not None:
 				th = LEGEND_FONT_SIZE
-				f.write('<rect fill="white" fill-opacity="0.5" x="1.5" y="%g" width="9" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
-				f.write('<text x="6" y="%g" dy="0.33em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % (textpos, LEGEND_FONT_SIZE, qty_label(t['value'])))
+				label = qty_label(t['value'])
+				if len(label) > 3:
+					f.write('<rect fill="white" fill-opacity="0.5" x="1.5" y="%g" width="9" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
+				else:
+					f.write('<rect fill="white" fill-opacity="0.5" x="2.5" y="%g" width="7" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
+				f.write('<text x="6" y="%g" dy="0.35em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % (textpos, LEGEND_FONT_SIZE, qty_label(t['value'])))
 
 			offset += t['height']
 
