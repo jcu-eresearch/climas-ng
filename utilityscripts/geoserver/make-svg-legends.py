@@ -11,10 +11,10 @@ from xml.dom import minidom
 LEGEND_FONT_SIZE = 3.6 # lineheight: "units" between lines of text, legend is 100 units tall
 
 # ---------------------------------------------------------
-def qty_label(qty):
+def qty_label(qty, show_plus_sign=False):
 
-	# can't do this coz big numbers go to sci notation
-	# label = "%g" % qty 
+	## label = "%g" % qty 
+	# actually can't do this coz big numbers go to sci notation
 	# instead do a stupid dance through Decimal format
 	ctx = decimal.Context()
 	ctx.prec = 20
@@ -30,6 +30,10 @@ def qty_label(qty):
 	# thousands
 	label = re.sub(r'(\d)([1-9])00$', r'\1.\2k', label)
 	label = re.sub(r'000$', 'k', label)
+
+	# show the plus sign for positive values?
+	if show_plus_sign:
+		label = re.sub(r'^([\d])', r'+\1', label)
 
 	return label
 
@@ -152,12 +156,12 @@ def make_legend(sld, legend):
 			textpos = offset + float(t['height']) / 2
 			if t.get('value') is not None:
 				th = LEGEND_FONT_SIZE
-				label = qty_label(t['value'])
+				label = qty_label(t['value'], ('delta' in legend))
 				if len(label) > 3:
 					f.write('<rect fill="white" fill-opacity="0.5" x="1.5" y="%g" width="9" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
 				else:
 					f.write('<rect fill="white" fill-opacity="0.5" x="2.5" y="%g" width="7" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
-				f.write('<text x="6" y="%g" dy="0.35em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % (textpos, LEGEND_FONT_SIZE, qty_label(t['value'])))
+				f.write('<text x="6" y="%g" dy="0.35em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % (textpos, LEGEND_FONT_SIZE, label))
 
 			offset += t['height']
 

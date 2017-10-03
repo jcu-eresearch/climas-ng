@@ -43,7 +43,7 @@ echo "Making legends:"
 echo
 
 ./make-svg-legends.py $STYLESDIR
-cp -r ./legends/*.svg ~/projects/vagrant-maps-test/test/legends/
+cp -r ./legends/*.svg ./styletestpage/legends/
 
 
 
