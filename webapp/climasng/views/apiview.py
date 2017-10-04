@@ -73,7 +73,7 @@ class ApiView(object):
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         elif command == 'preplayer':
 
-            gs_user = self.request.registry.settings['climnas.gs.user']
+            gs_user = self.request.registry.settings['climas.gs.user']
             gs_pass = self.request.registry.settings['climas.gs.pass']
 
             # ==== what's the map they want?
