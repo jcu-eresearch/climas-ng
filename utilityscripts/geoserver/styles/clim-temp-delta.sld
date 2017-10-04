@@ -13,7 +13,7 @@
               <ColorMapEntry color="#55ccff" opacity="1" quantity="-1"/>
               <ColorMapEntry color="#f8f8f8" opacity="1" quantity="0"/>
               <ColorMapEntry color="#f8d899" opacity="1" quantity="1"/>
-              <ColorMapEntry color="#bb8833" opacity="1" quantity="2"/>
+              <ColorMapEntry color="#bb7733" opacity="1" quantity="2"/>
               <ColorMapEntry color="#ff8811" opacity="1" quantity="4"/>
               <ColorMapEntry color="#ee0000" opacity="1" quantity="6"/>
               <!-- <ColorMapEntry color="#991100" opacity="1" quantity="8"/> -->

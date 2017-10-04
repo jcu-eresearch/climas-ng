@@ -31,7 +31,7 @@
     	display: inline-block;
     	clear: left;
     	padding: 0;
-    	min-width: 80px;
+    	min-width: 70px;
     	white-space: nowrap;
     	margin: 0 0.5em 0 0;
     }
@@ -117,33 +117,33 @@
 		]],
 
 		['Richness', [
-			['richness current birds',     'taxa-richness',          'wallace:aves-richness-current'],
-			['rich 2.7disp birds',         'taxa-richness-change',   'wallace:richness-aves-change-disp'],
-			['rich 2.7nodisp birds',       'taxa-richness-change',   'wallace:richness.aves.nodisp'],
-			['rich current carnivora',     'taxa-richness',          'wallace:carnivora-rich-current'],
-			['rich 2.7disp carnivora',     'taxa-richness-change',   'wallace:rich-carnivora-change-disp'],
-			['rich 2.7nodisp carnivora',   'taxa-richness-change',   'wallace:carnivora-rich-nodisp'],
+			['r base birds',          'taxa-richness',          'wallace:aves-richness-current'],
+			['r 2.7disp birds',       'taxa-richness-change',   'wallace:richness-aves-change-disp'],
+			['r 2.7nodisp birds',     'taxa-richness-change',   'wallace:richness.aves.nodisp'],
+			['r base carniv',         'taxa-richness',          'wallace:carnivora-rich-current'],
+			['r 2.7disp carniv',      'taxa-richness-change',   'wallace:rich-carnivora-change-disp'],
+			['r 2.7nodisp carniv',    'taxa-richness-change',   'wallace:carnivora-rich-nodisp'],
 		]],
 
-		['Areas of concern', [
-			['AoC carnivora',              'taxa-aoc',               'wallace:aoc-carnivora-nodisp'],
-			['AoC birds',                  'taxa-aoc',               'wallace:aoc-aves-nodisp'],
+		['AoC & Refugia', [
+			['AoC carnivora',         'taxa-aoc',               'wallace:aoc-carnivora-nodisp'],
+			['AoC birds',             'taxa-aoc',               'wallace:aoc-aves-nodisp'],
+			['Refugia carnivora',     'taxa-refugia',           'wallace:refuge-carnivora-nodisp'],
+			['Refugia birds',         'taxa-refugia',           'wallace:ref-aves-nodisp'],
 		]],
 
-		['Refugia', [
-			['Refugia carnivora',          'taxa-refugia',           'wallace:refuge-carnivora-nodisp'],
-			['Refugia birds',              'taxa-refugia',           'wallace:ref-aves-nodisp'],
+		['Temp', [
+			['Temp current',          'clim-temp',              'wallace:bc1-current'],
+			['Temp 1.5deg delta',     'clim-temp-delta',        'bc1-1p5-delta'],
+			['Temp 3.2deg delta',     'clim-temp-delta',        'bc1-3p2-delta'],
+			['Temp 6deg delta',       'clim-temp-delta',        'bc1-6deg-delta'],
+			['Temp 6deg',             'clim-temp',              'bc1-6deg-50th'],
 		]],
 
-		['Climate', [
-			['Temp current',               'clim-temp',              'wallace:bc1-current'],
-			['Temp 1.5deg delta',          'clim-temp-delta',        'bc1-1p5-delta'],
-			['Temp 3.2deg delta',          'clim-temp-delta',        'bc1-3p2-delta'],
-			['Temp 6deg delta',            'clim-temp-delta',        'bc1-6deg-delta'],
-			['Temp 6deg',                  'clim-temp',              'bc1-6deg-50th'],
-			['Precip current',             'clim-precip',            'wallace:bc12-current'],
-			['Precip 6deg',                'clim-precip',            'bc12-6deg-50th'],
-			['Precip 6deg delta',          'clim-precip',            'bc12-6deg-delta'],
+		['Precip', [
+			['Precip current',        'clim-precip',            'wallace:bc12-current'],
+			['Precip 6deg',           'clim-precip',            'bc12-6deg-50th'],
+			['Precip 6deg delta',     'clim-precip',            'bc12-6deg-delta'],
 		]],
 	].forEach(function(group, ig) {
 		document.querySelectorAll('.buttonbar')[0].appendChild(document.createElement('br'))
