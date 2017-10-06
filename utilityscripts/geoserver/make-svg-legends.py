@@ -8,34 +8,34 @@ import decimal
 from xml.dom import minidom
 
 
-LEGEND_FONT_SIZE = 3.6 # lineheight: "units" between lines of text, legend is 100 units tall
+LEGEND_FONT_SIZE = 3.4 # lineheight: "units" between lines of text, legend is 100 units tall
 
 # ---------------------------------------------------------
-def qty_label(qty, show_plus_sign=False):
+def qty_label(qty, prefix='', suffix='', show_plus=False):
 
 	## label = "%g" % qty 
-	# actually can't do this coz big numbers go to sci notation
-	# instead do a stupid dance through Decimal format
+	# can't use %g coz big numbers go to sci notation; instead,
+	# do a stupid dance through Decimal format *eyeroll*
 	ctx = decimal.Context()
 	ctx.prec = 20
 	label = format(ctx.create_decimal(repr(qty)), 'f')
 
-	# decimal zero
+	# discard trailing decimal-zero
 	label = re.sub(r'.0$', r'', label)
 
-	# millions
+	# replace 1200000 and 3000000 with 1.2M and 3M
 	label = re.sub(r'(\d)([1-9])00000$', r'\1.\2M', label)
 	label = re.sub(r'000000$', 'M', label)
 
-	# thousands
+	# replace 1200 and 3000 with 1.2k and 3k
 	label = re.sub(r'(\d)([1-9])00$', r'\1.\2k', label)
 	label = re.sub(r'000$', 'k', label)
 
-	# show the plus sign for positive values?
-	if show_plus_sign:
+	# add a plus sign to positive values (and 0)?
+	if show_plus:
 		label = re.sub(r'^([\d])', r'+\1', label)
 
-	return label
+	return str(prefix) + label + str(suffix)
 
 # ---------------------------------------------------------
 def make_legend(sld, legend):
@@ -156,7 +156,7 @@ def make_legend(sld, legend):
 			textpos = offset + float(t['height']) / 2
 			if t.get('value') is not None:
 				th = LEGEND_FONT_SIZE
-				label = qty_label(t['value'], ('delta' in legend))
+				label = qty_label(t['value'], show_plus=('delta' in legend))
 				if len(label) > 3:
 					f.write('<rect fill="white" fill-opacity="0.5" x="1.5" y="%g" width="9" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
 				else:
