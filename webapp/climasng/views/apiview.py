@@ -91,7 +91,7 @@ class ApiView(object):
                 "from": 0, "size": 10
             }
 
-            results = es.search(index='map', body=query)
+            results = es.search(index='wallace', doc_type='map', body=query)
 
             matches = {}
             for result in results['hits']['hits']:
