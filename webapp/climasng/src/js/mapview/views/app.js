@@ -369,7 +369,7 @@
         source: (function(_this) {
           return function(req, response) {
             return $.ajax({
-              url: '/api/namesearch/',
+              url: '/api/mapsearch/',
               data: {
                 term: req.term
               },

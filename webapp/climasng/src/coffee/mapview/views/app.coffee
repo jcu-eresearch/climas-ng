@@ -537,7 +537,7 @@ AppView = Backbone.View.extend {
             close: => @$el.trigger "#{side}mapupdate"
             source: (req, response)=>
                 $.ajax { 
-                    url: '/api/namesearch/'
+                    url: '/api/mapsearch/'
                     data: { term: req.term }
                     success: (answer)=>
                         # answer is a list of completions, eg:
