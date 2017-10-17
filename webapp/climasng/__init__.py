@@ -11,6 +11,8 @@ from whoosh import index
 from whoosh.qparser import QueryParser
 from whoosh.query import Or, And, Term
 
+import elasticsearch
+
 # import pprint
 
 # from .models import (
@@ -34,9 +36,19 @@ def main(global_config, **settings):
     # now get all the table reflection done
     # Base.prepare(engine)
 
+    # TODO: remove this whoosh stuff once ES is working
+    # TODO: don't forget to get rid of the includes and reqs for whoosh
     # pre-cook the whoosh interface for the search api
     config.registry.settings['whoosh_index'] = index.open_dir('/srv/wallacewebapp/climasng/data/searchindex')
     config.registry.settings['query_parser'] = QueryParser("nice_name", schema=config.registry.settings['whoosh_index'].schema)
+
+    # TODO: move ES host into config file 
+    config.registry.settings['search_conn'] = elasticsearch.Elasticsearch(['http://localhost:9200'])
+
+    #
+    # now add all the routes
+    #
+
     config.add_route('api', '/api/{command}/')
 
     config.add_static_view('static', 'climasng:static/', cache_max_age=3600)

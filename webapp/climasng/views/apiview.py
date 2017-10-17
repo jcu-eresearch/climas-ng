@@ -71,6 +71,41 @@ class ApiView(object):
             json_content = json.dumps(matches)
             return Response(body=json_content, content_type='application/json')
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        if command == 'mapsearch':
+
+            es = self.request.registry.settings['search_conn']
+
+            allowable = ['species', 'refugia', 'aoc', 'richness']
+            query = {
+                "query": { "bool": {
+                    "must": { "match": {
+                        "nice_name": { 
+                            "query": params['term'],
+                            "operator": "and"
+                        }
+                    }},
+                    "filter": {
+                        "terms": { "item_type": allowable }
+                    }
+                }},
+                "from": 0, "size": 10
+            }
+
+            results = searcher.search(query, filter=allowable)
+
+            matches = {}
+            for result in result['hits']['hits']:
+                doc = result['_source']
+                matches[doc['nice_name']] = {
+                    "type": doc['item_type'],
+                    "path": doc['item_path'],
+                    "mapId": doc['item_id']
+                }
+
+            json_content = json.dumps(matches)
+            return Response(body=json_content, content_type='application/json')
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         elif command == 'preplayer':
 
             gs_user = self.request.registry.settings['climas.gs_user']
