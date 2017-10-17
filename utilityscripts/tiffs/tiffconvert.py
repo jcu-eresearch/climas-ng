@@ -133,7 +133,13 @@ def searchtiffs(startingdir, convert=False, removeBackup=False):
 				msg('' + filewithpath + ' SRS is not EPSG:4326', 1)
 				file_okay = False
 
-			if not file_okay:
+			if file_okay:
+
+				if not convert:
+					# no conversion requested -- message required
+					msg('already good: ' + file)
+
+			else:
 
 				if convert:
 					msg('conversion needed: ' + file, 2)
