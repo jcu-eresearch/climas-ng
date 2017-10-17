@@ -91,10 +91,10 @@ class ApiView(object):
                 "from": 0, "size": 10
             }
 
-            results = searcher.search(query, filter=allowable)
+            results = es.search(index='map', body=query)
 
             matches = {}
-            for result in result['hits']['hits']:
+            for result in results['hits']['hits']:
                 doc = result['_source']
                 matches[doc['nice_name']] = {
                     "type": doc['item_type'],
