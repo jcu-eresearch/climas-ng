@@ -73,7 +73,7 @@ def createSpeciesJson(source_path, output_file):
             sci_name = match.group(7) + ' ' + match.group(8)
             sci_name_underscore = match.group(7) + '_' + match.group(8)
             species_list[sci_name] = {
-                "commonNames": common_names.get(sci_name_underscore, []),
+                "commonNames": common_names.get(sci_name, []),
                 "path": spp_path
             }
 
