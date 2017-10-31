@@ -3,6 +3,8 @@
 ES_SERVER="http://localhost:9200"
 ES_INDEX="wallace"
 
+echo "Pertforming setup on $ES_SERVER"
+
 echo "delete index '$ES_INDEX':"
 curl -XDELETE "$ES_SERVER/$ES_INDEX"
 
