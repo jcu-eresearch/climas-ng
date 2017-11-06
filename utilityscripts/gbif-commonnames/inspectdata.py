@@ -8,6 +8,7 @@ import os
 import json
 import codecs
 
+import csv
 import pandas as pa
 import numpy as np
 
@@ -28,7 +29,8 @@ print('Loading common names table from {} ...'.format(v_path))
 
 v = pa.read_table(v_path, 
 	dtype={ 'language': str, 'country': str, 'countryCode': str },
-	usecols=['taxonID', 'vernacularName', 'language', 'country', 'countryCode']
+	usecols=['taxonID', 'vernacularName', 'language', 'country', 'countryCode'],
+	quoting=csv.QUOTE_NONE
 )
 v.fillna('', inplace=True)
 
@@ -37,6 +39,11 @@ print(rowcount(v, 'vernacular names'))
 v = v.query('language == ""')
 
 print(rowcount(v, 'names are english or unspecified'))
+
+print( v.query('taxonID == 2930066') )
+# 2930066
+
+sys.exit()
 
 for country in v.country.unique():
 	cv = v[v['country'] == country]
