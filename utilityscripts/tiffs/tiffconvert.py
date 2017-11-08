@@ -137,7 +137,7 @@ def searchtiffs(startingdir, convert=False, removeBackup=False):
 
 				if not convert:
 					# no conversion requested -- message required
-					msg('already good: ' + file)
+					msg('already good: ' + filewithpath)
 
 			else:
 
