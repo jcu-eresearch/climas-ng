@@ -111,7 +111,7 @@ AppView = Backbone.View.extend {
         # add a legend
         @legend = L.control {uri: ''}
         @legend.onAdd = (map)=> this._div = L.DomUtil.create 'div', 'info'
-        @legend.update = (props)=> this._div.innerHTML = '<img src="' + (if props then props.uri else '.') + '" />'
+        @legend.update = (props)=> this._div.innerHTML = '<object type="image/svg+xml" data="' + (if props then props.uri else '.') + '" />'
 
         @legend.addTo @map
 

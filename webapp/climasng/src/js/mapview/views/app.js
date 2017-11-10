@@ -90,7 +90,7 @@
       })(this);
       this.legend.update = (function(_this) {
         return function(props) {
-          return _this._div.innerHTML = '<img src="' + (props ? props.uri : '.') + '" />';
+          return _this._div.innerHTML = '<object type="image/svg+xml" data="' + (props ? props.uri : '.') + '" />';
         };
       })(this);
       this.legend.addTo(this.map);
