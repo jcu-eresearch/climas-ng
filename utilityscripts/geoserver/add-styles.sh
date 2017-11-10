@@ -44,6 +44,7 @@ echo
 
 ./make-svg-legends.py $STYLESDIR
 cp -r ./legends/*.svg ./styletestpage/legends/
+cp -r ./legends/*.svg ../../webapp/climasng/static/images/legends/
 
 
 
