@@ -80,6 +80,20 @@
       });
       this.map.on('move', this.resizeThings);
       L.control.scale().addTo(this.map);
+      this.legend = L.control({
+        uri: ''
+      });
+      this.legend.onAdd = (function(_this) {
+        return function(map) {
+          return _this._div = L.DomUtil.create('div', 'info');
+        };
+      })(this);
+      this.legend.update = (function(_this) {
+        return function(props) {
+          return _this._div.innerHTML = '<img src="' + (props ? props.uri : '.') + '" />';
+        };
+      })(this);
+      this.legend.addTo(this.map);
       L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri',
         variant: 'World_Topo_Map'
@@ -311,6 +325,9 @@
             _this.rightLayer = layer;
           }
           layer.addTo(_this.map);
+          _this.legend.update({
+            uri: '/static/images/legends/' + style + '.sld.svg'
+          });
           return _this.resizeThings();
         };
       })(this)).fail((function(_this) {

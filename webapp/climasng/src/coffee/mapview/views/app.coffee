@@ -108,6 +108,13 @@ AppView = Backbone.View.extend {
         # add a distance scale bar
         L.control.scale().addTo @map
 
+        # add a legend
+        @legend = L.control {uri: ''}
+        @legend.onAdd = (map)=> this._div = L.DomUtil.create 'div', 'info'
+        @legend.update = (props)=> this._div.innerHTML = '<img src="' + (if props then props.uri else '.') + '" />'
+
+        @legend.addTo @map
+
         ## removed MapQuest base layer 2016-07-20 due to licencing changes
         # L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
         #     subdomains: '1234'
@@ -427,6 +434,9 @@ AppView = Backbone.View.extend {
                 @rightLayer = layer
 
             layer.addTo @map
+
+            # udpate the legend
+            @legend.update {uri: '/static/images/legends/' + style + '.sld.svg'}
 
             @resizeThings() # re-establish the splitter
 
