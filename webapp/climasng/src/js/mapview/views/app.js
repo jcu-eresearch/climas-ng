@@ -214,7 +214,7 @@
       }
     },
     addMapLayer: function(side) {
-      var ext, futureModelPoint, isConcern, isRefugia, isRichness, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
+      var ext, futureModelPoint, isConcern, isRefugia, isRichness, mapInfo, mapUrl, projectionName, sideInfo, style, url, zipUrl;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -229,21 +229,26 @@
       isRefugia = sideInfo.mapName.startsWith('Refugia -');
       isConcern = sideInfo.mapName.startsWith('Concern -');
       if (isRichness) {
+        style = 'taxa-richness-change';
         projectionName = "prop.richness_" + sideInfo.degs + "_" + sideInfo.range + "_" + sideInfo.confidence;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
+          style = 'taxa-richness';
         }
       } else if (isRefugia) {
+        style = 'taxa-refugia';
         projectionName = "refuge.certainty_" + sideInfo.degs + "_" + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
         }
       } else if (isConcern) {
+        style = 'taxa-aoc';
         projectionName = "AreaOfConcern.certainty_" + sideInfo.degs + "_" + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
         }
       } else {
+        style = 'spp-suitability-purple';
         projectionName = "TEMP_" + sideInfo.degs + "_" + sideInfo.confidence + "." + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current';
@@ -283,7 +288,7 @@
           layer = L.tileLayer.wms(wmsUrl, {
             layers: wmsLayer,
             format: 'image/png',
-            styles: 'spp-suitability-purple',
+            styles: style,
             transparent: true
           });
           loadClass = '' + side + 'loading';

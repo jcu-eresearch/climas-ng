@@ -327,21 +327,29 @@ AppView = Backbone.View.extend {
 
         if isRichness
             # ...then they've selected a richness map.
+            style = 'taxa-richness-change'
             projectionName = "prop.richness_#{sideInfo.degs}_#{sideInfo.range}_#{sideInfo.confidence}"
-            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
+                style = 'taxa-richness'
 
         else if isRefugia
             # ...then they've selected a refugia map.
+            style = 'taxa-refugia'
             projectionName = "refuge.certainty_#{sideInfo.degs}_#{sideInfo.range}"
-            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
 
         else if isConcern
             # ...then they've selected an area-of-concern map.
+            style = 'taxa-aoc'
             projectionName = "AreaOfConcern.certainty_#{sideInfo.degs}_#{sideInfo.range}"
-            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
 
         else
             # ...it's a plain old species map they're after.
+            style = 'spp-suitability-purple'
             # work out the string that gets to the projection point they want
             projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
             # if they want baseline, just get the baseline projection
@@ -401,7 +409,7 @@ AppView = Backbone.View.extend {
             layer = L.tileLayer.wms wmsUrl, {
                 layers: wmsLayer
                 format: 'image/png'
-                styles: 'spp-suitability-purple'
+                styles: style
                 transparent: true
             }
 
