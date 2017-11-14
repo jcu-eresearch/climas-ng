@@ -88,7 +88,7 @@ class ApiView(object):
                         "terms": { "item_type": allowable }
                     }
                 }},
-                "from": 0, "size": 10
+                "from": 0, "size": 20
             }
 
             results = es.search(index='wallace', doc_type='map', body=query)
