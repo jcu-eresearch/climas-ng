@@ -48,10 +48,6 @@ Collecting data
               '------------------------.-----------'
                                        |
                                        |
-                                 utilityscripts/
-                                 indextool-es.py
-                                       |
-                                       |
 .------------------------------.       |
 |                              |       |
 |      u~s~/elasticsearch/     |       |
@@ -62,6 +58,8 @@ Collecting data
        u~s~/elasticsearch              |
           setup-es.sh                  |
               |                        |
+              |                  utilityscripts/
+              |                  indextool-es.py
               |                        |
               '-----------------.------'
                                 |
