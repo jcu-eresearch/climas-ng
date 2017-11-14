@@ -383,6 +383,7 @@
       debug('AppView.buildForm');
       $mapspp = this.$("#" + side + "mapspp");
       return $mapspp.autocomplete({
+        delay: 200,
         close: (function(_this) {
           return function() {
             return _this.$el.trigger("" + side + "mapupdate");

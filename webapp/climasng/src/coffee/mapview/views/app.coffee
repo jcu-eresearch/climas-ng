@@ -552,6 +552,7 @@ AppView = Backbone.View.extend {
         $mapspp = @$ "##{side}mapspp"
 
         $mapspp.autocomplete {
+            delay: 200
             close: => @$el.trigger "#{side}mapupdate"
             source: (req, response)=>
                 $.ajax { 
