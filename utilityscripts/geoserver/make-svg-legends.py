@@ -8,7 +8,9 @@ import decimal
 from xml.dom import minidom
 
 
-LEGEND_FONT_SIZE = 3.4 # lineheight: "units" between lines of text, legend is 100 units tall
+LEGEND_FONT_SIZE = 3.4  # lineheight: "units" between lines of text, if legend is 100 units tall
+LEGEND_W = 12           # "units" wide, if legend is 100 units tall
+PIXELS_PER_UNIT = 2.66  # what's a nice number of pixels per "unit", if legend is 100 units tall
 
 # ---------------------------------------------------------
 def qty_label(qty, prefix='', suffix='', show_plus=False):
@@ -139,7 +141,11 @@ def make_legend(sld, legend):
 
 	with open(legend, 'w') as f:
 
-		f.write('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="300" viewBox="0 0 12 100">')
+		px_height = PIXELS_PER_UNIT * 100
+		px_width = PIXELS_PER_UNIT * LEGEND_W
+		svg_ns = 'xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"'
+
+		f.write('<svg %s width="%i" height="%i" viewBox="0 0 %i %i">' % (svg_ns, px_width, px_height, LEGEND_W, 100))
 		f.write('<defs><linearGradient id="legend-gradient-%s" x1="0" x2="0" y1="0" y2="1">' % sld_code)
 
 		offset = fix_alloc # start with a fixed space of initial padding
@@ -149,19 +155,27 @@ def make_legend(sld, legend):
 			f.write('<stop offset="%g%%" stop-color="%s"></stop>' % (offset, t['col2']))
 
 		f.write('</linearGradient></defs>')
-		f.write('<rect x="0" y="0" width="12" height="100" fill="url(#legend-gradient-%s)"></rect>' % sld_code)
+		f.write('<rect x="0" y="0" width="%i" height="100" fill="url(#legend-gradient-%s)"></rect>' % (LEGEND_W, sld_code))
 
 		offset = fix_alloc # start with a fixed space of initial padding
 		for t in lthings:
 			textpos = offset + float(t['height']) / 2
+
 			if t.get('value') is not None:
+				# there's a value to write
 				th = LEGEND_FONT_SIZE
 				label = qty_label(t['value'], show_plus=('delta' in legend))
+
+				label_bg_w = 7.5 # label background width
 				if len(label) > 3:
-					f.write('<rect fill="white" fill-opacity="0.5" x="1.5" y="%g" width="9" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
-				else:
-					f.write('<rect fill="white" fill-opacity="0.5" x="2.25" y="%g" width="7.5" height="%g" rx="%g" ry="%g" />' % (textpos - (th/2), th, th/2, th/2))
-				f.write('<text x="6" y="%g" dy="0.35em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % (textpos, LEGEND_FONT_SIZE, label))
+					label_bg_w = 9 # a wider label gets a wider background
+
+				# draw whitish background for the label
+				label_bg_x = (LEGEND_W / 2) - (label_bg_w / 2)
+				f.write('<rect fill="white" fill-opacity="0.5" x="%g" y="%g" width="%g" height="%g" rx="%g" ry="%g" />' % (label_bg_x, textpos - (th/2), label_bg_w, th, th/2, th/2))
+
+				# draw the label
+				f.write('<text x="%g" y="%g" dy="0.35em" font-family="sans-serif" font-size="%g" style="text-anchor: middle">%s</text>' % ((LEGEND_W/2), textpos, LEGEND_FONT_SIZE, label))
 
 			offset += t['height']
 
