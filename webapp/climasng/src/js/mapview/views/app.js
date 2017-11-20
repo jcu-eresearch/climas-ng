@@ -218,7 +218,7 @@
       if (info.degs === 'baseline') {
         tag = "baseline " + tag + " distribution";
       } else {
-        tag = "<b>" + info.confidence + "</b> percentile projections for " + tag + " at <b>+" + info.degs + "&deg;C</b> with <b>" + dispLookup[info.range] + "</b>";
+        tag = "<b>" + info.confidence + "th</b> percentile projections for " + tag + " at <b>+" + info.degs + "&deg;C</b> with <b>" + dispLookup[info.range] + "</b>";
       }
       if (side === 'left') {
         this.leftTag.find('.leftlayername').html(tag);
