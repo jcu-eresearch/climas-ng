@@ -10,17 +10,20 @@ def createSpeciesJson(source_path, output_file):
 
     # here's a regex to test for species dirs:
 
-    #                group(8) - Species ---------------------------------------------.
-    #                           (a literal underscore) --------------------------.   |
-    #                group(7) - Genus ----------------------------------------.  |   |
-    #                group(6) - Genus, again ---------------------------.     |  |   |
-    #                group(5) - Family ---------------------------.     |     |  |   |
-    #                group(4) - Order ----------------------.     |     |     |  |   |
-    #                group(3) - Class ----------------.     |     |     |     |  |   |
-    #                group(2) - Phylum ---------.     |     |     |     |     |  |   |
-    #                group(1) - Kingdom --.     |     |     |     |     |     |  |   |
-    #                                     V     V     V     V     V     V     V  V   V
-    sppdir_regex = re.compile(r'species/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)_([-\w]+)/summaries_temperature$')
+    #               group(11) - optional Sub-species -------------------------------------------.
+    #               group(10) - optional Sub-species and preceeding underscore -------------.   |
+    #                group(9) - Species ----------------------------------------------.     |   |
+    #                           (a literal underscore) ---------------------------.   |     |   |
+    #                group(8) - Genus -----------------------------------------.  |   |     |   |
+    #                group(7) - Genus, again ----------------------------.     |  |   |     |   |
+    #                group(6) - Family ----------------------------.     |     |  |   |     |   |
+    #                group(5) - Order -----------------------.     |     |     |  |   |     |   |
+    #                group(4) - Class -----------------.     |     |     |     |  |   |     |   |
+    #                group(3) - Phylum ----------.     |     |     |     |     |  |   |     |   |
+    #                group(2) - Kingdom ---.     |     |     |     |     |     |  |   |     |   |
+    #                group(1) - path ---.  |     |     |     |     |     |     |  |   |     |   |
+    #                                   V  V     V     V     V     V     V     V  V   V     V   V
+    sppdir_regex = re.compile(r'species(/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)_([-\w]+)(_([-\w]+))?)/summaries_temperature$')
 
     # Any dir that matches the regex (starting from source_path) is a dir
     # that contains species level data. For example:
@@ -64,21 +67,19 @@ def createSpeciesJson(source_path, output_file):
         match = sppdir_regex.search(dir)
 
         if match:
-            spp_path = '/'.join([
-                match.group(1), match.group(2), 
-                match.group(3), match.group(4), 
-                match.group(5), match.group(6), 
-                match.group(7) + '_' + match.group(8)
-            ])
-            sci_name = match.group(7) + ' ' + match.group(8)
-            sci_name_underscore = match.group(7) + '_' + match.group(8)
+            spp_path = match.group(1)
+            sci_name_list = [match.group(8), match.group(9)]
+            if match.group(11):
+                sci_name_list.append(match.group(11))
+            sci_name = ' '.join(sci_name_list)
+            # sci_name_underscore = '_'.join(sci_name_list)
             species_list[sci_name] = {
                 "commonNames": common_names.get(sci_name, []),
                 "path": spp_path
             }
 
             # maybe this is a new group?
-            this_group = match.group(1) + '::' + match.group(3) + '::' + match.group(4)
+            this_group = '::'.join([match.group(2), match.group(4), match.group(5)])
             if this_group != last_group:
                 print('starting ' + this_group)
                 last_group = this_group
