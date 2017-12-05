@@ -103,7 +103,7 @@ def createSummaryJson(source_path, output_file):
     # create the summaries.json file using data from the specified path
 
     # a list of places to look for summaries..
-    summary_roots = ['class', 'family', 'kingdom', 'order', 'phylum']
+    summary_roots = ['family', 'order', 'class', 'phylum', 'kingdom']
 
     # here's a regex to test for summary dirs:
     #
@@ -121,7 +121,7 @@ def createSummaryJson(source_path, output_file):
     #       \w+        is one or more word chars -- i.e. a word
     #      (\w+)       is a word that we want to remember
     #     /(\w+)       is a word with a literal slash in front of it
-    #    (/(\w+))?     optionally, a word with slash, and remember the whole thing as well as just the word
+    #    (/(\w+))?     optionally, a word with slash, and remember the slash-and-word as well as just the word
     #  (?:/(\w+))?     optionally, a word with slash, and remember just the word
 
     # for example:
@@ -157,7 +157,7 @@ def createSummaryJson(source_path, output_file):
                     # use the last name for the "short" name
                     short_name = tree_path[-1]
                     # which level is the summary at
-                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family'][len(tree_path) - 1]
+                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus'][len(tree_path) - 1]
                     summary_list[short_name] = {
                         "commonNames": common_names.get(short_name, []),
                         "level": tree_level,
@@ -167,7 +167,7 @@ def createSummaryJson(source_path, output_file):
                     # maybe this is a new group?
                     this_group = match.group(1) + '::' + short_name
                     if this_group != last_group:
-                        print('starting ' + this_group)
+                        print('searching ' + this_group)
                         last_group = this_group
 
                     break # leave file loop once we've matched here
