@@ -10,20 +10,20 @@ def createSpeciesJson(source_path, output_file):
 
     # here's a regex to test for species dirs:
     #
-    #               group(11) - optional Sub-species ------------------------------------------------------.
-    #               group(10) - optional Sub-species and preceding underscore -------------------------.   |
-    #                group(9) - Species ------------------------------------------------------.        |   |
-    #                           (a literal underscore) -------------------------------.       |        |   |
-    #                group(8) - Genus -------------------------------------------.    |       |        |   |
-    #                group(7) - Genus, again ----------------------------.       |    |       |        |   |
-    #                group(6) - Family ----------------------------.     |       |    |       |        |   |
-    #                group(5) - Order -----------------------.     |     |       |    |       |        |   |
-    #                group(4) - Class -----------------.     |     |     |       |    |       |        |   |
-    #                group(3) - Phylum ----------.     |     |     |     |       |    |       |        |   |
-    #                group(2) - Kingdom ---.     |     |     |     |     |       |    |       |        |   |
-    #                group(1) - path ---.  |     |     |     |     |     |       |    |  _____A_____   |   |
-    #                                   V  V     V     V     V     V     V       V    V /           \  V   V
-    sppdir_regex = re.compile(r'species(/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
+    #               group(11) - optional Sub-species ---------------------------------------------------------.
+    #               group(10) - optional Sub-species and preceding underscore ----------------------------.   |
+    #                group(9) - Species ---------------------------------------------------------.        |   |
+    #                           (a literal underscore) ----------------------------------.       |        |   |
+    #                group(8) - Genus ----------------------------------------------.    |       |        |   |
+    #                group(7) - Genus, again -------------------------------.       |    |       |        |   |
+    #                group(6) - Family -------------------------------.     |       |    |       |        |   |
+    #                group(5) - Order --------------------------.     |     |       |    |       |        |   |
+    #                group(4) - Class --------------------.     |     |     |       |    |       |        |   |
+    #                group(3) - Phylum -------------.     |     |     |     |       |    |       |        |   |
+    #                group(2) - Kingdom ---.        |     |     |     |     |       |    |       |        |   |
+    #                group(1) - path ---.  |        |     |     |     |     |       |    |  _____A_____   |   |
+    #                                   V  V        V     V     V     V     V       V    V /           \  V   V
+    sppdir_regex = re.compile(r'species(/([_\w]+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
 
     # Note:     \w+       catches unserscores.
     #         [^_\W]+     catches everything \w catches, EXCEPT underscores
