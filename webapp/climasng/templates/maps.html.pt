@@ -9,7 +9,7 @@
     <meta content="width=device-width" name="viewport" />
 
     <link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
-    <link href='http://fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
     <link href="${request.static_path('climasng:static/lib/leaflet.css')}" rel="stylesheet" />
     <link href="${request.static_path('climasng:static/lib/leaflet-wms-legend/leaflet.wmslegend.css')}" rel="stylesheet" />
     <link href="${request.static_path('climasng:static/lib/jqueryui-css/ui-lightness/jquery-ui-1.10.4.custom.min.css')}" rel="stylesheet" />
