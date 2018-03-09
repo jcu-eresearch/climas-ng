@@ -23,12 +23,12 @@ def createSpeciesJson(source_path, output_file):
     #                group(2) - Kingdom ---.        |     |     |     |     |       |    |       |        |   |
     #                group(1) - path ---.  |        |     |     |     |     |       |    |  _____A_____   |   |
     #                                   V  V        V     V     V     V     V       V    V /           \  V   V
-    sppdir_regex = re.compile( r'species(/([\w]+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
+    sppdir_regex = re.compile( r'species(/([^_\W]+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
 
-    # this alternative regex is for when you want to find maps insides Erin's testing "mammal_xxx" dirs.
+    # this alternative regex is for when you want to find maps inside Erin's testing "mammal_xxx" dirs.
     # sppdir_regex = re.compile(r'species(/([_\w]+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
 
-    # Note:     \w+       catches unserscores.
+    # Note:     \w+       catches underscores.
     #         [^_\W]+     catches everything \w catches, EXCEPT underscores
     #      (?:-|[^_\W])+  catches everything [^_\W]+ catches, and also dashes
 
