@@ -1,5 +1,5 @@
 <!-- -->
-<div class="disclaimer" onclick="$(this).toggleClass('show');">
+<div class="disclaimer show" onclick="$(this).toggleClass('show');">
 
 	<h1>Alpha test version!<br><small>(click to hide)</small></h1>
 	<p>
