@@ -54,6 +54,8 @@
 	<nav>
 		<ul class="main menu clearfix mspp-main-menu">
 			<!-- landing page, doco - - - - - - - - - - - - - - - -->
+
+			<!--
 			<li tal:condition="request.matched_route.name in ['home', 'science', 'credits']" class="current">
 				<a>About Wallace Initiative</a>
 				<ul>
@@ -69,6 +71,11 @@
 			</li>
 			<li tal:condition="not:request.matched_route.name in ['home', 'science', 'credits']">
 				<a href="${request.route_path('home')}">About Wallace Initiative</a>
+			</li>
+			-->
+
+			<li>
+				<a href="https://www.jcu.edu.au/wallace-initiative">About Wallace Initiative</a>
 			</li>
 
 			<!-- maps - - - - - - - - - - - - - - - - - - - - - - -->
