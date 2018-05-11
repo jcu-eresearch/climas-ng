@@ -6,13 +6,18 @@
 <body>
     <div metal:use-macro="load: partial.header.html.pt"></div><!-- ::partial:: -->
 
+    <!--
     <div id="contentwrap" class="contentwrap">
         <div class="maincontent">
             <div class="textcolumn">
-                <div metal:use-macro="load: ../pagecontent/about.html"></div><!-- ::partial:: -->
+                <div metal:use-macro="load: ../pagecontent/about.html"></div>
             </div>
         </div>
     </div>
+    -->
+
+    <p><a href="https://www.jcu.edu.au/wallace-initiative">About Wallace Initative</a></p>
+    <p><a href="${request.route_path('maps')}">View Maps</a></p>
 
     <div metal:use-macro="load: partial.footer.html.pt"></div><!-- ::partial:: -->
 
