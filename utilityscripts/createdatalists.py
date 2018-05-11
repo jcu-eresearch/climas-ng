@@ -1,30 +1,19 @@
 #!/usr/bin/env python
 
 # run this to create species.json and biodiversity.json in the
-# webapp's static/data directory.
+# .../climasng/data/ directory.
 
-
-import os
-
+## local dev paths
+# jsondir = '/Users/pvrdwb/jcu/cng/webapp/climasng/data'
+# datadir = '/Volumes/DanielsDisk/work/CliMAS-NG/datasubset'
 
 ## HPC / prod paths
-appdir = '/srv/wallacewebapp'
-jsondir = appdir + '/climasng/data'
-datadir = '/rdsi/wallace2/W2_website'
-
-if os.path.isdir('/Users/pvrdwb'):
-
-	# ..overwrite with local dev paths
-	jsondir = '/Users/pvrdwb/projects/climas-global/webapp/climasng/data'
-	datadir = '/Users/pvrdwb/projects/climas-global/testdata'
-
-
-
-#################################################
+jsondir = '/var/climaswebapp/climasng/data'
+datadir = '/rdsi/climas/taxa'
 
 import sys
-sys.path.append(appdir + '/climasng/data')
+sys.path.append(jsondir)
 import datafinder
 
-datafinder.createSpeciesJson(datadir, os.path.join(jsondir, 'species.json'))
-datafinder.createSummaryJson(datadir, os.path.join(jsondir, 'summaries.json'))
+datafinder.createSpeciesJson(datadir)
+datafinder.createBiodiversityJson(datadir)

@@ -1,5 +1,6 @@
 (function() {
-  var AppView, MapLayer, debug;
+  var AppView, MapLayer, debug,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   MapLayer = require('../models/maplayer');
 
@@ -11,10 +12,10 @@
   debug = function(itemToLog, itemLevel) {
     var levels, messageNum, threshold, thresholdNum;
     levels = ['verydebug', 'debug', 'message', 'warning'];
+    threshold = 'message';
     if (!itemLevel) {
       itemLevel = 'debug';
     }
-    threshold = 'debug';
     thresholdNum = levels.indexOf(threshold);
     messageNum = levels.indexOf(itemLevel);
     if (thresholdNum > messageNum) {
@@ -32,8 +33,6 @@
     className: 'splitmap showforms',
     id: 'splitmap',
     speciesDataUrl: window.mapConfig.speciesDataUrl,
-    climateDataUrl: window.mapConfig.climateDataUrl,
-    summariesDataUrl: window.mapConfig.summariesDataUrl,
     biodivDataUrl: window.mapConfig.biodivDataUrl,
     rasterApiUrl: window.mapConfig.rasterApiUrl,
     trackSplitter: false,
@@ -48,8 +47,7 @@
       'change select.left': 'leftSideUpdate',
       'change select.right': 'rightSideUpdate',
       'change input.left': 'leftSideUpdate',
-      'change input.right': 'rightSideUpdate',
-      'change #sync': 'toggleSync'
+      'change input.right': 'rightSideUpdate'
     },
     tick: function() {
       if (false) {
@@ -62,8 +60,11 @@
     initialize: function() {
       debug('AppView.initialize');
       _.bindAll.apply(_, [this].concat(_.functions(this)));
-      this.nameIndex = {};
-      return this.mapList = {};
+      this.namesList = [];
+      this.speciesSciNameList = [];
+      this.speciesInfoFetchProcess = this.fetchSpeciesInfo();
+      this.biodivList = [];
+      return this.biodivInfoFetchProcess = this.fetchBiodivInfo();
     },
     render: function() {
       debug('AppView.render');
@@ -75,40 +76,34 @@
       }));
       $('#contentwrap').append(this.$el);
       this.map = L.map('map', {
-        center: [0, 0],
-        zoom: 2
+        center: [-20, 136],
+        zoom: 5
       });
       this.map.on('move', this.resizeThings);
-      L.control.scale().addTo(this.map);
-      this.legend = L.control({
-        uri: ''
-      });
-      this.legend.onAdd = (function(_this) {
-        return function(map) {
-          return _this._div = L.DomUtil.create('div', 'info');
-        };
-      })(this);
-      this.legend.update = (function(_this) {
-        return function(props) {
-          return _this._div.innerHTML = '<object type="image/svg+xml" data="' + (props ? props.uri : '.') + '" />';
-        };
-      })(this);
-      this.legend.addTo(this.map);
-      L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri',
-        variant: 'World_Topo_Map'
+      L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+        attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
+        subdomains: '1234',
+        base: 'aerial',
+        type: 'maptile',
+        scheme: 'terrain.day',
+        app_id: 'l2Rye6zwq3u2cHZpVIPO',
+        app_code: 'MpXSlNLcLSQIpdU6XHB0TQ',
+        mapID: 'newest',
+        maxZoom: 18,
+        language: 'eng',
+        format: 'png8',
+        size: '256'
       }).addTo(this.map);
       this.leftForm = this.$('.left.form');
-      this.buildForm('left');
+      this.buildLeftForm();
       this.rightForm = this.$('.right.form');
-      this.buildForm('right');
+      this.buildRightForm();
       this.leftTag = this.$('.left.tag');
       this.rightTag = this.$('.right.tag');
       this.splitLine = this.$('.splitline');
       this.splitThumb = this.$('.splitthumb');
       this.leftSideUpdate();
-      this.rightSideUpdate();
-      return this.toggleSplitter();
+      return this.rightSideUpdate();
     },
     resolvePlaceholders: function(strWithPlaceholders, replacements) {
       var ans, key, re, value;
@@ -128,7 +123,7 @@
       if (!this.leftInfo) {
         return;
       }
-      this.$('#rightmapspp').val(this.leftInfo.mapName);
+      this.$('#rightmapspp').val(this.leftInfo.speciesName);
       this.$('#rightmapyear').val(this.leftInfo.year);
       this.$('input[name=rightmapscenario]').each((function(_this) {
         return function(index, item) {
@@ -143,7 +138,7 @@
       if (!this.rightInfo) {
         return;
       }
-      this.$('#leftmapspp').val(this.rightInfo.mapName);
+      this.$('#leftmapspp').val(this.rightInfo.speciesName);
       this.$('#leftmapyear').val(this.rightInfo.year);
       this.$('input[name=leftmapscenario]').each((function(_this) {
         return function(index, item) {
@@ -154,29 +149,30 @@
       return this.leftSideUpdate();
     },
     sideUpdate: function(side) {
-      var atBaseline, currInfo, newInfo;
+      var atBaseline, currInfo, mapValidQuery, newInfo, _ref;
       debug('AppView.sideUpdate (' + side + ')');
       newInfo = {
-        mapName: this.$('#' + side + 'mapspp').val(),
-        degs: this.$('#' + side + 'mapdegs').val(),
-        range: this.$('input[name=' + side + 'maprange]:checked').val(),
-        confidence: this.$('#' + side + 'mapconfidence').val()
+        speciesName: this.$('#' + side + 'mapspp').val(),
+        year: this.$('#' + side + 'mapyear').val(),
+        scenario: this.$('input[name=' + side + 'mapscenario]:checked').val(),
+        gcm: this.$('#' + side + 'mapgcm').val()
       };
-      atBaseline = newInfo.degs === 'baseline';
-      this.$("input[name=" + side + "maprange], #" + side + "mapconfidence").prop('disabled', atBaseline);
-      this.$("." + side + ".side.form fieldset").removeClass('disabled');
-      this.$("input[name^=" + side + "]:disabled, [id^=" + side + "]:disabled").closest('fieldset').addClass('disabled');
-      if (newInfo.mapName in this.nameIndex) {
-        this.$("." + side + "-valid-map").removeClass('disabled').prop('disabled', false);
+      atBaseline = newInfo.year === 'baseline';
+      this.$('input[name=' + side + 'mapscenario], #' + side + 'mapgcm').prop('disabled', atBaseline);
+      this.$('.' + side + '.side.form fieldset').removeClass('disabled');
+      this.$('input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled').closest('fieldset').addClass('disabled');
+      mapValidQuery = '.' + side + '-valid-map';
+      if (_ref = newInfo.speciesName, __indexOf.call(this.namesList, _ref) >= 0) {
+        this.$(mapValidQuery).removeClass('disabled').prop('disabled', false);
       } else {
-        this.$("." + side + "-valid-map").addClass('disabled').prop('disabled', true);
+        this.$(mapValidQuery).addClass('disabled').prop('disabled', true);
         return false;
       }
       currInfo = side === 'left' ? this.leftInfo : this.rightInfo;
       if (currInfo && _.isEqual(newInfo, currInfo)) {
         return false;
       }
-      if (currInfo && newInfo.mapName === currInfo.mapName && newInfo.degs === currInfo.degs && newInfo.degs === 'baseline') {
+      if (currInfo && newInfo.speciesName === currInfo.speciesName && newInfo.year === currInfo.year && newInfo.year === 'baseline') {
         return false;
       }
       if (side === 'left') {
@@ -188,21 +184,13 @@
       return this.addMapTag(side);
     },
     leftSideUpdate: function() {
-      this.sideUpdate('left');
-      if (this.$('#sync')[0].checked) {
-        debug('Sync checked - syncing right side', 'message');
-        return this.copySppToRightSide();
-      }
+      return this.sideUpdate('left');
     },
     rightSideUpdate: function() {
       return this.sideUpdate('right');
     },
-    copySppToRightSide: function() {
-      this.$('#rightmapspp').val(this.$('#leftmapspp').val());
-      return this.rightSideUpdate();
-    },
     addMapTag: function(side) {
-      var dispLookup, info, tag;
+      var info, tag;
       debug('AppView.addMapTag');
       if (side === 'left') {
         info = this.leftInfo;
@@ -210,15 +198,11 @@
       if (side === 'right') {
         info = this.rightInfo;
       }
-      tag = "<b><i>" + info.mapName + "</i></b>";
-      dispLookup = {
-        'no.disp': 'no range adaptation',
-        'real.disp': 'range adaptation'
-      };
-      if (info.degs === 'baseline') {
-        tag = "baseline " + tag + " distribution";
+      tag = "<b><i>" + info.speciesName + "</i></b>";
+      if (info.year === 'baseline') {
+        tag = "current " + tag + " distribution";
       } else {
-        tag = "<b>" + info.confidence + "th</b> percentile projections for " + tag + " at <b>+" + info.degs + "&deg;C</b> with <b>" + dispLookup[info.range] + "</b>";
+        tag = "<b>" + info.gcm + "</b> percentile projections for " + tag + " in <b>" + info.year + "</b> if <b>" + info.scenario + "</b>";
       }
       if (side === 'left') {
         this.leftTag.find('.leftlayername').html(tag);
@@ -228,7 +212,7 @@
       }
     },
     addMapLayer: function(side) {
-      var ext, futureModelPoint, isConcern, isRefugia, isRichness, mapInfo, mapUrl, projectionName, sideInfo, style, url, zipUrl;
+      var futureModelPoint, isBiodiversity, layer, loadClass, mapUrl, sideInfo, sppFileName, val, zipUrl, _ref;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -236,105 +220,100 @@
       if (side === 'right') {
         sideInfo = this.rightInfo;
       }
+      isBiodiversity = (_ref = sideInfo.speciesName, __indexOf.call(this.biodivList, _ref) >= 0);
       futureModelPoint = '';
       mapUrl = '';
       zipUrl = '';
-      isRichness = sideInfo.mapName.startsWith('Richness -');
-      isRefugia = sideInfo.mapName.startsWith('Refugia -');
-      isConcern = sideInfo.mapName.startsWith('Concern -');
-      if (isRichness) {
-        style = 'taxa-richness-change';
-        projectionName = "prop.richness_" + sideInfo.degs + "_" + sideInfo.range + "_" + sideInfo.confidence;
-        if (sideInfo.degs === 'baseline') {
-          projectionName = 'current.richness';
-          style = 'taxa-richness';
-        }
-      } else if (isRefugia) {
-        style = 'taxa-refugia';
-        projectionName = "refuge.certainty_" + sideInfo.degs + "_" + sideInfo.range;
-        if (sideInfo.degs === 'baseline') {
-          projectionName = 'current.richness';
-        }
-      } else if (isConcern) {
-        style = 'taxa-aoc';
-        projectionName = "AreaOfConcern.certainty_" + sideInfo.degs + "_" + sideInfo.range;
-        if (sideInfo.degs === 'baseline') {
-          projectionName = 'current.richness';
-        }
-      } else {
-        style = 'spp-suitability-purple';
-        projectionName = "TEMP_" + sideInfo.degs + "_" + sideInfo.confidence + "." + sideInfo.range;
-        if (sideInfo.degs === 'baseline') {
-          projectionName = 'current';
-        }
-      }
-      mapInfo = this.mapList[this.nameIndex[sideInfo.mapName]];
-      if (mapInfo) {
-        url = this.speciesDataUrl;
-        ext = '.tif';
-        if (mapInfo.type === 'climate') {
-          url = this.climateDataUrl;
-          ext = '.asc';
-        } else if (mapInfo.type === 'richness') {
-          url = this.summariesDataUrl;
+      if (isBiodiversity) {
+        futureModelPoint = ['biodiversity/deciles/biodiversity', sideInfo.scenario, sideInfo.year, sideInfo.gcm].join('_');
+        if (sideInfo.year === 'baseline') {
+          futureModelPoint = 'biodiversity/biodiversity_current';
         }
         mapUrl = [
-          this.resolvePlaceholders(url, {
-            path: mapInfo.path
-          }), projectionName + ext
+          this.resolvePlaceholders(this.biodivDataUrl, {
+            sppGroup: sideInfo.speciesName
+          }), futureModelPoint + '.tif'
         ].join('/');
+        zipUrl = [
+          this.resolvePlaceholders(this.biodivDataUrl, {
+            sppGroup: sideInfo.speciesName
+          }), 'biodiversity', sideInfo.speciesName + '.zip'
+        ].join('/');
+        this.$('#' + side + 'mapdl').attr('href', mapUrl);
+        this.$('#' + side + 'archivedl').html('download this biodiversity group<br>(~100Mb zip)');
+        this.$('#' + side + 'archivedl').attr('href', zipUrl);
       } else {
-        console.log("Can't map that -- no '" + sideInfo.mapName + "' in index");
-      }
-      return $.ajax({
-        url: '/api/preplayer/',
-        method: 'POST',
-        data: {
-          'info': mapInfo,
-          'proj': projectionName
+        futureModelPoint = ['/dispersal/deciles/' + sideInfo.scenario, sideInfo.year, sideInfo.gcm].join('_');
+        if (sideInfo.year === 'baseline') {
+          futureModelPoint = '/realized/vet.suit.cur';
         }
-      }).done((function(_this) {
-        return function(data) {
-          var layer, loadClass, wmsLayer, wmsUrl;
-          console.log(['layer prepped, answer is ', data]);
-          wmsUrl = data.mapUrl;
-          wmsLayer = data.layerName;
-          layer = L.tileLayer.wms(wmsUrl, {
-            layers: wmsLayer,
-            format: 'image/png',
-            styles: style,
-            transparent: true
-          });
-          loadClass = '' + side + 'loading';
-          layer.on('loading', function() {
-            return _this.$el.addClass(loadClass);
-          });
-          layer.on('load', function() {
-            return _this.$el.removeClass(loadClass);
-          });
-          if (side === 'left') {
-            if (_this.leftLayer) {
-              _this.map.removeLayer(_this.leftLayer);
-            }
-            _this.leftLayer = layer;
-          }
-          if (side === 'right') {
-            if (_this.rightLayer) {
-              _this.map.removeLayer(_this.rightLayer);
-            }
-            _this.rightLayer = layer;
-          }
-          layer.addTo(_this.map);
-          _this.legend.update({
-            uri: '/static/images/legends/' + style + '.sld.svg'
-          });
-          return _this.resizeThings();
-        };
-      })(this)).fail((function(_this) {
-        return function(jqx, status) {
-          return debug(status, 'warning');
+        sppFileName = sideInfo.speciesName.replace(' ', '_');
+        mapUrl = [
+          this.resolvePlaceholders(this.speciesDataUrl, {
+            sppName: sppFileName,
+            sppGroup: this.speciesGroups[sideInfo.speciesName]
+          }), futureModelPoint + '.tif'
+        ].join('/');
+        zipUrl = [
+          this.resolvePlaceholders(this.speciesDataUrl, {
+            sppName: sppFileName,
+            sppGroup: this.speciesGroups[sideInfo.speciesName]
+          }), sppFileName + '.zip'
+        ].join('/');
+        this.$('#' + side + 'mapdl').attr('href', mapUrl);
+        this.$('#' + side + 'archivedl').html('download this species<br>(~2Gb zip)');
+        this.$('#' + side + 'archivedl').attr('href', zipUrl);
+      }
+      layer = L.tileLayer.wms(this.resolvePlaceholders(this.rasterApiUrl), {
+        DATA_URL: mapUrl,
+        layers: 'DEFAULT',
+        format: 'image/png',
+        transparent: true
+      });
+      loadClass = '' + side + 'loading';
+      layer.on('loading', (function(_this) {
+        return function() {
+          return _this.$el.addClass(loadClass);
         };
       })(this));
+      layer.on('load', (function(_this) {
+        return function() {
+          return _this.$el.removeClass(loadClass);
+        };
+      })(this));
+      if (side === 'left') {
+        if (this.leftLayer) {
+          this.map.removeLayer(this.leftLayer);
+        }
+        this.leftLayer = layer;
+      }
+      if (side === 'right') {
+        if (this.rightLayer) {
+          this.map.removeLayer(this.rightLayer);
+        }
+        this.rightLayer = layer;
+      }
+      layer.addTo(this.map);
+      this.resizeThings();
+      if (ga && typeof ga === 'function') {
+        if (sideInfo.year === 'baseline') {
+          val = 1990;
+        } else {
+          val = parseInt(sideInfo.year, 10);
+        }
+        val = val + {
+          'tenth': 0.1,
+          'fiftieth': 0.5,
+          'ninetieth': 0.9
+        }[sideInfo.gcm];
+        return ga('send', {
+          'hitType': 'event',
+          'eventCategory': 'mapshow',
+          'eventAction': sideInfo.speciesName,
+          'eventLabel': sideInfo.scenario,
+          'eventValue': val
+        });
+      }
     },
     centreMap: function(repeatedlyFor) {
       var later, recentre, _i, _results;
@@ -369,50 +348,104 @@
       }
       return this.centreMap();
     },
-    toggleSync: function() {
-      debug('AppView.toggleSync');
-      if (this.$('#sync')[0].checked) {
-        this.$('.rightmapspp').prop('disabled', true);
-        return this.copySppToRightSide();
-      } else {
-        return this.$('.rightmapspp').prop('disabled', false);
-      }
+    fetchSpeciesInfo: function() {
+      debug('AppView.fetchSpeciesInfo');
+      return $.ajax({
+        url: '/data/species',
+        dataType: 'json'
+      }).done((function(_this) {
+        return function(data) {
+          var commonNameWriter, speciesGroups, speciesLookupList, speciesSciNameList;
+          speciesLookupList = [];
+          speciesSciNameList = [];
+          speciesGroups = {};
+          commonNameWriter = function(sciName) {
+            var sciNamePostfix;
+            sciNamePostfix = " (" + sciName + ")";
+            return function(cnIndex, cn) {
+              return speciesLookupList.push({
+                label: cn + sciNamePostfix,
+                value: sciName
+              });
+            };
+          };
+          $.each(data, function(sciName, sppInfo) {
+            speciesSciNameList.push(sciName);
+            speciesGroups[sciName] = sppInfo.group;
+            if (sppInfo.commonNames) {
+              return $.each(sppInfo.commonNames, commonNameWriter(sciName));
+            } else {
+              return speciesLookupList.push({
+                label: sciName,
+                value: sciName
+              });
+            }
+          });
+          _this.speciesLookupList = speciesLookupList;
+          _this.speciesSciNameList = speciesSciNameList;
+          return _this.speciesGroups = speciesGroups;
+        };
+      })(this));
     },
-    buildForm: function(side) {
-      var $mapspp;
-      debug('AppView.buildForm');
-      $mapspp = this.$("#" + side + "mapspp");
-      return $mapspp.autocomplete({
-        delay: 200,
-        close: (function(_this) {
-          return function() {
-            return _this.$el.trigger("" + side + "mapupdate");
-          };
-        })(this),
-        source: (function(_this) {
-          return function(req, response) {
-            return $.ajax({
-              url: '/api/mapsearch/',
-              data: {
-                term: req.term
-              },
-              success: function(answer) {
-                var info, nice, selectable;
-                selectable = [];
-                for (nice in answer) {
-                  info = answer[nice];
-                  selectable.push(nice);
-                  _this.mapList[info.mapId] = info;
-                  _this.nameIndex[nice] = info.mapId;
-                }
-                console.log(answer);
-                console.log(selectable);
-                return response(selectable);
-              }
+    fetchBiodivInfo: function() {
+      debug('AppView.fetchBiodivInfo');
+      return $.ajax({
+        url: '/data/biodiversity',
+        dataType: 'json'
+      }).done((function(_this) {
+        return function(data) {
+          var biodivList, biodivLookupList;
+          biodivList = [];
+          biodivLookupList = [];
+          $.each(data, function(biodivName, biodivInfo) {
+            var biodivCapName;
+            biodivCapName = biodivName.replace(/^./, function(c) {
+              return c.toUpperCase();
             });
-          };
-        })(this)
-      });
+            biodivList.push(biodivName);
+            return biodivLookupList.push({
+              label: "Biodiversity of " + biodivCapName,
+              value: biodivName
+            });
+          });
+          _this.biodivList = biodivList;
+          return _this.biodivLookupList = biodivLookupList;
+        };
+      })(this));
+    },
+    buildLeftForm: function() {
+      debug('AppView.buildLeftForm');
+      return $.when(this.speciesInfoFetchProcess, this.biodivInfoFetchProcess).done((function(_this) {
+        return function() {
+          var $leftmapspp;
+          $leftmapspp = _this.$('#leftmapspp');
+          _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
+          return $leftmapspp.autocomplete({
+            source: _this.biodivLookupList.concat(_this.speciesLookupList),
+            appendTo: _this.$el,
+            close: function() {
+              return _this.$el.trigger('leftmapupdate');
+            }
+          });
+        };
+      })(this));
+    },
+    buildRightForm: function() {
+      debug('AppView.buildRightForm');
+      return $.when(this.speciesInfoFetchProcess, this.biodivInfoFetchProcess).done((function(_this) {
+        return function() {
+          var $rightmapspp;
+          $rightmapspp = _this.$('#rightmapspp');
+          _this.namesList = _this.biodivList.concat(_this.speciesSciNameList);
+          return $rightmapspp.autocomplete({
+            source: _this.biodivLookupList.concat(_this.speciesLookupList),
+            appendTo: _this.$el,
+            close: function() {
+              return _this.$el.trigger('rightmapupdate');
+            }
+          });
+        };
+      })(this));
     },
     startSplitterTracking: function() {
       debug('AppView.startSplitterTracking');
@@ -495,11 +528,11 @@
     }
   }, {
     templates: {
-      layout: _.template("<div clas=\"ui-front\"></div>\n<div class=\"splitline\">&nbsp;</div>\n<div class=\"splitthumb\"><span>&#x276e; &#x276f;</span></div>\n<div class=\"left tag\"><%= leftTag %></div>\n<div class=\"right tag\"><%= rightTag %></div>\n<div class=\"left side form\"><%= leftForm %></div>\n<div class=\"right side form\"><%= rightForm %></div>\n<div class=\"left loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div class=\"right loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div id=\"mapwrapper\"><div id=\"map\"></div></div>"),
-      leftTag: _.template("<div class=\"show\">\n    <span class=\"leftlayername\">plain map</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <label class=\"left syncbox\"></label>\n    <input id=\"leftmapspp\" class=\"left\" type=\"text\" name=\"leftmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
-      rightTag: _.template("<div class=\"show\">\n    <span class=\"rightlayername\">(no distribution)</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <label class=\"right syncbox\"><input id=\"sync\" type=\"checkbox\" value=\"sync\" checked=\"checked\" /> same as left side</label>\n    <input id=\"rightmapspp\" type=\"text\" class=\"right\" name=\"rightmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
-      leftForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"left\" id=\"leftmapdegs\">\n        <option value=\"baseline\">baseline</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"High sensitivity climate\">\n            <option value=\"6\">6.0 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><!-- span>none</span --> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"no.disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><!-- span>allow</span --> <input name=\"leftmaprange\" class=\"left\" type=\"radio\" value=\"real.disp\"> allow range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <!-- option value=\"33\">33rd percentile</option -->\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <!-- option value=\"66\">66th percentile</option -->\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"leftmapdl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<1Mb GeoTIFF)</a>\n</fieldset>\n"),
-      rightForm: _.template("<fieldset>\n    <legend>temperature change</legend>\n    <select class=\"right\" id=\"rightmapdegs\">\n        <option value=\"baseline\">baseline</option>\n        <option value=\"1.5\">1.5 &deg;C</option>\n        <option value=\"2\">2.0 &deg;C</option>\n        <option value=\"2.7\">2.7 &deg;C</option>\n        <option value=\"3.2\">3.2 &deg;C</option>\n        <option value=\"4.5\">4.5 &deg;C</option>\n        <optgroup label=\"High sensitivity climate\">\n            <option value=\"6\">6.0 &deg;C</option>\n        </optgroup>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>adaptation via range shift</legend>\n    <label><!-- span>none</span --> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"no.disp\" checked=\"checked\"> species cannot shift ranges</label>\n    <label><!-- span>allow</span --> <input name=\"rightmaprange\" class=\"right\" type=\"radio\" value=\"real.disp\"> allow range adaptation</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"right\" id=\"rightmapconfidence\">\n        <option value=\"10\">10th percentile</option>\n        <!-- option value=\"33\">33rd percentile</option -->\n        <option value=\"50\" selected=\"selected\">50th percentile</option>\n        <!-- option value=\"66\">66th percentile</option -->\n        <option value=\"90\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide/show right map</button>\n    <button type=\"button\" class=\"btn-copy left-valid-map\">copy left map &laquo;</button>\n    <a id=\"rightmapdl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<1Mb GeoTIFF)</a>\n</fieldset>\n")
+      layout: _.template("<div class=\"splitline\">&nbsp;</div>\n<div class=\"splitthumb\"><span>&#x276e; &#x276f;</span></div>\n<div class=\"left tag\"><%= leftTag %></div>\n<div class=\"right tag\"><%= rightTag %></div>\n<div class=\"left side form\"><%= leftForm %></div>\n<div class=\"right side form\"><%= rightForm %></div>\n<div class=\"left loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div class=\"right loader\"><img src=\"/static/images/spinner.loadinfo.net.gif\" /></div>\n<div id=\"mapwrapper\"><div id=\"map\"></div></div>"),
+      leftTag: _.template("<div class=\"show\">\n    <span class=\"leftlayername\">plain map</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <input id=\"leftmapspp\" class=\"left\" name=\"leftmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n    <!--\n    <button class=\"btn-change\">hide settings</button>\n    <button class=\"btn-compare\">compare +/-</button>\n    -->\n</div>"),
+      rightTag: _.template("<div class=\"show\">\n    <span class=\"rightlayername\">(no distribution)</span>\n    <br>\n    <button class=\"btn-change\">settings</button>\n    <button class=\"btn-compare\">show/hide comparison map</button>\n</div>\n<div class=\"edit\">\n    <input id=\"rightmapspp\" class=\"right\" name=\"rightmapspp\" placeholder=\"&hellip; species or group &hellip;\" />\n</div>"),
+      leftForm: _.template("<fieldset>\n    <legend>time point</legend>\n    <select class=\"left\" id=\"leftmapyear\">\n        <option value=\"baseline\">current</option>\n        <option>2025</option>\n        <option>2035</option>\n        <option>2045</option>\n        <option>2055</option>\n        <option>2065</option>\n        <option>2075</option>\n        <option>2085</option>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>emission scenario</legend>\n    <label><span>RCP 4.5</span> <input name=\"leftmapscenario\" class=\"left\" type=\"radio\" value=\"RCP45\"> lower emissions</label>\n    <label><span>RCP 8.5</span> <input name=\"leftmapscenario\" class=\"left\" type=\"radio\" value=\"RCP85\" checked=\"checked\"> business as usual</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"left\" id=\"leftmapgcm\">\n        <option value=\"tenth\">10th percentile</option>\n        <option value=\"fiftieth\" selected=\"selected\">50th percentile</option>\n        <option value=\"ninetieth\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">show right map</button>\n    <button type=\"button\" class=\"btn-copy right-valid-map\">copy right map &laquo;</button>\n    <a id=\"leftmapdl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n    <a id=\"leftarchivedl\" class=\"download left-valid-map\" href=\"\" disabled=\"disabled\">download this set of maps<br>(~2Gb zip)</a>\n</fieldset>"),
+      rightForm: _.template("<fieldset>\n    <legend>time point</legend>\n    <select class=\"right\" id=\"rightmapyear\">\n        <option value=\"baseline\">current</option>\n        <option>2025</option>\n        <option>2035</option>\n        <option>2045</option>\n        <option>2055</option>\n        <option>2065</option>\n        <option>2075</option>\n        <option>2085</option>\n    </select>\n</fieldset>\n<fieldset>\n    <legend>emission scenario</legend>\n    <label><span>RCP 4.5</span> <input name=\"rightmapscenario\" class=\"right\" type=\"radio\" value=\"RCP45\"> lower emissions</label>\n    <label><span>RCP 8.5</span> <input name=\"rightmapscenario\" class=\"right\" type=\"radio\" value=\"RCP85\" checked=\"checked\"> business as usual</label>\n</fieldset>\n<fieldset>\n    <legend>model summary</legend>\n    <select class=\"right\" id=\"rightmapgcm\">\n        <option value=\"tenth\">10th percentile</option>\n        <option value=\"fiftieth\" selected=\"selected\">50th percentile</option>\n        <option value=\"ninetieth\">90th percentile</option>\n    </select>\n</fieldset>\n<fieldset class=\"blank\">\n    <button type=\"button\" class=\"btn-change\">hide settings</button>\n    <button type=\"button\" class=\"btn-compare\">hide right map</button>\n    <button type=\"button\" class=\"btn-copy left-valid-map\">&raquo; copy left map</button>\n    <a id=\"rightmapdl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download just this map<br>(<20Mb GeoTIFF)</a>\n    <a id=\"rightarchivedl\" class=\"download right-valid-map\" href=\"\" disabled=\"disabled\">download this set of maps<br>(<2Gb zip)</a>\n</fieldset>")
     }
   });
 

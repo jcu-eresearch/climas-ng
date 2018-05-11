@@ -24,10 +24,4 @@
     };
   }
 
-  if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function(searchStr, pos) {
-      return this.substr(pos || 0, searchStr.length) === searchStr;
-    };
-  }
-
 }).call(this);

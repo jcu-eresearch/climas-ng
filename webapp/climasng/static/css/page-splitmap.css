@@ -641,27 +641,27 @@ textarea {
 }
 @font-face {
   font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v14/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v14/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v11/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v14/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v11/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v14/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v11/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v11/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
 }
 body {
   padding: 0;
@@ -709,7 +709,6 @@ button:hover {
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {
-  line-height: 1.2;
   opacity: 0.66;
   border-radius: 1em;
   border: dotted black 2px;
@@ -954,11 +953,6 @@ nav ul li ul > li:hover {
   max-width: 190px;
   max-height: 140px;
 }
-.draft {
-  background-color: transparent;
-  background-image: -webkit-repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 4px, rgba(255, 255, 100, 0.5) 4px, rgba(255, 255, 100, 0.5) 8px);
-  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 4px, rgba(255, 255, 100, 0.5) 4px, rgba(255, 255, 100, 0.5) 8px);
-}
 /* footer - - - - - - - - - - - - - - - - - - - */
 footer.page {
   position: absolute;
@@ -1165,7 +1159,7 @@ body {
   width: 100%;
   left: 0;
   background: #efe6c5;
-  height: 5em;
+  height: 4em;
   overflow: hidden;
 }
 .splitmap .tag.left {
@@ -1178,8 +1172,8 @@ body {
 }
 .splitmap .tag > div {
   position: absolute;
-  top: 0.41666667em;
-  height: 4.16666667em;
+  top: 0.5em;
+  height: 3em;
   left: 4%;
   right: 4%;
   left: 0;
@@ -1197,31 +1191,25 @@ body {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  height: 2.5em;
-  line-height: 2.5em;
+  height: 2em;
+  line-height: 2em;
   padding: 0 1em;
   margin: 0 0 0 0.5em;
 }
-.splitmap .tag > div label.syncbox {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  height: 1.4em;
-  display: block;
-  margin-top: -0.35em;
-}
-.splitmap .tag > div input[type="text"] {
+.splitmap .tag > div input {
   text-align: inherit;
   vertical-align: middle;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 125%;
-  line-height: 2.21333333em;
-  height: 2.21333333em;
+  height: 100%;
   padding: 0 0.5em;
   width: 46%;
   margin: 0;
+}
+.splitmap .tag > div.edit {
+  line-height: 3em;
 }
 .splitmap .tag > div.show {
   line-height: 1.5em;
@@ -1237,16 +1225,16 @@ body {
   text-decoration: underline;
 }
 .splitmap.showforms .tag > div.edit {
-  top: 0.41666667em;
+  top: 0.5em;
 }
 .splitmap.showforms .tag > div.show {
-  top: 5em;
+  top: 4em;
 }
 .splitmap .tag > div.edit {
-  top: -5em;
+  top: -4em;
 }
 .splitmap .tag > div.show {
-  top: 0.41666667em;
+  top: 0.5em;
 }
 .splitmap .loader {
   z-index: 10000;
@@ -1314,7 +1302,7 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #efe6c5;
-  top: 5em;
+  top: 4em;
   bottom: 0;
   overflow-y: scroll;
   width: 15em;
@@ -1339,13 +1327,7 @@ body {
   text-align: center;
 }
 .splitmap .side.form label {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   text-align: left;
-  line-height: 1.1;
-  padding: 0.5em 0 0.5em 4ch;
-  text-indent: -4ch;
 }
 .splitmap .side.form label input[type="radio"] {
   margin: 0 0.33em;
@@ -1353,10 +1335,6 @@ body {
 .splitmap .side.form label span {
   text-transform: lowercase;
   font-variant: small-caps;
-  text-indent: 0;
-  display: inline-block;
-  min-width: 4ch;
-  text-align: right;
 }
 .splitmap .side.form fieldset {
   position: relative;
@@ -1442,7 +1420,7 @@ body {
 }
 .splitmap #mapwrapper {
   position: absolute;
-  top: 5em;
+  top: 4em;
   left: 0;
   right: 0;
   bottom: 0;

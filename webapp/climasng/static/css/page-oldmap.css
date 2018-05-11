@@ -641,27 +641,27 @@ textarea {
 }
 @font-face {
   font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v14/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
   font-style: normal;
   font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v14/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v11/nj47mAZe0mYUIySgfn0wpQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v14/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v11/v0SdcGFAl2aezM9Vq_aFTQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v14/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v11/4cKlrioa77J2iqTqBgkRWg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v11/LqowQDslGv4DmUBAfWa2Vw.ttf) format('truetype');
 }
 body {
   padding: 0;
@@ -709,7 +709,6 @@ button:hover {
 }
 /* disclaimer overlay - - - - - - - - - - - - - - */
 .disclaimer {
-  line-height: 1.2;
   opacity: 0.66;
   border-radius: 1em;
   border: dotted black 2px;
@@ -953,11 +952,6 @@ nav ul li ul > li:hover {
   border: none;
   max-width: 190px;
   max-height: 140px;
-}
-.draft {
-  background-color: transparent;
-  background-image: -webkit-repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 4px, rgba(255, 255, 100, 0.5) 4px, rgba(255, 255, 100, 0.5) 8px);
-  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 4px, rgba(255, 255, 100, 0.5) 4px, rgba(255, 255, 100, 0.5) 8px);
 }
 /* footer - - - - - - - - - - - - - - - - - - - */
 footer.page {

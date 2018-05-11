@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
 	<title>
-        Wallace 3
+		CliMAS Next Generation
 	</title>
 	<meta content="width=device-width" name="viewport" />
 	<link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />

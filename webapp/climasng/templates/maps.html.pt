@@ -4,14 +4,13 @@
     <meta charset="utf-8" />
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <title>
-        Wallace 3
+        CliMAS Next Generation
     </title>
     <meta content="width=device-width" name="viewport" />
 
     <link href="${request.static_path('climasng:static/images/favicon-trans.png')}" rel="shortcut icon" />
-    <link href='//fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Advent+Pro:100' rel='stylesheet' type='text/css'>
     <link href="${request.static_path('climasng:static/lib/leaflet.css')}" rel="stylesheet" />
-    <link href="${request.static_path('climasng:static/lib/leaflet-wms-legend/leaflet.wmslegend.css')}" rel="stylesheet" />
     <link href="${request.static_path('climasng:static/lib/jqueryui-css/ui-lightness/jquery-ui-1.10.4.custom.min.css')}" rel="stylesheet" />
     <script src="${request.static_path('climasng:static/lib/html5shiv.js')}"></script>
     <!-- this page's css -->
@@ -21,8 +20,6 @@
         // config used by the map-drawing code
         window.mapConfig = {
             speciesDataUrl: '${ species_data_url }',
-            climateDataUrl: '${ climate_data_url }',
-            summariesDataUrl: '${ summaries_data_url }',
             biodivDataUrl: '${ biodiv_data_url }',
             rasterApiUrl: '${ raster_api_url }'
         }
@@ -53,7 +50,6 @@
     <script src="${request.static_path('climasng:static/lib/lodash.compat.js')}"></script>
     <script src="${request.static_path('climasng:static/lib/backbone.js')}"></script>
     <script src="${request.static_path('climasng:static/lib/leaflet-src.js')}"></script>
-    <script src="${request.static_path('climasng:static/lib/leaflet-wms-legend/leaflet.wmslegend.js')}"></script>
     <script src="${request.static_path('climasng:static/js/page-splitmap.js')}"></script>
 </body>
 </html>

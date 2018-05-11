@@ -1,5 +1,5 @@
 
-PEOPLE
+TEAM
 
 Scientist: Jeremy VanDerWal
 Site: jjvanderwal.com
@@ -10,54 +10,30 @@ Scientist: Erin Graham
 Site: erin.graham@my.jcu.edu.au
 Location: Townsville, Australia
 
-Scientist: Jeff Price
-LinkedIn: Jeff Price
-Location: Norwich, United Kingdom
-
-Scientist: Rachel Warren
-Location: Norwich, United Kingdom
-
 Software maker: Daniel Baird
 Site: danielbaird.com
 Twitter: @danielbaird
 Location: Townsville, Australia
 
 
-WEBSITE
+SITE
 
-Mostly a lightly updated version of the 
-CliMAS website (climas.hpc.jcu.edu.au or
-tropicaldatahub.org/goto/climas).
-
-Server side: Python/Pyramid app. The search
-index uses Whoosh (whoosh.readthedocs.io)
-which is good.
+Server side: Python/Pyramid app, wasn't much 
+fun to write.
 
 Client side: Hand-rolled javascript hooked 
 onto a Backbone thing that Daniel is embarassed 
 by.  Leaflet for map display, jQuery for 
-managing the DOM etc.
+fetching data and managing the DOM.
 
 
 TOOLS
 
-Daniel used Sublime Text 3 on macOS for editing,
+Daniel used Sublime Text 2 on OSX for editing,
+and Vagrant for running Linux testing VMs.
 LESSCSS and autoprefixer for CSS, CoffeeScript + 
 Browserify for JavaScript, all hooked up with 
-Gulp. Mostly Pepsi Max for caffeination.
+Gulp.  Mostly Diet Coke for caffeination.
 
 Jeremy and Erin used maxent and R (and James Cook
 Uni's HPC) for grinding the data.
-
-Climate data came from CIAS (Community Integrated 
-Assessment System) at Tyndall Climate Change 
-Centre, which uses Climgen for its pattern 
-scaling and downscaling.
-
-Juliette's cafe provided caffeine to most 
-of the team, although Jeff also enjoyed a few 
-Pepsis Max.
-
-
-The project is dedicated to the memory of
-Professor Stephen H. Schneider

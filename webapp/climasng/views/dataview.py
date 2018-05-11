@@ -72,7 +72,7 @@ class DataView(object):
             species_file = os.path.join(data_path, data_name + '.json')
             if not os.path.isfile(species_file):
                 # species.json doesn't exist, create it
-                datafinder.createSpeciesJson(self.request.registry.settings['climas.species_data_path'], species_file)
+                datafinder.createSpeciesJson(self.request.registry.settings['climas.species_data_path'])
 
         # do we need to get the biodiversity json ready?
         elif data_name == 'biodiversity':

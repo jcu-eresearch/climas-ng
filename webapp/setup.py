@@ -18,10 +18,7 @@ install_reqs = [
     'parsimonious',
     'coverage',
     'simplejson',
-    'pypandoc==0.8.3',
-    'whoosh',
-    'requests',
-    'elasticsearch>=5.0.0,<6.0.0'
+    'pypandoc==0.8.3'
 ]
 
 setup_reqs = [

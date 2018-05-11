@@ -77,16 +77,6 @@ webapp/climasng/db/sqlbuilder/*.sql
 webapp/climasng/db/sqlbuilder/*.sqlite
 webapp/climasng/db/*.sqlite
 
-# ignore npm libraries
-webapp/node_modules
-webapp/old-nm
 
-# random testers
+
 utilityscripts/test.html
-utilityscripts/whooshindex
-
-# data index
-searchindex
-
-# ignore direnv files, which generally have passwords in 'em
-.envrc
