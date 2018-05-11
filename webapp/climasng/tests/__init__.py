@@ -5,7 +5,7 @@ from paste.deploy.loadwsgi import appconfig
 from pyramid.config import Configurator
 
 from pyramid import testing
-from climasng.views.oldspeciesview import OldSpeciesView
+# from climasng.views.oldspeciesview import OldSpeciesView
 from climasng.models import *
 
 from climasng.parsing.prosemaker import ProseMaker

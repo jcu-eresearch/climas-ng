@@ -15,10 +15,11 @@ require '../util/shims'
 debug = (itemToLog, itemLevel)->
     levels = ['verydebug', 'debug', 'message', 'warning']
 
-    # threshold = 'verydebug'
-    # threshold = 'debug'
-    threshold = 'message'
     itemLevel = 'debug' unless itemLevel
+
+    # threshold = 'verydebug'
+    threshold = 'debug'
+    # threshold = 'message'
 
     thresholdNum = levels.indexOf threshold
     messageNum = levels.indexOf itemLevel
@@ -41,6 +42,8 @@ AppView = Backbone.View.extend {
     # ---------------------------------------------------------------
     # some settings
     speciesDataUrl: window.mapConfig.speciesDataUrl
+    climateDataUrl: window.mapConfig.climateDataUrl
+    summariesDataUrl: window.mapConfig.summariesDataUrl
     biodivDataUrl: window.mapConfig.biodivDataUrl
     rasterApiUrl: window.mapConfig.rasterApiUrl
     # ---------------------------------------------------------------
@@ -59,6 +62,7 @@ AppView = Backbone.View.extend {
         'change select.right': 'rightSideUpdate'
         'change input.left': 'leftSideUpdate'
         'change input.right': 'rightSideUpdate'
+        'change #sync': 'toggleSync'
     # ---------------------------------------------------------------
     tick: ()->
         # if @map
@@ -76,14 +80,8 @@ AppView = Backbone.View.extend {
         # more annoying version of bindAll requires this concat stuff
         _.bindAll.apply _, [this].concat _.functions(this)
 
-        # kick off the fetching of the species and biodiversity lists
-        @namesList = []
-
-        @speciesSciNameList = []
-        @speciesInfoFetchProcess = @fetchSpeciesInfo()
-
-        @biodivList = []
-        @biodivInfoFetchProcess = @fetchBiodivInfo()
+        @nameIndex = {} # map of nice name -to-> "id name"
+        @mapList = {}   # map of "id name" -to-> url, type etc
 
         # @sideUpdate('left')
 
@@ -102,10 +100,20 @@ AppView = Backbone.View.extend {
         $('#contentwrap').append @$el
 
         @map = L.map 'map', {
-            center: [-20, 136]
-            zoom: 5
+            center: [0, 0]
+            zoom: 2
         }
         @map.on 'move', @resizeThings
+
+        # add a distance scale bar
+        L.control.scale().addTo @map
+
+        # add a legend
+        @legend = L.control {uri: ''}
+        @legend.onAdd = (map)=> this._div = L.DomUtil.create 'div', 'info'
+        @legend.update = (props)=> this._div.innerHTML = '<object type="image/svg+xml" data="' + (if props then props.uri else '.') + '" />'
+
+        @legend.addTo @map
 
         ## removed MapQuest base layer 2016-07-20 due to licencing changes
         # L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
@@ -119,26 +127,33 @@ AppView = Backbone.View.extend {
         #
         ## replaced with HERE maps base layer
 
-        L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
-            attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>'
-            subdomains: '1234'
-            base: 'aerial'
-            type: 'maptile'
-            scheme: 'terrain.day'
-            app_id: 'l2Rye6zwq3u2cHZpVIPO'
-            app_code: 'MpXSlNLcLSQIpdU6XHB0TQ'
-            mapID: 'newest'
-            maxZoom: 18
-            language: 'eng'
-            format: 'png8'
-            size: '256'
+        ## removing HERE maps base layer
+        # L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+        #     attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>'
+        #     subdomains: '1234'
+        #     base: 'aerial'
+        #     type: 'maptile'
+        #     scheme: 'terrain.day'
+        #     app_id: 'l2Rye6zwq3u2cHZpVIPO'
+        #     app_code: 'MpXSlNLcLSQIpdU6XHB0TQ'
+        #     mapID: 'newest'
+        #     maxZoom: 18
+        #     language: 'eng'
+        #     format: 'png8'
+        #     size: '256'
+        # }).addTo @map
+        ## switching to ESRI baselayer
+
+        L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri'
+            variant: 'World_Topo_Map'
         }).addTo @map
 
         @leftForm = @$ '.left.form'
-        @buildLeftForm()
+        @buildForm 'left'
 
         @rightForm = @$ '.right.form'
-        @buildRightForm()
+        @buildForm 'right'
 
         @leftTag = @$ '.left.tag'
         @rightTag = @$ '.right.tag'
@@ -148,6 +163,9 @@ AppView = Backbone.View.extend {
 
         @leftSideUpdate()
         @rightSideUpdate()
+
+        # show the splitter by default
+        @toggleSplitter()
     # ---------------------------------------------------------------
     resolvePlaceholders: (strWithPlaceholders, replacements)->
         ans = strWithPlaceholders
@@ -168,7 +186,7 @@ AppView = Backbone.View.extend {
 
         return unless @leftInfo
 
-        @$('#rightmapspp').val @leftInfo.speciesName
+        @$('#rightmapspp').val @leftInfo.mapName
         @$('#rightmapyear').val @leftInfo.year
         @$('input[name=rightmapscenario]').each (index, item)=>
             $(item).prop 'checked', ($(item).val() == @leftInfo.scenario)
@@ -181,7 +199,7 @@ AppView = Backbone.View.extend {
 
         return unless @rightInfo
 
-        @$('#leftmapspp').val @rightInfo.speciesName
+        @$('#leftmapspp').val @rightInfo.mapName
         @$('#leftmapyear').val @rightInfo.year
         @$('input[name=leftmapscenario]').each (index, item)=>
             $(item).prop 'checked', ($(item).val() == @rightInfo.scenario)
@@ -192,45 +210,58 @@ AppView = Backbone.View.extend {
     sideUpdate: (side)->
         debug 'AppView.sideUpdate (' + side + ')'
 
+        #
+        # Collect info from the form on that side
+        #
+
         newInfo = {
-            speciesName: @$('#' + side + 'mapspp').val()
-            year: @$('#' + side + 'mapyear').val()
-            scenario: @$('input[name=' + side + 'mapscenario]:checked').val()
-            gcm: @$('#' + side + 'mapgcm').val()
+            mapName: @$('#' + side + 'mapspp').val()
+            degs: @$('#' + side + 'mapdegs').val()
+            range: @$('input[name=' + side + 'maprange]:checked').val()
+            confidence: @$('#' + side + 'mapconfidence').val()
         }
 
-        # if we're at baseline, disable the future-y things
-        atBaseline = (newInfo.year == 'baseline')
+        #
+        # enable and disable the form parts that don't
+        # apply, eg. if you're looking at baseline,
+        # disable the future-y things
+        #
+
+        # set disabled for range-adaptation and model-summary-confidence
+        atBaseline = (newInfo.degs == 'baseline')
+        @$("input[name=#{side}maprange], ##{side}mapconfidence").prop 'disabled', atBaseline
+
+        # now, add a disabled style to the fieldsets holding disabled items
+        @$(".#{side}.side.form fieldset").removeClass 'disabled'
         @$(
-            'input[name=' + side + 'mapscenario], #' + side + 'mapgcm'
-        ).prop 'disabled', atBaseline
-        # now add a disabled style to the fieldsets holding disabled items
-        @$('.' + side + '.side.form fieldset').removeClass 'disabled'
-        @$(
-            'input[name=' + side + 'mapscenario]:disabled, #' + side + 'mapgcm:disabled'
+            "input[name^=#{side}]:disabled, [id^=#{side}]:disabled"
         ).closest('fieldset').addClass 'disabled'
 
-        # is it a real species or biodiv name?
-        mapValidQuery = '.' + side + '-valid-map'
-        if newInfo.speciesName in @namesList
-            # it's real, enable the things that need valid species
+        #
+        # check if what they typed is an available map
+        #
+
+        if newInfo.mapName of @nameIndex
+            # it's real, so enable the things that need valid maps
             # e.g. downloads, copy to the other side, etc
-            @$(mapValidQuery).removeClass('disabled').prop 'disabled', false
+            @$(".#{side}-valid-map").removeClass('disabled').prop 'disabled', false
         else
-            # it's not real, disable those things and bail out right now
-            @$(mapValidQuery).addClass('disabled').prop 'disabled', true
+            # it's NOT real, disable those things and bail out right now
+            @$(".#{side}-valid-map").addClass('disabled').prop 'disabled', true
             return false
 
         currInfo = if side == 'left' then @leftInfo else @rightInfo
         # bail if nothing changed
         return false if currInfo and _.isEqual newInfo, currInfo
 
-        # also bail if they're both same species at baseline
+        # also bail if they're both same species at baseline, even
+        # if future-projection stuff differs, coz that's a special 
+        # case of being "the same"
         if (
             currInfo and
-            newInfo.speciesName == currInfo.speciesName and
-            newInfo.year == currInfo.year and
-            newInfo.year == 'baseline'
+            newInfo.mapName == currInfo.mapName and
+            newInfo.degs == currInfo.degs and
+            newInfo.degs == 'baseline'
         )
             return false
 
@@ -250,10 +281,18 @@ AppView = Backbone.View.extend {
 
     # ---------------------------------------------------------------
     leftSideUpdate: ()->
-        return @sideUpdate 'left'
+        @sideUpdate 'left'
+        if @$('#sync')[0].checked 
+            debug 'Sync checked - syncing right side', 'message'
+            @copySppToRightSide()
+
     # ---------------------------------------------------------------
     rightSideUpdate: ()->
         return @sideUpdate 'right'
+    # ---------------------------------------------------------------
+    copySppToRightSide: ()->
+        @$('#rightmapspp').val @$('#leftmapspp').val()
+        @rightSideUpdate()
     # ---------------------------------------------------------------
     addMapTag: (side)->
         debug 'AppView.addMapTag'
@@ -261,13 +300,16 @@ AppView = Backbone.View.extend {
         info = @leftInfo if side == 'left'
         info = @rightInfo if side == 'right'
 
-        tag = "<b><i>#{info.speciesName}</i></b>"
+        tag = "<b><i>#{info.mapName}</i></b>"
+        dispLookup = {
+            'no.disp': 'no range adaptation'
+            'real.disp': 'range adaptation'
+        }
 
-        if info.year is 'baseline'
-            tag = "current #{tag} distribution"
+        if info.degs is 'baseline'
+            tag = "baseline #{tag} distribution"
         else
-            tag = "<b>#{info.gcm}</b> percentile projections for #{tag} in <b>#{info.year}</b> if <b>#{info.scenario}</b>"
-
+            tag = "<b>#{info.confidence}th</b> percentile projections for #{tag} at <b>+#{info.degs}&deg;C</b> with <b>#{dispLookup[info.range]}</b>"
 
         if side == 'left'
             @leftTag.find('.leftlayername').html tag
@@ -281,126 +323,183 @@ AppView = Backbone.View.extend {
         sideInfo = @leftInfo if side == 'left'
         sideInfo = @rightInfo if side == 'right'
 
-        # is it a biodiversity map?
-        isBiodiversity = sideInfo.speciesName in @biodivList
-
         futureModelPoint = ''
         mapUrl = ''
         zipUrl = ''
 
-        if isBiodiversity
-            # they're looking for a biodiversity map.
-            futureModelPoint = [
-                'biodiversity/deciles/biodiversity'
-                sideInfo.scenario
-                sideInfo.year
-                sideInfo.gcm
-            ].join '_'
+        # TODO: use mapInfo.type instead of these booleans
+        isRichness = sideInfo.mapName.startsWith 'Richness -'
+        isRefugia = sideInfo.mapName.startsWith 'Refugia -'
+        isConcern = sideInfo.mapName.startsWith 'Concern -'
 
-            # if they want current, just get the current biodiv
-            futureModelPoint = 'biodiversity/biodiversity_current' if sideInfo.year == 'baseline'
+        if isRichness
+            # ...then they've selected a richness map.
+            style = 'taxa-richness-change'
+            projectionName = "prop.richness_#{sideInfo.degs}_#{sideInfo.range}_#{sideInfo.confidence}"
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
+                style = 'taxa-richness'
 
-            # now make that into a URL
-            mapUrl = [
-                @resolvePlaceholders @biodivDataUrl, {
-                    sppGroup: sideInfo.speciesName
-                }
-                futureModelPoint + '.tif'
-            ].join '/'
+        else if isRefugia
+            # ...then they've selected a refugia map.
+            style = 'taxa-refugia'
+            projectionName = "refuge.certainty_#{sideInfo.degs}_#{sideInfo.range}"
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
 
-            zipUrl = [
-                @resolvePlaceholders @biodivDataUrl, {
-                    sppGroup: sideInfo.speciesName
-                }
-                'biodiversity'
-                sideInfo.speciesName + '.zip'
-            ].join '/'
-
-            # update the download links
-            @$('#' + side + 'mapdl').attr 'href', mapUrl
-            @$('#' + side + 'archivedl').html 'download this biodiversity group<br>(~100Mb zip)'
-            @$('#' + side + 'archivedl').attr 'href', zipUrl
+        else if isConcern
+            # ...then they've selected an area-of-concern map.
+            style = 'taxa-aoc'
+            projectionName = "AreaOfConcern.certainty_#{sideInfo.degs}_#{sideInfo.range}"
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
 
         else
-            # it's a plain old species map they're after.
-
+            # ...it's a plain old species map they're after.
+            style = 'spp-suitability-purple'
             # work out the string that gets to the projection point they want
-            futureModelPoint = [
-                '/dispersal/deciles/' + sideInfo.scenario
-                sideInfo.year
-                sideInfo.gcm
-            ].join '_'
+            projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
+            # if they want baseline, just get the baseline projection
+            projectionName = 'current' if sideInfo.degs == 'baseline'
 
-            # if they want current, just get the bioclim current projection
-            futureModelPoint = '/realized/vet.suit.cur' if sideInfo.year == 'baseline'
 
-            sppFileName = sideInfo.speciesName.replace ' ', '_'
+        mapInfo = @mapList[@nameIndex[sideInfo.mapName]]
 
-            # now make that into a URL
+        if mapInfo
+
+            # set up for the type we're looking at: start by assuming species and tif
+            url = @speciesDataUrl
+            ext = '.tif'
+
+            # then override as required
+            if mapInfo.type is 'climate'
+                url = @climateDataUrl
+                ext = '.asc'
+            else if mapInfo.type is 'richness'
+                url = @summariesDataUrl
+
+
+            # now set the URL for this type of map
             mapUrl = [
-                @resolvePlaceholders @speciesDataUrl, {
-                    sppName: sppFileName
-                    sppGroup: @speciesGroups[sideInfo.speciesName]
-                }
-                futureModelPoint + '.tif'
+                @resolvePlaceholders url, { path: mapInfo.path }
+                projectionName + ext
             ].join '/'
+        else
+            console.log "Can't map that -- no '#{sideInfo.mapName}' in index"
 
-            zipUrl = [
-                @resolvePlaceholders @speciesDataUrl, {
-                    sppName: sppFileName
-                    sppGroup: @speciesGroups[sideInfo.speciesName]
-                }
-                sppFileName + '.zip'
-            ].join '/'
+        # at this point we've worked out everything we can about the map
+        # the user is asking for.
+
+        # now we have to ask for a URL to the geoserver with that map, 
+        # and the layerName to use when loading it.
+
+        # TODO: use a pair of globals (leftfetch and rightfetch) to ensure
+        # early ajaxes are abandoned before starting a new one.
+
+        $.ajax({
+            url: '/api/preplayer/'
+            method: 'POST'
+            data: { 'info': mapInfo, 'proj': projectionName }
+        }).done( (data)=>
+
+            # when the layer prep is complete..
+
+            console.log ['layer prepped, answer is ', data] 
+            wmsUrl = data.mapUrl
+            wmsLayer = data.layerName
 
             # update the download links
-            @$('#' + side + 'mapdl').attr 'href', mapUrl
-            @$('#' + side + 'archivedl').html 'download this species<br>(~2Gb zip)'
-            @$('#' + side + 'archivedl').attr 'href', zipUrl
+            # TODO: we don't have the url of the map anymore..
+            # @$('#' + side + 'mapdl').attr 'href', mapUrl
 
-        # we've made a url, start the map layer loading
-        layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
-            DATA_URL: mapUrl
-            layers: 'DEFAULT'
-            format: 'image/png'
-            transparent: true
+            # start the map layer loading
+            layer = L.tileLayer.wms wmsUrl, {
+                layers: wmsLayer
+                format: 'image/png'
+                styles: style
+                transparent: true
             }
 
-        # add a class to our element when there's tiles loading
-        loadClass = '' + side + 'loading'
-        layer.on 'loading', ()=> @$el.addClass loadClass
-        layer.on 'load', ()=> @$el.removeClass loadClass
+            # add a class to our element when there's tiles loading
+            loadClass = '' + side + 'loading'
+            layer.on 'loading', ()=> @$el.addClass loadClass
+            layer.on 'load', ()=> @$el.removeClass loadClass
 
-        if side == 'left'
-            @map.removeLayer @leftLayer if @leftLayer
-            @leftLayer = layer
+            if side == 'left'
+                @map.removeLayer @leftLayer if @leftLayer
+                @leftLayer = layer
 
-        if side == 'right'
-            @map.removeLayer @rightLayer if @rightLayer
-            @rightLayer = layer
+            if side == 'right'
+                @map.removeLayer @rightLayer if @rightLayer
+                @rightLayer = layer
 
-        layer.addTo @map
+            layer.addTo @map
 
-        @resizeThings() # re-establish the splitter
+            # udpate the legend
+            @legend.update {uri: '/static/images/legends/' + style + '.sld.svg'}
 
-        # log this as an action in Google Analytics
-        if ga and typeof(ga) == 'function'
-            # we have a ga thing which is probaby a google analytics thing.
-            # "value" is year.percentile, eg. for 90th percentile in 2055,
-            # we will send 2055.9 as the value.
-            if sideInfo.year == 'baseline'
-                val = 1990
-            else
-                val = parseInt(sideInfo.year, 10)
-            val = val + { 'tenth': 0.1, 'fiftieth': 0.5, 'ninetieth': 0.9 }[sideInfo.gcm]
+            @resizeThings() # re-establish the splitter
 
-            ga('send', {
-                'hitType': 'event',
-                'eventCategory': 'mapshow',
-                'eventAction': sideInfo.speciesName,
-                'eventLabel': sideInfo.scenario,
-                'eventValue': val
-            })
+        ).fail( (jqx, status)=>
+            # when the layer prep has failed..
+            debug status, 'warning'
+        )
+
+
+
+
+
+        # # update the download links
+        # @$('#' + side + 'mapdl').attr 'href', mapUrl
+
+
+        # # we've made a url, start the map layer loading
+        # layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
+        #     DATA_URL: mapUrl
+        #     layers: 'DEFAULT'
+        #     format: 'image/png'
+        #     transparent: true
+        #     }
+
+        # # add a class to our element when there's tiles loading
+        # loadClass = '' + side + 'loading'
+        # layer.on 'loading', ()=> @$el.addClass loadClass
+        # layer.on 'load', ()=> @$el.removeClass loadClass
+
+        # if side == 'left'
+        #     @map.removeLayer @leftLayer if @leftLayer
+        #     @leftLayer = layer
+
+        # if side == 'right'
+        #     @map.removeLayer @rightLayer if @rightLayer
+        #     @rightLayer = layer
+
+        # layer.addTo @map
+
+        # @resizeThings() # re-establish the splitter
+
+        # # if we're local, log the map URL to the console
+        # if window.location.hostname == 'localhost'
+        #     console.log 'map URL is: ', mapUrl
+
+        # # log this as an action in Google Analytics
+        # if ga and typeof(ga) == 'function'
+        #     # we have a ga thing which is probaby a google analytics thing.
+        #     # "value" is year.percentile, eg. for 90th percentile in 2055,
+        #     # we will send 2055.9 as the value.
+        #     if sideInfo.year == 'baseline'
+        #         val = 1990
+        #     else
+        #         val = parseInt(sideInfo.year, 10)
+        #     val = val + { 'tenth': 0.1, 'fiftieth': 0.5, 'ninetieth': 0.9 }[sideInfo.gcm]
+
+        #     ga('send', {
+        #         'hitType': 'event',
+        #         'eventCategory': 'mapshow',
+        #         'eventAction': sideInfo.mapName,
+        #         'eventLabel': sideInfo.scenario,
+        #         'eventValue': val
+        #     })
 
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
@@ -434,99 +533,55 @@ AppView = Backbone.View.extend {
             @deactivateSplitter()
         @centreMap()
     # ---------------------------------------------------------------
-    # ---------------------------------------------------------------
-    # ajaxy stuff
-    # ---------------------------------------------------------------
-    fetchSpeciesInfo: ()->
-        debug 'AppView.fetchSpeciesInfo'
+    toggleSync: ()->
+        debug 'AppView.toggleSync'
 
-        return $.ajax({
-            url: '/data/species',
-            dataType: 'json'
-        }).done (data)=>
-            speciesLookupList = []
-            speciesSciNameList = []
-            speciesGroups = {}
-
-            # in order to avoid making a function in the inner loop,
-            # here's a function returning a function that writes a
-            # common name into the given sciName.  This is partial
-            # function application, which is a bit like currying.
-            commonNameWriter = (sciName)=>
-                sciNamePostfix = " (#{sciName})"
-                return (cnIndex, cn)=>
-                    speciesLookupList.push {
-                        label: cn + sciNamePostfix
-                        value: sciName
-                    }
-            # that's it.. this'll be used in the loop below.
-
-            $.each data, (sciName, sppInfo)=>
-                speciesSciNameList.push sciName
-                speciesGroups[sciName] = sppInfo.group
-                if sppInfo.commonNames
-                    $.each sppInfo.commonNames, commonNameWriter sciName
-                else
-                    speciesLookupList.push
-                        label: sciName
-                        value: sciName
-
-            @speciesLookupList = speciesLookupList
-            @speciesSciNameList = speciesSciNameList
-            @speciesGroups = speciesGroups
-    # ---------------------------------------------------------------
-    fetchBiodivInfo: ()->
-        debug 'AppView.fetchBiodivInfo'
-
-        return $.ajax({
-            url: '/data/biodiversity',
-            dataType: 'json'
-        }).done (data)=>
-            biodivList = []
-            biodivLookupList = []
-
-            $.each data, (biodivName, biodivInfo)=>
-                biodivCapName = biodivName.replace /^./, (c)-> c.toUpperCase()
-                biodivList.push biodivName
-                biodivLookupList.push
-                    label: "Biodiversity of " + biodivCapName
-                    value: biodivName
-
-            @biodivList = biodivList
-            @biodivLookupList = biodivLookupList
-
+        if @$('#sync')[0].checked
+            # .. checked now, so was unchecked before
+            @$('.rightmapspp').prop 'disabled', true
+            @copySppToRightSide()
+        else
+            @$('.rightmapspp').prop 'disabled', false
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
     # form creation
     # ---------------------------------------------------------------
-    buildLeftForm: ()->
-        debug 'AppView.buildLeftForm'
+    buildForm: (side)->
+        debug 'AppView.buildForm'
 
-        $.when(@speciesInfoFetchProcess, @biodivInfoFetchProcess).done =>
-            $leftmapspp = @$ '#leftmapspp'
+        $mapspp = @$ "##{side}mapspp"
 
-            # while we're here, make a big single list of acceptable names
-            @namesList = @biodivList.concat @speciesSciNameList
+        $mapspp.autocomplete {
+            delay: 200
+            close: => @$el.trigger "#{side}mapupdate"
+            source: (req, response)=>
+                $.ajax { 
+                    url: '/api/mapsearch/'
+                    data: { term: req.term }
+                    success: (answer)=>
+                        # answer is a list of completions, eg:
+                        # { "Giraffe (Giraffa camelopardalis)": {
+                        #         "type": "species", 
+                        #         "mapId": "Giraffa camelopardalis",
+                        #         "path": "..."
+                        # }, ... }
+                        selectable = []
 
-            $leftmapspp.autocomplete
-                source: @biodivLookupList.concat @speciesLookupList
-                appendTo: @$el
-                close: => @$el.trigger 'leftmapupdate'
-    # ---------------------------------------------------------------
-    buildRightForm: ()->
-        debug 'AppView.buildRightForm'
+                        for nice, info of answer
+                            # add each nice name to the completion list
+                            selectable.push nice
+                            # put the data into our local caches
+                            @mapList[info.mapId] = info
+                            @nameIndex[nice] = info.mapId
 
-        $.when(@speciesInfoFetchProcess, @biodivInfoFetchProcess).done =>
-            $rightmapspp = @$ '#rightmapspp'
+                        console.log answer
+                        console.log selectable
 
-            # while we're here, make a big single list of acceptable names
-            @namesList = @biodivList.concat @speciesSciNameList
+                        # finally, give the nice names to the autocomplete
+                        response selectable
+                }
+        }
 
-            $rightmapspp.autocomplete {
-                source: @biodivLookupList.concat @speciesLookupList
-                appendTo: @$el
-                close: => @$el.trigger 'rightmapupdate'
-            }
     # ---------------------------------------------------------------
     # ---------------------------------------------------------------
     # splitter handling
@@ -637,6 +692,7 @@ AppView = Backbone.View.extend {
     # templates here
     # ---------------------------------------------------------------
     layout: _.template """
+        <div clas="ui-front"></div>
         <div class="splitline">&nbsp;</div>
         <div class="splitthumb"><span>&#x276e; &#x276f;</span></div>
         <div class="left tag"><%= leftTag %></div>
@@ -656,11 +712,8 @@ AppView = Backbone.View.extend {
             <button class="btn-compare">show/hide comparison map</button>
         </div>
         <div class="edit">
-            <input id="leftmapspp" class="left" name="leftmapspp" placeholder="&hellip; species or group &hellip;" />
-            <!--
-            <button class="btn-change">hide settings</button>
-            <button class="btn-compare">compare +/-</button>
-            -->
+            <label class="left syncbox"></label>
+            <input id="leftmapspp" class="left" type="text" name="leftmapspp" placeholder="&hellip; species or group &hellip;" />
         </div>
     """
     # ---------------------------------------------------------------
@@ -672,80 +725,87 @@ AppView = Backbone.View.extend {
             <button class="btn-compare">show/hide comparison map</button>
         </div>
         <div class="edit">
-            <input id="rightmapspp" class="right" name="rightmapspp" placeholder="&hellip; species or group &hellip;" />
+            <label class="right syncbox"><input id="sync" type="checkbox" value="sync" checked="checked" /> same as left side</label>
+            <input id="rightmapspp" type="text" class="right" name="rightmapspp" placeholder="&hellip; species or group &hellip;" />
         </div>
     """
     # ---------------------------------------------------------------
     leftForm: _.template """
         <fieldset>
-            <legend>time point</legend>
-            <select class="left" id="leftmapyear">
-                <option value="baseline">current</option>
-                <option>2025</option>
-                <option>2035</option>
-                <option>2045</option>
-                <option>2055</option>
-                <option>2065</option>
-                <option>2075</option>
-                <option>2085</option>
+            <legend>temperature change</legend>
+            <select class="left" id="leftmapdegs">
+                <option value="baseline">baseline</option>
+                <option value="1.5">1.5 &deg;C</option>
+                <option value="2">2.0 &deg;C</option>
+                <option value="2.7">2.7 &deg;C</option>
+                <option value="3.2">3.2 &deg;C</option>
+                <option value="4.5">4.5 &deg;C</option>
+                <optgroup label="High sensitivity climate">
+                    <option value="6">6.0 &deg;C</option>
+                </optgroup>
             </select>
         </fieldset>
         <fieldset>
-            <legend>emission scenario</legend>
-            <label><span>RCP 4.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP45"> lower emissions</label>
-            <label><span>RCP 8.5</span> <input name="leftmapscenario" class="left" type="radio" value="RCP85" checked="checked"> business as usual</label>
+            <legend>adaptation via range shift</legend>
+            <label><!-- span>none</span --> <input name="leftmaprange" class="left" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
+            <label><!-- span>allow</span --> <input name="leftmaprange" class="left" type="radio" value="real.disp"> allow range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
-            <select class="left" id="leftmapgcm">
-                <option value="tenth">10th percentile</option>
-                <option value="fiftieth" selected="selected">50th percentile</option>
-                <option value="ninetieth">90th percentile</option>
+            <select class="left" id="leftmapconfidence">
+                <option value="10">10th percentile</option>
+                <!-- option value="33">33rd percentile</option -->
+                <option value="50" selected="selected">50th percentile</option>
+                <!-- option value="66">66th percentile</option -->
+                <option value="90">90th percentile</option>
             </select>
         </fieldset>
         <fieldset class="blank">
             <button type="button" class="btn-change">hide settings</button>
-            <button type="button" class="btn-compare">show right map</button>
+            <button type="button" class="btn-compare">hide/show right map</button>
             <button type="button" class="btn-copy right-valid-map">copy right map &laquo;</button>
-            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="leftarchivedl" class="download left-valid-map" href="" disabled="disabled">download this set of maps<br>(~2Gb zip)</a>
+            <a id="leftmapdl" class="download left-valid-map" href="" disabled="disabled">download just this map<br>(<1Mb GeoTIFF)</a>
         </fieldset>
+
     """
     # ---------------------------------------------------------------
     rightForm: _.template """
         <fieldset>
-            <legend>time point</legend>
-            <select class="right" id="rightmapyear">
-                <option value="baseline">current</option>
-                <option>2025</option>
-                <option>2035</option>
-                <option>2045</option>
-                <option>2055</option>
-                <option>2065</option>
-                <option>2075</option>
-                <option>2085</option>
+            <legend>temperature change</legend>
+            <select class="right" id="rightmapdegs">
+                <option value="baseline">baseline</option>
+                <option value="1.5">1.5 &deg;C</option>
+                <option value="2">2.0 &deg;C</option>
+                <option value="2.7">2.7 &deg;C</option>
+                <option value="3.2">3.2 &deg;C</option>
+                <option value="4.5">4.5 &deg;C</option>
+                <optgroup label="High sensitivity climate">
+                    <option value="6">6.0 &deg;C</option>
+                </optgroup>
             </select>
         </fieldset>
         <fieldset>
-            <legend>emission scenario</legend>
-            <label><span>RCP 4.5</span> <input name="rightmapscenario" class="right" type="radio" value="RCP45"> lower emissions</label>
-            <label><span>RCP 8.5</span> <input name="rightmapscenario" class="right" type="radio" value="RCP85" checked="checked"> business as usual</label>
+            <legend>adaptation via range shift</legend>
+            <label><!-- span>none</span --> <input name="rightmaprange" class="right" type="radio" value="no.disp" checked="checked"> species cannot shift ranges</label>
+            <label><!-- span>allow</span --> <input name="rightmaprange" class="right" type="radio" value="real.disp"> allow range adaptation</label>
         </fieldset>
         <fieldset>
             <legend>model summary</legend>
-            <select class="right" id="rightmapgcm">
-                <option value="tenth">10th percentile</option>
-                <option value="fiftieth" selected="selected">50th percentile</option>
-                <option value="ninetieth">90th percentile</option>
+            <select class="right" id="rightmapconfidence">
+                <option value="10">10th percentile</option>
+                <!-- option value="33">33rd percentile</option -->
+                <option value="50" selected="selected">50th percentile</option>
+                <!-- option value="66">66th percentile</option -->
+                <option value="90">90th percentile</option>
             </select>
         </fieldset>
         <fieldset class="blank">
             <button type="button" class="btn-change">hide settings</button>
-            <button type="button" class="btn-compare">hide right map</button>
-            <button type="button" class="btn-copy left-valid-map">&raquo; copy left map</button>
-            <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<20Mb GeoTIFF)</a>
-            <a id="rightarchivedl" class="download right-valid-map" href="" disabled="disabled">download this set of maps<br>(<2Gb zip)</a>
+            <button type="button" class="btn-compare">hide/show right map</button>
+            <button type="button" class="btn-copy left-valid-map">copy left map &laquo;</button>
+            <a id="rightmapdl" class="download right-valid-map" href="" disabled="disabled">download just this map<br>(<1Mb GeoTIFF)</a>
         </fieldset>
+
     """
     # ---------------------------------------------------------------
 }}

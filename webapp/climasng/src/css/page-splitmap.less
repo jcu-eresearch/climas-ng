@@ -37,8 +37,9 @@ body {
     // background: @background;
 }
 
-@tagheight: 4em;
-@tagcontentpad: (@tagheight / 8);
+@tagheight: 5em;
+@tagtabheight:  1.4em;
+@tagcontentpad: (@tagheight / 12);
 .splitmap {
 
     background: #efe6c5;
@@ -92,14 +93,22 @@ body {
                 padding: 0 1em;
                 margin: 0 0 0 0.5em;
             }
+            label.syncbox {
+                box-sizing: border-box;
+                height: @tagtabheight;
+                display: block;
+                margin-top: (-0.25 * @tagtabheight);
+            }
             @inputfontzoom: 1.25;
-            input {
-                // inputs in a tag are the species search box
+            @sppsearchheight: (1.0/@inputfontzoom * (@tagheight - @tagcontentpad - @tagcontentpad - @tagtabheight));
+            input[type="text"] {
+                // text inputs in a tag are the species search box
                 text-align: inherit;
                 vertical-align: middle;
                 box-sizing: border-box;
                 font-size: (100% * @inputfontzoom);
-                height: 100%;
+                line-height: @sppsearchheight;
+                height: @sppsearchheight;
                 padding: 0 0.5em;
                 width: (50 - @sidepad);
                 margin: 0;
@@ -107,7 +116,7 @@ body {
             }
         }
         > div.edit {
-            line-height: (@tagheight - @tagcontentpad - @tagcontentpad);
+            // line-height: (@tagheight - @tagcontentpad - @tagcontentpad);
         }
         > div.show {
             line-height: 1.5em;
@@ -207,13 +216,28 @@ body {
             // padding: 0.25em 0;
         }
         label {
+            box-sizing: border-box;
+
+            // min-width of the span that precedes the radio
+            // button as a kind of terse label.
+            @pre-radio-span-width: 4ch;
+
+            text-align: left;
+            line-height: 1.1;
+            padding: 0.5em 0 0.5em @pre-radio-span-width;
+            text-indent: (-1 * @pre-radio-span-width);
+
             input[type="radio"] {
                 margin: 0 0.33em;
             }
-            text-align: left;
             span {
                 text-transform: lowercase;
                 font-variant: small-caps;
+                text-indent: 0;
+
+                display: inline-block;
+                min-width: @pre-radio-span-width;
+                text-align: right;
             }
         }
         fieldset {

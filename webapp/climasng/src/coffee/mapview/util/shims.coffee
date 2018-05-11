@@ -11,3 +11,8 @@ unless Array.prototype.indexOf
         # not supporting starting index
         (return i if this[i] == needle) for i in [0..this.length]
         return -1
+
+unless String.prototype.startsWith
+	# shim in a startsWith implementation, you'll never guess what browser oh yep you got it IE
+	String.prototype.startsWith = (searchStr, pos)->
+    	return this.substr(pos || 0, searchStr.length) == searchStr

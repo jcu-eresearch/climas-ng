@@ -16,6 +16,9 @@ content = content.replace("rg_name", "region")
 # section-included detectors
 content = re.sub(r'(\[\[\s*)section_([_\w]+)\s+>\s+0(\s*\]\])', r'\1<span class="punc">includes?</span> \2\3', content)
 
+# LaTeX commands
+content = re.sub(r'^(\\.+)$', r'<pre>\1</pre>', content, flags=re.MULTILINE)
+
 # temperature and precipitation
 for tp in ['t','p']:
     content = content.replace(tp + "_mean",               tp)
@@ -64,14 +67,23 @@ content = re.sub(r'\[\[\s*([^\]]*?)\s*\]\]', r'<span class="condition"><span cla
 content = re.sub(r'\{\{\s*([^\}]*?)\s*\}\}', r'<span class="sub"><span class="punc">{{</span>\1<span class="punc">}}</span></span>', content)
 
 content = '''
+<html>
+<head>
 <style>
     body {
         max-width: 35em;
         margin: 0 auto;
         padding: 1em 3em;
-        line-height: 1.4;
+        line-height: 1.5;
         font-family: Cambria, Book Antiqua, Palatino, Georgia, serif;
         font-size: 16pt;
+    }
+    pre {
+        font-size: 66%;
+        background: #eee;
+        color: #999;
+        margin: 0;
+        padding: 0.05em;
     }
     span {
         border-radius: 0.7em;
@@ -90,7 +102,7 @@ content = '''
         vertical-align: middle;
         line-height: 1.1;
         font-family: sans-serif;
-        font-size: 70%;
+        font-size: 65%;
         background: #cef;
         color: #369;
         border: 1px solid #bdf;
@@ -104,6 +116,11 @@ content = '''
     }
     .sub .punc { letter-spacing: -0.15em; }
 </style>
-''' + content
+</head>
+<body>
+''' + content + '''
+</body>
+</html>
+'''
 
 print content

@@ -6,85 +6,118 @@
 </p>
 <h3>Generating species distributions</h3>
 <p>
-    Species occurrences were vetted for accuracy and
+    Species occurrences were vetted, as much as possible 
+    given the size of the dataset, for accuracy and
     plausibility.  These occurrences were compared
-    statistically to current climate data at 0.01&deg;
-    geographic resolution (often referred to as &ldquo;1
-    km&rdquo; resolution) to produce a statistical model
-    that predicts species survival given specified
-    climate values.  This model is known as a Species
-    Distribution Model or SDM and one was created for
-    each species.
+    statistically to current climate data at 
+    10 arc minutes geographic resolution (often referred 
+    to as &ldquo;20 km&rdquo; resolution) to produce a 
+    statistical model that predicts species occurrence 
+    probability given specified climate values.  This model 
+    is known as a Species Distribution Model or SDM and one 
+    was created for each species.
 </p><p>
     Using the SDM and current climate conditions, a
     climate suitability map was created for each species.
-    These suitability maps were then clipped by experts
-    to remove areas with suitable climate that did not
-    currently host the species.  This produced an estimate
-    of the current species distribution.
+    These suitability maps were then clipped using a
+    set of parameters (see <span class="draft">zzz</span>)
+    to produce an estimate of the current species distribution.
 </p>
 <h3>Projecting future climate</h3>
 <p>
     Future climate projections must account for a broad
     range of factors, such as population growth, land use,
-    energy demand, and new technology.  The IPCC has defined
-    a set of scenarios to represent potential futures.
+    energy demand, and new technology.  In the past the
+    Intergovernmental Panel on Climate Change (IPCC) defined
+    defined a set of scenarios to represent potential futures.
+    However, starting with the fifth assessment report these
+    were changed to represent potential future levels of
+    radiative climate forcings through what are known as
+    Representative Concentration Pathways or RCPs. This
+    allows for differing changes in technology, population,
+    etc to potentially lead to the same level of climate
+    change.
 </p><p>
-    This project uses two of the four IPCC scenarios.
-    RCP8.5, a scenario with continuing high emission
-    of greenhouse gases, was selected to represent a
-    "business as usual" future.  RCP4.5, a scenario in
-    which greenhouse gas emission stabilises before 2100,
-    was selected to represent a lower emission future.
-</p><p>
-    18 different global climate models or GCMs were used to
-    generate climate projections for each selected RCP and
-    each decadal time step from 2015 to 2085.
+    Rather than deal with multiple different possible 
+    scenarios occurring over different times (the way 
+    previous studies have looked at change) this project 
+    looks at the potential impacts on biodiversity at 
+    different amounts of warming above pre-industrial 
+    levels – these are referred to as specific warming 
+    levels. These were drawn from versions of the RCPs 
+    produced for the UK Government as part of their 
+    AVOID2 project, and more detail can be found at 
+    <span class="draft">yyyy</span>. The advantage to 
+    this approach is that it is more adaptation friendly 
+    and provides outcomes that better tie in with stated 
+    policy goals (e.g., to hold temperature to less than 
+    2&deg;C). 21 different global climate models or GCMs 
+    were used to generate climate projections for each 
+    selected temperature step.
+    <span class="draft">Should we mention time and dispersal?
+    Relevant mostly for 1.5 and 2C wher the temperature
+    is reached early but dispersal has not played entirely out...</span>
 </p>
 <h3>Projecting future species distributions</h3>
 <p>
-    The SDM for each species was then applied to future
-    climate projections to create climate suitability
-    maps.  These suitability maps were then clipped based
-    on a realistic dispersal rate to remove areas that
-    had newly suitable climate but could not be reached
-    by the species.  A diagram demonstrating this process
-    is shown below.
+    The future climate projections were then run through
+    the SDM for each species to create projected future 
+    climate suitability maps.  The maps allow you to look
+    at either the situation where a species is unable to 
+    undertake any climate mediated dispersal (e.g. barriers
+    or slow dispersal rates) or allowed to move 
+    (<span class="draft">tick the allow species to move 
+    button</span>) based on a realistic dispersal rate to
+    remove areas that had newly suitable climate but could
+    not be reached by the species.
+    A diagram demonstrating this process is shown below.
+    More on dispersal rates can be found in 
+    <span class="draft">zzz</span>.
 </p><p>
     <img src="/static/images/dispersal.png" style="display: block; width: 100%; margin: 0 auto">
 </p><p>
-    Dispersal and suitability for freshwater fish and crayfish,
-    and selected stream-dependent species of frogs and turtles,
-    was calculated using stream flow data in addition to climate
-    factors.
-</p><p>
-    The dispersal-clipped projections of different GCMs were
-    summarised using the median or 50th percentile as a "best
-    estimate", and the 10th and 90th percentiles to give an
-    indication of variability between models.  This summarising
-    across models produced the projected species distribution
-    maps displayed in CliMAS' map interface.
+    The projections of different GCMs, with and without 
+    movement, were summarised using the median or 50th 
+    percentile as a "best estimate" or “central tendency”, 
+    and then summarised again at 10th, 33rd, 66th, and 90th
+    percentiles to give an indication of variability between 
+    climate models to help assess uncertainty. This 
+    summarising across models produced the projected species
+    distribution maps displayed in the Wallace Initiative map
+    interface.
+
 </p>
 <h3>Generating biodiversity values</h3>
 <p>
-    Maps for the species in each given taxa were reduced to
+    Maps for the species in each given taxa, family, and some 
+    genera were reduced to
     a binary value of present or not-present.  Calculating the
     number of different species present at a given point (with
-    10th, 50th and 90th percentile summaries across GCMs)
-    produced the taxa biodiversity maps available in the map
+    10th, 33rd, 50th, 66th and 90th percentile summaries across
+    GCMs) produced the biodiversity maps available in the map
     interface.
 </p>
 <h3>Regional summaries</h3>
 <p>
-    Projected species distributions were overlaid with region
-    borders for each of the reportable regions.  This allowed
-    the species potentially present in the region at a given
-    projected future point to be listed.
+    Projected species distributions were overlaid with 
+    region borders from the Terrestrial Ecosystems of 
+    the World (TEOW, see credits) for each of the 
+    reportable regions. This allowed the species potentially 
+    present in the region at a given projected future point 
+    to be listed.  For Protected Areas, the boundaries of 
+    the Protected Area (from the World Database of Protected 
+    Areas, see credits) were mapped to the most appropriate 
+    ecosystem.  While it is possible to request data for a 
+    given protected area, the data is for the entire 
+    ecosystem, owing to a better match with the spatial 
+    resolution of the underlying species model data (e.g., 
+    in many cases a small protected area would lie entirely 
+    within a single data cell for climate and biodiversity).
 </p><p>
     Similarly, region borders were used to clip temperature and
     rainfall values for current and future projections.  This
     provided numerical climate summary data with 10th 50th and
     90th percentiles, and this information is available along
-    with species presence summaries from CliMAS' reports
-    generation interface.
+    with species presence summaries from the Wallace Initiative's
+    reports generation interface.
 </p>
