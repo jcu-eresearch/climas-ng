@@ -9,18 +9,28 @@ def createSpeciesJson(source_path, output_file):
     # create the species.json file using data from the specified path
 
     # here's a regex to test for species dirs:
+    #
+    #               group(11) - optional Sub-species -----------------------------------------------------------.
+    #               group(10) - optional Sub-species and preceding underscore ------------------------------.   |
+    #                group(9) - Species -----------------------------------------------------------.        |   |
+    #                           (a literal underscore) ------------------------------------.       |        |   |
+    #                group(8) - Genus ------------------------------------------------.    |       |        |   |
+    #                group(7) - Genus, again ---------------------------------.       |    |       |        |   |
+    #                group(6) - Family ---------------------------------.     |       |    |       |        |   |
+    #                group(5) - Order ----------------------------.     |     |       |    |       |        |   |
+    #                group(4) - Class ----------------------.     |     |     |       |    |       |        |   |
+    #                group(3) - Phylum ---------------.     |     |     |     |       |    |       |        |   |
+    #                group(2) - Kingdom -----.        |     |     |     |     |       |    |       |        |   |
+    #                group(1) - path ----.   |        |     |     |     |     |       |    |  _____A_____   |   |
+    #                                    V   V        V     V     V     V     V       V    V /           \  V   V
+    sppdir_regex = re.compile( r'species(/([^_\W]+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
 
-    #                group(8) - Species ---------------------------------------------.
-    #                           (a literal underscore) --------------------------.   |
-    #                group(7) - Genus ----------------------------------------.  |   |
-    #                group(6) - Genus, again ---------------------------.     |  |   |
-    #                group(5) - Family ---------------------------.     |     |  |   |
-    #                group(4) - Order ----------------------.     |     |     |  |   |
-    #                group(3) - Class ----------------.     |     |     |     |  |   |
-    #                group(2) - Phylum ---------.     |     |     |     |     |  |   |
-    #                group(1) - Kingdom --.     |     |     |     |     |     |  |   |
-    #                                     V     V     V     V     V     V     V  V   V
-    sppdir_regex = re.compile(r'species/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)_([-\w]+)/summaries_temperature$')
+    # this alternative regex is for when you want to find maps inside Erin's testing "mammal_xxx" dirs.
+    # sppdir_regex = re.compile(r'species(/([_\w]+)/(\w+)/(\w+)/(\w+)/(\w+)/(\w+)/([^_\W]+)_((?:-|[^_\W])+)(_([-\w]+))?)/summaries_temperature$')
+
+    # Note:     \w+       catches underscores.
+    #         [^_\W]+     catches everything \w catches, EXCEPT underscores
+    #      (?:-|[^_\W])+  catches everything [^_\W]+ catches, and also dashes
 
     # Any dir that matches the regex (starting from source_path) is a dir
     # that contains species level data. For example:
@@ -64,21 +74,19 @@ def createSpeciesJson(source_path, output_file):
         match = sppdir_regex.search(dir)
 
         if match:
-            spp_path = '/'.join([
-                match.group(1), match.group(2), 
-                match.group(3), match.group(4), 
-                match.group(5), match.group(6), 
-                match.group(7) + '_' + match.group(8)
-            ])
-            sci_name = match.group(7) + ' ' + match.group(8)
-            sci_name_underscore = match.group(7) + '_' + match.group(8)
+            spp_path = match.group(1)
+            sci_name_list = [match.group(8), match.group(9)]
+            if match.group(11):
+                sci_name_list.append(match.group(11))
+            sci_name = ' '.join(sci_name_list)
+            # sci_name_underscore = '_'.join(sci_name_list)
             species_list[sci_name] = {
-                "commonNames": common_names.get(sci_name_underscore, []),
+                "commonNames": common_names.get(sci_name, []),
                 "path": spp_path
             }
 
             # maybe this is a new group?
-            this_group = match.group(1) + '::' + match.group(3) + '::' + match.group(4)
+            this_group = '::'.join([match.group(2), match.group(4), match.group(5)])
             if this_group != last_group:
                 print('starting ' + this_group)
                 last_group = this_group
@@ -98,7 +106,7 @@ def createSummaryJson(source_path, output_file):
     # create the summaries.json file using data from the specified path
 
     # a list of places to look for summaries..
-    summary_roots = ['class', 'family', 'kingdom', 'order', 'phylum']
+    summary_roots = ['family', 'order', 'class', 'phylum', 'kingdom']
 
     # here's a regex to test for summary dirs:
     #
@@ -116,7 +124,7 @@ def createSummaryJson(source_path, output_file):
     #       \w+        is one or more word chars -- i.e. a word
     #      (\w+)       is a word that we want to remember
     #     /(\w+)       is a word with a literal slash in front of it
-    #    (/(\w+))?     optionally, a word with slash, and remember the whole thing as well as just the word
+    #    (/(\w+))?     optionally, a word with slash, and remember the slash-and-word as well as just the word
     #  (?:/(\w+))?     optionally, a word with slash, and remember just the word
 
     # for example:
@@ -152,7 +160,7 @@ def createSummaryJson(source_path, output_file):
                     # use the last name for the "short" name
                     short_name = tree_path[-1]
                     # which level is the summary at
-                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family'][len(tree_path) - 1]
+                    tree_level = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus'][len(tree_path) - 1]
                     summary_list[short_name] = {
                         "commonNames": common_names.get(short_name, []),
                         "level": tree_level,
@@ -162,7 +170,7 @@ def createSummaryJson(source_path, output_file):
                     # maybe this is a new group?
                     this_group = match.group(1) + '::' + short_name
                     if this_group != last_group:
-                        print('starting ' + this_group)
+                        print('searching ' + this_group)
                         last_group = this_group
 
                     break # leave file loop once we've matched here

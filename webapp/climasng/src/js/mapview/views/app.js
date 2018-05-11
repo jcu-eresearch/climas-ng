@@ -80,6 +80,20 @@
       });
       this.map.on('move', this.resizeThings);
       L.control.scale().addTo(this.map);
+      this.legend = L.control({
+        uri: ''
+      });
+      this.legend.onAdd = (function(_this) {
+        return function(map) {
+          return _this._div = L.DomUtil.create('div', 'info');
+        };
+      })(this);
+      this.legend.update = (function(_this) {
+        return function(props) {
+          return _this._div.innerHTML = '<object type="image/svg+xml" data="' + (props ? props.uri : '.') + '" />';
+        };
+      })(this);
+      this.legend.addTo(this.map);
       L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri',
         variant: 'World_Topo_Map'
@@ -204,7 +218,7 @@
       if (info.degs === 'baseline') {
         tag = "baseline " + tag + " distribution";
       } else {
-        tag = "<b>" + info.confidence + "</b> percentile projections for " + tag + " at <b>+" + info.degs + "&deg;C</b> with <b>" + dispLookup[info.range] + "</b>";
+        tag = "<b>" + info.confidence + "th</b> percentile projections for " + tag + " at <b>+" + info.degs + "&deg;C</b> with <b>" + dispLookup[info.range] + "</b>";
       }
       if (side === 'left') {
         this.leftTag.find('.leftlayername').html(tag);
@@ -214,7 +228,7 @@
       }
     },
     addMapLayer: function(side) {
-      var ext, futureModelPoint, isConcern, isRefugia, isRichness, layer, loadClass, mapInfo, mapUrl, projectionName, sideInfo, url, zipUrl;
+      var ext, futureModelPoint, isConcern, isRefugia, isRichness, mapInfo, mapUrl, projectionName, sideInfo, style, url, zipUrl;
       debug('AppView.addMapLayer');
       if (side === 'left') {
         sideInfo = this.leftInfo;
@@ -229,21 +243,26 @@
       isRefugia = sideInfo.mapName.startsWith('Refugia -');
       isConcern = sideInfo.mapName.startsWith('Concern -');
       if (isRichness) {
+        style = 'taxa-richness-change';
         projectionName = "prop.richness_" + sideInfo.degs + "_" + sideInfo.range + "_" + sideInfo.confidence;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
+          style = 'taxa-richness';
         }
       } else if (isRefugia) {
+        style = 'taxa-refugia';
         projectionName = "refuge.certainty_" + sideInfo.degs + "_" + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
         }
       } else if (isConcern) {
+        style = 'taxa-aoc';
         projectionName = "AreaOfConcern.certainty_" + sideInfo.degs + "_" + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current.richness';
         }
       } else {
+        style = 'spp-suitability-purple';
         projectionName = "TEMP_" + sideInfo.degs + "_" + sideInfo.confidence + "." + sideInfo.range;
         if (sideInfo.degs === 'baseline') {
           projectionName = 'current';
@@ -267,41 +286,55 @@
       } else {
         console.log("Can't map that -- no '" + sideInfo.mapName + "' in index");
       }
-      this.$('#' + side + 'mapdl').attr('href', mapUrl);
-      layer = L.tileLayer.wms(this.resolvePlaceholders(this.rasterApiUrl), {
-        DATA_URL: mapUrl,
-        layers: 'DEFAULT',
-        format: 'image/png',
-        transparent: true
-      });
-      loadClass = '' + side + 'loading';
-      layer.on('loading', (function(_this) {
-        return function() {
-          return _this.$el.addClass(loadClass);
+      return $.ajax({
+        url: '/api/preplayer/',
+        method: 'POST',
+        data: {
+          'info': mapInfo,
+          'proj': projectionName
+        }
+      }).done((function(_this) {
+        return function(data) {
+          var layer, loadClass, wmsLayer, wmsUrl;
+          console.log(['layer prepped, answer is ', data]);
+          wmsUrl = data.mapUrl;
+          wmsLayer = data.layerName;
+          layer = L.tileLayer.wms(wmsUrl, {
+            layers: wmsLayer,
+            format: 'image/png',
+            styles: style,
+            transparent: true
+          });
+          loadClass = '' + side + 'loading';
+          layer.on('loading', function() {
+            return _this.$el.addClass(loadClass);
+          });
+          layer.on('load', function() {
+            return _this.$el.removeClass(loadClass);
+          });
+          if (side === 'left') {
+            if (_this.leftLayer) {
+              _this.map.removeLayer(_this.leftLayer);
+            }
+            _this.leftLayer = layer;
+          }
+          if (side === 'right') {
+            if (_this.rightLayer) {
+              _this.map.removeLayer(_this.rightLayer);
+            }
+            _this.rightLayer = layer;
+          }
+          layer.addTo(_this.map);
+          _this.legend.update({
+            uri: '/static/images/legends/' + style + '.sld.svg'
+          });
+          return _this.resizeThings();
+        };
+      })(this)).fail((function(_this) {
+        return function(jqx, status) {
+          return debug(status, 'warning');
         };
       })(this));
-      layer.on('load', (function(_this) {
-        return function() {
-          return _this.$el.removeClass(loadClass);
-        };
-      })(this));
-      if (side === 'left') {
-        if (this.leftLayer) {
-          this.map.removeLayer(this.leftLayer);
-        }
-        this.leftLayer = layer;
-      }
-      if (side === 'right') {
-        if (this.rightLayer) {
-          this.map.removeLayer(this.rightLayer);
-        }
-        this.rightLayer = layer;
-      }
-      layer.addTo(this.map);
-      this.resizeThings();
-      if (window.location.hostname === 'localhost') {
-        return console.log('map URL is: ', mapUrl);
-      }
     },
     centreMap: function(repeatedlyFor) {
       var later, recentre, _i, _results;
@@ -350,6 +383,7 @@
       debug('AppView.buildForm');
       $mapspp = this.$("#" + side + "mapspp");
       return $mapspp.autocomplete({
+        delay: 200,
         close: (function(_this) {
           return function() {
             return _this.$el.trigger("" + side + "mapupdate");
@@ -358,7 +392,7 @@
         source: (function(_this) {
           return function(req, response) {
             return $.ajax({
-              url: '/api/namesearch/',
+              url: '/api/mapsearch/',
               data: {
                 term: req.term
               },

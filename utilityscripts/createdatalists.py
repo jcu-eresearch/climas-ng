@@ -8,7 +8,7 @@ import os
 
 
 ## HPC / prod paths
-appdir = '/var/wallacewebapp'
+appdir = '/srv/wallacewebapp'
 jsondir = appdir + '/climasng/data'
 datadir = '/rdsi/wallace2/W2_website'
 

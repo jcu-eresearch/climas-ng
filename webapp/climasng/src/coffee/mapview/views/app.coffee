@@ -108,6 +108,13 @@ AppView = Backbone.View.extend {
         # add a distance scale bar
         L.control.scale().addTo @map
 
+        # add a legend
+        @legend = L.control {uri: ''}
+        @legend.onAdd = (map)=> this._div = L.DomUtil.create 'div', 'info'
+        @legend.update = (props)=> this._div.innerHTML = '<object type="image/svg+xml" data="' + (if props then props.uri else '.') + '" />'
+
+        @legend.addTo @map
+
         ## removed MapQuest base layer 2016-07-20 due to licencing changes
         # L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
         #     subdomains: '1234'
@@ -302,7 +309,7 @@ AppView = Backbone.View.extend {
         if info.degs is 'baseline'
             tag = "baseline #{tag} distribution"
         else
-            tag = "<b>#{info.confidence}</b> percentile projections for #{tag} at <b>+#{info.degs}&deg;C</b> with <b>#{dispLookup[info.range]}</b>"
+            tag = "<b>#{info.confidence}th</b> percentile projections for #{tag} at <b>+#{info.degs}&deg;C</b> with <b>#{dispLookup[info.range]}</b>"
 
         if side == 'left'
             @leftTag.find('.leftlayername').html tag
@@ -320,32 +327,40 @@ AppView = Backbone.View.extend {
         mapUrl = ''
         zipUrl = ''
 
+        # TODO: use mapInfo.type instead of these booleans
         isRichness = sideInfo.mapName.startsWith 'Richness -'
         isRefugia = sideInfo.mapName.startsWith 'Refugia -'
         isConcern = sideInfo.mapName.startsWith 'Concern -'
 
         if isRichness
             # ...then they've selected a richness map.
+            style = 'taxa-richness-change'
             projectionName = "prop.richness_#{sideInfo.degs}_#{sideInfo.range}_#{sideInfo.confidence}"
-            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
+                style = 'taxa-richness'
 
         else if isRefugia
             # ...then they've selected a refugia map.
+            style = 'taxa-refugia'
             projectionName = "refuge.certainty_#{sideInfo.degs}_#{sideInfo.range}"
-            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
 
         else if isConcern
             # ...then they've selected an area-of-concern map.
+            style = 'taxa-aoc'
             projectionName = "AreaOfConcern.certainty_#{sideInfo.degs}_#{sideInfo.range}"
-            projectionName = 'current.richness' if sideInfo.degs == 'baseline'
+            if sideInfo.degs == 'baseline'
+                projectionName = 'current.richness'
 
         else
             # ...it's a plain old species map they're after.
+            style = 'spp-suitability-purple'
             # work out the string that gets to the projection point they want
             projectionName = "TEMP_#{sideInfo.degs}_#{sideInfo.confidence}.#{sideInfo.range}"
             # if they want baseline, just get the baseline projection
             projectionName = 'current' if sideInfo.degs == 'baseline'
-
 
 
         mapInfo = @mapList[@nameIndex[sideInfo.mapName]]
@@ -372,38 +387,100 @@ AppView = Backbone.View.extend {
         else
             console.log "Can't map that -- no '#{sideInfo.mapName}' in index"
 
-        # update the download links
-        @$('#' + side + 'mapdl').attr 'href', mapUrl
+        # at this point we've worked out everything we can about the map
+        # the user is asking for.
 
+        # now we have to ask for a URL to the geoserver with that map, 
+        # and the layerName to use when loading it.
 
-        # we've made a url, start the map layer loading
-        layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
-            DATA_URL: mapUrl
-            layers: 'DEFAULT'
-            format: 'image/png'
-            transparent: true
+        # TODO: use a pair of globals (leftfetch and rightfetch) to ensure
+        # early ajaxes are abandoned before starting a new one.
+
+        $.ajax({
+            url: '/api/preplayer/'
+            method: 'POST'
+            data: { 'info': mapInfo, 'proj': projectionName }
+        }).done( (data)=>
+
+            # when the layer prep is complete..
+
+            console.log ['layer prepped, answer is ', data] 
+            wmsUrl = data.mapUrl
+            wmsLayer = data.layerName
+
+            # update the download links
+            # TODO: we don't have the url of the map anymore..
+            # @$('#' + side + 'mapdl').attr 'href', mapUrl
+
+            # start the map layer loading
+            layer = L.tileLayer.wms wmsUrl, {
+                layers: wmsLayer
+                format: 'image/png'
+                styles: style
+                transparent: true
             }
 
-        # add a class to our element when there's tiles loading
-        loadClass = '' + side + 'loading'
-        layer.on 'loading', ()=> @$el.addClass loadClass
-        layer.on 'load', ()=> @$el.removeClass loadClass
+            # add a class to our element when there's tiles loading
+            loadClass = '' + side + 'loading'
+            layer.on 'loading', ()=> @$el.addClass loadClass
+            layer.on 'load', ()=> @$el.removeClass loadClass
 
-        if side == 'left'
-            @map.removeLayer @leftLayer if @leftLayer
-            @leftLayer = layer
+            if side == 'left'
+                @map.removeLayer @leftLayer if @leftLayer
+                @leftLayer = layer
 
-        if side == 'right'
-            @map.removeLayer @rightLayer if @rightLayer
-            @rightLayer = layer
+            if side == 'right'
+                @map.removeLayer @rightLayer if @rightLayer
+                @rightLayer = layer
 
-        layer.addTo @map
+            layer.addTo @map
 
-        @resizeThings() # re-establish the splitter
+            # udpate the legend
+            @legend.update {uri: '/static/images/legends/' + style + '.sld.svg'}
 
-        # if we're local, log the map URL to the console
-        if window.location.hostname == 'localhost'
-            console.log 'map URL is: ', mapUrl
+            @resizeThings() # re-establish the splitter
+
+        ).fail( (jqx, status)=>
+            # when the layer prep has failed..
+            debug status, 'warning'
+        )
+
+
+
+
+
+        # # update the download links
+        # @$('#' + side + 'mapdl').attr 'href', mapUrl
+
+
+        # # we've made a url, start the map layer loading
+        # layer = L.tileLayer.wms @resolvePlaceholders(@rasterApiUrl), {
+        #     DATA_URL: mapUrl
+        #     layers: 'DEFAULT'
+        #     format: 'image/png'
+        #     transparent: true
+        #     }
+
+        # # add a class to our element when there's tiles loading
+        # loadClass = '' + side + 'loading'
+        # layer.on 'loading', ()=> @$el.addClass loadClass
+        # layer.on 'load', ()=> @$el.removeClass loadClass
+
+        # if side == 'left'
+        #     @map.removeLayer @leftLayer if @leftLayer
+        #     @leftLayer = layer
+
+        # if side == 'right'
+        #     @map.removeLayer @rightLayer if @rightLayer
+        #     @rightLayer = layer
+
+        # layer.addTo @map
+
+        # @resizeThings() # re-establish the splitter
+
+        # # if we're local, log the map URL to the console
+        # if window.location.hostname == 'localhost'
+        #     console.log 'map URL is: ', mapUrl
 
         # # log this as an action in Google Analytics
         # if ga and typeof(ga) == 'function'
@@ -475,10 +552,11 @@ AppView = Backbone.View.extend {
         $mapspp = @$ "##{side}mapspp"
 
         $mapspp.autocomplete {
+            delay: 200
             close: => @$el.trigger "#{side}mapupdate"
             source: (req, response)=>
                 $.ajax { 
-                    url: '/api/namesearch/'
+                    url: '/api/mapsearch/'
                     data: { term: req.term }
                     success: (answer)=>
                         # answer is a list of completions, eg:

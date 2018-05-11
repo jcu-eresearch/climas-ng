@@ -87,3 +87,6 @@ utilityscripts/whooshindex
 
 # data index
 searchindex
+
+# ignore direnv files, which generally have passwords in 'em
+.envrc

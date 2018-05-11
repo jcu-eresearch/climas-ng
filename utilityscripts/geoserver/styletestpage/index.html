@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+
+    <title>test map</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+		integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+		crossorigin=""/>
+
+	<!-- <link rel="stylesheet" href="./leaflet-legend.css"/> -->
+
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+		integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+		crossorigin=""></script>
+
+    <!-- <script src="./wallacelegend.js"></script> -->
+
+
+    <style type="text/css">
+    #map {
+        height: 500px;
+    }
+    .buttonbar {
+    	padding: 1em;
+    }
+    .buttonbar h4 {
+    	display: inline-block;
+    	clear: left;
+    	padding: 0;
+    	min-width: 70px;
+    	white-space: nowrap;
+    	margin: 0 0.5em 0 0;
+    }
+    .buttonbar button {
+    	padding: 0.5em 1em;
+    	margin: 0.5em;
+    }
+    .buttonbar button.showing {
+    	box-shadow: 0 2px 8px 2px #0066cc;
+    }
+    .buttonbar button::before {
+    	content: attr(data-layer);
+    </style>
+
+</head>
+
+<body>
+
+	<div id="map">
+	</div>
+
+	<div class="buttonbar">
+	</div>
+
+<script type="text/javascript">
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+	var testmap = L.map('map', {
+    	center: [-10, 20],
+    	zoom: 3
+	})
+	var testLayer = L.tileLayer()
+
+	var legendControl = L.control({uri: ''})
+
+	legendControl.onAdd = function(map) {
+		this._div = L.DomUtil.create('div', 'info')
+		return this._div
+	}
+	legendControl.update = function(props) {
+		this._div.innerHTML = '<img src="' + (props ? props.uri : '.') + '" />'
+	}
+
+	legendControl.addTo(testmap)
+// ----------------------------------------------------------------------
+
+	// L.tileLayer('http://{s}.{base}.maps.cit.api.here.com/maptile/2.1/{type}/{mapID}/{scheme}/{z}/{x}/{y}/{size}/{format}?app_id={app_id}&app_code={app_code}&lg={language}', {
+
+	L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/{variant}/MapServer/tile/{z}/{y}/{x}', {
+	    attribution: 'Map &copy; 2016 <a href="http://developer.here.com">HERE</a>',
+	    subdomains: '1234',                base: 'aerial',
+	    type: 'maptile',                   scheme: 'terrain.day',
+	    app_id: 'l2Rye6zwq3u2cHZpVIPO',    app_code: 'MpXSlNLcLSQIpdU6XHB0TQ',
+	    mapID: 'newest',                   maxZoom: 18,
+	    language: 'eng',                   format: 'png8',
+	    size: '256',
+        variant: 'World_Topo_Map'
+	}).addTo(testmap)
+// ----------------------------------------------------------------------
+	function layer(layerName, style) {
+	    testLayer.remove()
+	    testLayer = L.tileLayer.wms("http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms", {
+	        layers: layerName, format: 'image/png', styles: style, transparent: true
+	    })
+	    testLayer.addTo(testmap)
+
+	 //    legendControl.remove()
+		// uri = "http://wallace-maps.hpc.jcu.edu.au/geoserver/wallace/wms?"
+	 //    uri += ['REQUEST=GetLegendGraphic',  'VERSION=1.0.0',
+		// 	    'WIDTH=20',                  'HEIGHT=20',
+	 //            'FORMAT=image/png',          'LAYER=' + layerName,
+	 //            'STYLE=' + style             ].join('&')
+	    legendControl.update({ uri: './legends/' + style + '.sld.svg' })
+
+	 //    legendControl = new L.Control.Legend({uri: uri})
+	 //    legendControl.addTo(testmap)
+
+	}
+// ----------------------------------------------------------------------
+	[
+		['Species', [
+			['species Lepidopilum affine', 'spp-suitability-purple', 'wallace:species@Lepidopilum_affine@current'],
+		]],
+
+		['Richness', [
+			['r base birds',          'taxa-richness',              'wallace:aves-richness-current'],
+			['r 2.7disp birds',       'taxa-richness-change',       'wallace:richness-aves-change-disp'],
+			['r 2.7nodisp birds',     'taxa-richness-change',       'wallace:richness.aves.nodisp'],
+			['r base carniv',         'taxa-richness',              'wallace:carnivora-rich-current'],
+			['r 2.7disp carniv',      'taxa-richness-change',       'wallace:rich-carnivora-change-disp'],
+			['r 2.7nodisp carniv',    'taxa-richness-change',       'wallace:carnivora-rich-nodisp'],
+		]],
+
+		['AoC & Refugia', [
+			['AoC carnivora',         'taxa-aoc',                   'wallace:aoc-carnivora-nodisp'],
+			['AoC birds',             'taxa-aoc',                   'wallace:aoc-aves-nodisp'],
+			['Refugia carnivora',     'taxa-refugia',               'wallace:refuge-carnivora-nodisp'],
+			['Refugia birds',         'taxa-refugia',               'wallace:ref-aves-nodisp'],
+		]],
+
+		['Temp', [
+			['Temp current',          'clim-temp',                  'wallace:bc1-current'],
+			['Temp 1.5deg delta',     'clim-temp-delta',            'bc1-1p5-delta'],
+			['Temp 3.2deg delta',     'clim-temp-delta',            'bc1-3p2-delta'],
+			['Temp 6deg delta',       'clim-temp-delta',            'bc1-6deg-delta'],
+			['Temp 6deg delta (ash)', 'clim-temp-delta-ash',        'bc1-6deg-delta'],
+			['Temp 6deg',             'clim-temp',                  'bc1-6deg-50th'],
+		]],
+
+		['Precip', [
+			['Precip current',        'clim-precip',                'wallace:bc12-current'],
+			['Precip 1.5deg delta%',  'clim-precip-percent-delta',  'bc12-1p5deg-percent'],
+			['Precip 6deg delta%',    'clim-precip-percent-delta',  'bc12-6deg-percent'],
+			['Precip 1.5deg delta% (gap)',  'clim-precip-percent-delta-gap',  'bc12-1p5deg-percent'],
+			['Precip 6deg delta% (gap)',    'clim-precip-percent-delta-gap',  'bc12-6deg-percent'],
+		]],
+
+	].forEach(function(group, ig) {
+		document.querySelectorAll('.buttonbar')[0].appendChild(document.createElement('br'))
+		var head = document.createElement('h4')
+		head.innerHTML = group[0]
+		document.querySelectorAll('.buttonbar')[0].appendChild(head)
+
+		group[1].forEach(function(item, i) {
+			var btn = document.createElement('button')
+			btn.setAttribute('data-layer', item[0])
+			btn.addEventListener('click', function() {
+				var showbtns = document.querySelectorAll('.showing')
+				if (showbtns.length > 0) {
+					showbtns[0].setAttribute('class', '')
+				}
+				layer(item[2], item[1])
+				this.className = 'showing'
+			})
+			document.querySelectorAll('.buttonbar')[0].appendChild(btn)
+		})
+	})
+// ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+</script>
+
+</body>
+
+</html>

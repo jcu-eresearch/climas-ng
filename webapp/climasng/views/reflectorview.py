@@ -13,7 +13,7 @@ class ReflectorView(object):
     def __init__(self, request):
         self.request = request
 
-    @view_config(route_name='reflector')
+    # @view_config(route_name='reflector')
     def __call__(self):
 
                 # # find the filename, css files, and format they wanted
